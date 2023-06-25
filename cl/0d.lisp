@@ -7,8 +7,8 @@
 
 (defclass List-Operand (Operand)())
 
-(defun Operand/new (&keywork raw len reflection))
-(defun List-Operand/new (&keywork raw len reflection))
+(defun Operand/new (&keyword raw len reflection))
+(defun List-Operand/new (&keyword raw len reflection))
 
 (defmethod clone ((self Operand))
   (Operand/new :raw (raw self) :len (len self) :reflection (reflection self)))
