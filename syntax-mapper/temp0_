@@ -21,7 +21,6 @@ Connector :: struct($User_Datum: typeid) {
     dst_port: Port,
 }
 
-
 Component :: struct($User_Datum: typeid) {
     name:    string,
     input:   queue.Queue(Message(User_Datum)),
