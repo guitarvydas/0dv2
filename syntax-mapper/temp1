@@ -15,9 +15,6 @@ Connector :: struct($User_Datum: typeid) {
  dst: ^Component(User_Datum),
  dst_port: Port,
 }
-FIFO :: queue.Queue(Message)
-fifo_push :: queue.push_back
-fifo_pop :: queue.pop_front_safe
 Component :: struct($User_Datum: typeid) {
  name: string,
  input: queue.Queue(Message(User_Datum)),
@@ -29,12 +26,12 @@ def step(self sys )
 (-
  for component in sys.components {
  for component.output.len > 0 {
- msg, _ := fifo_pop(&component.output)
+ msg, _ := queue.pop_front_safe(&component.output)
  route(sys, component, msg)
  }
  }
  for component in sys.components {
- msg, ok := fifo_pop(&component.input)
+ msg, ok := queue.pop_front_safe(&component.input)
  if ok {
  component.state(component, msg.port, msg.datum)
  retry = true
@@ -48,7 +45,7 @@ def route(self sys from msg )
  if c.src == from && c.src_port == msg.port {
  new_msg := msg
  new_msg.port = c.dst_port
- fifo_push(&c.dst.input, new_msg)
+ queue.push_back(&c.dst.input, new_msg)
  }
  }
 -)
@@ -78,7 +75,7 @@ def add_connection(self sys connection )
 -)
 def send(self component port data )
 (-
- fifo_push(&component.output, Message(User_Datum){port, data})
+ queue.push_back(&component.output, Message(User_Datum){port, data})
 -)
 ENTER :: Port("__STATE_ENTER__")
 EXIT :: Port("__STATE_EXIT__")

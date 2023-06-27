@@ -18,8 +18,6 @@ defstruct Connector
     dst
     dst_port
     -)
-FIFO :: queue.Queue(Message)
-fifo_push :: queue.push_back
 defstruct Component
 (-
     name
@@ -51,7 +49,7 @@ def route(self sys from msg )
     if c.src == from && c.src_port == msg.port {
     new_msg := msg
     new_msg.port = c.dst_port
-    fifo_push(&c.dst.input, new_msg)
+    queue.push_back(&c.dst.input, new_msg)
     }
     }
     -)
@@ -81,7 +79,7 @@ def add_connection(self sys connection )
     -)
 def send(self component port data )
 (-
-    fifo_push(&component.output, Message(User_Datum){port, data})
+    queue.push_back(&component.output, Message(User_Datum){port, data})
     -)
 ENTER :: Port("__STATE_ENTER__")
 EXIT :: Port("__STATE_EXIT__")

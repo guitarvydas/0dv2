@@ -169,13 +169,18 @@
   },
   "active": "8e9f07a47fca0712",
   "lastOpenFiles": [
+    "syntax-mapper/temp000",
+    "syntax-mapper/#macros.py#",
+    "syntax-mapper/#Makefile#",
+    "syntax-mapper/delmacrodefs.sed~",
+    "syntax-mapper/delmacrodefs.sed",
+    "odin/0d/#0d.odin#",
+    "odin/0d/0d.odin~",
+    "syntax-mapper/temp00",
+    "syntax-mapper/macros.py~",
+    "syntax-mapper/macros.py",
+    "junk.bash~",
     "doc/2023-06-27-0Dv2 Working Paper.md",
-    "attic/py/0d.py",
-    "attic/py",
-    "attic/cl/0d.lisp",
-    "attic/cl/0d.lisp~",
-    "attic/cl",
-    "odin/demo.o",
     "README.md"
   ]
 }
