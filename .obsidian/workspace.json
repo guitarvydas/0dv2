@@ -33,7 +33,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "doc/2023-06-27-0Dv2 Working Paper.md",
+                "file": "README.md",
                 "mode": "source",
                 "source": false
               }
@@ -106,7 +106,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "doc/2023-06-27-0Dv2 Working Paper.md",
+                "file": "README.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -123,7 +123,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "doc/2023-06-27-0Dv2 Working Paper.md",
+                "file": "README.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -146,7 +146,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "doc/2023-06-27-0Dv2 Working Paper.md"
+                "file": "README.md"
               }
             }
           }
@@ -169,13 +169,13 @@
   },
   "active": "8e9f07a47fca0712",
   "lastOpenFiles": [
+    "doc/2023-06-27-0Dv2 Working Paper.md",
     "attic/py/0d.py",
     "attic/py",
     "attic/cl/0d.lisp",
     "attic/cl/0d.lisp~",
     "attic/cl",
     "odin/demo.o",
-    "README.md",
-    "doc/2023-06-27-0Dv2 Working Paper.md"
+    "README.md"
   ]
 }
