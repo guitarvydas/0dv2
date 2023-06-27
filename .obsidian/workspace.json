@@ -21,7 +21,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "doc/2023-06-27-0Dv2 Working Paper.md",
+                "file": "doc/0Dv2 Working Paper.md",
                 "mode": "source",
                 "source": false
               }
@@ -33,7 +33,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "README.md",
+                "file": "doc/0Dv2 Working Paper.md",
                 "mode": "source",
                 "source": false
               }
@@ -106,7 +106,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "README.md",
+                "file": "doc/0Dv2 Working Paper.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -123,7 +123,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "README.md",
+                "file": "doc/0Dv2 Working Paper.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -146,7 +146,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "README.md"
+                "file": "doc/0Dv2 Working Paper.md"
               }
             }
           }
@@ -169,18 +169,18 @@
   },
   "active": "8e9f07a47fca0712",
   "lastOpenFiles": [
-    "syntax-mapper/temp000",
-    "syntax-mapper/#macros.py#",
-    "syntax-mapper/#Makefile#",
-    "syntax-mapper/delmacrodefs.sed~",
-    "syntax-mapper/delmacrodefs.sed",
-    "odin/0d/#0d.odin#",
-    "odin/0d/0d.odin~",
+    "syntax-mapper/#junk.ohm#",
+    "syntax-mapper/temp0",
     "syntax-mapper/temp00",
-    "syntax-mapper/macros.py~",
-    "syntax-mapper/macros.py",
-    "junk.bash~",
-    "doc/2023-06-27-0Dv2 Working Paper.md",
-    "README.md"
+    "syntax-mapper/temp0_",
+    "syntax-mapper/temp000",
+    "syntax-mapper/convertws.py~",
+    "syntax-mapper/convertws.py",
+    "README.md",
+    "syntax-mapper/junk.ohm",
+    "syntax-mapper/#odinproc.ohm#",
+    "syntax-mapper/#pseudo.ohm#",
+    "syntax-mapper/#odinproc.fab#",
+    "doc/0Dv2 Working Paper.md"
   ]
 }

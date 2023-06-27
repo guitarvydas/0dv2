@@ -104,3 +104,19 @@ Note that most of the tools being used rely on *structured text*, i.e. parenthes
 			- but, pure functional languages cannot do side-effects - a hallmark of how computer work
 			- question: is it possible to relegate mutation to some other kind of syntax which can be combined with pure functional syntax?
 
+## 2023-06-27
+
+- syntax transformation 
+	- input contains whitespace
+	- generated code contains whitespace, too,
+	- but, generated whitespace is "different" from input whitespace
+	- to take advantage of Ohm-JS Syntactic Rules, we must make input whitespace different from generated whitespace
+		- we want to use Syntactic Rules to parse generated code
+	- my choice:
+		- there is more than one way to "solve" this problem, my choice is essentially arbitrary:
+		- convert all input blanks into Unicode characters
+		- convert all input newlines into Unicode characters different from input blanks
+		- choice: input blanks are "・" and input newlines are "⦚"
+		- use *sed*-like preprocess (written in Python, in this case) to convert input whitespace to the above two characters
+		- TABs are currently ignored
+			- no good reason, just less work

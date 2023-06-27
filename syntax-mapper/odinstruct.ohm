@@ -37,5 +37,4 @@ Odin0Dstruct {
   string = dq (~dq any)* dq
   dq = "\""
   comment = "//" (~"\n" any)*
-  space += comment
 }

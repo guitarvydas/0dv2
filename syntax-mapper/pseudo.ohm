@@ -1,0 +1,25 @@
+Pseudo2CL {
+  Program = (Defstruct | Def)+
+  Defstruct =  "defstruct"  id left id+ right 
+  Def =  "def"  id formals left line+ right
+
+  formals = "("  id* ")" 
+  
+  left = "(-" 
+  right = "-)" 
+
+  line = linechar+ nl
+  linechar = ~nl any
+  
+  id = idfirst idrest* 
+  idfirst = letter | "_"
+  idrest = alnum | "_"
+  comment = "//" (~"\n" any)+
+  comma = ","
+  string = dq (~dq any)* dq
+  dq = "\""
+  nl = "\n"
+  space := uspc | unl | comment
+  uspc = "・"
+  unl = "⦚"
+}

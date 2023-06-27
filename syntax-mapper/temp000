@@ -1,13 +1,13 @@
 package zd
 
+// test comment
+
 import "core:container/queue"
 
 Message :: struct($User_Datum: typeid) {
     port:  Port,
     datum: User_Datum,
 }
-
-Port :: distinct string
 
 System :: struct($User_Datum: typeid) {
     components: [dynamic]^Component(User_Datum),
@@ -91,8 +91,6 @@ send :: proc(component: ^Component($User_Datum), port: Port, data: User_Datum) {
     fifo_push(&component.output, Message(User_Datum){port, data})
 }
 
-ENTER :: Port("__STATE_ENTER__")
-EXIT  :: Port("__STATE_EXIT__")
 
 tran :: proc(component: ^Component($User_Datum), state: proc(^Component(User_Datum), Port, User_Datum)) {
     component.state(component, EXIT, nil)

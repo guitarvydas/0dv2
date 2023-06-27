@@ -1,12 +1,13 @@
 Odin0Dcomment {
   program = item+
   item =
-    | newline+ -- newlines
+    | unl+ -- newlines
     | space+ -- space
     | any -- other
 
-  newline = "\n"
-  comment = "//" (~"\n" any)*
-  space += comment
+  uspc = "・"
+  unl = "⦚"
+  comment = "//" (~unl any)*
+  space := uspc | unl | comment
 }
 

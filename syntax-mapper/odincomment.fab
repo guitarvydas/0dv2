@@ -1,8 +1,8 @@
 Odin0Dcomment {
   program [item+] = ‛«item»’
-  item_newlines [nl+] = ‛\n’
-  item_space [s+] = ‛ ’
+  item_newlines [nl+] = ‛⦚’
+  item_space [s+] = ‛・’
   item_other [c] = ‛«c»’
-  comment [lslsl cs*] = ‛\n’
+  comment [lslsl cs*] = ‛⦚’
 }
 

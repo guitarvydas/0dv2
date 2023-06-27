@@ -17,5 +17,7 @@ for line in sys.stdin:
     # then, do replacements
     r = line.replace ('FIFO', 'queue.Queue(Message)')\
       .replace ('fifo_push', 'queue.push_back')\
-      .replace ('fifo_pop', 'queue.pop_front_safe')
+      .replace ('fifo_pop', 'queue.pop_front_safe') \
+      .replace ('ENTER', 'Port("__STATE_ENTER__")') \
+      .replace ('EXIT', 'Port("__STATE_EXIT__")')
     print (r, end='')

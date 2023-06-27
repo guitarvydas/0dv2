@@ -10,7 +10,7 @@ Odin0Dstruct {
 
   parameterizedtype [lp kdollar id sp1 kcolon sp2 typechar+ rp] = ‛’
 
-  typedfield [s1 id s2 kcolon s3 type s4] = ‛    «id»\n’
+  typedfield [s1 id s2 kcolon s3 type s4] = ‛・・・・«id»⦚’
   type_procref [ktype spc1 kproc spc2 typechar+] = ‛«ktype»«spc1»«kproc»«spc2»«typechar»’
   type_other [typechar+] = ‛«typechar»’
 
