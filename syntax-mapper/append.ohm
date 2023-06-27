@@ -1,0 +1,21 @@
+AppendRewriteForCL {
+  program = item+
+  item =
+    | applySyntactic<Append> -- append
+    | any -- other
+
+  Append = "append" "(" "&" Operand "," Operand ")"
+  Operand =
+    | Operand "." id -- recursive
+    | id -- bottom
+
+  id = idfirst idrest*
+  idfirst = letter | "_"
+  idrest = alnum | "_"
+  comma = ","
+  string = dq (~dq any)* dq
+  dq = "\""
+  uspc = "・"
+  unl = "⦚"
+  space += uspc | unl
+}

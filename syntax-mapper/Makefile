@@ -1,9 +1,10 @@
-all: dev
+all: clean
+	make dev
 
-dev: pseudo
+dev: clean
+	make pseudo
 
 devandclean: dev
-
 	./cleanup.py <0d.lisp.pseudo
 
 preprocess:
@@ -22,8 +23,12 @@ struct: proc
 queue: struct
 	./queue.bash <temp2 >temp3
 
-pseudo: queue
-	./intermediateindenter.py <temp3 >0d.lisp.pseudo
+append: queue
+	#./append.bash <temp3 >temp4 ## using a REGEX doesn't work as reliably as using a grammar
+	./fab append.ohm append.fab support.js <temp3 >temp4
+
+pseudo: append
+	./intermediateindenter.py <temp4 >0d.lisp.pseudo
 
 py0d: passes
 	./braces.py <temp3 >temp4
