@@ -20,7 +20,6 @@ defstruct Connector
     -)
 FIFO :: queue.Queue(Message)
 fifo_push :: queue.push_back
-fifo_pop :: queue.pop_front_safe
 defstruct Component
 (-
     name
@@ -33,12 +32,12 @@ def step(self sys )
 (-
     for component in sys.components {
     for component.output.len > 0 {
-    msg, _ := fifo_pop(&component.output)
+    msg, _ := queue.pop_front_safe(&component.output)
     route(sys, component, msg)
     }
     }
     for component in sys.components {
-    msg, ok := fifo_pop(&component.input)
+    msg, ok := queue.pop_front_safe(&component.input)
     if ok {
     component.state(component, msg.port, msg.datum)
     retry = true

@@ -18,6 +18,24 @@ https://github.com/guitarvydas/0dv2
 ## Syntax Mapper
 - use Ohm-JS + FAB to convert the minimal Odin 0D code into other languages
 - manifestation of FDD principles
+## Usage
+### Odin Test
+`cd odin`
+`make`
+Type in lines of test when prompted.
+An empty line quits.
+Dump `demo.txt` to see what was typed in.
+### Syntax Mapper
+`cd syntax-mapper`
+`make`
+See `temp3` for the converted output.  
+
+Note that, at this time, the conversion is not complete.
+
+Note that the converter uses brackets `(-` and `-)` which, at this time, remain in `temp3`.  We want to use something that cannot be confused with braces and parentheses in the source, but can be formatted by a Lisp pretty-printer, and, can be understood by `indenter.py` and `intermediateindenter.py`.
+
+Note that most of the tools being used rely on *structured text*, i.e. parentheses and braces, instead of Python-esque indentation syntax.  To use these tools, we invent new kinds of brackets `(-` and `-)` that allow us to keep working in *structured text* mode and can be converted - at the last moment - into Python indentation syntax as needed.  To work in this mode, you will see .FAB files that insert the new kinds of brackets into the generated code.  Aside: it is easier to insert such brackets than it is to actually parse indentation (we'll let the Python compiler worry about that).  Aside: Human readability is not a goal, we simply want something that a dumb machine can parse.
+
 ## Minor Revelations
 - sys is a Container
 - current Odin implementation combines Design with Optimization details (Production Engineering)
@@ -63,6 +81,13 @@ https://github.com/guitarvydas/0dv2
 		- clean-up after-the-fact is sometimes called *peepholing*
 			- I've implemented peepholers using simple command-line tools like *sed* and *awk*
 			- I believe that Ohm-JS + FAB will make the job of writing a peepholer even easier
+	- for example, Odin provides a limited form of *macros*
+		- e.g. `fifo_pop :: queue.pop_front_safe` tells the compiler to replace every use of the word `fifo_pop` with `queue.pop_front_safe`
+			- this is only a shorthand for Humans which makes the textual code appear to be less verbose
+		- this kind of thing is called *symbol macros* in Common Lisp
+		- it is easy to replace symbol macros using a Python script
+			- or JS, or, M4, or *sed*, or ...
+- `example.drawio` contains a diagram that represents the code in odin/demo/main.odin, but, the diagram is not - at this moment - used by the compiler ; the diagram is unchecked and meant for Human eyes
 ## Research Questions
 - should data allocation issues belong to the code, or to the data?
 	- Odin makes this problem quite explicit by silently passing a *context* parameter into all procedures
