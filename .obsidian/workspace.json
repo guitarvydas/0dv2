@@ -169,6 +169,10 @@
   },
   "active": "8e9f07a47fca0712",
   "lastOpenFiles": [
+    "syntax-mapper/temp2",
+    "syntax-mapper/cleanup.py",
+    "syntax-mapper/#odinproc.fab#",
+    "syntax-mapper/temp1",
     "syntax-mapper/#junk.ohm#",
     "syntax-mapper/temp0",
     "syntax-mapper/temp00",
@@ -177,10 +181,6 @@
     "syntax-mapper/convertws.py~",
     "syntax-mapper/convertws.py",
     "README.md",
-    "syntax-mapper/junk.ohm",
-    "syntax-mapper/#odinproc.ohm#",
-    "syntax-mapper/#pseudo.ohm#",
-    "syntax-mapper/#odinproc.fab#",
     "doc/0Dv2 Working Paper.md"
   ]
 }

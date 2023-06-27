@@ -2,14 +2,14 @@ Odin0D {
   program [item+] = ‛«item»’
   item [i] = ‛«i»’
 
-  procDef [id s1 kcc s2 kinline? s3 kproc s4 formalList s5 karrow? s6? retList? shereclause? procBody] =
-    ‛def・«id»«formalList»⦚(-«procBody»-)’
+  procDef [id s1 kcc s2 kinline? s3 kproc s4 formalList s5 karrow? s6? retList? whereclause? procBody] =
+    ‛def «id»«formalList»(-«procBody»-)\n’
 
   whereclause [kwhere sp wherebody] = ‛’
 
-  formalsList [lp formals* rp] = ‛«lp»self・«formals»«rp»’
-  formal_shorthand [s1 id kcomma] = ‛«id»・’
-  formal_other [s1 id s2 kcolon s3 type] = ‛«id»・’
+  formalsList [lp formals* rp] = ‛«lp»self «formals»«rp»’
+  formal_shorthand [s1 id kcomma] = ‛«id» ’
+  formal_other [s1 id s2 kcolon s3 type] = ‛«id» ’
   formal_allocator [kallocator spaces1 kassign spaces2 kcontextdot id spaces3] = ‛’
   type [spaces1 typechar+ spaces2] = ‛«typechar»’
   typechar_parenthesized [lp typecharinner+ rp] = ‛«lp»«typecharinner»«rp»’
@@ -32,7 +32,7 @@ Odin0D {
   id [idfirst idrest*] = ‛«idfirst»«idrest»’
   idfirst [c] = ‛«c»’
   idrest  [c] = ‛«c»’
-  comment [kslsl c+] = ‛・’
+  comment [kslsl c+] = ‛ ’
   comma [c] = ‛’
   string [dq1 cs* dq2] = ‛"«cs»"’
   dq [c] = ‛"’

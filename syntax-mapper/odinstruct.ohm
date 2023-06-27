@@ -36,5 +36,8 @@ Odin0Dstruct {
   idrest = alnum | "_"
   string = dq (~dq any)* dq
   dq = "\""
-  comment = "//" (~"\n" any)*
+  uspc = "・"
+  unl = "⦚"
+  comment = "//" (~unl any)*
+  space := uspc | unl | comment
 }

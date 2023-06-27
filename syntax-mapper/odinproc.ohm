@@ -39,9 +39,12 @@ Odin0D {
   id = idfirst idrest*
   idfirst = letter | "_"
   idrest = alnum | "_"
-  comment = "//" (~"\n" any)+
   comma = ","
   string = dq (~dq any)* dq
   dq = "\""
+  uspc = "・"
+  unl = "⦚"
+  comment = "//" (~unl any)*
+  space := uspc | unl | comment
 }
 
