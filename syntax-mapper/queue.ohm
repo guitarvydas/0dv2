@@ -1,0 +1,27 @@
+QueueForCL {
+  program = item+
+  item =
+    | applySyntactic<Push> -- push
+    | applySyntactic<Pop> -- pop
+    | any -- other
+
+  Push = "queue.push_back" "(" "&" Operand "," Operand ")"
+  Pop = "queue.pop_front_safe" "(" "&" Operand ")"
+
+  Operand =
+    | id "(" id ")" "{" idcomma+ "}" -- constructor
+    | Operand "." id -- recursive
+    | id -- bottom
+
+  idcomma = id comma?
+  
+  id = idfirst idrest*
+  idfirst = letter | "_"
+  idrest = alnum | "_"
+  comma = ","
+  string = dq (~dq any)* dq
+  dq = "\""
+  uspc = "・"
+  unl = "⦚"
+  space += uspc | unl
+}

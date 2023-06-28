@@ -21,7 +21,8 @@ struct: proc
 	./fab odinstruct.ohm odinstruct.fab support.js <temp1 >temp2
 
 queue: struct
-	./queue.bash <temp2 >temp3
+	# ./queue.bash <temp2 >temp3
+	./fab queue.ohm queue.fab support.js <temp2 >temp3
 
 append: queue
 	#./append.bash <temp3 >temp4 ## using a REGEX doesn't work as reliably as using a grammar

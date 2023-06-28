@@ -1,0 +1,20 @@
+QueueRewriteForCL {
+  program [items+] = ‛«items»’
+  item [x] = ‛«x»’
+
+  Push [kqpb lp kamp Operand1 kcomma Operand2 rp] = ‛ «Operand1».enqueue («Operand2») ’
+  Pop [kqpfs lp kamp Operand1 rp] = ‛ «Operand1».dequeue () ’
+
+  Operand_constructor [id1 lp id2 rp lb idcomma+ rb] = ‛«id1» («id2») {«idcomma»}’
+  Operand_recursive [Operand kdot id] = ‛«Operand»«kdot»«id»’
+  Operand_bottom [id] = ‛«id»’
+
+  idcomma [id comma?] = ‛«id»«comma»’
+
+  id [idfirst idrest*] = ‛«idfirst»«idrest»’
+  idfirst [c] = ‛«c»’
+  idrest  [c] = ‛«c»’
+  dq [c] = ‛"’
+  string [dq1 cs* dq2] = ‛"«cs»"’
+}
+
