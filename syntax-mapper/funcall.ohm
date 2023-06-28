@@ -1,0 +1,26 @@
+FuncallRewriteForCL {
+  program = item+
+  item =
+    | applySyntactic<Funcall> -- funcall
+    | any -- other
+
+  Funcall = Operand Args
+
+  Args = "(" Arg* ")"
+
+  Arg = Operand comma?
+  
+  Operand =
+    | Operand "." id -- recursive
+    | id -- bottom
+
+  id = idfirst idrest*
+  idfirst = letter | "_"
+  idrest = alnum | "_"
+  comma = ","
+  string = dq (~dq any)* dq
+  dq = "\""
+  uspc = "・"
+  unl = "⦚"
+  space += uspc | unl
+}

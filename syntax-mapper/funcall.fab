@@ -1,7 +1,13 @@
 AppendRewriteForCL {
   program [items+] = ‛«items»’
   item [x] = ‛«x»’
-  Append [kappend lp kamp Operand1 kcomma Operand2 rp] = ‛\n«Operand1».append («Operand2») ’
+
+  Funcall [Operand Args] = ‛(funcall «Operand» «Args»)’
+
+  Args [lp Arg* rp] = ‛«Arg»’
+
+  Arg [Operand comma?] = ‛«Operand» ’
+  
   Operand_recursive [Operand kdot id] = ‛«Operand»«kdot»«id»’
   Operand_bottom [id] = ‛«id»’
 

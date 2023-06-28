@@ -1,0 +1,21 @@
+AssignRewriteForCL {
+  program = item+
+  item =
+    | applySyntactic<Assign> -- assign
+    | any -- other
+
+  Assign = Operand "=" Operand
+  Operand =
+    | Operand "." id -- recursive
+    | id -- bottom
+
+  id = idfirst idrest*
+  idfirst = letter | "_"
+  idrest = alnum | "_"
+  comma = ","
+  string = dq (~dq any)* dq
+  dq = "\""
+  uspc = "・"
+  unl = "⦚"
+  space += uspc | unl
+}

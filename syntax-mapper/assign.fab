@@ -1,7 +1,9 @@
 AppendRewriteForCL {
   program [items+] = ‛«items»’
   item [x] = ‛«x»’
-  Append [kappend lp kamp Operand1 kcomma Operand2 rp] = ‛\n«Operand1».append («Operand2») ’
+
+  Assign [Operand1 keq Operand2] = ‛\n(setf «Operand1» «Operand2») ’
+
   Operand_recursive [Operand kdot id] = ‛«Operand»«kdot»«id»’
   Operand_bottom [id] = ‛«id»’
 
