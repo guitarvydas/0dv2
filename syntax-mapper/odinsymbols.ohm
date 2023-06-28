@@ -9,8 +9,10 @@ Odin0Dsymbols {
 
 
   symbol = symfirst symrest*
-  symfirst = ~ws ~uspc ~unl ~commentbegin ~commentend ~digit any
-  symrest  = ~ws ~uspc ~unl ~commentbegin ~commentend        any
+  symfirst = ~ws ~uspc ~unl ~commentbegin ~commentend ~digit char
+  symrest  = ~ws ~uspc ~unl ~commentbegin ~commentend        char
+
+  char = alnum | "_"
 
   dqb = "“"
   dqe = "”"

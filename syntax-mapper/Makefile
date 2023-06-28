@@ -15,7 +15,7 @@ pseudo:
 	| ./fab odincomment.ohm odincomment.fab support.js \
 	| ./fab odinstrings.ohm odinstrings.fab support.js \
 	| ./fab odinsymbols.ohm odinsymbols.fab support.js >junk
-	cat junk
+	./cleanup.py <junk | ./indenter.py
 
 old:
 	| ./fab odinproc.ohm odinproc.fab support.js \
