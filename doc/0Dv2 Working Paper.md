@@ -125,3 +125,5 @@ Note that most of the tools being used rely on *structured text*, i.e. parenthes
 	- surround keywords with unicode brackets, e.g. `‹def›`
 - make generated formals lists distinct from other lists, e.g. `❲a b c❳`
 - change indent/dedent characters to unicode `⇢` and `⇠` resp.
+- PEG matches on single runes, compounds need to be delimited by runes
+	- compounds = ids and strings and keywords and comments and numbers and multi-char operators and symbol (id / keyword)

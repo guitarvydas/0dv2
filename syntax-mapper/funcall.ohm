@@ -9,16 +9,22 @@ FuncallRewriteForCL {
     | Operand Args -- evaled
 
   Funcid =
-    | ~("def" | "defstruct") id
+    | id
     
   Args = "(" Arg* ")"
 
-  Arg = Operand comma?
+  Arg =
+    | "Message_Literal" "(" Stuff ")" -- messageliteral
+    | Operand -- arg
   
   Operand =
     | Operand "." id -- recursive
     | id -- bottom
 
+  Stuff =
+    | "(" Stuff ")" Stuff? -- recursive
+    | ~"(" ~")" Operand Stuff? -- bottom
+    
   id = idfirst idrest*
   idfirst = letter | "_"
   idrest = alnum | "_"
@@ -27,5 +33,5 @@ FuncallRewriteForCL {
   dq = "\""
   uspc = "・"
   unl = "⦚"
-  space += uspc | unl
+  space += uspc | unl | comma
 }

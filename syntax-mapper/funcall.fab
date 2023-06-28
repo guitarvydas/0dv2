@@ -7,7 +7,8 @@ AppendRewriteForCL {
 
   Args [lp Arg* rp] = ‛«Arg»’
 
-  Arg [Operand comma?] = ‛«Operand» ’
+  Arg_arg [Operand comma?] = ‛«Operand» ’
+  Arg_messageliteral [lp kml Stuff rp comma?] = ‛ (Message_Literal «Stuff») ’
   
   Funcid [id] = ‛«id»’
   
