@@ -15,7 +15,7 @@ tokenize:
 	| ./fab odincomment.ohm odincomment.fab support.js \
 	| ./fab odinstrings.ohm odinstrings.fab support.js \
 	| ./fab odinsymbols.ohm odinsymbols.fab support.js >junk-tokenized
-	./cleanup.py <junk-tokenized | ./indenter.py
+	./cleanup.py <junk-tokenized | ./indenter.py | ./strip.py
 
 pseudo: tokenize
 

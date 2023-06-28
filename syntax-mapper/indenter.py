@@ -4,7 +4,7 @@ import re
 
 indentation = []
 
-#  // we emit code using bracketed notation ⤙ and ⤚
+#  // we emit code using bracketed notation ⇢ and ⇠
 #  // then, for Python, we convert the bracketing into indentation...
 def indent1 (s):
     global indentation
