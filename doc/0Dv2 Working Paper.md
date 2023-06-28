@@ -120,3 +120,8 @@ Note that most of the tools being used rely on *structured text*, i.e. parenthes
 		- use *sed*-like preprocess (written in Python, in this case) to convert input whitespace to the above two characters
 		- TABs are currently ignored
 			- no good reason, just less work
+## 2023-06-28
+- make generated keywords special and distinct from other ids
+	- surround keywords with unicode brackets, e.g. `‹def›`
+- make generated formals lists distinct from other lists, e.g. `❲a b c❳`
+- change indent/dedent characters to unicode `⇢` and `⇠` resp.

@@ -4,14 +4,13 @@ import re
 
 indentation = []
 
-#  // we emit code using bracketed notation (- and -) which is compatible
-#  // lisp pretty-printing, which allows easier debugging of the transpiled code
+#  // we emit code using bracketed notation ⤙ and ⤚
 #  // then, for Python, we convert the bracketing into indentation...
 def indent1 (s):
     global indentation
-    nOpens = len (re.findall ("\(\-", s))
-    nCloses = len (re.findall ("\-\)", s))
-    clean = s.strip ().replace ('(-', '').replace ('-)', '')
+    nOpens = len (re.findall ("⇢", s))
+    nCloses = len (re.findall ("⇠", s))
+    clean = s.strip ().replace ('⇢', '').replace ('⇠', '')
     diff = nOpens - nCloses
     previousIndentation = indentation.copy ()
     if (diff == 0):

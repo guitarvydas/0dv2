@@ -3,11 +3,11 @@ Odin0D {
   item [i] = ‛«i»’
 
   procDef [id s1 kcc s2 kinline? s3 kproc s4 formalList s5 karrow? s6? retList? whereclause? procBody] =
-    ‛def «id»«formalList»(-«procBody»-)\n’
+    ‛‹def› «id» «formalList» ⇢«procBody»⇠\n’
 
   whereclause [kwhere sp wherebody] = ‛’
 
-  formalsList [lp formals* rp] = ‛«lp»self «formals»«rp»’
+  formalsList [lp formals* rp] = ‛❲self «formals»❳’
   formal_shorthand [s1 id kcomma] = ‛«id» ’
   formal_other [s1 id s2 kcolon s3 type] = ‛«id» ’
   formal_allocator [kallocator spaces1 kassign spaces2 kcontextdot id spaces3] = ‛’

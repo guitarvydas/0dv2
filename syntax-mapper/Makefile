@@ -5,7 +5,7 @@ dev: clean
 	make pseudo
 
 devandclean: dev
-	./cleanup.py <0d.lisp.pseudo >0d.lisp
+	./cleanup.py <0d.lisp.pseudo | ./indenter.py >0d.lisp
 	cat 0d.lisp
 
 pseudo: 
@@ -16,8 +16,9 @@ pseudo:
 	| ./fab odinproc.ohm odinproc.fab support.js \
 	| ./fab odinstruct.ohm odinstruct.fab support.js \
 	| ./fab queue.ohm queue.fab support.js \
-	| ./fab append.ohm append.fab support.js \
-	| ./fab assign.ohm assign.fab support.js \
+	| ./fab append.ohm append.fab support.js | tee junk-append \
+	| ./fab message_literal.ohm message_literal.fab support.js | tee junk-ml \
+	| ./fab assign.ohm assign.fab support.js | tee junk-assign \
 	| ./fab funcall.ohm funcall.fab support.js \
 	| ./intermediateindenter.py >0d.lisp.pseudo
 

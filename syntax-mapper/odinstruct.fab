@@ -6,7 +6,7 @@ Odin0Dstruct {
   importDef_unnamed [kimport spc s] = ‛’
   importDef_named [kimport spc1 id spc2 s] = ‛’
 
-  struct [spc0 id spc1 kcc spc2 kstruct spc0a parameterizedtype? spc3 lb spc4 typedfield+ rb] = ‛\ndefstruct «id»\n(-\n«typedfield»-)’
+  struct [spc0 id spc1 kcc spc2 kstruct spc0a parameterizedtype? spc3 lb spc4 typedfield+ rb] = ‛\n‹defstruct› «id»\n⇢\n«typedfield»⇠’
 
   parameterizedtype [lp kdollar id sp1 kcolon sp2 typechar+ rp] = ‛’
 

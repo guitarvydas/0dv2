@@ -1,20 +1,11 @@
-FuncallRewriteForCL {
+Message_Literal_RewriteForCL {
   program = item+
   item =
-    | applySyntactic<Funcall> -- funcall
+    | applySyntactic<Message_Literal> -- append
     | any -- other
 
-  Funcall =
-    | Funcid Args -- quoted
-    | Operand Args -- evaled
+  Message_Literal = "Message" "(" id ")" "{" Operand "," Operand "}"
 
-  Funcid =
-    | ~("def" | "defstruct") id
-    
-  Args = "(" Arg* ")"
-
-  Arg = Operand comma?
-  
   Operand =
     | Operand "." id -- recursive
     | id -- bottom

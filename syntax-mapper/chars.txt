@@ -4,3 +4,18 @@ _
 ₋
 ▽
 ・space
+❲ formals list begin 
+❳ formals list end
+« verbatim begin
+» verbatim end
+⎨
+⎬
+‹ keyword begin
+› keyword end
+⤺
+⤎
+⤑
+⤙
+⤚
+⇢ indent
+⇠ dedent

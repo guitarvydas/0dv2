@@ -1,16 +1,7 @@
-AppendRewriteForCL {
+Message_Literal_RewriteForCL {
   program [items+] = ‛«items»’
   item [x] = ‛«x»’
-
-  Funcall_quoted [id Args] = ‛(«id» «Args»)’
-  Funcall_evaled [Operand Args] = ‛(funcall «Operand» «Args»)’
-
-  Args [lp Arg* rp] = ‛«Arg»’
-
-  Arg [Operand comma?] = ‛«Operand» ’
-  
-  Funcid [id] = ‛«id»’
-  
+  Message_Literal [kmessage lp id rp lb Operand1 kcomma Operand2 rb] = ‛ Message_Literal («Operand1», «Operand2») ’
   Operand_recursive [Operand kdot id] = ‛«Operand»«kdot»«id»’
   Operand_bottom [id] = ‛«id»’
 
