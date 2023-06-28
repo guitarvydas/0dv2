@@ -1,0 +1,19 @@
+Odin0Dstrings {
+  program = item+
+  item =
+    | string -- string
+    | charconst -- charconst
+    | any -- other
+
+
+  string = dq (~dq any)* dq
+  charconst = sq (~sq any)* sq
+
+  dq = "\""
+  sq = "'"
+
+  uspc = "・"
+  unl = "⦚"
+  space := uspc | unl
+}
+

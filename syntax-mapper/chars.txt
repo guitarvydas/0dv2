@@ -24,7 +24,7 @@ _
 `⎣...⎦` comments
 ## preprocessed by ohm-js/fab parser
 `“...”` strings
-`‘.’` rune literals
+`❛.❜` rune literals
 
 ## preprocessed by regexp script (convertws.py)
 `・` spaces/tabs in original

@@ -12,7 +12,8 @@ pseudo:
 	./delmacrodefs.sed <../odin/0d/0d.odin \
 	| ./macros.py \
 	| ./convertws.py \
-	| ./fab odincomment.ohm odincomment.fab support.js >junk
+	| ./fab odincomment.ohm odincomment.fab support.js \
+	| ./fab odinstrings.ohm odinstrings.fab support.js >junk
 	cat junk
 
 old:
