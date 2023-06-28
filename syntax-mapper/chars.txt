@@ -19,3 +19,23 @@ _
 ⤚
 ⇢ indent
 ⇠ dedent
+
+## preprocessed by ohm-js/fab parser
+`⎣...⎦` comments
+## preprocessed by ohm-js/fab parser
+`“...”` strings
+`‘.’` rune literals
+
+## preprocessed by regexp script (convertws.py)
+`・` spaces/tabs in original
+`⦚` newlines in original
+
+## preprocessed by ohm-js/fab parser
+`❲...❳` symbols
+`⟨...⟩` numbers
+
+## generated
+`‹...›` keywords
+`⟪...⟫` multi-char operators
+`⇢` indent
+`⇠` dedent

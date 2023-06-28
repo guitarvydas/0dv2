@@ -3,6 +3,6 @@ Odin0Dcomment {
   item_newlines [nl+] = ‛⦚’
   item_space [s+] = ‛・’
   item_other [c] = ‛«c»’
-  comment [lslsl cs*] = ‛⦚’
+  comment [lslsl cs*] = ‛⎣«cs»⎦’
 }
 

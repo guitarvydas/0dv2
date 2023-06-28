@@ -12,7 +12,10 @@ pseudo:
 	./delmacrodefs.sed <../odin/0d/0d.odin \
 	| ./macros.py \
 	| ./convertws.py \
-	| ./fab odincomment.ohm odincomment.fab support.js \
+	| ./fab odincomment.ohm odincomment.fab support.js >junk
+	cat junk
+
+old:
 	| ./fab odinproc.ohm odinproc.fab support.js \
 	| ./fab odinstruct.ohm odinstruct.fab support.js \
 	| ./fab queue.ohm queue.fab support.js \

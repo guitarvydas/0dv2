@@ -179,11 +179,12 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "4ee44a7b71430fae",
+  "active": "90007e6683140748",
   "lastOpenFiles": [
+    "syntax-mapper/junk",
+    "syntax-mapper/#chars.txt#",
     "doc/0Dv2 Working Paper.md",
     "doc/WP 2023-06-28.md",
-    "syntax-mapper/#chars.txt#",
     "syntax-mapper/#intermediateindenter.py#",
     "syntax-mapper/#odinproc.fab#",
     "syntax-mapper/junk-assign-clean",
