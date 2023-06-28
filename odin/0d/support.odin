@@ -1,5 +1,7 @@
 package zd
 
+import "core:container/queue"
+
 Port :: distinct string
 FIFO      :: queue.Queue(Message)
 fifo_push :: queue.push_back

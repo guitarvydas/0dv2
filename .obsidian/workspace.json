@@ -169,6 +169,7 @@
   },
   "active": "8e9f07a47fca0712",
   "lastOpenFiles": [
+    "odin/demo.o",
     "syntax-mapper/funcall.fab~",
     "syntax-mapper/#funcall.ohm#",
     "syntax-mapper/funcall.fab",
@@ -179,7 +180,6 @@
     "syntax-mapper/assign.fab",
     "syntax-mapper/#assign.fab#",
     "syntax-mapper/assign.ohm",
-    "syntax-mapper/0d.lisp",
     "syntax-mapper/lisp-notes.md",
     "README.md",
     "doc/0Dv2 Working Paper.md"
