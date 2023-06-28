@@ -1,9 +1,10 @@
-Odin0Dsymbols {
+Odin0Dsymbolsandintegers{
   program = item+
   item =
     | comment -- comment
     | string -- string
     | charconst -- charconst
+    | integer -- integer
     | symbol -- symbol
     | any -- other
 
@@ -14,6 +15,8 @@ Odin0Dsymbols {
 
   char = alnum | "_"
 
+  integer = digit+
+  
   dqb = "“"
   dqe = "”"
   sqb = "❛"

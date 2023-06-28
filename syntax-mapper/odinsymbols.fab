@@ -1,8 +1,9 @@
-Odin0Dsymbols {
+dOdin0Dsymbolsandintegers {
   program [item+] = ‛«item»’
   symbol [first rest*] = ‛❲«first»«rest»❳’
   comment [B cs* E] = ‛«B»«cs»«E»’
   string [dq1 cs* dq2] = ‛“«cs»”’
   charconst [sq1 cs* sq2] = ‛❛«cs»❜’
+  integer [d+] = ‛⟨«d»⟩’
 }
 
