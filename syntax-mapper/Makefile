@@ -13,7 +13,8 @@ pseudo:
 	| ./macros.py \
 	| ./convertws.py \
 	| ./fab odincomment.ohm odincomment.fab support.js \
-	| ./fab odinstrings.ohm odinstrings.fab support.js >junk
+	| ./fab odinstrings.ohm odinstrings.fab support.js \
+	| ./fab odinsymbols.ohm odinsymbols.fab support.js >junk
 	cat junk
 
 old:

@@ -39,3 +39,4 @@ _
 `⟪...⟫` multi-char operators
 `⇢` indent
 `⇠` dedent
+`«...»` verbatim
