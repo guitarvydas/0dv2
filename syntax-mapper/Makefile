@@ -12,10 +12,10 @@ tokenize:
 	| ./macros.py \
 	| ./convertws.py \
 	| ./fab odincomment.ohm odincomment.fab support.js \
-	| cat - >junk-comments
+	| ./fab odinstrings.ohm odinstrings.fab support.js \
+	| cat - >junk-strings
 
 hold:
-	| ./fab odinstrings.ohm odinstrings.fab support.js \
 	| ./fab odinsymbols.ohm odinsymbols.fab support.js >junk-tokenized
 
 pseudo: tokenize odinproc.ohm odinproc.fab

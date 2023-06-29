@@ -6,8 +6,20 @@ Odin0Dstrings {
     | any -- other
 
 
-  string = dq (~dq any)* dq
-  charconst = sq (~sq any)* sq
+  string = dq (~dq convertedany)* dq
+  charconst = sq (~sq convertedany)* sq
+
+  convertedany =
+    | stringspace
+    | stringnl
+    | charspace
+    | charnl
+    | any
+
+  stringspace = uspc
+  stringnl = unl
+  charspace = uspc
+  charnl = unl
 
   dq = "\""
   sq = "'"
