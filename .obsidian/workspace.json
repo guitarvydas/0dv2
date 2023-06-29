@@ -193,6 +193,7 @@
   },
   "active": "c1dc1215ee2e7a9a",
   "lastOpenFiles": [
+    "syntax-mapper/junk-tokenized",
     "syntax-mapper/junk-strings",
     "syntax-mapper/#odinstrings.fab#",
     "syntax-mapper/#odinstrings.ohm#",
@@ -205,7 +206,6 @@
     "syntax-mapper/odinproc.fab",
     "syntax-mapper/#junk-pseudo#",
     "syntax-mapper/#junk-tokenized#",
-    "syntax-mapper/junk",
     "doc/0Dv2 Working Paper.md",
     "syntax-mapper/lisp-notes.md",
     "README.md"
