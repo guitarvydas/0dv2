@@ -27,8 +27,16 @@ _
 `❛.❜` rune literals
 
 ## preprocessed by regexp script (convertws.py)
-`・` spaces/tabs in original
-`⦚` newlines in original
+`"・"` spaces/tabs in input (original)
+`"⦚"` newlines in input (original)
+`" "` spaces in output (generated) (normal space)
+`"\n"` newlines in output (normal newline)
+`"◦"` spaces in comments
+`"¶"` newlines in comments
+`"□"` spaces in strings
+`"‡"` newlines in strings
+`"☐"` spaces in character constants
+`"†"` newlines in character constants
 
 ## preprocessed by ohm-js/fab parser
 `❲...❳` symbols

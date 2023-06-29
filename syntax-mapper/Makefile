@@ -1,8 +1,7 @@
-all: clean
-	make dev
+all: dev
 
 dev: clean
-	make pseudo
+	make tokenize
 
 devandclean: dev
 	./cleanup.py <0d.lisp.pseudo | ./indenter.py >0d.lisp
@@ -13,11 +12,21 @@ tokenize:
 	| ./macros.py \
 	| ./convertws.py \
 	| ./fab odincomment.ohm odincomment.fab support.js \
+	| cat - >junk-comments
+
+hold:
 	| ./fab odinstrings.ohm odinstrings.fab support.js \
 	| ./fab odinsymbols.ohm odinsymbols.fab support.js >junk-tokenized
-	./cleanup.py <junk-tokenized | ./indenter.py | ./strip.py
 
-pseudo: tokenize
+pseudo: tokenize odinproc.ohm odinproc.fab
+	./fab odinproc.ohm odinproc.fab support.js <junk-route >junk-pseudo
+	./cleanup.py <junk-pseudo | ./indenter.py 
+
+odinproc.ohm:
+	m4 odinproc.ohm.m4 >odinproc.ohm
+
+odinproc.fab:
+	m4 odinproc.fab.m4 >odinproc.fab
 
 old:
 	| ./fab odinproc.ohm odinproc.fab support.js \
@@ -31,3 +40,6 @@ old:
 
 clean:
 	rm -f temp*
+	rm -f odinproc.ohm
+	rm -f odinproc.fab
+	rm -rf junk*

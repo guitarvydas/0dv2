@@ -4,5 +4,10 @@ Odin0Dcomment {
   item_space [s+] = ‛・’
   item_other [c] = ‛«c»’
   comment [lslsl cs*] = ‛⎣«cs»⎦’
+
+  // convert input whitespace to comment-specific whitespace
+  uspc [c] = ‛◦’
+  unl [c] = ‛¶’
+
 }
 

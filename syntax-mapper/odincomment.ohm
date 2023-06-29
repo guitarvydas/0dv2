@@ -8,7 +8,8 @@ Odin0Dcomment {
 
   uspc = "・"
   unl = "⦚"
-  comment = "//" (~unl any)*
+  comment = "//" (~unl convertany)*
+  convertany = uspc | any
   space := uspc | unl
 }
 
