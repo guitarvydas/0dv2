@@ -70,7 +70,7 @@ ParseNamedTypedParameterList {
 }
 
 
-OdinParamameterList {
+OdinParameterList {
   Main = OdinParameterList
   OdinParameterList =
     | "(" ")" -- empty
@@ -79,11 +79,11 @@ OdinParamameterList {
   NotLastParameter = id ":" AnythingButComma ","
   LastParameter = AnythingButRPar
 
-  AnythingButComma =
-    | &"," -- done
-    | Inner -- continue
-  AnythingButRPar =
-    | &")" -- done
+  AnythingButComma = SkipTo<",">
+  AnythingButRPar = SkipTo<")">
+  
+  SkipTo<stopBefore> =
+    | &stopBefore -- done
     | Inner -- continue
   Inner =
     | "(" Inner* ")" -- nested
