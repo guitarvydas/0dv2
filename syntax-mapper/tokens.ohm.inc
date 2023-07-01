@@ -34,6 +34,8 @@
 
     uspc = "・"
     unl = "⦚"
+    in_nl = unl
+    
     spc = " "
     nl = "\n"
   // space += uspc | unl | comment

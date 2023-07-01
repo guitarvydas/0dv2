@@ -57,14 +57,26 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "2023-06-29.md",
+                "file": "doc/2023-06-29.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          },
+          {
+            "id": "b981822dc7a97640",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "doc/2023-07-01.md",
                 "mode": "source",
                 "source": false
               }
             }
           }
         ],
-        "currentTab": 4
+        "currentTab": 5
       }
     ],
     "direction": "vertical"
@@ -130,7 +142,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "2023-06-29.md",
+                "file": "doc/2023-07-01.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -147,7 +159,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "2023-06-29.md",
+                "file": "doc/2023-07-01.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -170,7 +182,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "2023-06-29.md"
+                "file": "doc/2023-07-01.md"
               }
             }
           }
@@ -191,21 +203,23 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "c1dc1215ee2e7a9a",
+  "active": "b981822dc7a97640",
   "lastOpenFiles": [
-    "syntax-mapper/junk-tokenized",
-    "syntax-mapper/junk-strings",
-    "syntax-mapper/#odinstrings.fab#",
-    "syntax-mapper/#odinstrings.ohm#",
-    "syntax-mapper/junk-comments",
-    "syntax-mapper/#odincomment.fab#",
+    "syntax-mapper/#torpar.ohm#",
+    "doc/Skip.drawio.svg",
+    "doc/2023-07-01.md",
+    "doc/Skip.drawio",
+    "doc/Skip.drawio.png",
     "doc/WP 2023-06-28.md",
-    "2023-06-29.md",
+    "doc/2023-06-29.md",
+    "syntax-mapper/Skip.drawio",
+    "syntax-mapper/torpar.ohm~",
+    "syntax-mapper/torpar.ohm",
+    "syntax-mapper/junk-simple",
     "syntax-mapper/junk-pseudo",
-    "syntax-mapper/junk-route",
     "syntax-mapper/odinproc.fab",
-    "syntax-mapper/#junk-pseudo#",
-    "syntax-mapper/#junk-tokenized#",
+    "syntax-mapper/odinproc.ohm",
+    "syntax-mapper/odinproc.ohm~",
     "doc/0Dv2 Working Paper.md",
     "syntax-mapper/lisp-notes.md",
     "README.md"
