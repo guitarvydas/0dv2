@@ -77,14 +77,14 @@ OdinParameterList {
     | "(" LastParameter ")" -- single
     | "(" NotLastParameter+ LastParameter ")" -- multiple
   NotLastParameter = id ":" AnythingButComma ","
-  LastParameter = AnythingButRPar
+  LastParameter = ~AnythingButComma AnythingButRPar
 
   AnythingButComma = SkipTo<",">
   AnythingButRPar = SkipTo<")">
   
   SkipTo<stopBefore> =
     | &stopBefore -- done
-    | Inner -- continue
+    | Inner SkipTo<stopBefore> -- continue
   Inner =
     | "(" Inner* ")" -- nested
     | ~"(" ~")" any -- bottom
