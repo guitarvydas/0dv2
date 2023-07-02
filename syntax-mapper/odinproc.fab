@@ -28,7 +28,7 @@ OdinProcSignature {
   LastReturnParameter [ParameterName? AnythingButRPar] = ‛«ParameterName» «AnythingButRPar»’
   SingleReturnParameter [AnythingButProcDefinitionBody] = ‛«AnythingButProcDefinitionBody»’
 
-  Pragma [kocto force_inline] = ‛#force_inline ’
+  Pragma [kocto fi] = ‛«kocto»«fi» ’
 
   ParameterName_sharedtype [ID lookahead] = ‛«ID» ’
   ParameterName_named [ID kcolon] = ‛«ID» ’
