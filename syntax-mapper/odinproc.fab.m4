@@ -21,8 +21,8 @@ OdinProcSignature {
   OdinReturnTypeList_multiple [lp NotLastParameter+ LastParameter rp] = ‛(«NotLastParameter» «LastParameter»)’
   OdinReturnTypeList_single [SingleReturnParameter] = ‛«SingleReturnParameter»’
 
-  NotLastParameter [AllocatorOrParameterName AnythingButComma kcomma] = ‛«AllocatorOrParameterName»«AnythingButComma»«kcomma»’
-  LastParameter [AllocatorOrParameterName AnythingButRPar] = ‛«AllocatorOrParameterName»«AnythingButRPar»’
+  NotLastParameter [AllocatorOrParameterName AnythingButComma kcomma] = ‛«AllocatorOrParameterName»’
+  LastParameter [AllocatorOrParameterName AnythingButRPar] = ‛«AllocatorOrParameterName»’
 
   NotLastReturnParameter [ParameterName? AnythingButComma kcomma] = ‛«ParameterName» «AnythingButComma»,’
   LastReturnParameter [ParameterName? AnythingButRPar] = ‛«ParameterName» «AnythingButRPar»’
@@ -30,9 +30,9 @@ OdinProcSignature {
 
   Pragma [kocto force_inline] = ‛#force_inline ’
 
-  ParameterName_sharedtype [ID lookahead] = ‛«ID»,’
-  ParameterName_named [ID kcolon] = ‛«ID»:’
-  Allocator [kallocator kassign] = ‛allocator :=’
+  ParameterName_sharedtype [ID lookahead] = ‛«ID» ’
+  ParameterName_named [ID kcolon] = ‛«ID» ’
+  Allocator [kallocator kassign] = ‛’
   AllocatorOrParameterName [x] = ‛«x»’
 
   BodyStuff [stuff] = ‛«stuff»’
