@@ -1,6 +1,8 @@
 OdinProcSignature {
   Main = Proc+
-  Proc = ProcSignature "{" "}" 
+  Proc = ProcSignature ProcDefinitionBody
+
+  ProcDefinitionBody = "{" "}"
 
   item =
     | applySyntactic<ProcSignature>
@@ -8,7 +10,7 @@ OdinProcSignature {
     
   ProcSignature =
     | id "::" Pragma? "proc" OdinParameterList OdinReturnTypeList -- nonvoid
-    | id "::" Pragma? "proc" OdinParameterList &"{"-- void
+    | id "::" Pragma? "proc" OdinParameterList &ProcDefinitionBody -- void
 
   OdinParameterList =
     | "(" ")" -- empty
@@ -16,7 +18,7 @@ OdinProcSignature {
     | "(" NotLastParameter+ LastParameter ")" -- multiple
 
   OdinReturnType =
-    | &"{" -- void
+    | &ProcDefinitionBody -- void
     | "->" OdinReturnTypeList -- typed
   OdinReturnTypeList =
     |  "(" ")" -- empty
@@ -29,7 +31,7 @@ OdinProcSignature {
 
   NotLastReturnParameter = ParameterName? AnythingButComma ","
   LastReturnParameter = ParameterName? ~AnythingButComma AnythingButRPar
-  SingleReturnParameter = ~"{" AnythingButLBrace
+  SingleReturnParameter = ~ProcDefinitionBody AnythingButProcDefinitionBody
 
   Pragma = "#" "force_inline"
 
@@ -40,7 +42,7 @@ OdinProcSignature {
 
   AnythingButComma = SkipTo<",">
   AnythingButRPar = SkipTo<")">
-  AnythingButLBrace = SkipTo<"{">
+  AnythingButProcDefinitionBody = SkipTo<ProcDefinitionBody>
   
   SkipTo<stopBefore> =
     | &stopBefore -- done
