@@ -71,13 +71,16 @@ ParseNamedTypedParameterList {
 
 
 OdinParameterList {
-  Main = OdinParameterList
+  Main = OdinParameterList+
   OdinParameterList =
     | "(" ")" -- empty
     | "(" LastParameter ")" -- single
     | "(" NotLastParameter+ LastParameter ")" -- multiple
-  NotLastParameter = id ":" AnythingButComma ","
-  LastParameter = ~AnythingButComma AnythingButRPar
+  NotLastParameter = ParameterName AnythingButComma ","
+  LastParameter = ParameterName ~AnythingButComma AnythingButRPar
+  ParameterName =
+    | id ":" -- named
+    | -- unnamed
 
   AnythingButComma = SkipTo<",">
   AnythingButRPar = SkipTo<")">
