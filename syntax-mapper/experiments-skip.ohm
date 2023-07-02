@@ -7,13 +7,14 @@ OdinProcSignature {
     | "(" LastParameter ")" -- single
     | "(" NotLastParameter+ LastParameter ")" -- multiple
 
-  OdinReturnType = "->" OdinReturnTypeList
+  OdinReturnType =
+    | &"{" -- void
+    | "->" OdinReturnTypeList -- typed
   OdinReturnTypeList =
     |  "(" ")" -- empty
     |  "(" LastParameter ")" -- singlebracketed
     |  "(" NotLastReturnParameter+ LastReturnParameter ")" -- multiple
     | ~"(" SingleReturnParameter -- single
-    | ~"(" &"{" -- void
 
   NotLastParameter = (Allocator | ParameterName) AnythingButComma ","
   LastParameter = (Allocator | ParameterName) ~AnythingButComma AnythingButRPar
