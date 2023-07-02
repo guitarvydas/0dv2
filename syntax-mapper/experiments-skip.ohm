@@ -1,25 +1,34 @@
 OdinProcSignature {
-  Main = OdinParameterList+
+  Main = OdinReturnType+
   ProcSignature = id "::" OdinParameterList OdinReturnTypeList?
+
   OdinParameterList =
     | "(" ")" -- empty
     | "(" LastParameter ")" -- single
     | "(" NotLastParameter+ LastParameter ")" -- multiple
+
+  OdinReturnType = "->" OdinReturnTypeList
+  OdinReturnTypeList =
+    |  "(" ")" -- empty
+    |  "(" LastParameter ")" -- single
+    |  "(" NotLastReturnParameter+ LastReturnParameter ")" -- multiple
+    | ~"(" SingleReturnParameter
+
   NotLastParameter = (Allocator | ParameterName) AnythingButComma ","
   LastParameter = (Allocator | ParameterName) ~AnythingButComma AnythingButRPar
+
+  NotLastReturnParameter = ParameterName? AnythingButComma ","
+  LastReturnParameter = ParameterName? ~AnythingButComma AnythingButRPar
+  SingleReturnParameter = ~AnythingButLBrace AnythingButLBrace
+
   ParameterName =
     | id &"," -- sharedtype
     | id ":" -- named
   Allocator = "allocator" ":="
 
-  OdinReturnTypeList = "->" OdinReturnTypes
-  OdinReturnTypes =
-    | LastParameter -- single
-    | "(" LastParameter ")" -- singleparenthesized
-    | "(" NotLastParameter+ LastParameter ")" -- multiple
-
   AnythingButComma = SkipTo<",">
   AnythingButRPar = SkipTo<")">
+  AnythingButLBrace = SkipTo<"{">
   
   SkipTo<stopBefore> =
     | &stopBefore -- done
