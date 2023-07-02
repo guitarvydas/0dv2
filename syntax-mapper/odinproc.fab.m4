@@ -1,42 +1,50 @@
-Odin0Dproc {
+OdinProcSignature {
   Program [item+] = ‛«item»’
   Item [i] = ‛«i»’
 
-  ProcDef [ID kcc kinline? kproc FormalsList RetList? Whereclause? ProcBody] =
-    ‛‹def› «ID» «FormalsList» ⇢«ProcBody»⇠\n’
 
-  Inline [kocto kinline] = ‛«kocto»«kinline»’
+  Proc [ProcSignature ProcDefinitionBody] = ‛«ProcSignature»«ProcDefinitionBody»’
 
-  Whereclause [kwhere wherebody] = ‛’
+  ProcDefinitionBody [lb BodyStuff rb] = ‛«lb»«BodyStuff»«rb»’
 
-  FormalsList [lp formals* rp] = ‛(❲self «formals»❳)’
-  Formal_allocator [kallocator kassign kcontext kdot ID lookahead] = ‛’
-  Formal_shorthand [ID kcomma] = ‛«ID» ’
-  Formal_other [ID kcolon Type lookahead] = ‛«ID» ’
+  ProcSignature_nonvoid [ID kcc Pragma? kproc OdinParameterList OdinReturnTypeList] = ‛«ID»«kcc»«Pragma»«kproc»«OdinParameterList»«OdinReturnTypeList»’
+  ProcSignature_void [ID kcc Pragma? kproc OdinParameterList lookahead] = ‛«ID»«kcc»«Pragma»«kproc»«OdinParameterList»’
 
-  nextf [x] = ‛«x»’
+  OdinParameterList_empty [lp rp] = ‛()’
+  OdinParameterList_single [lp LastParameter rp] = ‛(«LastParameter»)’
+  OdinParameterList_multiple [lp NotLastParameter+ LastParameter rp] = ‛(«NotLastParameter» «LastParameter»)’
 
-  Type [Typestuff+] = ‛«Typestuff»’
-  Typestuff_parenthesized [lp Typestuffinner+ rp lookahead] = ‛«lp»«Typestuffinner»«rp»’
-  Typestuff_bottom [c lookahead] = ‛«c»’
-  Typestuffinner_parenthesized [lp Typestuffinner+ rp] = ‛«lp»«Typestuffinner»«rp»’
-  Typestuffinner_bottom [c] = ‛«c»’
+  OdinReturnType_void [lookahead] = ‛’
+  OdinReturnType_typed [karrow OdinReturnTypeList] = ‛->«OdinReturnTypeList»’
+  OdinReturnTypeList_empty [lp rp] = ‛()’
+  OdinReturnTypeList_singlebracketed [lp LastParameter rp] = ‛(«LastParameter»)’
+  OdinReturnTypeList_multiple [lp NotLastParameter+ LastParameter rp] = ‛(«NotLastParameter» «LastParameter»)’
+  OdinReturnTypeList_single [SingleReturnParameter] = ‛«SingleReturnParameter»’
 
-  RetList [karrow rettype] = ‛«karrow»«rettype»’
-  RetType_multiple [lp Type* rp] = ‛«Type»’
-  RetType_single [Type] = ‛«Type»’
+  NotLastParameter [AllocatorOrParameterName AnythingButComma kcomma] = ‛«AllocatorOrParameterName»«AnythingButComma»«kcomma»’
+  LastParameter [AllocatorOrParameterName AnythingButRPar] = ‛«AllocatorOrParameterName»«AnythingButRPar»’
 
-  Procbody [lb Bodystuff+ rb] = ‛«Bodystuff»’
-  Bodystuff_recursive [lb Bodystuff+ rb] = ‛«lb»«Bodystuff»«rb»’
-  Bodystuff_comment [c] = ‛’
-  Bodystuff_bottom [c] = ‛«c»’
-  Bodystuff_string [s] = ‛«s»’
-  Wherebody [Wbodystuff+] = ‛«Wbodystuff»’
-  Wbodystuff_comment [c] = ‛’
-  Wbodystuff_bottom [c] = ‛«c»’
-  Wbodystuff_string [s] = ‛«s»’
+  NotLastReturnParameter [ParameterName? AnythingButComma kcomma] = ‛«ParameterName» «AnythingButComma»,’
+  LastReturnParameter [ParameterName? AnythingButRPar] = ‛«ParameterName» «AnythingButRPar»’
+  SingleReturnParameter [AnythingButProcDefinitionBody] = ‛«AnythingButProcDefinitionBody»’
 
-  comma [c] = ‛’
+  Pragma [kocto force_inline] = ‛#force_inline ’
+
+  ParameterName_sharedtype [ID lookahead] = ‛«ID»,’
+  ParameterName_named [ID kcolon] = ‛«ID»:’
+  Allocator [kallocator kassign] = ‛allocator :=’
+  AllocatorOrParameterName [x] = ‛«x»’
+
+  BodyStuff [stuff] = ‛«stuff»’
+  AnythingButComma [stuff] = ‛«stuff»’
+  AnythingButRPar [stuff] = ‛«stuff»’
+  AnythingButProcDefinitionBody [stuff] = ‛«stuff»’
+  
+  SkipTo_done [x] = ‛«x»’
+  SkipTo_continue [i x] = ‛«i» «x»’
+  Inner_nestedparens [l Inner* r] = ‛«l»«Inner»«r»’
+  Inner_nestedbraces [l Inner* r] = ‛«l»«Inner»«r»’
+  Inner_bottom [AnyToken] = ‛«AnyToken»’
 
   include(`tokens.fab.inc')
 }

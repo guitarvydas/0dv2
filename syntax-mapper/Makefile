@@ -1,3 +1,6 @@
+#SRC=../../odin0d/0d/0d.odin
+SRC=test.odin
+
 all: dev
 
 dev: clean
@@ -8,21 +11,21 @@ devandclean: dev
 	cat 0d.lisp
 
 tokenize:
-	./delmacrodefs.sed <../odin/0d/0d.odin \
+	./delmacrodefs.sed <$(SRC) \
 	| ./macros.py \
 	| ./convertws.py \
-	| ./fab odincomment.ohm odincomment.fab support.js \
-	| ./fab odinstrings.ohm odinstrings.fab support.js \
+	| ./fab odincomment.ohm odincomment.fab support.js | tee junk--comment \
+	| ./fab odinstrings.ohm odinstrings.fab support.js | tee junk--strings \
 	| ./fab odinsymbols.ohm odinsymbols.fab support.js >junk--tokenized
 
 pseudo: tokenize odinproc.ohm odinproc.fab
 	./fab odinproc.ohm odinproc.fab support.js <junk--tokenized >junk--pseudo
 	./cleanup.py <junk--pseudo | ./indenter.py 
 
-odinproc.ohm:
+odinproc.ohm: odinproc.ohm.m4 tokens.ohm.inc
 	m4 odinproc.ohm.m4 >odinproc.ohm
 
-odinproc.fab:
+odinproc.fab: odinproc.fab.m4 tokens.fab.inc
 	m4 odinproc.fab.m4 >odinproc.fab
 
 old:

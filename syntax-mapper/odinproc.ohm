@@ -1,54 +1,62 @@
 
-Odin0Dproc {
+OdinProcSignature {
   Program = Item+
   Item =
-    | ProcDef -- procdef
-    | Anytoken -- other
-
-  ProcDef = ProcSignature Procbody
-  ProcSignature = ID "::" Inline? "❲proc❳" FormalsList RetList? Whereclause?
-
-  Inline = "#" "❲force_inline❳"
-  Whereclause = "❲where❳" Wherebody
-  FormalsList = "(" Formal* ")"
-  Formal =
-    | "❲allocator❳" ":=" "❲context❳" "." SkipToRPar -- allocatorrpar
-    | "❲allocator❳" ":=" "❲context❳" "." SkipToComma comma -- allocatorcomma
-    | ID comma -- shorthand
-    | ID ":" TypeSkipToComma comma -- othercomma
-    | ID ":" TypeSkipToRPar ")" -- otherrpar
-
-  TypeSkipToRPar = SkipToRPar
-  TypeSkipToComma = SkipToComma
-  
-  SkipToComma =
-    | "(" SkipToRPar ")" -- parenthesized
-    | ~"," Anytoken &comma -- comma
-    | ~"," Anytoken SkipToComma -- continue
-
-  SkipToRPar =
-    | "(" SkipToRPar ")" -- parenthesized
-    | ~")" Anytoken &")" -- rpar
-    | ~")" Anytoken SkipToRPar -- continue
-
-  RetList = "->" RetType
-  RetType = SkipToWhereOrLBrace
-  SkipToWhereOrLBrace =
-    | ~"❲where❳" ~"{" Anytoken &"❲where❳" -- where
-    | ~"❲where❳" ~"{" Anytoken &"{" -- lbrace
-    | ~"❲where❳" ~"{" Anytoken SkipToWhereOrLBrace -- continue
-
-  SkipToLBrace =
-    | ~"{" Anytoken &"{" -- lbrace
-    | ~"{" Anytoken SkipToLBrace -- continue
-
-  Procbody = "{" Line* "}"
-  Line = (~in_nl any) in_nl
+    | Proc -- proc
+    | AnyToken -- other
     
-  Wherebody = SkipToLBrace
+  Proc = ProcSignature ProcDefinitionBody
 
-  comma = ","
+  ProcDefinitionBody = "{" BodyStuff "}"
+
+  ProcSignature =
+    | ID "::" Pragma? "❲proc❳" OdinParameterList OdinReturnTypeList -- nonvoid
+    | ID "::" Pragma? "❲proc❳" OdinParameterList &ProcDefinitionBody -- void
+
+  OdinParameterList =
+    | "(" ")" -- empty
+    | "(" LastParameter ")" -- single
+    | "(" NotLastParameter+ LastParameter ")" -- multiple
+
+  OdinReturnType =
+    | &ProcDefinitionBody -- void
+    | "->" OdinReturnTypeList -- typed
+  OdinReturnTypeList =
+    |  "(" ")" -- empty
+    |  "(" LastParameter ")" -- singlebracketed
+    |  "(" NotLastReturnParameter+ LastReturnParameter ")" -- multiple
+    | ~"(" SingleReturnParameter -- single
+
+  NotLastParameter = AllocatorOrParameterName AnythingButComma ","
+  LastParameter = AllocatorOrParameterName ~AnythingButComma AnythingButRPar
+
+  NotLastReturnParameter = ParameterName? AnythingButComma ","
+  LastReturnParameter = ParameterName? ~AnythingButComma AnythingButRPar
+  SingleReturnParameter = ~ProcDefinitionBody AnythingButProcDefinitionBody
+
+  Pragma = "#" "❲force_inline❳"
+
+  ParameterName =
+    | ID &"," -- sharedtype
+    | ID ":" -- named
+  Allocator =  "❲allocator❳" ":="
+  AllocatorOrParameterName = Allocator | ParameterName
+
+  BodyStuff = SkipTo<"}">
+  AnythingButComma = SkipTo<",">
+  AnythingButRPar = SkipTo<")">
+//  AnythingButProcDefinitionBody = SkipTo<ProcDefinitionBody>
+  AnythingButProcDefinitionBody = SkipTo<"{">
   
+  SkipTo<stopBefore> =
+    | &stopBefore -- done
+    | Inner SkipTo<stopBefore> -- continue
+  Inner =
+    | "(" Inner* ")" -- nestedparens
+    | "{" Inner* "}" -- nestedbraces
+    | ~"(" ~")" AnyToken -- bottom
+
+ 
       dqb = "“"
     dqe = "”"
   string = dqb (~dqb ~dqe any)* dqe
@@ -81,7 +89,7 @@ Odin0Dproc {
 
   comment = "⎣" (~"⎣" ~"⎦" any)* "⎦" 
 
-  Anytoken = string | charconst | ID | integer | keyword | multi_char_operator | indentc | dedentc | verbatim | comment | any
+  AnyToken = string | charconst | ID | integer | keyword | multi_char_operator | indentc | dedentc | verbatim | comment | any
 
     uspc = "・"
     unl = "⦚"

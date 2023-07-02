@@ -30,7 +30,7 @@
 
   comment = "⎣" (~"⎣" ~"⎦" any)* "⎦" 
 
-  Anytoken = string | charconst | ID | integer | keyword | multi_char_operator | indentc | dedentc | verbatim | comment | any
+  AnyToken = string | charconst | ID | integer | keyword | multi_char_operator | indentc | dedentc | verbatim | comment | any
 
     uspc = "・"
     unl = "⦚"
