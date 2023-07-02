@@ -1,5 +1,5 @@
 OdinProcSignature {
-  Main = OdinReturnType+
+  Main = (OdinReturnType "{}")+
   ProcSignature = id "::" OdinParameterList OdinReturnTypeList?
 
   OdinParameterList =
@@ -10,16 +10,17 @@ OdinProcSignature {
   OdinReturnType = "->" OdinReturnTypeList
   OdinReturnTypeList =
     |  "(" ")" -- empty
-    |  "(" LastParameter ")" -- single
+    |  "(" LastParameter ")" -- singlebracketed
     |  "(" NotLastReturnParameter+ LastReturnParameter ")" -- multiple
-    | ~"(" SingleReturnParameter
+    | ~"(" SingleReturnParameter -- single
+    | ~"(" &"{" -- void
 
   NotLastParameter = (Allocator | ParameterName) AnythingButComma ","
   LastParameter = (Allocator | ParameterName) ~AnythingButComma AnythingButRPar
 
   NotLastReturnParameter = ParameterName? AnythingButComma ","
   LastReturnParameter = ParameterName? ~AnythingButComma AnythingButRPar
-  SingleReturnParameter = ~AnythingButLBrace AnythingButLBrace
+  SingleReturnParameter = ~"{" AnythingButLBrace
 
   ParameterName =
     | id &"," -- sharedtype
