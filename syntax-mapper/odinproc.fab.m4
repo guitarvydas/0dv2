@@ -7,7 +7,7 @@ OdinProcSignature {
 
   ProcDefinitionBody [lb BodyStuff rb] = ‛«lb»«BodyStuff»«rb»’
 
-  ProcSignature_nonvoid [ID kcc Pragma? kproc OdinParameterList OdinReturnTypeList] = ‛«ID»«kcc»«Pragma»«kproc»«OdinParameterList»«OdinReturnTypeList»’
+  ProcSignature_nonvoid [ID kcc Pragma? kproc OdinParameterList OdinReturnTypeList] = ‛«ID»«kcc»«Pragma»«kproc»«OdinParameterList»’
   ProcSignature_void [ID kcc Pragma? kproc OdinParameterList lookahead] = ‛«ID»«kcc»«Pragma»«kproc»«OdinParameterList»’
 
   OdinParameterList_empty [lp rp] = ‛()’
