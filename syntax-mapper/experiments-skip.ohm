@@ -1,6 +1,14 @@
 OdinProcSignature {
-  Main = (OdinReturnType "{}")+
-  ProcSignature = id "::" OdinParameterList OdinReturnTypeList?
+  Main = Proc+
+  Proc = ProcSignature "{" "}" 
+
+  item =
+    | applySyntactic<ProcSignature>
+    | any
+    
+  ProcSignature =
+    | id "::" Pragma? "proc" OdinParameterList OdinReturnTypeList -- nonvoid
+    | id "::" Pragma? "proc" OdinParameterList &"{"-- void
 
   OdinParameterList =
     | "(" ")" -- empty
@@ -22,6 +30,8 @@ OdinProcSignature {
   NotLastReturnParameter = ParameterName? AnythingButComma ","
   LastReturnParameter = ParameterName? ~AnythingButComma AnythingButRPar
   SingleReturnParameter = ~"{" AnythingButLBrace
+
+  Pragma = "#" "force_inline"
 
   ParameterName =
     | id &"," -- sharedtype

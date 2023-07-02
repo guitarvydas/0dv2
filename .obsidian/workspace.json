@@ -181,6 +181,7 @@
   },
   "active": "90007e6683140748",
   "lastOpenFiles": [
+    "syntax-mapper/sigtests.odin",
     "syntax-mapper/returntests.odin~",
     "syntax-mapper/#junk.odin#",
     "syntax-mapper/#returntests.odin#",
@@ -191,7 +192,6 @@
     "syntax-mapper/experiments-skip.ohm~",
     "syntax-mapper/experiments-skip.ohm",
     "syntax-mapper/test2.odin~",
-    "syntax-mapper/#test2.odin#",
     "doc/Skip.drawio.svg",
     "doc/2023-07-01.md",
     "doc/2023-06-29.md",
