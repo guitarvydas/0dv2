@@ -1,13 +1,13 @@
 OdinProcSignature {
-  Main = Proc+
+  main = item+
+  item =
+    | applySyntactic<Proc> -- proc
+    | any -- other
+    
   Proc = ProcSignature ProcDefinitionBody
 
-  ProcDefinitionBody = "{" "}"
+  ProcDefinitionBody = "{" BodyStuff "}"
 
-  item =
-    | applySyntactic<ProcSignature>
-    | any
-    
   ProcSignature =
     | id "::" Pragma? "proc" OdinParameterList OdinReturnTypeList -- nonvoid
     | id "::" Pragma? "proc" OdinParameterList &ProcDefinitionBody -- void
@@ -40,15 +40,18 @@ OdinProcSignature {
     | id ":" -- named
   Allocator = "allocator" ":="
 
+  BodyStuff = SkipTo<"}">
   AnythingButComma = SkipTo<",">
   AnythingButRPar = SkipTo<")">
-  AnythingButProcDefinitionBody = SkipTo<ProcDefinitionBody>
+//  AnythingButProcDefinitionBody = SkipTo<ProcDefinitionBody>
+  AnythingButProcDefinitionBody = SkipTo<"{">
   
   SkipTo<stopBefore> =
     | &stopBefore -- done
     | Inner SkipTo<stopBefore> -- continue
   Inner =
-    | "(" Inner* ")" -- nested
+    | "(" Inner* ")" -- nestedparens
+    | "{" Inner* "}" -- nestedbraces
     | ~"(" ~")" any -- bottom
 
   id = idFirst idRest*
