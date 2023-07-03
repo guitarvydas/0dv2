@@ -4,10 +4,10 @@ Odin0Dstruct {
 
   Struct [ID kcc kstruct lb NotLastField* LastField rb] = ‛«ID» «kcc» «kstruct» «lb» «NotLastField» «LastField» «rb»’
 
-  NotLastField [ID kcolon AnythingButComma kcomma] = ‛«ID»«kcolon»«AnythingButComma» ’
+  NotLastField [ID kcolon AnythingButComma kcomma] = ‛«ID» ’
   LastField_done [lookahead] = ‛’
-  LastField_fieldwithcomma [ID kcolon AnythingButComma kcomma] = ‛«ID»«kcolon»«AnythinButComma» ’
-  LastField_fieldnocomma [ID kcolon AnythingButRBrace] = ‛«ID»«kcolon»«AnythingButRBrace»’
+  LastField_fieldwithcomma [ID kcolon AnythingButComma kcomma] = ‛«ID»’
+  LastField_fieldnocomma [ID kcolon AnythingButRBrace] = ‛«ID»’
 
   
   string [kb cs* ke] = ‛«kb»«cs»«ke»’
