@@ -1,40 +1,41 @@
     dqb = "“"
     dqe = "”"
-  string = dqb (~dqb ~dqe any)* dqe
+  string = dqb (~dqb ~dqe any)* dqe ws
 
     sqb = "❛"
     sqe = "❜"
-  charconst = sqb (~sqb ~sqe any)* sqe
+  charconst = sqb (~sqb ~sqe any)* sqe ws
 
-  id = "❲" (~"❲" ~"❳" any)* "❳"
+  id = "❲" (~"❲" ~"❳" any)* "❳" ws
 
 
     intb = "⟨"
     inte = "⟩"
-  integer = intb (~intb ~inte any)* inte
+  integer = intb (~intb ~inte any)* inte ws
 
     symb = "❲"
     syme = "❳"
-  symbol = symb (~symb ~syme any)* syme
+  symbol = symb (~symb ~syme any)* syme ws
     
     kwb = "‹"
     kwe = "›"
-  keyword = kwb (~kwb ~kwe any)* kwe
+  keyword = kwb (~kwb ~kwe any)* kwe ws
 
     mcb = "⟪"
     mce = "⟫"
-  multi_char_operator = mcb (~mcb ~mce any)* mce
+  multi_char_operator = mcb (~mcb ~mce any)* mce ws
 
-  indentc = "⇢"
-  dedentc = "⇠"
+  indentc = "⇢" ws
+  dedentc = "⇠" ws
 
     vb = "«"
     ve = "»"
-  verbatim = vb (~vb ~ve any)* ve
+  verbatim = vb (~vb ~ve any)* ve ws
 
-  comment = "⎣" (~"⎣" ~"⎦" any)* "⎦" 
+  comment = "⎣" (~"⎣" ~"⎦" any)* "⎦" ws
 
-  anyToken = string | charconst | id | integer | keyword | multi_char_operator | indentc | dedentc | verbatim | comment | symbol | integer | any
+  anyToken1 = string | charconst | id | integer | keyword | multi_char_operator | indentc | dedentc | verbatim | comment | symbol | integer | any
+  anyToken = anyToken1 ws
 
     uspc = "・"
     unl = "⦚"
@@ -42,5 +43,14 @@
     
     spc = " "
     nl = "\n"
-  // space += uspc | unl | comment
 
+    commentspace = "◦"
+    commentnl = "¶"
+
+    stringspace = "□"
+    stringnl = "‡"
+    charspace = "☐"
+    charnl = "†"
+
+    wsc = space | spc | nl | uspc | unl | commentspace | commentnl | stringspace | stringnl | charspace | charnl | comment | verbatim
+    ws = wsc*

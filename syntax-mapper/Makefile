@@ -27,7 +27,7 @@ pseudo: deleteComments odinproc.ohm odinproc.fab odinstruct.ohm odinstruct.fab
 	cat - <junk--pseudo | ./indenter.py | ./show.py
 hold-pseudo: deleteComments odinproc.ohm odinproc.fab odinstruct.ohm odinstruct.fab
 	./fab odinproc.ohm odinproc.fab support.js <junk--nocomments | tee junk--proc \
-	| ./fab odinstruct.ohm odinstruct.fab support.js | tee struct \
+	| ./fab odinstruct.ohm odinstruct.fab support.js | tee junk--struct \
 	>junk--pseudo
 	cat - <junk--pseudo | ./indenter.py | ./show.py
 
