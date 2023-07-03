@@ -1,44 +1,46 @@
 OdinProcSignature {
-  Program [item+] = ‛«item»’
-  Item [i] = ‛«i»’
+  program [item+] = ‛«item»’
+  item [i] = ‛«i»’
 
 
-  Proc [ProcSignature ProcDefinitionBody] = ‛«ProcSignature»«ProcDefinitionBody»’
+  proc [ProcSignature ProcDefinitionBody] = ‛«ProcSignature»«ProcDefinitionBody»’
 
-  ProcDefinitionBody [lb BodyStuff rb] = ‛«lb»«BodyStuff»«rb»’
+  procDefinitionBody [lb ws1 BodyStuff rb ws2] = ‛«lb»«ws1»«BodyStuff»«rb»«ws2»’
 
-  ProcSignature_nonvoid [ID kcc Pragma? kproc OdinParameterList OdinReturnTypeList] = ‛«ID»«kcc»«Pragma»«kproc»«OdinParameterList»’
-  ProcSignature_void [ID kcc Pragma? kproc OdinParameterList lookahead] = ‛«ID»«kcc»«Pragma»«kproc»«OdinParameterList»’
+  procSignature_nonvoid [ID kcc ws1 Pragma? kproc ws2 OdinParameterList OdinReturnTypeList] = ‛«ID»«kcc»«ws1»«Pragma»«kproc»«ws2»«OdinParameterList»’
+  procSignature_void [ID kcc ws1 Pragma? kproc ws2 OdinParameterList lookahead] = ‛«ID»«kcc»«ws1»«Pragma»«kproc»«ws2»«OdinParameterList»’
 
-  OdinParameterList_empty [lp rp] = ‛()’
-  OdinParameterList_single [lp LastParameter rp] = ‛(«LastParameter»)’
-  OdinParameterList_multiple [lp NotLastParameter+ LastParameter rp] = ‛(«NotLastParameter» «LastParameter»)’
+  odinParameterList_empty [lp ws1 rp ws2] = ‛«lp»«ws1»«rp»«ws2»’
+  odinParameterList_single [lp ws1 LastParameter rp ws2] = ‛(«ws1»«LastParameter»)«ws2»’
+  odinParameterList_multiple [lp ws1 NotLastParameter+ LastParameter rp ws2] = ‛(«ws1»«NotLastParameter» «LastParameter»)«ws2»’
 
-  OdinReturnType_void [lookahead] = ‛’
-  OdinReturnType_typed [karrow OdinReturnTypeList] = ‛->«OdinReturnTypeList»’
-  OdinReturnTypeList_empty [lp rp] = ‛()’
-  OdinReturnTypeList_singlebracketed [lp LastParameter rp] = ‛(«LastParameter»)’
-  OdinReturnTypeList_multiple [lp NotLastParameter+ LastParameter rp] = ‛(«NotLastParameter» «LastParameter»)’
-  OdinReturnTypeList_single [SingleReturnParameter] = ‛«SingleReturnParameter»’
+  odinReturnType_void [lookahead] = ‛’
+  odinReturnType_typed [karrow ws1 OdinReturnTypeList] = ‛->«ws1»«OdinReturnTypeList»’
+  odinReturnTypeList_empty [lp ws1 rp ws2] = ‛(«ws1»)«ws2»’
+  odinReturnTypeList_singlebracketed [lp ws1 LastParameter rp ws2] = ‛(«ws1»«LastParameter»)«ws2»’
+  odinReturnTypeList_multiple [lp ws1 NotLastParameter+ LastParameter rp ws2] = ‛(«ws1»«NotLastParameter» «LastParameter»)«ws2»’
+  odinReturnTypeList_single [SingleReturnParameter] = ‛«SingleReturnParameter»’
 
-  NotLastParameter [AllocatorOrParameterName AnythingButComma kcomma] = ‛«AllocatorOrParameterName»’
-  LastParameter [AllocatorOrParameterName AnythingButRPar] = ‛«AllocatorOrParameterName»’
+  notLastParameter [AllocatorOrParameterName AnythingButComma kcomma ws1] = ‛«AllocatorOrParameterName»’
+  lastParameter [AllocatorOrParameterName AnythingButRPar] = ‛«AllocatorOrParameterName»’
 
-  NotLastReturnParameter [ParameterName? AnythingButComma kcomma] = ‛«ParameterName» «AnythingButComma»,’
-  LastReturnParameter [ParameterName? AnythingButRPar] = ‛«ParameterName» «AnythingButRPar»’
-  SingleReturnParameter [AnythingButProcDefinitionBody] = ‛«AnythingButProcDefinitionBody»’
+  notLastReturnParameter [ParameterName? AnythingButComma kcomma ws1] = ‛«ParameterName» «AnythingButComma»,«ws1»’
+  lastReturnParameter [ParameterName? AnythingButRPar] = ‛«ParameterName» «AnythingButRPar»’
+  singleReturnParameter [AnythingButProcDefinitionBody] = ‛«AnythingButProcDefinitionBody»’
 
-  Pragma [kocto fi] = ‛«kocto»«fi» ’
+  pragma [kfi ws1] = ‛«kfi»«ws1»’
 
-  ParameterName_sharedtype [ID lookahead] = ‛«ID» ’
-  ParameterName_named [ID kcolon] = ‛«ID» ’
-  Allocator [kallocator kassign] = ‛’
-  AllocatorOrParameterName [x] = ‛«x»’
+  parameterName_sharedtype [ID lookahead] = ‛«ID» ’
+  parameterName_named [ID kcolon ws1] = ‛«ID» ’
+  allocator [kallocator ws1 kassign ws2] = ‛’
+  allocatorOrParameterName [x] = ‛«x»’
 
-  BodyStuff [stuff] = ‛«stuff»’
-  AnythingButComma [stuff] = ‛«stuff»’
-  AnythingButRPar [stuff] = ‛«stuff»’
-  AnythingButProcDefinitionBody [stuff] = ‛«stuff»’
+  bodyStuff [stuff] = ‛«stuff»’
+  anythingButComma [stuff] = ‛«stuff»’
+  anythingButRPar [stuff] = ‛«stuff»’
+  anythingButProcDefinitionBody [stuff] = ‛«stuff»’
+
+  procDefinitionBodyBeginning [lb ws1] = ‛{«ws1»’
   
   
   string [kb cs* ke ws] = ‛«kb»«cs»«ke»«ws»’

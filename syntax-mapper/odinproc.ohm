@@ -7,46 +7,46 @@ OdinProcSignature {
     
   proc = procSignature procDefinitionBody
 
-  procDefinitionBody = "{" bodyStuff "}"
+  procDefinitionBody = "{" ws bodyStuff "}" ws
 
   procSignature =
-    | id "::" pragma? "❲proc❳" odinParameterList odinReturnTypeList -- nonvoid
-    | id "::" pragma? "❲proc❳" odinParameterList &procDefinitionBody -- void
+    | id "::" ws pragma? "❲proc❳" ws odinParameterList odinReturnTypeList -- nonvoid
+    | id "::" ws pragma? "❲proc❳" ws odinParameterList &procDefinitionBody -- void
 
   odinParameterList =
-    | "(" ")" -- empty
-    | "(" lastParameter ")" -- single
-    | "(" notLastParameter+ lastParameter ")" -- multiple
+    | "(" ws ")" ws -- empty
+    | "(" ws lastParameter ")" ws -- single
+    | "(" ws notLastParameter+ lastParameter ")" ws -- multiple
 
   odinReturnType =
     | &procDefinitionBody -- void
-    | "->" odinReturnTypeList -- typed
+    | "->" ws odinReturnTypeList -- typed
   odinReturnTypeList =
-    |  "(" ")" -- empty
-    |  "(" lastParameter ")" -- singlebracketed
-    |  "(" notLastReturnParameter+ lastReturnParameter ")" -- multiple
+    |  "(" ws ")" ws -- empty
+    |  "(" ws lastParameter ")" ws -- singlebracketed
+    |  "(" ws notLastReturnParameter+ lastReturnParameter ")" ws -- multiple
     | ~"(" singleReturnParameter -- single
 
-  notLastParameter = allocatorOrParameterName anythingButComma ","
+  notLastParameter = allocatorOrParameterName anythingButComma "," ws
   lastParameter = allocatorOrParameterName ~anythingButComma anythingButRPar
 
-  notLastReturnParameter = parameterName? anythingButComma ","
+  notLastReturnParameter = parameterName? anythingButComma "," ws
   lastReturnParameter = parameterName? ~anythingButComma anythingButRPar
   singleReturnParameter = ~procDefinitionBody anythingButProcDefinitionBody
 
-  pragma = "#" "❲force_inline❳"
+  pragma = "#❲force_inline❳" ws
 
   parameterName =
     | id &"," -- sharedtype
-    | id ":" -- named
-  allocator =  "❲allocator❳" ":="
+    | id ":" ws -- named
+  allocator =  "❲allocator❳" ws ":=" ws
   allocatorOrParameterName = allocator | parameterName
 
   bodyStuff = skipTo<"}">
   anythingButComma = skipTo<",">
   anythingButRPar = skipTo<")">
   anythingButProcDefinitionBody = skipTo<procDefinitionBodyBeginning>
-  procDefinitionBodyBeginning = "{"  
+  procDefinitionBodyBeginning = "{" ws
 
  
       dqb = "“"
@@ -106,7 +106,6 @@ OdinProcSignature {
     wsc = space | spc | nl | uspc | unl | commentspace | commentnl | stringspace | stringnl | charspace | charnl | comment | verbatim
     ws = wsc*
 
-  space += uspc | unl | comment
     skipTo<stopBefore> =
     | &stopBefore -- done
     | inner skipTo<stopBefore> -- continue
