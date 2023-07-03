@@ -25,6 +25,7 @@ pseudo: deleteComments odinproc.ohm odinproc.fab odinstruct.ohm odinstruct.fab
 	./fab odinproc.ohm odinproc.fab support.js <junk--nocomments | tee junk--proc \
 	| ./fab odinstruct.ohm odinstruct.fab support.js | tee junk--struct \
 	>junk--pseudo
+	cat - <junk--pseudo | ./indenter.py | ./show.py >junk--show
 	cat - <junk--pseudo | ./indenter.py | ./show.py
 
 odinproc.ohm: odinproc.ohm.m4 tokens.ohm.inc skip.ohm.inc
