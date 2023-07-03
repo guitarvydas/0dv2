@@ -45,19 +45,12 @@ OdinProcSignature {
   BodyStuff = SkipTo<"}">
   AnythingButComma = SkipTo<",">
   AnythingButRPar = SkipTo<")">
-//  AnythingButProcDefinitionBody = SkipTo<ProcDefinitionBody>
-  AnythingButProcDefinitionBody = SkipTo<"{">
-  
-  SkipTo<stopBefore> =
-    | &stopBefore -- done
-    | Inner SkipTo<stopBefore> -- continue
-  Inner =
-    | "(" Inner* ")" -- nestedparens
-    | "{" Inner* "}" -- nestedbraces
-    | ~"(" ~")" AnyToken -- bottom
+  AnythingButProcDefinitionBody = SkipTo<ProcDefinitionBodyBeginning>
+  ProcDefinitionBodyBeginning = "{"  
 
  
   include(`tokens.ohm.inc')
   space += uspc | unl | comment
+  include(`skip.ohm.inc')  
 }
 
