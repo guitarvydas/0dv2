@@ -1,4 +1,7 @@
-
+Odin0Ddeletecomments{
+  program [item+] = ‛«item»’
+  item_comment [c] = ‛’
+  
   string [kb cs* ke] = ‛«kb»«cs»«ke»’
   charconst [kb cs* ke] = ‛«kb»«cs»«ke»’
   ID [kb cs* ke] = ‛«kb»«cs»«ke»’
@@ -8,3 +11,5 @@
   multi_char_operator [kb cs* ke] = ‛«kb»«cs»«ke»’
   verbatim [kb cs* ke] = ‛«kb»«cs»«ke»’
   comment [kb cs* ke] = ‛«kb»«cs»«ke»’
+
+}

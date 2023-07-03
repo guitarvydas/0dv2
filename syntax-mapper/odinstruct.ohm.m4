@@ -1,19 +1,19 @@
 Odin0Dstruct {
-  Program = Item+
-  Item =
-    | Struct -- struct
-    | AnyToken -- other
+  program = item+
+  item =
+    | struct -- struct
+    | anyToken -- other
 
-  Struct = ID "::" "❲struct❳" "{" NotLastField* LastField "}"
+  struct = id "::" "❲struct❳" "{" notLastField* lastField "}"
 
-  NotLastField = ID ":" AnythingButComma ","
-  LastField =
+  notLastField = id ":" anythingButComma ","
+  lastField =
     | &"}" -- done
-    | ID ":" AnythingButComma "," -- fieldwithcomma
-    | ID ":" AnythingButRBrace -- fieldnocomma
+    | id ":" anythingButComma "," -- fieldwithcomma
+    | id ":" anythingButRBrace -- fieldnocomma
 
-  AnythingButComma = SkipTo<",">
-  AnythingButRBrace = SkipTo<"}">
+  anythingButComma = skipTo<",">
+  anythingButRBrace = skipTo<"}">
 
   include(`tokens.ohm.inc')
   space += uspc | unl | comment

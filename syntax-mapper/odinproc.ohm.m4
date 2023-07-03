@@ -1,52 +1,52 @@
 
 OdinProcSignature {
-  Program = Item+
-  Item =
-    | Proc -- proc
-    | AnyToken -- other
+  program = item+
+  item =
+    | proc -- proc
+    | anyToken -- other
     
-  Proc = ProcSignature ProcDefinitionBody
+  proc = procSignature procDefinitionBody
 
-  ProcDefinitionBody = "{" BodyStuff "}"
+  procDefinitionBody = "{" bodyStuff "}"
 
-  ProcSignature =
-    | ID "::" Pragma? "❲proc❳" OdinParameterList OdinReturnTypeList -- nonvoid
-    | ID "::" Pragma? "❲proc❳" OdinParameterList &ProcDefinitionBody -- void
+  procSignature =
+    | id "::" pragma? "❲proc❳" odinParameterList odinReturnTypeList -- nonvoid
+    | id "::" pragma? "❲proc❳" odinParameterList &procDefinitionBody -- void
 
-  OdinParameterList =
+  pdinParameterList =
     | "(" ")" -- empty
-    | "(" LastParameter ")" -- single
-    | "(" NotLastParameter+ LastParameter ")" -- multiple
+    | "(" lastParameter ")" -- single
+    | "(" notLastParameter+ LastParameter ")" -- multiple
 
-  OdinReturnType =
-    | &ProcDefinitionBody -- void
-    | "->" OdinReturnTypeList -- typed
-  OdinReturnTypeList =
+  odinReturnType =
+    | &procDefinitionBody -- void
+    | "->" odinReturnTypeList -- typed
+  odinReturnTypeList =
     |  "(" ")" -- empty
-    |  "(" LastParameter ")" -- singlebracketed
-    |  "(" NotLastReturnParameter+ LastReturnParameter ")" -- multiple
-    | ~"(" SingleReturnParameter -- single
+    |  "(" lastParameter ")" -- singlebracketed
+    |  "(" notLastReturnParameter+ LastReturnParameter ")" -- multiple
+    | ~"(" singleReturnParameter -- single
 
-  NotLastParameter = AllocatorOrParameterName AnythingButComma ","
-  LastParameter = AllocatorOrParameterName ~AnythingButComma AnythingButRPar
+  notLastParameter = allocatorOrParameterName anythingButComma ","
+  lastParameter = allocatorOrParameterName ~anythingButComma anythingButRPar
 
-  NotLastReturnParameter = ParameterName? AnythingButComma ","
-  LastReturnParameter = ParameterName? ~AnythingButComma AnythingButRPar
-  SingleReturnParameter = ~ProcDefinitionBody AnythingButProcDefinitionBody
+  notLastReturnParameter = parameterName? anythingButComma ","
+  lastReturnParameter = parameterName? ~anythingButComma anythingButRPar
+  singleReturnParameter = ~procDefinitionBody anythingButProcDefinitionBody
 
-  Pragma = "#" "❲force_inline❳"
+  pragma = "#" "❲force_inline❳"
 
-  ParameterName =
-    | ID &"," -- sharedtype
-    | ID ":" -- named
-  Allocator =  "❲allocator❳" ":="
-  AllocatorOrParameterName = Allocator | ParameterName
+  parameterName =
+    | id &"," -- sharedtype
+    | id ":" -- named
+  allocator =  "❲allocator❳" ":="
+  allocatorOrParameterName = allocator | parameterName
 
-  BodyStuff = SkipTo<"}">
-  AnythingButComma = SkipTo<",">
-  AnythingButRPar = SkipTo<")">
-  AnythingButProcDefinitionBody = SkipTo<ProcDefinitionBodyBeginning>
-  ProcDefinitionBodyBeginning = "{"  
+  bodyStuff = skipTo<"}">
+  anythingButComma = skipTo<",">
+  anythingButRPar = skipTo<")">
+  anythingButProcDefinitionBody = skipTo<procDefinitionBodyBeginning>
+  procDefinitionBodyBeginning = "{"  
 
  
   include(`tokens.ohm.inc')
