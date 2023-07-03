@@ -1,21 +1,20 @@
 Odin0Dstruct {
-  Program = Item+
-  Item =
-    | Struct -- struct
-    | AnyToken -- other
+  program = item+
+  item =
+    | struct -- struct
+    | anyToken -- other
 
-  Struct = ID "::" "❲struct❳" "{" NotLastField* LastField "}"
+  struct = id "::" ws "❲struct❳" ws "{" ws notLastField* lastField "}" ws
 
-  NotLastField = ID ":" AnythingButComma ","
-  LastField =
+  notLastField = id ":" ws anythingButComma "," ws
+  lastField =
     | &"}" -- done
-    | ID ":" AnythingButComma "," -- fieldwithcomma
-    | ID ":" AnythingButRBrace -- fieldnocomma
+    | id ":" ws anythingButComma "," ws -- fieldwithcomma
+    | id ":" ws anythingButRBrace -- fieldnocomma
 
-  AnythingButComma = SkipTo<",">
-  AnythingButRBrace = SkipTo<"}">
+  anythingButComma = skipTo<","> ws
+  anythingButRBrace = skipTo<"}"> ws
 
   include(`tokens.ohm.inc')
-  space += uspc | unl | comment
   include(`skip.ohm.inc')  
 }

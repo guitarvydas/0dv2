@@ -1,29 +1,35 @@
 Odin0Dstruct {
-  Program [item+] = ‛«item»’
-  Item [i] = ‛«i»’
+  program [item+] = ‛«item»’
+  item [i] = ‛«i»’
 
-  Struct [ID kcc kstruct lb NotLastField* LastField rb] = ‛«ID» «kcc» «kstruct» «lb» «NotLastField» «LastField» «rb»’
+  struct [ID kcc ws1 kstruct ws2 lb ws3 NotLastField* LastField rb ws4] = ‛«ID»«kcc»«ws1»«kstruct»«ws2»«lb»«ws3» «NotLastField» «LastField» «rb»⦚«ws4»’
 
-  NotLastField [ID kcolon AnythingButComma kcomma] = ‛«ID» ’
-  LastField_done [lookahead] = ‛’
-  LastField_fieldwithcomma [ID kcolon AnythingButComma kcomma] = ‛«ID»’
-  LastField_fieldnocomma [ID kcolon AnythingButRBrace] = ‛«ID»’
+  notLastField [ID kcolon ws1 AnythingButComma kcomma ws2] = ‛«ID»⦚’
+  lastField_done [lookahead] = ‛’
+  lastField_fieldwithcomma [ID kcolon ws1 AnythingButComma kcomma ws2] = ‛«ID»⦚’
+  lastField_fieldnocomma [ID kcolon ws1 AnythingButRBrace] = ‛«ID»⦚’
 
+  anythingButComma [skip ws] = ‛«skip»«ws»’
+  anythingButRBrace [skip ws] = ‛«skip»«ws»’
+
+
+  string [kb cs* ke ws] = ‛«kb»«cs»«ke»«ws»’
+  charconst [kb cs* ke ws] = ‛«kb»«cs»«ke»«ws»’
+  id [kb cs* ke ws] = ‛«kb»«cs»«ke»«ws»’
+  integer [kb cs* ke ws] = ‛«kb»«cs»«ke»«ws»’
+  symbol [kb cs* ke ws] = ‛«kb»«cs»«ke»«ws»’
+  keyword [kb cs* ke ws] = ‛«kb»«cs»«ke»«ws»’
+  multi_char_operator [kb cs* ke ws] = ‛«kb»«cs»«ke»«ws»’
+  verbatim [kb cs* ke ws] = ‛«kb»«cs»«ke»«ws»’
+  comment [kb cs* ke ws] = ‛«kb»«cs»«ke»«ws»’
+  anyToken [anyToken1 ws] = ‛«anyToken1»«ws»’
   
-  string [kb cs* ke] = ‛«kb»«cs»«ke»’
-  charconst [kb cs* ke] = ‛«kb»«cs»«ke»’
-  ID [kb cs* ke] = ‛«kb»«cs»«ke»’
-  integer [kb cs* ke] = ‛«kb»«cs»«ke»’
-  keyword [kb cs* ke] = ‛«kb»«cs»«ke»’
-  multi_char_operator [kb cs* ke] = ‛«kb»«cs»«ke»’
-  verbatim [kb cs* ke] = ‛«kb»«cs»«ke»’
-  comment [kb cs* ke] = ‛«kb»«cs»«ke»’
+  ws [wsc*] = ‛«wsc»’
+    skipTo_done [lookahead] = ‛’
+  skipTo_continue [i x] = ‛«i» «x»’
+  inner_nestedparens [l ws1 Inner* r ws2] = ‛«l»«ws1»«Inner»«r»«ws2»’
+  inner_nestedbraces [l ws1 Inner* r ws2] = ‛«l»«ws1»«Inner»«r»«ws2»’
+  inner_bottom [AnyToken] = ‛«AnyToken»’
 
-    SkipTo_done [lookahead] = ‛’
-  SkipTo_continue [i x] = ‛«i» «x»’
-  Inner_nestedparens [l Inner* r] = ‛«l»«Inner»«r»’
-  Inner_nestedbraces [l Inner* r] = ‛«l»«Inner»«r»’
-  Inner_bottom [AnyToken] = ‛«AnyToken»’
 
-  
 }

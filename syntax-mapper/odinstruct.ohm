@@ -1,53 +1,58 @@
 Odin0Dstruct {
-  Program = Item+
-  Item =
-    | Struct -- struct
-    | AnyToken -- other
+  program = item+
+  item =
+    | struct -- struct
+    | anyToken -- other
 
-  Struct = ID "::" "❲struct❳" "{" NotLastField* LastField "}"
+  struct = id "::" ws "❲struct❳" ws "{" ws notLastField* lastField "}" ws
 
-  NotLastField = ID ":" AnythingButComma ","
-  LastField =
+  notLastField = id ":" ws anythingButComma "," ws
+  lastField =
     | &"}" -- done
-    | ID ":" AnythingButComma "," -- fieldwithcomma
-    | ID ":" AnythingButRBrace -- fieldnocomma
+    | id ":" ws anythingButComma "," ws -- fieldwithcomma
+    | id ":" ws anythingButRBrace -- fieldnocomma
 
-  AnythingButComma = SkipTo<",">
-  AnythingButRBrace = SkipTo<"}">
+  anythingButComma = skipTo<","> ws
+  anythingButRBrace = skipTo<"}"> ws
 
       dqb = "“"
     dqe = "”"
-  string = dqb (~dqb ~dqe any)* dqe
+  string = dqb (~dqb ~dqe any)* dqe ws
 
     sqb = "❛"
     sqe = "❜"
-  charconst = sqb (~sqb ~sqe any)* sqe
+  charconst = sqb (~sqb ~sqe any)* sqe ws
 
-  ID = "❲" (~"❲" ~"❳" any)* "❳"
+  id = "❲" (~"❲" ~"❳" any)* "❳" ws
 
 
     intb = "⟨"
     inte = "⟩"
-  integer = intb (~intb ~inte any)* inte
+  integer = intb (~intb ~inte any)* inte ws
 
+    symb = "❲"
+    syme = "❳"
+  symbol = symb (~symb ~syme any)* syme ws
+    
     kwb = "‹"
     kwe = "›"
-  keyword = kwb (~kwb ~kwe any)* kwe
+  keyword = kwb (~kwb ~kwe any)* kwe ws
 
     mcb = "⟪"
     mce = "⟫"
-  multi_char_operator = mcb (~mcb ~mce any)* mce
+  multi_char_operator = mcb (~mcb ~mce any)* mce ws
 
-  indentc = "⇢"
-  dedentc = "⇠"
+  indentc = "⇢" ws
+  dedentc = "⇠" ws
 
     vb = "«"
     ve = "»"
-  verbatim = vb (~vb ~ve any)* ve
+  verbatim = vb (~vb ~ve any)* ve ws
 
-  comment = "⎣" (~"⎣" ~"⎦" any)* "⎦" 
+  comment = "⎣" (~"⎣" ~"⎦" any)* "⎦" ws
 
-  AnyToken = string | charconst | ID | integer | keyword | multi_char_operator | indentc | dedentc | verbatim | comment | any
+  anyToken1 = string | charconst | id | integer | keyword | multi_char_operator | indentc | dedentc | verbatim | comment | symbol | integer | any
+  anyToken = anyToken1 ws
 
     uspc = "・"
     unl = "⦚"
@@ -55,16 +60,24 @@ Odin0Dstruct {
     
     spc = " "
     nl = "\n"
-  // space += uspc | unl | comment
 
+    commentspace = "◦"
+    commentnl = "¶"
 
-  space += uspc | unl | comment
-    SkipTo<stopBefore> =
+    stringspace = "□"
+    stringnl = "‡"
+    charspace = "☐"
+    charnl = "†"
+
+    wsc = space | spc | nl | uspc | unl | commentspace | commentnl | stringspace | stringnl | charspace | charnl | verbatim
+    ws = wsc*
+
+    skipTo<stopBefore> =
     | &stopBefore -- done
-    | Inner SkipTo<stopBefore> -- continue
-  Inner =
-    | "(" Inner* ")" -- nestedparens
-    | "{" Inner* "}" -- nestedbraces
-    | ~"(" ~")" AnyToken -- bottom
+    | inner skipTo<stopBefore> -- continue
+  inner =
+    | "(" ws inner* ")" ws -- nestedparens
+    | "{" ws inner* "}" ws -- nestedbraces
+    | ~"(" ~")" anyToken -- bottom
   
 }

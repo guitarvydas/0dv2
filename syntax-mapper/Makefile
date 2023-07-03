@@ -14,14 +14,18 @@ tokenize:
 	./delmacrodefs.sed <$(SRC) \
 	| ./macros.py \
 	| ./convertws.py \
-	| ./fab odincomment.ohm odincomment.fab support.js | tee junk--comment \
+	| ./fab odincomment.ohm odincomment.fab support.js | tee junk--comments \
 	| ./fab odinstrings.ohm odinstrings.fab support.js | tee junk--strings \
 	| ./fab odinsymbols.ohm odinsymbols.fab support.js >junk--tokenized
 
-pseudo: tokenize odinproc.ohm odinproc.fab odinstruct.ohm odinstruct.fab
-	./fab odinproc.ohm odinproc.fab support.js <junk--tokenized \
-	| ./fab odinstruct.ohm odinstruct.fab support.js  >junk--pseudo
-	./cleanup.py <junk--pseudo | ./indenter.py 
+deleteComments: tokenize odindeletecomments.ohm odindeletecomments.fab support.js
+	./fab odindeletecomments.ohm odindeletecomments.fab support.js <junk--tokenized >junk--nocomments
+
+pseudo: deleteComments odinproc.ohm odinproc.fab odinstruct.ohm odinstruct.fab
+	./fab odinproc.ohm odinproc.fab support.js <junk--nocomments | tee junk--proc \
+	| ./fab odinstruct.ohm odinstruct.fab support.js | tee junk--struct \
+	>junk--pseudo
+	cat - <junk--pseudo | ./indenter.py | ./show.py
 
 odinproc.ohm: odinproc.ohm.m4 tokens.ohm.inc skip.ohm.inc
 	m4 odinproc.ohm.m4 >odinproc.ohm
@@ -34,6 +38,12 @@ odinstruct.ohm: odinstruct.ohm.m4 tokens.ohm.inc skip.ohm.inc
 
 odinstruct.fab: odinstruct.fab.m4 tokens.fab.inc skip.fab.inc
 	m4 odinstruct.fab.m4 >odinstruct.fab
+
+odindeletecomments.ohm: odindeletecomments.ohm.m4 tokens.ohm.inc skip.ohm.inc
+	m4 odindeletecomments.ohm.m4 >odindeletecomments.ohm
+
+odindeletecomments.fab: odindeletecomments.fab.m4 tokens.fab.inc skip.fab.inc
+	m4 odindeletecomments.fab.m4 >odindeletecomments.fab
 
 old:
 	| ./fab odinproc.ohm odinproc.fab support.js \

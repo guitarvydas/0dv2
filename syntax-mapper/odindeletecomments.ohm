@@ -1,4 +1,14 @@
-    dqb = "“"
+Odin0Ddeletecomments{
+  program = item+
+  item =
+    | comment -- comment
+    | string -- string
+    | charconst -- charconst
+    | integer -- integer
+    | symbol -- symbol
+    | any -- other
+
+      dqb = "“"
     dqe = "”"
   string = dqb (~dqb ~dqe any)* dqe ws
 
@@ -54,3 +64,6 @@
 
     wsc = space | spc | nl | uspc | unl | commentspace | commentnl | stringspace | stringnl | charspace | charnl | verbatim
     ws = wsc*
+
+}
+

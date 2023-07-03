@@ -1,14 +1,17 @@
 Odin0Dstruct {
-  Program [item+] = ‛«item»’
-  Item [i] = ‛«i»’
+  program [item+] = ‛«item»’
+  item [i] = ‛«i»’
 
-  Struct [ID kcc kstruct lb NotLastField* LastField rb] = ‛«ID» «kcc» «kstruct» «lb» «NotLastField» «LastField» «rb»’
+  struct [ID kcc ws1 kstruct ws2 lb ws3 NotLastField* LastField rb ws4] = ‛«ID»«kcc»«ws1»«kstruct»«ws2»«lb»«ws3» «NotLastField» «LastField» «rb»⦚«ws4»’
 
-  NotLastField [ID kcolon AnythingButComma kcomma] = ‛«ID» ’
-  LastField_done [lookahead] = ‛’
-  LastField_fieldwithcomma [ID kcolon AnythingButComma kcomma] = ‛«ID»’
-  LastField_fieldnocomma [ID kcolon AnythingButRBrace] = ‛«ID»’
+  notLastField [ID kcolon ws1 AnythingButComma kcomma ws2] = ‛«ID»⦚’
+  lastField_done [lookahead] = ‛’
+  lastField_fieldwithcomma [ID kcolon ws1 AnythingButComma kcomma ws2] = ‛«ID»⦚’
+  lastField_fieldnocomma [ID kcolon ws1 AnythingButRBrace] = ‛«ID»⦚’
 
-  include(`tokens.fab.inc')
-  include(`skip.fab.inc')  
+  anythingButComma [skip ws] = ‛«skip»«ws»’
+  anythingButRBrace [skip ws] = ‛«skip»«ws»’
+
+include(`tokens.fab.inc')
+  include(`skip.fab.inc')
 }

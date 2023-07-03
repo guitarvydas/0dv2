@@ -1,4 +1,7 @@
-
+Odin0Ddeletecomments{
+  program [item+] = ‛«item»’
+  item_comment [c] = ‛’
+  
   string [kb cs* ke ws] = ‛«kb»«cs»«ke»«ws»’
   charconst [kb cs* ke ws] = ‛«kb»«cs»«ke»«ws»’
   id [kb cs* ke ws] = ‛«kb»«cs»«ke»«ws»’
@@ -11,3 +14,4 @@
   anyToken [anyToken1 ws] = ‛«anyToken1»«ws»’
   
   ws [wsc*] = ‛«wsc»’
+}
