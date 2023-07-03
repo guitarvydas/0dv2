@@ -1,3 +1,15 @@
+Eh :: struct {
+    name:         string,
+    input:        FIFO,
+    output:       FIFO,
+    yield:        FIFO,
+    data:	  ^any,   // this should be a Union: a Leaf has (instance) data, while a Container  
+    children:     []^Eh, // has instance data, too, but the shape is predefined to be "children" and
+    connections:  []Connector,  // "connections"
+    handler:      #type proc(eh: ^Eh, message: Message, data: ^any),
+    state:        int,
+}
+
 make_container :: proc(name: string) -> ^Eh {
     eh := new(Eh)
     eh.name = name

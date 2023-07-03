@@ -40,12 +40,6 @@ OdinProcSignature {
   AnythingButRPar [stuff] = ‛«stuff»’
   AnythingButProcDefinitionBody [stuff] = ‛«stuff»’
   
-  SkipTo_done [lookahead] = ‛’
-  SkipTo_continue [i x] = ‛«i» «x»’
-  Inner_nestedparens [l Inner* r] = ‛«l»«Inner»«r»’
-  Inner_nestedbraces [l Inner* r] = ‛«l»«Inner»«r»’
-  Inner_bottom [AnyToken] = ‛«AnyToken»’
-
   
   string [kb cs* ke] = ‛«kb»«cs»«ke»’
   charconst [kb cs* ke] = ‛«kb»«cs»«ke»’
@@ -55,6 +49,13 @@ OdinProcSignature {
   multi_char_operator [kb cs* ke] = ‛«kb»«cs»«ke»’
   verbatim [kb cs* ke] = ‛«kb»«cs»«ke»’
   comment [kb cs* ke] = ‛«kb»«cs»«ke»’
+
+    SkipTo_done [lookahead] = ‛’
+  SkipTo_continue [i x] = ‛«i» «x»’
+  Inner_nestedparens [l Inner* r] = ‛«l»«Inner»«r»’
+  Inner_nestedbraces [l Inner* r] = ‛«l»«Inner»«r»’
+  Inner_bottom [AnyToken] = ‛«AnyToken»’
+
 
 }
 

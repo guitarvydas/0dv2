@@ -1,30 +1,29 @@
 Odin0Dstruct {
-  program [item+] = ‛«item»’
-  item [i] = ‛«i»’
+  Program [item+] = ‛«item»’
+  Item [i] = ‛«i»’
+
+  Struct [ID kcc kstruct lb NotLastField* LastField rb] = ‛«ID» «kcc» «kstruct» «lb» «NotLastField» «LastField» «rb»’
+
+  NotLastField [ID kcolon AnythingButComma kcomma] = ‛«ID»«kcolon»«AnythingButComma» ’
+  LastField_done [lookahead] = ‛’
+  LastField_fieldwithcomma [ID kcolon AnythingButComma kcomma] = ‛«ID»«kcolon»«AnythinButComma» ’
+  LastField_fieldnocomma [ID kcolon AnythingButRBrace] = ‛«ID»«kcolon»«AnythingButRBrace»’
+
   
-  packageDef [kpackage spc id] = ‛’
-  importDef_unnamed [kimport spc s] = ‛’
-  importDef_named [kimport spc1 id spc2 s] = ‛’
+  string [kb cs* ke] = ‛«kb»«cs»«ke»’
+  charconst [kb cs* ke] = ‛«kb»«cs»«ke»’
+  ID [kb cs* ke] = ‛«kb»«cs»«ke»’
+  integer [kb cs* ke] = ‛«kb»«cs»«ke»’
+  keyword [kb cs* ke] = ‛«kb»«cs»«ke»’
+  multi_char_operator [kb cs* ke] = ‛«kb»«cs»«ke»’
+  verbatim [kb cs* ke] = ‛«kb»«cs»«ke»’
+  comment [kb cs* ke] = ‛«kb»«cs»«ke»’
 
-  struct [spc0 id spc1 kcc spc2 kstruct spc0a parameterizedtype? spc3 lb spc4 typedfield+ rb] = ‛\n‹defstruct› «id»\n⇢\n«typedfield»⇠’
+    SkipTo_done [lookahead] = ‛’
+  SkipTo_continue [i x] = ‛«i» «x»’
+  Inner_nestedparens [l Inner* r] = ‛«l»«Inner»«r»’
+  Inner_nestedbraces [l Inner* r] = ‛«l»«Inner»«r»’
+  Inner_bottom [AnyToken] = ‛«AnyToken»’
 
-  parameterizedtype [lp kdollar id sp1 kcolon sp2 typechar+ rp] = ‛’
-
-  typedfield [s1 id s2 kcolon s3 type s4] = ‛    «id»\n’
-  type_procref [ktype spc1 kproc spc2 typechar+] = ‛«ktype»«spc1»«kproc»«spc2»«typechar»’
-  type_other [typechar+] = ‛«typechar»’
-
-  typechar_parenthesized [lp typecharinner+ rp] = ‛«lp»«typecharinner»«rp»’
-  typechar_bottom [c] = ‛«c»’
-  typecharinner_parenthesized [lp typecharinner+ rp] = ‛«lp»«typecharinner»«rp»’
-  typecharinner_bottom [c] = ‛«c»’
-
-
-  id [idfirst idrest*] = ‛«idfirst»«idrest»’
-  idfirst [c] = ‛«c»’
-  idrest  [c] = ‛«c»’
-  dq [c] = ‛"’
-  string [dq1 cs* dq2] = ‛"«cs»"’
-  comment [kslsl cs*] = ‛’
+  
 }
-

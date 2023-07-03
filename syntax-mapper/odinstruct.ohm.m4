@@ -12,6 +12,9 @@ Odin0Dstruct {
     | ID ":" AnythingButComma "," -- fieldwithcomma
     | ID ":" AnythingButRBrace -- fieldnocomma
 
+  AnythingButComma = SkipTo<",">
+  AnythingButRBrace = SkipTo<"}">
+
   include(`tokens.ohm.inc')
   space += uspc | unl | comment
   include(`skip.ohm.inc')  

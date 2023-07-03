@@ -18,15 +18,22 @@ tokenize:
 	| ./fab odinstrings.ohm odinstrings.fab support.js | tee junk--strings \
 	| ./fab odinsymbols.ohm odinsymbols.fab support.js >junk--tokenized
 
-pseudo: tokenize odinproc.ohm odinproc.fab
-	./fab odinproc.ohm odinproc.fab support.js <junk--tokenized >junk--pseudo
+pseudo: tokenize odinproc.ohm odinproc.fab odinstruct.ohm odinstruct.fab
+	./fab odinproc.ohm odinproc.fab support.js <junk--tokenized \
+	| ./fab odinstruct.ohm odinstruct.fab support.js  >junk--pseudo
 	./cleanup.py <junk--pseudo | ./indenter.py 
 
-odinproc.ohm: odinproc.ohm.m4 tokens.ohm.inc
+odinproc.ohm: odinproc.ohm.m4 tokens.ohm.inc skip.ohm.inc
 	m4 odinproc.ohm.m4 >odinproc.ohm
 
-odinproc.fab: odinproc.fab.m4 tokens.fab.inc
+odinproc.fab: odinproc.fab.m4 tokens.fab.inc skip.fab.inc
 	m4 odinproc.fab.m4 >odinproc.fab
+
+odinstruct.ohm: odinstruct.ohm.m4 tokens.ohm.inc skip.ohm.inc
+	m4 odinstruct.ohm.m4 >odinstruct.ohm
+
+odinstruct.fab: odinstruct.fab.m4 tokens.fab.inc skip.fab.inc
+	m4 odinstruct.fab.m4 >odinstruct.fab
 
 old:
 	| ./fab odinproc.ohm odinproc.fab support.js \
