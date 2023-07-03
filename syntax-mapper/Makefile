@@ -14,7 +14,7 @@ tokenize:
 	./delmacrodefs.sed <$(SRC) \
 	| ./macros.py \
 	| ./convertws.py \
-	| ./fab odincomment.ohm odincomment.fab support.js | tee junk--comment \
+	| ./fab odincomment.ohm odincomment.fab support.js | tee junk--comments \
 	| ./fab odinstrings.ohm odinstrings.fab support.js | tee junk--strings \
 	| ./fab odinsymbols.ohm odinsymbols.fab support.js >junk--tokenized
 
@@ -22,10 +22,6 @@ deleteComments: tokenize odindeletecomments.ohm odindeletecomments.fab support.j
 	./fab odindeletecomments.ohm odindeletecomments.fab support.js <junk--tokenized >junk--nocomments
 
 pseudo: deleteComments odinproc.ohm odinproc.fab odinstruct.ohm odinstruct.fab
-	./fab odinproc.ohm odinproc.fab support.js <junk--nocomments | tee junk--proc \
-	>junk--pseudo
-	cat - <junk--pseudo | ./indenter.py | ./show.py
-hold-pseudo: deleteComments odinproc.ohm odinproc.fab odinstruct.ohm odinstruct.fab
 	./fab odinproc.ohm odinproc.fab support.js <junk--nocomments | tee junk--proc \
 	| ./fab odinstruct.ohm odinstruct.fab support.js | tee junk--struct \
 	>junk--pseudo
