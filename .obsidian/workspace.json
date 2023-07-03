@@ -181,6 +181,8 @@
   },
   "active": "90007e6683140748",
   "lastOpenFiles": [
+    "syntax-mapper/skip.fab.inc~",
+    "syntax-mapper/skip.ohm.inc~",
     "syntax-mapper/hold-tokens.ohm.inc",
     "syntax-mapper/hold-tokens.fab.inc",
     "syntax-mapper/hold.odinstruct.fab.m4",
@@ -190,8 +192,6 @@
     "syntax-mapper/hold-odinproc.ohm.m4",
     "syntax-mapper/struct",
     "syntax-mapper/junk--proc",
-    "syntax-mapper/show.py",
-    "syntax-mapper/junk--nocomments~",
     "doc/2023-07-01.md",
     "doc/WP 2023-06-28.md",
     "doc/Skip.drawio.svg",

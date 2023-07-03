@@ -1,7 +1,7 @@
-  SkipTo<stopBefore> =
+  skipTo<stopBefore> =
     | &stopBefore -- done
-    | Inner SkipTo<stopBefore> -- continue
-  Inner =
-    | "(" Inner* ")" -- nestedparens
-    | "{" Inner* "}" -- nestedbraces
-    | ~"(" ~")" AnyToken -- bottom
+    | inner skipTo<stopBefore> -- continue
+  inner =
+    | "(" inner* ")" -- nestedparens
+    | "{" inner* "}" -- nestedbraces
+    | ~"(" ~")" anyToken -- bottom

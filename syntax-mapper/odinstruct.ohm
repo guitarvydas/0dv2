@@ -1,19 +1,19 @@
 Odin0Dstruct {
-  Program = Item+
-  Item =
-    | Struct -- struct
-    | AnyToken -- other
+  program = item+
+  item =
+    | struct -- struct
+    | anyToken -- other
 
-  Struct = ID "::" "❲struct❳" "{" NotLastField* LastField "}"
+  struct = id "::" "❲struct❳" "{" notLastField* lastField "}"
 
-  NotLastField = ID ":" AnythingButComma ","
-  LastField =
+  notLastField = id ":" anythingButComma ","
+  lastField =
     | &"}" -- done
-    | ID ":" AnythingButComma "," -- fieldwithcomma
-    | ID ":" AnythingButRBrace -- fieldnocomma
+    | id ":" anythingButComma "," -- fieldwithcomma
+    | id ":" anythingButRBrace -- fieldnocomma
 
-  AnythingButComma = SkipTo<",">
-  AnythingButRBrace = SkipTo<"}">
+  anythingButComma = skipTo<",">
+  anythingButRBrace = skipTo<"}">
 
       dqb = "“"
     dqe = "”"
@@ -23,7 +23,7 @@ Odin0Dstruct {
     sqe = "❜"
   charconst = sqb (~sqb ~sqe any)* sqe
 
-  ID = "❲" (~"❲" ~"❳" any)* "❳"
+  id = "❲" (~"❲" ~"❳" any)* "❳"
 
 
     intb = "⟨"
@@ -51,7 +51,7 @@ Odin0Dstruct {
 
   comment = "⎣" (~"⎣" ~"⎦" any)* "⎦" 
 
-  AnyToken = string | charconst | ID | integer | keyword | multi_char_operator | indentc | dedentc | verbatim | comment | symbol | integer | any
+  anyToken = string | charconst | id | integer | keyword | multi_char_operator | indentc | dedentc | verbatim | comment | symbol | integer | any
 
     uspc = "・"
     unl = "⦚"
@@ -63,12 +63,12 @@ Odin0Dstruct {
 
 
   space += uspc | unl | comment
-    SkipTo<stopBefore> =
+    skipTo<stopBefore> =
     | &stopBefore -- done
-    | Inner SkipTo<stopBefore> -- continue
-  Inner =
-    | "(" Inner* ")" -- nestedparens
-    | "{" Inner* "}" -- nestedbraces
-    | ~"(" ~")" AnyToken -- bottom
+    | inner skipTo<stopBefore> -- continue
+  inner =
+    | "(" inner* ")" -- nestedparens
+    | "{" inner* "}" -- nestedbraces
+    | ~"(" ~")" anyToken -- bottom
   
 }

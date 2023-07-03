@@ -16,7 +16,7 @@ Odin0Ddeletecomments{
     sqe = "❜"
   charconst = sqb (~sqb ~sqe any)* sqe
 
-  ID = "❲" (~"❲" ~"❳" any)* "❳"
+  id = "❲" (~"❲" ~"❳" any)* "❳"
 
 
     intb = "⟨"
@@ -44,7 +44,7 @@ Odin0Ddeletecomments{
 
   comment = "⎣" (~"⎣" ~"⎦" any)* "⎦" 
 
-  AnyToken = string | charconst | ID | integer | keyword | multi_char_operator | indentc | dedentc | verbatim | comment | symbol | integer | any
+  anyToken = string | charconst | id | integer | keyword | multi_char_operator | indentc | dedentc | verbatim | comment | symbol | integer | any
 
     uspc = "・"
     unl = "⦚"

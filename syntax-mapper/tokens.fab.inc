@@ -1,7 +1,7 @@
 
   string [kb cs* ke] = ‛«kb»«cs»«ke»’
   charconst [kb cs* ke] = ‛«kb»«cs»«ke»’
-  ID [kb cs* ke] = ‛«kb»«cs»«ke»’
+  id [kb cs* ke] = ‛«kb»«cs»«ke»’
   integer [kb cs* ke] = ‛«kb»«cs»«ke»’
   symbol [kb cs* ke] = ‛«kb»«cs»«ke»’
   keyword [kb cs* ke] = ‛«kb»«cs»«ke»’

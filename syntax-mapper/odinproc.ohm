@@ -57,7 +57,7 @@ OdinProcSignature {
     sqe = "❜"
   charconst = sqb (~sqb ~sqe any)* sqe
 
-  ID = "❲" (~"❲" ~"❳" any)* "❳"
+  id = "❲" (~"❲" ~"❳" any)* "❳"
 
 
     intb = "⟨"
@@ -85,7 +85,7 @@ OdinProcSignature {
 
   comment = "⎣" (~"⎣" ~"⎦" any)* "⎦" 
 
-  AnyToken = string | charconst | ID | integer | keyword | multi_char_operator | indentc | dedentc | verbatim | comment | symbol | integer | any
+  anyToken = string | charconst | id | integer | keyword | multi_char_operator | indentc | dedentc | verbatim | comment | symbol | integer | any
 
     uspc = "・"
     unl = "⦚"
@@ -97,13 +97,13 @@ OdinProcSignature {
 
 
   space += uspc | unl | comment
-    SkipTo<stopBefore> =
+    skipTo<stopBefore> =
     | &stopBefore -- done
-    | Inner SkipTo<stopBefore> -- continue
-  Inner =
-    | "(" Inner* ")" -- nestedparens
-    | "{" Inner* "}" -- nestedbraces
-    | ~"(" ~")" AnyToken -- bottom
+    | inner skipTo<stopBefore> -- continue
+  inner =
+    | "(" inner* ")" -- nestedparens
+    | "{" inner* "}" -- nestedbraces
+    | ~"(" ~")" anyToken -- bottom
   
 }
 

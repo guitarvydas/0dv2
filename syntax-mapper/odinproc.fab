@@ -43,7 +43,7 @@ OdinProcSignature {
   
   string [kb cs* ke] = ‛«kb»«cs»«ke»’
   charconst [kb cs* ke] = ‛«kb»«cs»«ke»’
-  ID [kb cs* ke] = ‛«kb»«cs»«ke»’
+  id [kb cs* ke] = ‛«kb»«cs»«ke»’
   integer [kb cs* ke] = ‛«kb»«cs»«ke»’
   symbol [kb cs* ke] = ‛«kb»«cs»«ke»’
   keyword [kb cs* ke] = ‛«kb»«cs»«ke»’
@@ -51,11 +51,11 @@ OdinProcSignature {
   verbatim [kb cs* ke] = ‛«kb»«cs»«ke»’
   comment [kb cs* ke] = ‛«kb»«cs»«ke»’
 
-    SkipTo_done [lookahead] = ‛’
-  SkipTo_continue [i x] = ‛«i» «x»’
-  Inner_nestedparens [l Inner* r] = ‛«l»«Inner»«r»’
-  Inner_nestedbraces [l Inner* r] = ‛«l»«Inner»«r»’
-  Inner_bottom [AnyToken] = ‛«AnyToken»’
+    skipTo_done [lookahead] = ‛’
+  skipTo_continue [i x] = ‛«i» «x»’
+  inner_nestedparens [l Inner* r] = ‛«l»«Inner»«r»’
+  inner_nestedbraces [l Inner* r] = ‛«l»«Inner»«r»’
+  inner_bottom [AnyToken] = ‛«AnyToken»’
 
 
 }

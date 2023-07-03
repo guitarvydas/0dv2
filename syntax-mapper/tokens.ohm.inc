@@ -6,7 +6,7 @@
     sqe = "❜"
   charconst = sqb (~sqb ~sqe any)* sqe
 
-  ID = "❲" (~"❲" ~"❳" any)* "❳"
+  id = "❲" (~"❲" ~"❳" any)* "❳"
 
 
     intb = "⟨"
@@ -34,7 +34,7 @@
 
   comment = "⎣" (~"⎣" ~"⎦" any)* "⎦" 
 
-  AnyToken = string | charconst | ID | integer | keyword | multi_char_operator | indentc | dedentc | verbatim | comment | symbol | integer | any
+  anyToken = string | charconst | id | integer | keyword | multi_char_operator | indentc | dedentc | verbatim | comment | symbol | integer | any
 
     uspc = "・"
     unl = "⦚"

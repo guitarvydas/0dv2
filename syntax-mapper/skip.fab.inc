@@ -1,6 +1,6 @@
-  SkipTo_done [lookahead] = ‛’
-  SkipTo_continue [i x] = ‛«i» «x»’
-  Inner_nestedparens [l Inner* r] = ‛«l»«Inner»«r»’
-  Inner_nestedbraces [l Inner* r] = ‛«l»«Inner»«r»’
-  Inner_bottom [AnyToken] = ‛«AnyToken»’
+  skipTo_done [lookahead] = ‛’
+  skipTo_continue [i x] = ‛«i» «x»’
+  inner_nestedparens [l Inner* r] = ‛«l»«Inner»«r»’
+  inner_nestedbraces [l Inner* r] = ‛«l»«Inner»«r»’
+  inner_bottom [AnyToken] = ‛«AnyToken»’
 
