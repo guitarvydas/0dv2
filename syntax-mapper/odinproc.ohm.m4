@@ -13,10 +13,10 @@ OdinProcSignature {
     | id "::" pragma? "❲proc❳" odinParameterList odinReturnTypeList -- nonvoid
     | id "::" pragma? "❲proc❳" odinParameterList &procDefinitionBody -- void
 
-  pdinParameterList =
+  odinParameterList =
     | "(" ")" -- empty
     | "(" lastParameter ")" -- single
-    | "(" notLastParameter+ LastParameter ")" -- multiple
+    | "(" notLastParameter+ lastParameter ")" -- multiple
 
   odinReturnType =
     | &procDefinitionBody -- void
@@ -24,7 +24,7 @@ OdinProcSignature {
   odinReturnTypeList =
     |  "(" ")" -- empty
     |  "(" lastParameter ")" -- singlebracketed
-    |  "(" notLastReturnParameter+ LastReturnParameter ")" -- multiple
+    |  "(" notLastReturnParameter+ lastReturnParameter ")" -- multiple
     | ~"(" singleReturnParameter -- single
 
   notLastParameter = allocatorOrParameterName anythingButComma ","

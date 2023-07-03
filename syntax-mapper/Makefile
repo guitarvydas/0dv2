@@ -22,7 +22,7 @@ deleteComments: tokenize odindeletecomments.ohm odindeletecomments.fab support.j
 	./fab odindeletecomments.ohm odindeletecomments.fab support.js <junk--tokenized >junk--nocomments
 
 pseudo: deleteComments odinproc.ohm odinproc.fab odinstruct.ohm odinstruct.fab
-	./fab odinstruct.ohm odinstruct.fab support.js <junk--nocomments | tee struct \
+	./fab odinproc.ohm odinproc.fab support.js <junk--nocomments | tee junk--proc \
 	>junk--pseudo
 	cat - <junk--pseudo | ./indenter.py | ./show.py
 hold-pseudo: deleteComments odinproc.ohm odinproc.fab odinstruct.ohm odinstruct.fab
