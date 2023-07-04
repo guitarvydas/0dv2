@@ -25,3 +25,9 @@
   - these ONLY transform proc's and leave everything else alone
 - indenter.py uses '(-' and '-)' indentation clues to reformat python code in proper indentation format
 
+## July 4, 2023
+- in *.tocl.fab.m4, id is capturing unl/nl with the result that `(setf ... id)` inserts a newline before the `)` - ignoring for now
+- might be hard to fix in a general manner
+- might just use a post-pass to clean up `\nl)` -> `)\nl`
+- undecided
+
