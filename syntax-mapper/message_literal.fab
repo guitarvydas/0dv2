@@ -1,13 +1,24 @@
 Message_Literal_RewriteForCL {
   program [items+] = ‛«items»’
   item [x] = ‛«x»’
-  Message_Literal [kmessage lp id rp lb Operand1 kcomma Operand2 rb] = ‛ Message_Literal («Operand1», «Operand2») ’
-  Operand_recursive [Operand kdot id] = ‛«Operand»«kdot»«id»’
-  Operand_bottom [id] = ‛«id»’
+  message_Literal [kmessage lp ws1 id ws2 rp ws3 lb ws4 Operand1 kcomma ws5 Operand2 rb ws6] = ‛ Message_Literal («Operand1», «Operand2»)’
+  operand_recursive [Operand kdot id ws] = ‛«Operand»«kdot»«id»«ws»’
+  operand_bottom [id ws] = ‛«id»«ws»’
 
-  id [idfirst idrest*] = ‛«idfirst»«idrest»’
-  idfirst [c] = ‛«c»’
-  idrest  [c] = ‛«c»’
-  dq [c] = ‛"’
-  string [dq1 cs* dq2] = ‛"«cs»"’
+  
+  string [kb cs* ke ws] = ‛«kb»«cs»«ke»«ws»’
+  charconst [kb cs* ke ws] = ‛«kb»«cs»«ke»«ws»’
+  id [kb cs* ke ws] = ‛«kb»«cs»«ke»«ws»’
+  integer [kb cs* ke ws] = ‛«kb»«cs»«ke»«ws»’
+  symbol [kb cs* ke ws] = ‛«kb»«cs»«ke»«ws»’
+  keyword [kb cs* ke ws] = ‛«kb»«cs»«ke»«ws»’
+  multi_char_operator [kb cs* ke ws] = ‛«kb»«cs»«ke»«ws»’
+  verbatim [kb cs* ke ws] = ‛«kb»«cs»«ke»«ws»’
+  comment [kb cs* ke ws] = ‛«kb»«cs»«ke»«ws»’
+  anyToken [anyToken1 ws] = ‛«anyToken1»«ws»’
+  
+  ws [wsc*] = ‛«wsc»’
+
+  sym [kbegin text kend ws] = ‛«kbegin»«text»«kend»«ws»’
+
 }
