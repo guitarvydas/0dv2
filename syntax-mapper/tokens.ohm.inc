@@ -53,5 +53,5 @@
     charspace = "☐"
     charnl = "†"
 
-    wsc = space | spc | nl | uspc | unl | commentspace | commentnl | stringspace | stringnl | charspace | charnl | verbatim
+    wsc = space | spc | nl | uspc | unl | indentc | dedentc | commentspace | commentnl | stringspace | stringnl | charspace | charnl | verbatim
     ws = wsc*

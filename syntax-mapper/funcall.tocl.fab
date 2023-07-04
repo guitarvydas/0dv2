@@ -1,23 +1,32 @@
 AppendRewriteForCL {
   program [items+] = ‛«items»’
   item [x] = ‛«x»’
+  funcall [id ws lp anythingButRPar rp] = ‛(«id» «anythingButRPar»)’
 
-  Funcall_quoted [id Args] = ‛(«id» «Args»)’
-  Funcall_evaled [Operand Args] = ‛(funcall «Operand» «Args»)’
-
-  Args [lp Arg* rp] = ‛«Arg»’
-
-  Arg_arg [Operand comma?] = ‛«Operand» ’
-  Arg_messageliteral [lp kml Stuff rp comma?] = ‛ (Message_Literal «Stuff») ’
   
-  Funcid [id] = ‛«id»’
+  string [kb cs* ke ws] = ‛«kb»«cs»«ke»«ws»’
+  charconst [kb cs* ke ws] = ‛«kb»«cs»«ke»«ws»’
+  id [kb cs* ke ws] = ‛«kb»«cs»«ke»«ws»’
+  integer [kb cs* ke ws] = ‛«kb»«cs»«ke»«ws»’
+  symbol [kb cs* ke ws] = ‛«kb»«cs»«ke»«ws»’
+  keyword [kb cs* ke ws] = ‛«kb»«cs»«ke»«ws»’
+  multi_char_operator [kb cs* ke ws] = ‛«kb»«cs»«ke»«ws»’
+  verbatim [kb cs* ke ws] = ‛«kb»«cs»«ke»«ws»’
+  comment [kb cs* ke ws] = ‛«kb»«cs»«ke»«ws»’
+  anyToken [anyToken1 ws] = ‛«anyToken1»«ws»’
   
-  Operand_recursive [Operand kdot id] = ‛«Operand»«kdot»«id»’
-  Operand_bottom [id] = ‛«id»’
+  ws [wsc*] = ‛«wsc»’
 
-  id [idfirst idrest*] = ‛«idfirst»«idrest»’
-  idfirst [c] = ‛«c»’
-  idrest  [c] = ‛«c»’
-  dq [c] = ‛"’
-  string [dq1 cs* dq2] = ‛"«cs»"’
+  sym [kbegin text kend ws] = ‛«kbegin»«text»«kend»«ws»’
+
+  indentc [k ws] = ‛«k»«ws»’
+  dedentc [k ws] = ‛«k»«ws»’
+  
+    skipTo_done [lookahead] = ‛’
+  skipTo_continue [i x] = ‛«i»«x»’
+  inner_nestedparens [l ws1 Inner* r ws2] = ‛«l»«ws1»«Inner»«r»«ws2»’
+  inner_nestedbraces [l ws1 Inner* r ws2] = ‛«l»«ws1»«Inner»«r»«ws2»’
+  inner_bottom [AnyToken] = ‛«AnyToken»’
+
+  
 }

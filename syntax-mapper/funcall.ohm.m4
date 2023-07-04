@@ -1,37 +1,13 @@
-FuncallRewriteForCL {
+FuncallRewrite {
   program = item+
   item =
-    | applySyntactic<Funcall> -- funcall
+    | funcall -- funcall
     | any -- other
 
-  Funcall =
-    | Funcid Args -- quoted
-    | Operand Args -- evaled
+  funcall = id ws "(" anythingButRPar ")"
 
-  Funcid =
-    | id
-    
-  Args = "(" Arg* ")"
+  anythingButRPar = skipTo<")">
 
-  Arg =
-    | "Message_Literal" "(" Stuff ")" -- messageliteral
-    | Operand -- arg
-  
-  Operand =
-    | Operand "." id -- recursive
-    | id -- bottom
-
-  Stuff =
-    | "(" Stuff ")" Stuff? -- recursive
-    | ~"(" ~")" Operand Stuff? -- bottom
-    
-  id = idfirst idrest*
-  idfirst = letter | "_"
-  idrest = alnum | "_"
-  comma = ","
-  string = dq (~dq any)* dq
-  dq = "\""
-  uspc = "・"
-  unl = "⦚"
-  space += uspc | unl | comma
+  include(`tokens.ohm.inc')
+  include(`skip.ohm.inc')  
 }

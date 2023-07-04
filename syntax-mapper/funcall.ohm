@@ -1,37 +1,77 @@
-FuncallRewriteForCL {
+FuncallRewrite {
   program = item+
   item =
-    | applySyntactic<Funcall> -- funcall
+    | funcall -- funcall
     | any -- other
 
-  Funcall =
-    | Funcid Args -- quoted
-    | Operand Args -- evaled
+  funcall = id ws "(" anythingButRPar ")"
 
-  Funcid =
-    | id
+  anythingButRPar = skipTo<")">
+
+      dqb = "“"
+    dqe = "”"
+  string = dqb (~dqb ~dqe any)* dqe ws
+
+    sqb = "❛"
+    sqe = "❜"
+  charconst = sqb (~sqb ~sqe any)* sqe ws
+
+  id = "❲" (~"❲" ~"❳" any)* "❳" ws
+
+
+    intb = "⟨"
+    inte = "⟩"
+  integer = intb (~intb ~inte any)* inte ws
+
+    symb = "❲"
+    syme = "❳"
+  symbol = symb (~symb ~syme any)* syme ws
+  sym<text> = symb text syme ws
     
-  Args = "(" Arg* ")"
+    kwb = "‹"
+    kwe = "›"
+  keyword = kwb (~kwb ~kwe any)* kwe ws
 
-  Arg =
-    | "Message_Literal" "(" Stuff ")" -- messageliteral
-    | Operand -- arg
+    mcb = "⟪"
+    mce = "⟫"
+  multi_char_operator = mcb (~mcb ~mce any)* mce ws
+
+  indentc = "⇢" ws
+  dedentc = "⇠" ws
+
+    vb = "«"
+    ve = "»"
+  verbatim = vb (~vb ~ve any)* ve ws
+
+  comment = "⎣" (~"⎣" ~"⎦" any)* "⎦" ws
+
+  anyToken1 = string | charconst | id | integer | keyword | multi_char_operator | indentc | dedentc | verbatim | comment | symbol | integer | any
+  anyToken = anyToken1 ws
+
+    uspc = "・"
+    unl = "⦚"
+    in_nl = unl
+    
+    spc = " "
+    nl = "\n"
+
+    commentspace = "◦"
+    commentnl = "¶"
+
+    stringspace = "□"
+    stringnl = "‡"
+    charspace = "☐"
+    charnl = "†"
+
+    wsc = space | spc | nl | uspc | unl | indentc | dedentc | commentspace | commentnl | stringspace | stringnl | charspace | charnl | verbatim
+    ws = wsc*
+
+    skipTo<stopBefore> =
+    | &stopBefore -- done
+    | inner skipTo<stopBefore> -- continue
+  inner =
+    | "(" ws inner* ")" ws -- nestedparens
+    | "{" ws inner* "}" ws -- nestedbraces
+    | ~"(" ~")" anyToken -- bottom
   
-  Operand =
-    | Operand "." id -- recursive
-    | id -- bottom
-
-  Stuff =
-    | "(" Stuff ")" Stuff? -- recursive
-    | ~"(" ~")" Operand Stuff? -- bottom
-    
-  id = idfirst idrest*
-  idfirst = letter | "_"
-  idrest = alnum | "_"
-  comma = ","
-  string = dq (~dq any)* dq
-  dq = "\""
-  uspc = "・"
-  unl = "⦚"
-  space += uspc | unl | comma
 }

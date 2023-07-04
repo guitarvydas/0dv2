@@ -13,3 +13,7 @@
   ws [wsc*] = ‛«wsc»’
 
   sym [kbegin text kend ws] = ‛«kbegin»«text»«kend»«ws»’
+
+  indentc [k ws] = ‛«k»«ws»’
+  dedentc [k ws] = ‛«k»«ws»’
+  

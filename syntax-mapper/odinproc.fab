@@ -3,9 +3,9 @@ OdinProcSignature {
   item [i] = ‛«i»’
 
 
-  proc [ProcSignature ProcDefinitionBody] = ‛«ProcSignature»«ProcDefinitionBody»’
+  proc [ProcSignature ProcDefinitionBody] = ‛«ProcSignature»⇢«ProcDefinitionBody»⇠’
 
-  procDefinitionBody [lb ws1 BodyStuff rb ws2] = ‛«lb»«ws1»«BodyStuff»«rb»«ws2»’
+  procDefinitionBody [lb ws1 BodyStuff rb ws2] = ‛«lb»«ws1»\n«BodyStuff»\n«rb»«ws2»’
 
   procSignature_nonvoid [ID kcc ws1 Pragma? kproc ws2 OdinParameterList OdinReturnTypeList] = ‛«ID»«kcc»«ws1»«Pragma»«kproc»«ws2»«OdinParameterList»’
   procSignature_void [ID kcc ws1 Pragma? kproc ws2 OdinParameterList lookahead] = ‛«ID»«kcc»«ws1»«Pragma»«kproc»«ws2»«OdinParameterList»’
@@ -58,6 +58,9 @@ OdinProcSignature {
 
   sym [kbegin text kend ws] = ‛«kbegin»«text»«kend»«ws»’
 
+  indentc [k ws] = ‛«k»«ws»’
+  dedentc [k ws] = ‛«k»«ws»’
+  
     skipTo_done [lookahead] = ‛’
   skipTo_continue [i x] = ‛«i»«x»’
   inner_nestedparens [l ws1 Inner* r ws2] = ‛«l»«ws1»«Inner»«r»«ws2»’

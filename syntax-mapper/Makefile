@@ -1,6 +1,17 @@
 #SRC=../../odin0d/0d/0d.odin
 SRC=test.odin
 
+# notes: 
+# steps: src (Odin syntax) -> tokenize -> pseudo -> cl (to Common Lisp)
+# for debugging: capturing all intermediate results in `junk--*` files, which get deleted on every `make dev`
+# `junk--tokenized` contains the tokenized file
+# `junk--pseudo` contains the file without types (i.e. more human-readable)
+# `junk--cl` contains the Common Lisp transpilation, maybe containing transpilation warts
+# `junk--show` contains latest/experimental transpiled code with newlines expanded for human readability/debuggability
+#
+# intention: to convert to .py syntax, we will create non-indented code containing special brackets,
+#  then, will indent the code (removing the special brackets) to create Python3-compatible code
+
 all: dev
 
 dev: clean
@@ -31,6 +42,7 @@ cl: pseudo append.ohm append.tocl.fab message_literal.ohm message_literal.tocl.f
 	./fab append.ohm append.tocl.fab support.js <junk--pseudo | tee junk--append \
 	| ./fab message_literal.ohm message_literal.tocl.fab support.js | tee junk--ml \
 	| ./fab assign.ohm assign.tocl.fab support.js | tee junk--assign \
+	| ./fab funcall.ohm funcall.tocl.fab support.js | tee junk--funcall \
 	| cat - >junk--cl
 	cat - <junk--cl | ./indenter.py | ./show.py >junk--show
 	cat - <junk--cl | ./indenter.py | ./show.py
