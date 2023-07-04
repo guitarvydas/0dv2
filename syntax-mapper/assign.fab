@@ -1,9 +1,11 @@
-Message_Literal_Rewrite {
+AppendRewriteForCL {
   program [items+] = ‛«items»’
   item [x] = ‛«x»’
-  message_Literal [kmessage lp ws1 id ws2 rp ws3 lb ws4 Operand1 kcomma ws5 Operand2 rb ws6] = ‛ Message_Literal («Operand1», «Operand2»)’
-  operand_recursive [Operand kdot id ws] = ‛«Operand»«kdot»«id»«ws»’
-  operand_bottom [id ws] = ‛«id»«ws»’
+
+  assign [Operand1 keq ws Operand2] = ‛\n(setf «Operand1» «Operand2»)\n’
+
+  operand_recursive [Operand kdot id ws] = ‛«Operand»«kdot»«id»’
+  operand_bottom [id ws] = ‛«id»’
 
   
   string [kb cs* ke ws] = ‛«kb»«cs»«ke»«ws»’
