@@ -1,13 +1,24 @@
-AppendRewriteForCL {
+AppendRewrite {
   program [items+] = ‛«items»’
   item [x] = ‛«x»’
-  Append [kappend lp kamp Operand1 kcomma Operand2 rp] = ‛\n«Operand1».append («Operand2») ’
-  Operand_recursive [Operand kdot id] = ‛«Operand»«kdot»«id»’
-  Operand_bottom [id] = ‛«id»’
+  append [kappend lp ws1 kamp ws2 Operand1 kcomma ws3 Operand2 rp ws4] = ‛\n«Operand1».append («Operand2») ’
+  operand_recursive [Operand kdot id ws] = ‛«Operand»«kdot»«id»«ws»’
+  operand_bottom [id ws] = ‛«id»«ws»’
 
-  id [idfirst idrest*] = ‛«idfirst»«idrest»’
-  idfirst [c] = ‛«c»’
-  idrest  [c] = ‛«c»’
-  dq [c] = ‛"’
-  string [dq1 cs* dq2] = ‛"«cs»"’
+  
+  string [kb cs* ke ws] = ‛«kb»«cs»«ke»«ws»’
+  charconst [kb cs* ke ws] = ‛«kb»«cs»«ke»«ws»’
+  id [kb cs* ke ws] = ‛«kb»«cs»«ke»«ws»’
+  integer [kb cs* ke ws] = ‛«kb»«cs»«ke»«ws»’
+  symbol [kb cs* ke ws] = ‛«kb»«cs»«ke»«ws»’
+  keyword [kb cs* ke ws] = ‛«kb»«cs»«ke»«ws»’
+  multi_char_operator [kb cs* ke ws] = ‛«kb»«cs»«ke»«ws»’
+  verbatim [kb cs* ke ws] = ‛«kb»«cs»«ke»«ws»’
+  comment [kb cs* ke ws] = ‛«kb»«cs»«ke»«ws»’
+  anyToken [anyToken1 ws] = ‛«anyToken1»«ws»’
+  
+  ws [wsc*] = ‛«wsc»’
+
+  sym [kbegin text kend ws] = ‛«kbegin»«text»«kend»«ws»’
+
 }

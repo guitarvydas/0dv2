@@ -16,6 +16,7 @@
     symb = "❲"
     syme = "❳"
   symbol = symb (~symb ~syme any)* syme ws
+  sym<text> = symb text syme ws
     
     kwb = "‹"
     kwe = "›"

@@ -21,10 +21,11 @@ tokenize:
 deleteComments: tokenize odindeletecomments.ohm odindeletecomments.fab support.js
 	./fab odindeletecomments.ohm odindeletecomments.fab support.js <junk--tokenized >junk--nocomments
 
-pseudo: deleteComments odinproc.ohm odinproc.fab odinstruct.ohm odinstruct.fab queue.ohm queue.fab
+pseudo: deleteComments odinproc.ohm odinproc.fab odinstruct.ohm odinstruct.fab queue.ohm queue.fab append.ohm append.fab
 	./fab odinproc.ohm odinproc.fab support.js <junk--nocomments | tee junk--proc \
 	| ./fab odinstruct.ohm odinstruct.fab support.js | tee junk--struct \
 	| ./fab queue.ohm queue.fab support.js | tee junk--queue \
+	| ./fab append.ohm append.fab support.js | tee junk--append \
 	>junk--pseudo
 	cat - <junk--pseudo | ./indenter.py | ./show.py >junk--show
 	cat - <junk--pseudo | ./indenter.py | ./show.py
@@ -48,6 +49,11 @@ queue.ohm: queue.ohm.m4 tokens.ohm.inc skip.ohm.inc
 	m4 queue.ohm.m4 >queue.ohm
 queue.fab: queue.fab.m4 tokens.fab.inc skip.fab.inc
 	m4 queue.fab.m4 >queue.fab
+
+append.ohm: append.ohm.m4 tokens.ohm.inc skip.ohm.inc
+	m4 append.ohm.m4 >append.ohm
+append.fab: append.fab.m4 tokens.fab.inc skip.fab.inc
+	m4 append.fab.m4 >append.fab
 
 old:
 	| ./fab odinproc.ohm odinproc.fab support.js \

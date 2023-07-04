@@ -24,6 +24,9 @@ QueueRewrite {
   anyToken [anyToken1 ws] = ‛«anyToken1»«ws»’
   
   ws [wsc*] = ‛«wsc»’
+
+  sym [kbegin text kend ws] = ‛«kbegin»«text»«kend»«ws»’
+
     skipTo_done [lookahead] = ‛’
   skipTo_continue [i x] = ‛«i»«x»’
   inner_nestedparens [l ws1 Inner* r ws2] = ‛«l»«ws1»«Inner»«r»«ws2»’

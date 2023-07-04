@@ -11,3 +11,5 @@
   anyToken [anyToken1 ws] = ‛«anyToken1»«ws»’
   
   ws [wsc*] = ‛«wsc»’
+
+  sym [kbegin text kend ws] = ‛«kbegin»«text»«kend»«ws»’
