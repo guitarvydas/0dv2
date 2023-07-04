@@ -12,7 +12,7 @@ Odin0Dstruct {
   anythingButComma [skip ws] = ‛«skip»«ws»’
   anythingButRBrace [skip ws] = ‛«skip»«ws»’
 
-
+  
   string [kb cs* ke ws] = ‛«kb»«cs»«ke»«ws»’
   charconst [kb cs* ke ws] = ‛«kb»«cs»«ke»«ws»’
   id [kb cs* ke ws] = ‛«kb»«cs»«ke»«ws»’

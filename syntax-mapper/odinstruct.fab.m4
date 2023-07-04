@@ -12,6 +12,6 @@ Odin0Dstruct {
   anythingButComma [skip ws] = ‛«skip»«ws»’
   anythingButRBrace [skip ws] = ‛«skip»«ws»’
 
-include(`tokens.fab.inc')
+  include(`tokens.fab.inc')
   include(`skip.fab.inc')
 }
