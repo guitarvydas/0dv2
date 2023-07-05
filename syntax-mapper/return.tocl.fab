@@ -1,11 +1,8 @@
-Forexpr_Rewrite {
+Return_Rewrite {
   program [items+] = ‛«items»’
   item [x] = ‛«x»’
 
-  forexpr [kfor ws1 expr lb block rb] =
-‛\n⎨(loop while ⎬⇢«expr»
-    ⎨do (progn⎬⇢
-          «block»⎨))⎬⇠⇠’
+  returnstatement [kreturn ws expr] = ‛\n«expr»’
 
   
   string [kb1 cs* ke] = ‛«kb1»«cs»«ke»’

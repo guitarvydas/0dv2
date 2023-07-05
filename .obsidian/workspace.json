@@ -182,8 +182,8 @@
   "active": "90007e6683140748",
   "lastOpenFiles": [
     "syntax-mapper/junk--show",
-    "syntax-mapper/junk--assign",
     "syntax-mapper/junk--forexpr",
+    "syntax-mapper/junk--assign",
     "syntax-mapper/junk--cl",
     "syntax-mapper/junk--forin",
     "syntax-mapper/junk--if",
