@@ -23,6 +23,7 @@ devandclean: dev
 
 tokenize:
 	./delmacrodefs.sed <$(SRC) \
+	| ./delnoise.sed \
 	| ./macros.py \
 	| ./convertws.py \
 	| ./fab odincomment.ohm odincomment.fab support.js | tee junk--comments \

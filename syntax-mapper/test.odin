@@ -1,3 +1,9 @@
+package zd
+
+// test comment
+
+import "core:container/queue"
+
 step :: proc(sys: ^System($User_Datum)) -> (retry: bool) {
     for component in sys.components {
         for component.output.len > 0 {
