@@ -4,7 +4,7 @@ AppendRewrite {
     | append -- append
     | any -- other
 
-  append = sym<"append"> "(" ws "&" ws operand "," ws operand ")" ws
+  append = sym<"append"> "(" ws "&" ws operand "," ws operand ")"
   operand =
     | operand "." id ws -- recursive
     | id ws -- bottom

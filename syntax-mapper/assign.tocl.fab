@@ -8,22 +8,22 @@ AppendRewriteForCL {
   operand_bottom [id ws] = ‛«id»’
 
   
-  string [kb cs* ke ws] = ‛«kb»«cs»«ke»«ws»’
-  charconst [kb cs* ke ws] = ‛«kb»«cs»«ke»«ws»’
-  id [kb cs* ke ws] = ‛«kb»«cs»«ke»«ws»’
-  integer [kb cs* ke ws] = ‛«kb»«cs»«ke»«ws»’
-  symbol [kb cs* ke ws] = ‛«kb»«cs»«ke»«ws»’
-  keyword [kb cs* ke ws] = ‛«kb»«cs»«ke»«ws»’
-  multi_char_operator [kb cs* ke ws] = ‛«kb»«cs»«ke»«ws»’
-  verbatim [kb cs* ke ws] = ‛«kb»«cs»«ke»«ws»’
-  comment [kb cs* ke ws] = ‛«kb»«cs»«ke»«ws»’
-  anyToken [anyToken1 ws] = ‛«anyToken1»«ws»’
+  string [kb cs* ke] = ‛«kb»«cs»«ke»’
+  charconst [kb cs* ke] = ‛«kb»«cs»«ke»’
+  id [kb cs* ke] = ‛«kb»«cs»«ke»’
+  integer [kb cs* ke] = ‛«kb»«cs»«ke»’
+  symbol [kb cs* ke] = ‛«kb»«cs»«ke»’
+  keyword [kb cs* ke] = ‛«kb»«cs»«ke»’
+  multi_char_operator [kb cs* ke] = ‛«kb»«cs»«ke»’
+  verbatim [kb cs* ke] = ‛«kb»«cs»«ke»’
+  comment [kb cs* ke] = ‛«kb»«cs»«ke»’
+  anyToken [anyToken1] = ‛«anyToken1»’
   
   ws [wsc*] = ‛«wsc»’
 
-  sym [kbegin text kend ws] = ‛«kbegin»«text»«kend»«ws»’
+  sym [kbegin text kend] = ‛«kbegin»«text»«kend»’
 
-  indentc [k ws] = ‛«k»«ws»’
-  dedentc [k ws] = ‛«k»«ws»’
+  indentc [k] = ‛«k»’
+  dedentc [k] = ‛«k»’
   
 }

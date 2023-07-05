@@ -4,7 +4,7 @@ Message_Literal_Rewrite {
     | message_Literal -- messageliteral
     | any -- other
 
-  message_Literal = sym<"Message"> "(" ws id ws ")" ws "{" ws operand "," ws operand "}" ws
+  message_Literal = sym<"Message"> "(" ws id ws ")" ws "{" ws operand "," ws operand "}"
 
   operand =
     | operand "." id ws -- recursive
@@ -12,43 +12,43 @@ Message_Literal_Rewrite {
 
       dqb = "“"
     dqe = "”"
-  string = dqb (~dqb ~dqe any)* dqe ws
+  string = dqb (~dqb ~dqe any)* dqe
 
     sqb = "❛"
     sqe = "❜"
-  charconst = sqb (~sqb ~sqe any)* sqe ws
+  charconst = sqb (~sqb ~sqe any)* sqe
 
-  id = "❲" (~"❲" ~"❳" any)* "❳" ws
+  id = "❲" (~"❲" ~"❳" any)* "❳"
 
 
     intb = "⟨"
     inte = "⟩"
-  integer = intb (~intb ~inte any)* inte ws
+  integer = intb (~intb ~inte any)* inte
 
     symb = "❲"
     syme = "❳"
-  symbol = symb (~symb ~syme any)* syme ws
-  sym<text> = symb text syme ws
+  symbol = symb (~symb ~syme any)* syme
+  sym<text> = symb text syme
     
     kwb = "‹"
     kwe = "›"
-  keyword = kwb (~kwb ~kwe any)* kwe ws
+  keyword = kwb (~kwb ~kwe any)* kwe
 
     mcb = "⟪"
     mce = "⟫"
-  multi_char_operator = mcb (~mcb ~mce any)* mce ws
+  multi_char_operator = mcb (~mcb ~mce any)* mce
 
-  indentc = "⇢" ws
-  dedentc = "⇠" ws
+  indentc = "⇢"
+  dedentc = "⇠"
 
     vb = "«"
     ve = "»"
-  verbatim = vb (~vb ~ve any)* ve ws
+  verbatim = vb (~vb ~ve any)* ve
 
-  comment = "⎣" (~"⎣" ~"⎦" any)* "⎦" ws
+  comment = "⎣" (~"⎣" ~"⎦" any)* "⎦"
 
   anyToken1 = string | charconst | id | integer | keyword | multi_char_operator | indentc | dedentc | verbatim | comment | symbol | integer | any
-  anyToken = anyToken1 ws
+  anyToken = anyToken1
 
     uspc = "・"
     unl = "⦚"

@@ -3,16 +3,16 @@ OdinProcSignature {
   item [i] = ‛«i»’
 
 
-  proc [ProcSignature ProcDefinitionBody] = ‛«ProcSignature»⇢«ProcDefinitionBody»⇠’
+  proc [ProcSignature ProcDefinitionBody] = ‛\n«ProcSignature»⇢ {\n«ProcDefinitionBody»⇠\n}\n’
 
-  procDefinitionBody [lb ws1 BodyStuff rb ws2] = ‛«lb»«ws1»\n«BodyStuff»\n«rb»«ws2»’
+  procDefinitionBody [lb ws1 BodyStuff rb ws2] = ‛«BodyStuff»’
 
-  procSignature_nonvoid [ID kcc ws1 Pragma? kproc ws2 OdinParameterList OdinReturnTypeList] = ‛«ID»«kcc»«ws1»«Pragma»«kproc»«ws2»«OdinParameterList»’
-  procSignature_void [ID kcc ws1 Pragma? kproc ws2 OdinParameterList lookahead] = ‛«ID»«kcc»«ws1»«Pragma»«kproc»«ws2»«OdinParameterList»’
+  procSignature_nonvoid [ID kcc ws1 Pragma? kproc ws2 OdinParameterList OdinReturnTypeList] = ‛«ID» :: proc «OdinParameterList»’
+  procSignature_void [ID kcc ws1 Pragma? kproc ws2 OdinParameterList lookahead] = ‛«ID» :: proc «OdinParameterList»’
 
-  odinParameterList_empty [lp ws1 rp ws2] = ‛«lp»«ws1»«rp»«ws2»’
-  odinParameterList_single [lp ws1 LastParameter rp ws2] = ‛(«ws1»«LastParameter»)«ws2»’
-  odinParameterList_multiple [lp ws1 NotLastParameter+ LastParameter rp ws2] = ‛(«ws1»«NotLastParameter» «LastParameter»)«ws2»’
+  odinParameterList_empty [lp ws1 rp ws2] = ‛()’
+  odinParameterList_single [lp ws1 LastParameter rp ws2] = ‛(«LastParameter»)’
+  odinParameterList_multiple [lp ws1 NotLastParameter+ LastParameter rp ws2] = ‛(«NotLastParameter» «LastParameter»)’
 
   odinReturnType_void [lookahead] = ‛’
   odinReturnType_typed [karrow ws1 OdinReturnTypeList] = ‛->«ws1»«OdinReturnTypeList»’
@@ -39,8 +39,6 @@ OdinProcSignature {
   anythingButComma [stuff] = ‛«stuff»’
   anythingButRPar [stuff] = ‛«stuff»’
   anythingButProcDefinitionBody [stuff] = ‛«stuff»’
-
-  procDefinitionBodyBeginning [lb ws1] = ‛{«ws1»’
   
   include(`tokens.fab.inc')
   include(`skip.fab.inc')

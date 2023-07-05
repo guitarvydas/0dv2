@@ -27,10 +27,10 @@ OdinProcSignature {
     |  "(" ws notLastReturnParameter+ lastReturnParameter ")" ws -- multiple
     | ~"(" singleReturnParameter -- single
 
-  notLastParameter = allocatorOrParameterName anythingButComma "," ws
+  notLastParameter = allocatorOrParameterName anythingButComma "," ws ~")"
   lastParameter = allocatorOrParameterName ~anythingButComma anythingButRPar
 
-  notLastReturnParameter = parameterName? anythingButComma "," ws
+  notLastReturnParameter = parameterName? anythingButComma "," ws ~")"
   lastReturnParameter = parameterName? ~anythingButComma anythingButRPar
   singleReturnParameter = ~procDefinitionBody anythingButProcDefinitionBody
 
@@ -45,8 +45,7 @@ OdinProcSignature {
   bodyStuff = skipTo<"}">
   anythingButComma = skipTo<",">
   anythingButRPar = skipTo<")">
-  anythingButProcDefinitionBody = skipTo<procDefinitionBodyBeginning>
-  procDefinitionBodyBeginning = "{" ws
+  anythingButProcDefinitionBody = skipTo<procDefinitionBody>
 
  
   include(`tokens.ohm.inc')

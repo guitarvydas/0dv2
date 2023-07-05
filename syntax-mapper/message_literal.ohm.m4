@@ -4,7 +4,7 @@ Message_Literal_Rewrite {
     | message_Literal -- messageliteral
     | any -- other
 
-  message_Literal = sym<"Message"> "(" ws id ws ")" ws "{" ws operand "," ws operand "}" ws
+  message_Literal = sym<"Message"> "(" ws id ws ")" ws "{" ws operand "," ws operand "}"
 
   operand =
     | operand "." id ws -- recursive

@@ -6,10 +6,10 @@ Odin0Dstruct {
 
   structtype [lp ws1 anythingButRPar rp ws2] = ‛’
 
-  notLastField [ID kcolon ws1 AnythingButComma kcomma ws2] = ‛A«ID»\n’
+  notLastField [ID kcolon ws1 AnythingButComma kcomma ws2] = ‛«ID»\n’
   lastField_done [lookahead] = ‛’
-  lastField_fieldwithcomma [ID kcolon ws1 AnythingButComma kcomma ws2 lookahead] = ‛B⇠«ID»’
-  lastField_fieldnocomma [ID kcolon ws1 AnythingButRBrace lookahead] = ‛C⇠«ID»’
+  lastField_fieldwithcomma [ID kcolon ws1 AnythingButComma kcomma ws2 lookahead] = ‛⇠«ID»’
+  lastField_fieldnocomma [ID kcolon ws1 AnythingButRBrace lookahead] = ‛⇠«ID»’
 
   anythingButComma [skip ws] = ‛«skip»’
   anythingButRBrace [skip ws] = ‛«skip»’

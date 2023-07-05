@@ -5,8 +5,8 @@ QueueRewrite {
     | pop -- pop
     | any -- other
 
-  push = "❲queue❳" ws "." ws "❲push_back❳" ws "(" ws "&" ws notlastoperand lastoperand ")" ws
-  pop = "❲queue❳" ws "." ws "❲pop_front_safe❳" ws "(" ws "&" ws lastoperand ")" ws
+  push = "❲queue❳" ws "." ws "❲push_back❳" ws "(" ws "&" ws notlastoperand lastoperand ")"
+  pop = "❲queue❳" ws "." ws "❲pop_front_safe❳" ws "(" ws "&" ws lastoperand ")"
 
   notlastoperand = anythingButComma "," ws
   lastoperand = anythingButRPar ws
