@@ -4,10 +4,12 @@ AssignRewrite {
     | assign -- assign
     | any -- other
 
-  assign = operand "=" ws operand
-  operand =
-    | operand "." id ws -- recursive
-    | id ws -- bottom
+  assign = lhs "=" ws rhs
+  lhs = id ws
+  rhs = anythingButEOL
+
+  anythingButEOL = skipTo<eol>
+  eol = "⦚"
 
       dqb = "“"
     dqe = "”"
@@ -67,4 +69,12 @@ AssignRewrite {
     wsc = space | spc | nl | uspc | unl | indentc | dedentc | commentspace | commentnl | stringspace | stringnl | charspace | charnl | verbatim
     ws = wsc*
 
+    skipTo<stopBefore> =
+    | &stopBefore -- done
+    | inner skipTo<stopBefore> -- continue
+  inner =
+    | "(" ws inner* ")" ws -- nestedparens
+    | "{" ws inner* "}" ws -- nestedbraces
+    | ~"(" ~")" anyToken -- bottom
+  
 }

@@ -4,10 +4,13 @@ AssignRewrite {
     | assign -- assign
     | any -- other
 
-  assign = operand "=" ws operand
-  operand =
-    | operand "." id ws -- recursive
-    | id ws -- bottom
+  assign = lhs "=" ws rhs
+  lhs = id ws
+  rhs = anythingButEOL
+
+  anythingButEOL = skipTo<eol>
+  eol = "⦚"
 
   include(`tokens.ohm.inc')
+  include(`skip.ohm.inc')  
 }

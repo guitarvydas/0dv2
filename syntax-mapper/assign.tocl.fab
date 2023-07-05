@@ -2,10 +2,8 @@ AppendRewriteForCL {
   program [items+] = ‛«items»’
   item [x] = ‛«x»’
 
-  assign [Operand1 keq ws Operand2] = ‛(setf «Operand1» «Operand2»)’
-
-  operand_recursive [Operand kdot id ws] = ‛«Operand»«kdot»«id»’
-  operand_bottom [id ws] = ‛«id»’
+  assign [lhs keq ws rhs] = ‛(setf «lhs» «rhs»)’
+  lhs [id ws] = ‛«id»«ws»’
 
   
   string [kb cs* ke] = ‛«kb»«cs»«ke»’
@@ -26,4 +24,11 @@ AppendRewriteForCL {
   indentc [k] = ‛«k»’
   dedentc [k] = ‛«k»’
   
+    skipTo_done [lookahead] = ‛’
+  skipTo_continue [i x] = ‛«i»«x»’
+  inner_nestedparens [l ws1 Inner* r ws2] = ‛«l»«ws1»«Inner»«r»«ws2»’
+  inner_nestedbraces [l ws1 Inner* r ws2] = ‛«l»«ws1»«Inner»«r»«ws2»’
+  inner_bottom [AnyToken] = ‛«AnyToken»’
+
+
 }
