@@ -10,8 +10,8 @@ OdinProcSignature {
   procDefinitionBody = "{" ws bodyStuff "}" ws
 
   procSignature =
-    | id "::" ws pragma? "❲proc❳" ws odinParameterList odinReturnTypeList -- nonvoid
-    | id "::" ws pragma? "❲proc❳" ws odinParameterList &procDefinitionBody -- void
+    | id ws "::" ws pragma? "❲proc❳" ws odinParameterList odinReturnTypeList -- nonvoid
+    | id ws "::" ws pragma? "❲proc❳" ws odinParameterList &procDefinitionBody -- void
 
   odinParameterList =
     | "(" ws ")" ws -- empty
@@ -37,8 +37,8 @@ OdinProcSignature {
   pragma = "#❲force_inline❳" ws
 
   parameterName =
-    | id &"," -- sharedtype
-    | id ":" ws -- named
+    | id ws &"," -- sharedtype
+    | id ws ":" ws -- named
   allocator =  "❲allocator❳" ws ":=" ws
   allocatorOrParameterName = allocator | parameterName
 
@@ -47,7 +47,6 @@ OdinProcSignature {
   anythingButRPar = skipTo<")">
   anythingButProcDefinitionBody = skipTo<procDefinitionBody>
 
- 
       dqb = "“"
     dqe = "”"
   string = dqb (~dqb ~dqe any)* dqe

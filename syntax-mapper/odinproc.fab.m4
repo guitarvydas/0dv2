@@ -7,8 +7,8 @@ OdinProcSignature {
 
   procDefinitionBody [lb ws1 BodyStuff rb ws2] = ‛«BodyStuff»’
 
-  procSignature_nonvoid [ID kcc ws1 Pragma? kproc ws2 OdinParameterList OdinReturnTypeList] = ‛«ID» :: proc «OdinParameterList»’
-  procSignature_void [ID kcc ws1 Pragma? kproc ws2 OdinParameterList lookahead] = ‛«ID» :: proc «OdinParameterList»’
+  procSignature_nonvoid [ID ws0 kcc ws1 Pragma? kproc ws2 OdinParameterList OdinReturnTypeList] = ‛«ID» :: proc «OdinParameterList»’
+  procSignature_void [ID ws0 kcc ws1 Pragma? kproc ws2 OdinParameterList lookahead] = ‛«ID» :: proc «OdinParameterList»’
 
   odinParameterList_empty [lp ws1 rp ws2] = ‛()’
   odinParameterList_single [lp ws1 LastParameter rp ws2] = ‛(«LastParameter»)’
@@ -30,8 +30,8 @@ OdinProcSignature {
 
   pragma [kfi ws1] = ‛’
 
-  parameterName_sharedtype [ID lookahead] = ‛«ID» ’
-  parameterName_named [ID kcolon ws1] = ‛«ID» ’
+  parameterName_sharedtype [ID ws lookahead] = ‛«ID» ’
+  parameterName_named [ID ws kcolon ws1] = ‛«ID» ’
   allocator [kallocator ws1 kassign ws2] = ‛’
   allocatorOrParameterName [x] = ‛«x»’
 
