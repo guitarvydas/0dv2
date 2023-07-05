@@ -1,11 +1,14 @@
 AssignRewrite {
   program = item+
   item =
-    | assign -- assign
-    | any -- other
+    | massign
+    | assign
+    | any
 
   assign = lhs "=" ws rhs
-  lhs = id ws
+  massign = mlhs "=" ws rhs
+  lhs = id ws ~","
+  mlhs = id ws "," ws id ws
   rhs = anythingButEOL
 
   anythingButEOL = skipTo<eol>
