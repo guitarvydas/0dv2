@@ -41,7 +41,6 @@ pseudo: deleteComments odinproc.ohm odinproc.fab odinstruct.ohm odinstruct.fab q
 cl: pseudo append.ohm append.tocl.fab message_literal.ohm message_literal.tocl.fab assign.ohm assign.tocl.fab funcall.ohm funcall.tocl.fab
 	./fab append.ohm append.tocl.fab support.js <junk--pseudo | tee junk--append \
 	| ./fab message_literal.ohm message_literal.tocl.fab support.js | tee junk--ml \
-	| ./fab assign.ohm assign.tocl.fab support.js | tee junk--assign \
 	| cat - >junk--cl
 	cat - <junk--cl | ./indenter.py | ./show.py >junk--show
 	cat - <junk--cl | ./indenter.py | ./show.py

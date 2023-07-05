@@ -2,7 +2,7 @@ Odin0Dstruct {
   program [item+] = ‛«item»’
   item [i] = ‛«i»’
 
-  struct [ID ws0 kcc ws1 kstruct ws2 structype? lb ws3 NotLastField* LastField rb ws4] = ‛\n«ID» :: struct {⇢\n«NotLastField»«LastField»\n}\n’
+  struct [ID ws0 kcc ws1 kstruct ws2 structype? lb ws3 NotLastField* LastField rb ws4] = ‛\n«ID» :: ‹struct› {⇢\n«NotLastField»«LastField»\n}\n’
 
   structtype [lp ws1 anythingButRPar rp ws2] = ‛’
 
