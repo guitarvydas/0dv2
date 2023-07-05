@@ -1,8 +1,12 @@
-Ifstatement_Rewrite {
+Forin_Rewrite {
   program [items+] = ‛«items»’
   item [x] = ‛«x»’
 
-  ifstatement [kif expr lb then rb] = ‛\n⎨(«kif» ⎬⇢«expr»\n⎨(progn⎬⇢\n«then»⎨))⎬⇠⇠’
+  forin [kfor ws1 variable kin ws2 expr lb block rb] =
+‛\n⎨(loop for ⎬⇢«variable»⎨ in ⎬«expr»
+    ⎨do (progn⎬⇢
+          «block»⎨))⎬⇠⇠’
+  variable [id ws] = ‛«id»’
 
   
   string [kb1 cs* ke] = ‛«kb1»«cs»«ke»’

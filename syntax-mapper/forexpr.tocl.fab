@@ -1,8 +1,11 @@
-Ifstatement_Rewrite {
+Forexpr_Rewrite {
   program [items+] = ‛«items»’
   item [x] = ‛«x»’
 
-  ifstatement [kif expr lb then rb] = ‛\n⎨(«kif» ⎬⇢«expr»\n⎨(progn⎬⇢\n«then»⎨))⎬⇠⇠’
+  forexpr [kfor ws1 expr lb block rb] =
+‛\n⎨(loop while ⎬«expr»
+    ⎨do (progn⎬⇢
+          «block»⎨))⎬⇠⇠’
 
   
   string [kb1 cs* ke] = ‛«kb1»«cs»«ke»’

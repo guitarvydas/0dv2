@@ -38,10 +38,12 @@ pseudo: deleteComments odinproc.ohm odinproc.fab odinstruct.ohm odinstruct.fab q
 	| ./fab queue.ohm queue.fab support.js | tee junk--queue \
 	| cat - > junk--pseudo
 
-cl: pseudo append.ohm append.tocl.fab message_literal.ohm message_literal.tocl.fab assign.ohm assign.tocl.fab funcall.ohm funcall.tocl.fab if.ohm if.tocl.fab
+cl: pseudo append.ohm append.tocl.fab message_literal.ohm message_literal.tocl.fab assign.ohm assign.tocl.fab funcall.ohm funcall.tocl.fab if.ohm if.tocl.fab forin.ohm forin.tocl.fab forexpr.ohm forexpr.tocl.fab
 	./fab append.ohm append.tocl.fab support.js <junk--pseudo | tee junk--append \
 	| ./fab message_literal.ohm message_literal.tocl.fab support.js | tee junk--ml \
 	| ./fab if.ohm if.tocl.fab support.js | tee junk--if \
+	| ./fab forin.ohm forin.tocl.fab support.js | tee junk--forin \
+	| ./fab forexpr.ohm forexpr.tocl.fab support.js | tee junk--forexpr \
 	| cat - >junk--cl
 	cat - <junk--cl | ./indenter.py | ./show.py >junk--show
 	cat - <junk--cl | ./indenter.py | ./show.py
@@ -80,6 +82,16 @@ if.ohm: if.ohm.m4 tokens.ohm.inc skip.ohm.inc
 	m4 if.ohm.m4 >if.ohm
 if.tocl.fab: if.tocl.fab.m4 tokens.fab.inc skip.fab.inc
 	m4 if.tocl.fab.m4 >if.tocl.fab
+
+forin.ohm: forin.ohm.m4 tokens.ohm.inc skip.ohm.inc
+	m4 forin.ohm.m4 >forin.ohm
+forin.tocl.fab: forin.tocl.fab.m4 tokens.fab.inc skip.fab.inc
+	m4 forin.tocl.fab.m4 >forin.tocl.fab
+
+forexpr.ohm: forexpr.ohm.m4 tokens.ohm.inc skip.ohm.inc
+	m4 forexpr.ohm.m4 >forexpr.ohm
+forexpr.tocl.fab: forexpr.tocl.fab.m4 tokens.fab.inc skip.fab.inc
+	m4 forexpr.tocl.fab.m4 >forexpr.tocl.fab
 
 assign.ohm: assign.ohm.m4 tokens.ohm.inc skip.ohm.inc
 	m4 assign.ohm.m4 >assign.ohm
