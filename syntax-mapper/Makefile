@@ -42,7 +42,6 @@ cl: pseudo append.ohm append.tocl.fab message_literal.ohm message_literal.tocl.f
 	./fab append.ohm append.tocl.fab support.js <junk--pseudo | tee junk--append \
 	| ./fab message_literal.ohm message_literal.tocl.fab support.js | tee junk--ml \
 	| ./fab assign.ohm assign.tocl.fab support.js | tee junk--assign \
-	| ./fab funcall.ohm funcall.tocl.fab support.js | tee junk--funcall \
 	| cat - >junk--cl
 	cat - <junk--cl | ./indenter.py | ./show.py >junk--show
 	cat - <junk--cl | ./indenter.py | ./show.py
