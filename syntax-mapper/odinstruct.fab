@@ -2,15 +2,18 @@ Odin0Dstruct {
   program [item+] = ‛«item»’
   item [i] = ‛«i»’
 
-  struct [ID kcc ws1 kstruct ws2 lb ws3 NotLastField* LastField rb ws4] = ‛«ID»«kcc»«ws1»«kstruct»«ws2»«lb»«ws3» «NotLastField» «LastField» «rb»⦚«ws4»’
+  struct [ID kcc ws1 kstruct ws2 structype? lb ws3 NotLastField* LastField rb ws4] = ‛\n«ID» :: struct {⇢\n«NotLastField»«LastField»\n}\n’
 
-  notLastField [ID kcolon ws1 AnythingButComma kcomma ws2] = ‛«ID»⦚’
+  structtype [lp ws1 anythingButRPar rp ws2] = ‛’
+
+  notLastField [ID kcolon ws1 AnythingButComma kcomma ws2] = ‛A«ID»\n’
   lastField_done [lookahead] = ‛’
-  lastField_fieldwithcomma [ID kcolon ws1 AnythingButComma kcomma ws2] = ‛«ID»⦚’
-  lastField_fieldnocomma [ID kcolon ws1 AnythingButRBrace] = ‛«ID»⦚’
+  lastField_fieldwithcomma [ID kcolon ws1 AnythingButComma kcomma ws2 lookahead] = ‛B⇠«ID»’
+  lastField_fieldnocomma [ID kcolon ws1 AnythingButRBrace lookahead] = ‛C⇠«ID»’
 
-  anythingButComma [skip ws] = ‛«skip»«ws»’
-  anythingButRBrace [skip ws] = ‛«skip»«ws»’
+  anythingButComma [skip ws] = ‛«skip»’
+  anythingButRBrace [skip ws] = ‛«skip»’
+  anythingButRPar [skip ws] = ‛«skip»’
 
   
   string [kb cs* ke ws] = ‛«kb»«cs»«ke»«ws»’

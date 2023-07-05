@@ -4,16 +4,19 @@ Odin0Dstruct {
     | struct -- struct
     | anyToken -- other
 
-  struct = id "::" ws "❲struct❳" ws "{" ws notLastField* lastField "}" ws
+  struct = id "::" ws "❲struct❳" ws structtype? "{" ws notLastField* lastField "}" ws
 
-  notLastField = id ":" ws anythingButComma "," ws
+  structtype = "(" ws anythingButRPar ")" ws
+
+  notLastField = id ":" ws anythingButComma "," ws ~"}"
   lastField =
     | &"}" -- done
-    | id ":" ws anythingButComma "," ws -- fieldwithcomma
-    | id ":" ws anythingButRBrace -- fieldnocomma
+    | id ":" ws anythingButComma "," ws &"}" -- fieldwithcomma
+    | id ":" ws anythingButRBrace &"}" -- fieldnocomma
 
   anythingButComma = skipTo<","> ws
   anythingButRBrace = skipTo<"}"> ws
+  anythingButRPar = skipTo<")"> ws
 
       dqb = "“"
     dqe = "”"
