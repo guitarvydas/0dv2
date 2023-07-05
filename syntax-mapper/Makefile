@@ -38,7 +38,7 @@ pseudo: deleteComments odinproc.ohm odinproc.fab odinstruct.ohm odinstruct.fab q
 	| ./fab queue.ohm queue.fab support.js | tee junk--queue \
 	| cat - > junk--pseudo
 
-cl: pseudo append.ohm append.tocl.fab message_literal.ohm message_literal.tocl.fab assign.ohm assign.tocl.fab funcall.ohm funcall.tocl.fab if.ohm if.tocl.fab forin.ohm forin.tocl.fab forexpr.ohm forexpr.tocl.fab  return.ohm return.tocl.fab
+cl: pseudo append.ohm append.tocl.fab message_literal.ohm message_literal.tocl.fab assign.ohm assign.tocl.fab funcall.ohm funcall.tocl.fab if.ohm if.tocl.fab forin.ohm forin.tocl.fab forexpr.ohm forexpr.tocl.fab  return.ohm return.tocl.fab op.ohm op.tocl.fab
 	./fab append.ohm append.tocl.fab support.js <junk--pseudo | tee junk--append \
 	| ./fab message_literal.ohm message_literal.tocl.fab support.js | tee junk--ml \
 	| ./fab if.ohm if.tocl.fab support.js | tee junk--if \
@@ -46,6 +46,7 @@ cl: pseudo append.ohm append.tocl.fab message_literal.ohm message_literal.tocl.f
 	| ./fab forexpr.ohm forexpr.tocl.fab support.js | tee junk--forexpr \
 	| ./fab assign.ohm assign.tocl.fab support.js | tee junk--assign \
 	| ./fab funcall.ohm funcall.tocl.fab support.js | tee junk--funcall \
+	| ./fab op.ohm op.tocl.fab support.js | tee junk--op \
 	| ./fab return.ohm return.tocl.fab support.js | tee junk--forexpr \
 	| cat - >junk--cl
 	cat - <junk--cl | ./indenter.py | ./show.py >junk--show
@@ -100,6 +101,11 @@ return.ohm: return.ohm.m4 tokens.ohm.inc skip.ohm.inc
 	m4 return.ohm.m4 >return.ohm
 return.tocl.fab: return.tocl.fab.m4 tokens.fab.inc skip.fab.inc
 	m4 return.tocl.fab.m4 >return.tocl.fab
+
+op.ohm: op.ohm.m4 tokens.ohm.inc skip.ohm.inc
+	m4 op.ohm.m4 >op.ohm
+op.tocl.fab: op.tocl.fab.m4 tokens.fab.inc skip.fab.inc
+	m4 op.tocl.fab.m4 >op.tocl.fab
 
 assign.ohm: assign.ohm.m4 tokens.ohm.inc skip.ohm.inc
 	m4 assign.ohm.m4 >assign.ohm

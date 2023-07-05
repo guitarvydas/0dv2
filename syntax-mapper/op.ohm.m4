@@ -4,12 +4,15 @@ Op_Rewrite {
     | op
     | any
 
-  op = idchain ws operator expr
-  idchain_rec [idchain kdot ws id] = ‛«idchain».«id»’
-  idchain_bottom [id] = ‛«id»’
+  op = idchain ws operator ws expr eolc
+  idchain =
+    | idchain "." ws id -- rec
+    | id -- bottom
   expr = anythingButEOL
 
-  anythingButEOL = skipTo<srcnl>
+  anythingButEOL = skipTo<eolc>
+  operator = ">"
+  eolc = srcnl | nl
 
   include(`tokens.ohm.inc')
   include(`skip.ohm.inc')
