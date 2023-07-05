@@ -5,8 +5,8 @@ AssignRewrite {
     | assign
     | any
 
-  assign = lhs assignc ws rhs
-  massign = mlhs assignc ws rhs
+  assign = lhs ws assignc ws rhs
+  massign = mlhs ws assignc ws rhs
   lhs = id ws ~","
   mlhs = id ws "," ws id ws
   rhs = anythingButEOL
@@ -77,8 +77,9 @@ AssignRewrite {
     | &stopBefore -- done
     | inner skipTo<stopBefore> -- continue
   inner =
-    | "(" ws inner* ")" ws -- nestedparens
-    | "{" ws inner* "}" ws -- nestedbraces
-    | ~"(" ~")" anyToken -- bottom
-  
+    | wsc -- ws
+    | "(" ws inner* ")" -- nestedparens
+    | "{" ws inner* "}" -- nestedbraces
+    | ~"(" ~")" ~"{" ~"}" anyToken -- bottom
+    
 }

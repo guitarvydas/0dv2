@@ -2,6 +2,8 @@
     | &stopBefore -- done
     | inner skipTo<stopBefore> -- continue
   inner =
-    | "(" ws inner* ")" ws -- nestedparens
-    | "{" ws inner* "}" ws -- nestedbraces
-    | ~"(" ~")" anyToken -- bottom
+    | wsc -- ws
+    | "(" ws inner* ")" -- nestedparens
+    | "{" ws inner* "}" -- nestedbraces
+    | ~"(" ~")" ~"{" ~"}" anyToken -- bottom
+  
