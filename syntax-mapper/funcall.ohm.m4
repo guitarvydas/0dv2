@@ -16,7 +16,6 @@ FuncallRewrite {
   notLastArg = anythingButComma ","
   lastArg = anythingButRPar
   
-
   anythingButComma = skipTo<",">
   anythingButRPar = skipTo<")">
 

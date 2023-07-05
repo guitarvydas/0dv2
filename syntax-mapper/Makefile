@@ -38,7 +38,7 @@ pseudo: deleteComments odinproc.ohm odinproc.fab odinstruct.ohm odinstruct.fab q
 	| ./fab queue.ohm queue.fab support.js | tee junk--queue \
 	| cat - > junk--pseudo
 
-cl: pseudo append.ohm append.tocl.fab message_literal.ohm message_literal.tocl.fab assign.ohm assign.tocl.fab funcall.ohm funcall.tocl.fab if.ohm if.tocl.fab forin.ohm forin.tocl.fab forexpr.ohm forexpr.tocl.fab  return.ohm return.tocl.fab op.ohm op.tocl.fab
+cl: pseudo append.ohm append.tocl.fab message_literal.ohm message_literal.tocl.fab assign.ohm assign.tocl.fab funcall.ohm funcall.tocl.fab if.ohm if.tocl.fab forin.ohm forin.tocl.fab forexpr.ohm forexpr.tocl.fab  return.ohm return.tocl.fab op.ohm op.tocl.fab slotvalue.ohm slotvalue.tocl.fab
 	./fab append.ohm append.tocl.fab support.js <junk--pseudo | tee junk--append \
 	| ./fab message_literal.ohm message_literal.tocl.fab support.js | tee junk--ml \
 	| ./fab if.ohm if.tocl.fab support.js | tee junk--if \
@@ -47,7 +47,8 @@ cl: pseudo append.ohm append.tocl.fab message_literal.ohm message_literal.tocl.f
 	| ./fab assign.ohm assign.tocl.fab support.js | tee junk--assign \
 	| ./fab funcall.ohm funcall.tocl.fab support.js | tee junk--funcall \
 	| ./fab op.ohm op.tocl.fab support.js | tee junk--op \
-	| ./fab return.ohm return.tocl.fab support.js | tee junk--forexpr \
+	| ./fab slotvalue.ohm slotvalue.tocl.fab support.js | tee junk--slotvalue \
+	| ./fab return.ohm return.tocl.fab support.js | tee junk--return \
 	| cat - >junk--cl
 	cat - <junk--cl | ./indenter.py | ./show.py >junk--show
 	cat - <junk--cl | ./indenter.py | ./show.py
@@ -111,6 +112,11 @@ assign.ohm: assign.ohm.m4 tokens.ohm.inc skip.ohm.inc
 	m4 assign.ohm.m4 >assign.ohm
 assign.tocl.fab: assign.tocl.fab.m4 tokens.fab.inc skip.fab.inc
 	m4 assign.tocl.fab.m4 >assign.tocl.fab
+
+slotvalue.ohm: slotvalue.ohm.m4 tokens.ohm.inc skip.ohm.inc
+	m4 slotvalue.ohm.m4 >slotvalue.ohm
+slotvalue.tocl.fab: slotvalue.tocl.fab.m4 tokens.fab.inc skip.fab.inc
+	m4 slotvalue.tocl.fab.m4 >slotvalue.tocl.fab
 
 funcall.ohm: funcall.ohm.m4 tokens.ohm.inc skip.ohm.inc
 	m4 funcall.ohm.m4 >funcall.ohm
