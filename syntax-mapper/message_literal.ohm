@@ -54,7 +54,7 @@ Message_Literal_Rewrite {
 
     uspc = "・"
     unl = "⦚"
-    in_nl = unl
+    srcnl = unl
     
     spc = " "
     nl = "\n"

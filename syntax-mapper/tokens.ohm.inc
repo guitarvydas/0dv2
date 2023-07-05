@@ -42,7 +42,7 @@
 
     uspc = "・"
     unl = "⦚"
-    in_nl = unl
+    srcnl = unl
     
     spc = " "
     nl = "\n"

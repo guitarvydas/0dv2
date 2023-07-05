@@ -183,8 +183,8 @@
   "lastOpenFiles": [
     "syntax-mapper/junk--show",
     "syntax-mapper/junk--forexpr",
-    "syntax-mapper/junk--funcall",
     "syntax-mapper/junk--cl",
+    "syntax-mapper/junk--funcall",
     "syntax-mapper/junk--assign",
     "syntax-mapper/junk--forin",
     "syntax-mapper/junk--if",

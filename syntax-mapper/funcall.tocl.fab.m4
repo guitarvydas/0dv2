@@ -1,4 +1,4 @@
-AppendRewriteForCL {
+FuncallRewriteForCL {
   program [items+] = ‛«items»’
   item [x] = ‛«x»’
   funcall [id ws lp notLastArg* lastArg rp] = ‛(«id» «notLastArg»«lastArg»)’

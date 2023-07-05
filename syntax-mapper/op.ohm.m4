@@ -1,11 +1,12 @@
-Return_Rewrite {
+Op_Rewrite {
   program = item+
   item =
-    | returnstatement
+    | op
     | any
 
-  returnstatement = sym<"return"> ws expr
-
+  op = idchain ws operator expr
+  idchain_rec [idchain kdot ws id] = ‛«idchain».«id»’
+  idchain_bottom [id] = ‛«id»’
   expr = anythingButEOL
 
   anythingButEOL = skipTo<srcnl>
