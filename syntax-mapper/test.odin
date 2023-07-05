@@ -28,14 +28,6 @@ Component :: struct($User_Datum: typeid) {
     state:   #type proc(^Component(User_Datum), Port, User_Datum),
     data:    rawptr,
 }
-xxComponent :: struct {
-    name:    string,
-    input:   queue.Queue(Message(User_Datum)),
-    output:  queue.Queue(Message(User_Datum)),
-    state:   #type proc(^Component(User_Datum), Port, User_Datum),
-    data:    rawptr,
-}
-
 step :: proc(sys: ^System($User_Datum)) -> (retry: bool) {
     for component in sys.components {
         for component.output.len > 0 {

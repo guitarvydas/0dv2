@@ -1,7 +1,10 @@
 AppendRewriteForCL {
   program [items+] = ‛«items»’
   item [x] = ‛«x»’
-  funcall [id ws lp anythingButRPar rp] = ‛(«id» «anythingButRPar»)’
+  funcall [id ws lp notLastArg* lastArg rp] = ‛(«id» «notLastArg»«lastArg»)’
+
+  notLastArg [stuff kcomma] = ‛«stuff» ’
+  lastArg [stuff] = ‛«stuff»’
 
   
   string [kb cs* ke] = ‛«kb»«cs»«ke»’

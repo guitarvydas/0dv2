@@ -4,8 +4,13 @@ FuncallRewrite {
     | funcall -- funcall
     | any -- other
 
-  funcall = id ws "(" anythingButRPar ")"
+  funcall = id ws "(" notLastArg* lastArg ")"
 
+  notLastArg = anythingButComma ","
+  lastArg = anythingButRPar
+  
+
+  anythingButComma = skipTo<",">
   anythingButRPar = skipTo<")">
 
   include(`tokens.ohm.inc')
