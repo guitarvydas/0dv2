@@ -44,6 +44,7 @@ cl: pseudo append.ohm append.tocl.fab message_literal.ohm message_literal.tocl.f
 	| ./fab if.ohm if.tocl.fab support.js | tee junk--if \
 	| ./fab forin.ohm forin.tocl.fab support.js | tee junk--forin \
 	| ./fab forexpr.ohm forexpr.tocl.fab support.js | tee junk--forexpr \
+	| ./fab assign.ohm assign.tocl.fab support.js | tee junk--assign \
 	| cat - >junk--cl
 	cat - <junk--cl | ./indenter.py | ./show.py >junk--show
 	cat - <junk--cl | ./indenter.py | ./show.py
