@@ -31,7 +31,9 @@
 
     vb = "«"
     ve = "»"
-  verbatim = vb (~vb ~ve any)* ve
+    vb2 = "⎨"
+    ve2 = "⎬"
+    verbatim = (vb | vb2) (~vb ~ve any)* (ve | ve2)
 
   comment = "⎣" (~"⎣" ~"⎦" any)* "⎦"
 

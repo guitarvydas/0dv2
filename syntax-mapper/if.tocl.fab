@@ -1,9 +1,8 @@
-AppendRewrite {
+Ifstatement_Rewrite {
   program [items+] = ‛«items»’
   item [x] = ‛«x»’
-  append [kappend lp ws1 kamp ws2 Operand1 kcomma ws3 Operand2 rp] = ‛\n«Operand1».append («Operand2») ’
-  operand_recursive [Operand kdot id ws] = ‛«Operand»«kdot»«id»«ws»’
-  operand_bottom [id ws] = ‛«id»«ws»’
+
+  ifstatement [kif expr lb then rb] = ‛⎨(«kif» ⎬⇢«expr»\n⎨(progn⎬⇢\n«then»⎨))⎬⇠⇠’
 
   
   string [kb1 cs* ke] = ‛«kb1»«cs»«ke»’
@@ -24,4 +23,12 @@ AppendRewrite {
   indentc [k] = ‛«k»’
   dedentc [k] = ‛«k»’
   
+    skipTo_done [lookahead] = ‛’
+  skipTo_continue [i x] = ‛«i»«x»’
+  inner_ws [c] = ‛«c»’
+  inner_nestedparens [l ws1 Inner* r] = ‛«l»«ws1»«Inner»«r»’
+  inner_nestedbraces [l ws1 Inner* r] = ‛«l»«ws1»«Inner»«r»’
+  inner_bottom [AnyToken] = ‛«AnyToken»’
+
+
 }

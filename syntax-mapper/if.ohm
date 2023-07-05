@@ -1,18 +1,16 @@
-QueueRewrite {
+Ifstatemet_Rewrite {
   program = item+
   item =
-    | push -- push
-    | pop -- pop
-    | any -- other
+    | ifstatement
+    | any
 
-  push = "❲queue❳" ws "." ws "❲push_back❳" ws "(" ws "&" ws notlastoperand lastoperand ")"
-  pop = "❲queue❳" ws "." ws "❲pop_front_safe❳" ws "(" ws "&" ws lastoperand ")"
+  ifstatement = sym<"if"> expr "{" then "}"
 
-  notlastoperand = anythingButComma "," ws
-  lastoperand = anythingButRPar ws
+  expr = anythingButLBrace
+  then = anythingButRBrace
 
-  anythingButComma = skipTo<","> ws
-  anythingButRPar = skipTo<")"> ws
+  anythingButLBrace = skipTo<"{">
+  anythingButRBrace = skipTo<"}">
 
       dqb = "“"
     dqe = "”"
@@ -82,6 +80,5 @@ QueueRewrite {
     | "(" ws inner* ")" -- nestedparens
     | "{" ws inner* "}" -- nestedbraces
     | ~"(" ~")" ~"{" ~"}" anyToken -- bottom
-    
   
 }

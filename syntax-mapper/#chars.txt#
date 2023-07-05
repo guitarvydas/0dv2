@@ -1,0 +1,61 @@
+¶
+_ 
+⦚ newline
+₋
+▽
+・space
+❲ formals list begin 
+❳ formals list end
+« verbatim begin
+» verbatim end
+⎨
+⎬
+‹ keyword begin
+› keyword end
+⤺
+⤎
+⤑
+⤙
+⤚
+⇢ indent
+⇠ dedent
+
+## preprocessed by ohm-js/fab parser
+`⎣...⎦` comments
+## preprocessed by ohm-js/fab parser
+`“...”` strings
+`❛.❜` rune literals
+
+## preprocessed by regexp script (convertws.py)
+`"・"` spaces/tabs in input (original)
+`"⦚"` newlines in input (original)
+`" "` spaces in output (generated) (normal space)
+`"\n"` newlines in output (normal newline)
+`"◦"` spaces in comments
+`"¶"` newlines in comments
+`"□"` spaces in strings
+`"‡"` newlines in strings
+`"☐"` spaces in character constants
+`"†"` newlines in character constants
+
+## preprocessed by ohm-js/fab parser
+`❲...❳` symbols
+`⟨...⟩` numbers
+
+## generated
+`‹...›` keywords
+`⟪...⟫` multi-char operators
+`⇢` indent
+`⇠` dedent
+`«...»` verbatim
+`⎨...⎬` verbatim (alternate)
+
+
+`⎧...⎫`
+`❬...❭`
+⎝...⎠
+⎛...⎞
+⎟...⎢
+⎡...⎤
+⎣...⎦
+‹...›
