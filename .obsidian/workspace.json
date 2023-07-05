@@ -183,8 +183,8 @@
   "lastOpenFiles": [
     "syntax-mapper/junk--show",
     "syntax-mapper/junk--funcall",
-    "syntax-mapper/junk--cl",
     "syntax-mapper/junk--assign",
+    "syntax-mapper/junk--cl",
     "syntax-mapper/junk--ml",
     "syntax-mapper/junk--append",
     "syntax-mapper/funcall.tocl.fab",
