@@ -1,43 +1,90 @@
 Odin0Dstruct {
   program = item+
   item =
-    | packageDef -- package
-    | importDef -- import
     | struct -- struct
-    | space -- space
-    | any -- other
+    | anyToken -- other
 
-  importDef =
-    | "import" spaces string -- unnamed
-    | "import" spaces id spaces string -- named
+  struct = id ws "::" ws "❲struct❳" ws structtype? "{" ws notLastField* lastField "}" ws
 
-  packageDef = "package" spaces id
+  structtype = "(" ws anythingButRPar ")" ws
 
-  struct = spaces id spaces "::" spaces "struct" spaces parameterizedtype? spaces "{" spaces typedfield+ "}"
+  notLastField = id ws ":" ws anythingButComma "," ws ~"}"
+  lastField =
+    | &"}" -- done
+    | id ws ":" ws anythingButComma "," ws &"}" -- fieldwithcomma
+    | id ws ":" ws anythingButRBrace &"}" -- fieldnocomma
 
-  parameterizedtype = "(" "$" id spaces ":" spaces typechar+ ")"
+  anythingButComma = skipTo<","> ws
+  anythingButRBrace = skipTo<"}"> ws
+  anythingButRPar = skipTo<")"> ws
 
-  typedfield = spaces id spaces ":" spaces type spaces
-  type =
-    | "#type" spaces "proc" spaces typechar+ -- procref
-    | typechar+ -- other
+      dqb = "“"
+    dqe = "”"
+  string = dqb (~dqb ~dqe any)* dqe
 
-  typechar =
-    | "(" typecharinner+ ")" -- parenthesized
-    | ~space ~"(" ~")" any -- bottom
+    sqb = "❛"
+    sqe = "❜"
+  charconst = sqb (~sqb ~sqe any)* sqe
 
-  typecharinner =
-    | "(" typecharinner+ ")" -- parenthesized
-    | ~"(" ~")" any  -- bottom
+  id = "❲" (~"❲" ~"❳" any)* "❳"
 
 
-  id = idfirst idrest*
-  idfirst = letter | "_"
-  idrest = alnum | "_"
-  string = dq (~dq any)* dq
-  dq = "\""
-  uspc = "・"
-  unl = "⦚"
-  comment = "//" (~unl any)*
-  space := uspc | unl | comment
+    intb = "⟨"
+    inte = "⟩"
+  integer = intb (~intb ~inte any)* inte
+
+    symb = "❲"
+    syme = "❳"
+  symbol = symb (~symb ~syme any)* syme
+  sym<text> = symb text syme
+    
+    kwb = "‹"
+    kwe = "›"
+  keyword = kwb (~kwb ~kwe any)* kwe
+
+    mcb = "⟪"
+    mce = "⟫"
+  multi_char_operator = mcb (~mcb ~mce any)* mce
+
+  indentc = "⇢"
+  dedentc = "⇠"
+
+    vb = "«"
+    ve = "»"
+    vb2 = "⎨"
+    ve2 = "⎬"
+    verbatim = (vb | vb2) (~vb ~ve any)* (ve | ve2)
+
+  comment = "⎣" (~"⎣" ~"⎦" any)* "⎦"
+
+  anyToken1 = string | charconst | id | integer | keyword | multi_char_operator | indentc | dedentc | verbatim | comment | symbol | integer | any
+  anyToken = anyToken1
+
+    uspc = "・"
+    unl = "⦚"
+    in_nl = unl
+    
+    spc = " "
+    nl = "\n"
+
+    commentspace = "◦"
+    commentnl = "¶"
+
+    stringspace = "□"
+    stringnl = "‡"
+    charspace = "☐"
+    charnl = "†"
+
+    wsc = space | spc | nl | uspc | unl | indentc | dedentc | commentspace | commentnl | stringspace | stringnl | charspace | charnl | verbatim
+    ws = wsc*
+
+    skipTo<stopBefore> =
+    | &stopBefore -- done
+    | inner skipTo<stopBefore> -- continue
+  inner =
+    | wsc -- ws
+    | "(" ws inner* ")" -- nestedparens
+    | "{" ws inner* "}" -- nestedbraces
+    | ~"(" ~")" ~"{" ~"}" anyToken -- bottom
+    
 }

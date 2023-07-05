@@ -1,0 +1,60 @@
+OdinProcSignature {
+  main = item+
+  item =
+    | applySyntactic<Proc> -- proc
+    | any -- other
+    
+  Proc = ProcSignature ProcDefinitionBody
+
+  ProcDefinitionBody = "{" BodyStuff "}"
+
+  ProcSignature =
+    | id "::" Pragma? "proc" OdinParameterList OdinReturnTypeList -- nonvoid
+    | id "::" Pragma? "proc" OdinParameterList &ProcDefinitionBody -- void
+
+  OdinParameterList =
+    | "(" ")" -- empty
+    | "(" LastParameter ")" -- single
+    | "(" NotLastParameter+ LastParameter ")" -- multiple
+
+  OdinReturnType =
+    | &ProcDefinitionBody -- void
+    | "->" OdinReturnTypeList -- typed
+  OdinReturnTypeList =
+    |  "(" ")" -- empty
+    |  "(" LastParameter ")" -- singlebracketed
+    |  "(" NotLastReturnParameter+ LastReturnParameter ")" -- multiple
+    | ~"(" SingleReturnParameter -- single
+
+  NotLastParameter = (Allocator | ParameterName) AnythingButComma ","
+  LastParameter = (Allocator | ParameterName) ~AnythingButComma AnythingButRPar
+
+  NotLastReturnParameter = ParameterName? AnythingButComma ","
+  LastReturnParameter = ParameterName? ~AnythingButComma AnythingButRPar
+  SingleReturnParameter = ~ProcDefinitionBody AnythingButProcDefinitionBody
+
+  Pragma = "#" "force_inline"
+
+  ParameterName =
+    | id &"," -- sharedtype
+    | id ":" -- named
+  Allocator = "allocator" ":="
+
+  BodyStuff = SkipTo<"}">
+  AnythingButComma = SkipTo<",">
+  AnythingButRPar = SkipTo<")">
+//  AnythingButProcDefinitionBody = SkipTo<ProcDefinitionBody>
+  AnythingButProcDefinitionBody = SkipTo<"{">
+  
+  SkipTo<stopBefore> =
+    | &stopBefore -- done
+    | Inner SkipTo<stopBefore> -- continue
+  Inner =
+    | "(" Inner* ")" -- nestedparens
+    | "{" Inner* "}" -- nestedbraces
+    | ~"(" ~")" any -- bottom
+
+  id = idFirst idRest*
+  idFirst = letter | "_"
+  idRest = alnum | "_"
+}

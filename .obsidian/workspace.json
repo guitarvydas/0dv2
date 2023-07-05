@@ -45,7 +45,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "doc/WP 2023-06-28.md",
+                "file": "syntax-mapper/README.md",
                 "mode": "source",
                 "source": false
               }
@@ -118,7 +118,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "doc/WP 2023-06-28.md",
+                "file": "syntax-mapper/README.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -135,7 +135,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "doc/WP 2023-06-28.md",
+                "file": "syntax-mapper/README.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -158,7 +158,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "doc/WP 2023-06-28.md"
+                "file": "syntax-mapper/README.md"
               }
             }
           }
@@ -179,20 +179,26 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "4ee44a7b71430fae",
+  "active": "90007e6683140748",
   "lastOpenFiles": [
-    "doc/0Dv2 Working Paper.md",
+    "syntax-mapper/junk--show",
+    "syntax-mapper/junk--if",
+    "syntax-mapper/junk--ml",
+    "syntax-mapper/junk--append",
+    "syntax-mapper/junk--cl",
+    "syntax-mapper/funcall.tocl.fab",
+    "syntax-mapper/funcall.ohm",
+    "syntax-mapper/assign.tocl.fab",
+    "syntax-mapper/assign.ohm",
+    "syntax-mapper/message_literal.tocl.fab",
+    "syntax-mapper/message_literal.ohm",
+    "doc/2023-07-01.md",
     "doc/WP 2023-06-28.md",
-    "syntax-mapper/#chars.txt#",
-    "syntax-mapper/#intermediateindenter.py#",
-    "syntax-mapper/#odinproc.fab#",
-    "syntax-mapper/junk-assign-clean",
-    "syntax-mapper/junk-ml-clean",
-    "syntax-mapper/junk-assign",
-    "syntax-mapper/junk-ml",
-    "syntax-mapper/junk-append",
-    "syntax-mapper/temp",
-    "syntax-mapper/message_literal.ohm~",
+    "doc/Skip.drawio.svg",
+    "doc/2023-06-29.md",
+    "2023-06-29.md",
+    "doc/Skip.drawio.png",
+    "doc/0Dv2 Working Paper.md",
     "syntax-mapper/lisp-notes.md",
     "README.md"
   ]
