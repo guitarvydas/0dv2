@@ -4,7 +4,11 @@ FuncallRewrite {
     | funcall -- funcall
     | any -- other
 
-  funcall = id ws "(" notLastArg* lastArg ")"
+  funcall = idchain ws "(" notLastArg* lastArg ")"
+
+  idchain =
+    | idchain "." ws id -- rec
+    | id -- bottom
 
   notLastArg = anythingButComma ","
   lastArg = anythingButRPar
