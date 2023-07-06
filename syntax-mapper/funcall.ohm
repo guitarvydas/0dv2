@@ -15,9 +15,18 @@ FuncallRewrite {
   dotc = "." ws
   notLastArg = anythingButComma ","
   lastArg = anythingButRPar
-  
+
   anythingButComma = skipTo<",">
   anythingButRPar = skipTo<")">
+
+  skipTo<stopBefore> =
+    | &stopBefore -- done
+    | inner skipTo<stopBefore> -- continue
+  inner =
+    | funcall -- funcall
+    | "(" ws inner* ")" -- nestedparens
+    | "{" ws inner* "}" -- nestedbraces
+    | ~"(" ~")" ~"{" ~"}" anyToken -- bottom
 
       dqb = "“"
     dqe = "”"
@@ -79,13 +88,4 @@ FuncallRewrite {
     wsc = space | spc | nl | uspc | unl | indentc | dedentc | commentspace | commentnl | stringspace | stringnl | charspace | charnl | verbatim
     ws = wsc*
 
-    skipTo<stopBefore> =
-    | &stopBefore -- done
-    | inner skipTo<stopBefore> -- continue
-  inner =
-    | wsc -- ws
-    | "(" ws inner* ")" -- nestedparens
-    | "{" ws inner* "}" -- nestedbraces
-    | ~"(" ~")" ~"{" ~"}" anyToken -- bottom
-    
 }

@@ -3,5 +3,5 @@
 import sys
 
 for line in sys.stdin:
-    r = line.replace ('・', ' ').replace ('⦚', '\n')
+    r = line.replace ('・', ' ').replace ('⦚', '\n').replace ('◦', ' ').replace ('¶', '\n').replace ('□', ' ').replace ('‡', '\n').replace ('☐', ' ').replace ('†', '\n')
     print (r, end='')

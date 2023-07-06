@@ -15,10 +15,18 @@ FuncallRewrite {
   dotc = "." ws
   notLastArg = anythingButComma ","
   lastArg = anythingButRPar
-  
+
   anythingButComma = skipTo<",">
   anythingButRPar = skipTo<")">
 
+  skipTo<stopBefore> =
+    | &stopBefore -- done
+    | inner skipTo<stopBefore> -- continue
+  inner =
+    | funcall -- funcall
+    | "(" ws inner* ")" -- nestedparens
+    | "{" ws inner* "}" -- nestedbraces
+    | ~"(" ~")" ~"{" ~"}" anyToken -- bottom
+
   include(`tokens.ohm.inc')
-  include(`skip.ohm.inc')  
 }

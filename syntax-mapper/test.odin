@@ -1,23 +1,6 @@
-package zd
-
-// test comment
-
-import "core:container/queue"
-
-step :: proc(sys: ^System($User_Datum)) -> (retry: bool) {
-    for component in sys.components {
-        for component.output.len > 0 {
-            msg, _ := fifo_pop(&component.output)
-            route(sys, component, msg)
-        }
-    }
-
-    for component in sys.components {
-        msg, ok := fifo_pop(&component.input)
-        if ok {
-            component.state(component, msg.port, msg.datum)
-            retry = true
-        }
-    }
-    return retry
+tran :: proc(component: ^Component($User_Datum), state: proc(^Component(User_Datum), Port, User_Datum)) {
+    Aort(EXIT, Bort(x))
+    Qort(x)
+    Rort("x")
+    Sort(Cort(y))
 }

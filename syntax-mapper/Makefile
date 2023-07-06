@@ -51,8 +51,8 @@ cl: pseudo append.ohm append.tocl.fab message_literal.ohm message_literal.tocl.f
 	| ./fab slotvalue.ohm slotvalue.tocl.fab support.js | tee junk--slotvalue \
 	| ./fab return.ohm return.tocl.fab support.js | tee junk--return \
 	| cat - >junk--cl
-	cat - <junk--cl | ./indenter.py | ./show.py >junk--show
-	cat - <junk--cl | ./indenter.py | ./show.py
+	cat - <junk--cl | ./cleanup.py | ./indenter.py | ./show.py >junk--show
+	cat - <junk--cl | ./cleanup.py | ./indenter.py | ./show.py
 
 odinproc.ohm: odinproc.ohm.m4 tokens.ohm.inc skip.ohm.inc
 	m4 odinproc.ohm.m4 >odinproc.ohm
