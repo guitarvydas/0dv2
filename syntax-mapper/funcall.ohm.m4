@@ -16,13 +16,13 @@ FuncallRewrite {
   notLastArg = anythingButComma ","
   lastArg = anythingButRPar
 
-  anythingButComma = skipTo<",">
-  anythingButRPar = skipTo<")">
+  anythingButComma = skipTo<",",funcall>
+  anythingButRPar = skipTo<")",funcall>
 
-  skipTo<stopBefore> =
+  skipTo<stopBefore,macro> =
     | &stopBefore -- done
-    | funcall -- macro
-    | inner skipTo<stopBefore> -- continue
+    | macro -- macro
+    | inner skipTo<stopBefore,macro> -- continue
   inner =
     | "(" ws inner* ")" -- nestedparens
     | "{" ws inner* "}" -- nestedbraces
