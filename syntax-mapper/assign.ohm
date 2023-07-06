@@ -7,7 +7,7 @@ AssignRewrite {
   massignOrAssign = massign | assign
   assign = lhs ws assignc ws rhs
   massign = mlhs ws assignc ws rhs
-  lhs = id ws ~","
+  lhs = idchain ws ~","
   mlhs = idchain ws "," ws id ws
   rhs = anythingButEOL
 

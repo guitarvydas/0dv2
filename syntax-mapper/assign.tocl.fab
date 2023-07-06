@@ -34,4 +34,9 @@ AppendRewriteForCL {
   inner_nestedbraces [l ws1 Inner* r] = ‛«l»«ws1»«Inner»«r»’
   inner_bottom [AnyToken] = ‛«AnyToken»’
 
+    idchain_rec [idchain dotc id] = ‛«idchain».«id»’
+  idchain_bottom [id] = ‛«id»’
+  dotc [kdot ws] = ‛«kdot»«ws»’
+
+
 }

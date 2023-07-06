@@ -9,4 +9,5 @@ AppendRewriteForCL {
 
   include(`tokens.fab.inc')
   include(`skip.fab.inc')
+  include(`tocl.fab.inc')
 }
