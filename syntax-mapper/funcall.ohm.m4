@@ -17,16 +17,8 @@ FuncallRewrite {
   lastArg = anythingButRPar
 
   anythingButComma = skipTo<",",funcall>
-  anythingButRPar = skipTo<")",funcall>
-
-  skipTo<stopBefore,macro> =
-    | &stopBefore -- done
-    | macro -- macro
-    | inner skipTo<stopBefore,macro> -- continue
-  inner =
-    | "(" ws inner* ")" -- nestedparens
-    | "{" ws inner* "}" -- nestedbraces
-    | ~"(" ~")" ~"{" ~"}" anyToken -- bottom
+  anythingButRPar  = skipTo<")",funcall>
 
   include(`tokens.ohm.inc')
+  include(`skip.ohm.inc')
 }

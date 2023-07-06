@@ -9,8 +9,8 @@ Ifstatemet_Rewrite {
   expr = anythingButLBrace
   then = anythingButRBrace
 
-  anythingButLBrace = skipTo<"{">
-  anythingButRBrace = skipTo<"}">
+  anythingButLBrace = skipTo<"{",ifstatement>
+  anythingButRBrace = skipTo<"}",ifstatement>
 
   include(`tokens.ohm.inc')
   include(`skip.ohm.inc')

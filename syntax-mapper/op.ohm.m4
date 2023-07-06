@@ -10,7 +10,7 @@ Op_Rewrite {
     | id -- bottom
   expr = anythingButEOL
 
-  anythingButEOL = skipTo<eolc>
+  anythingButEOL = skipTo<eolc,op>
   operator = ">"
   eolc = srcnl | nl
 

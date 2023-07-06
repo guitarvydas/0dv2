@@ -10,7 +10,7 @@ Op_Rewrite {
     | id -- bottom
   expr = anythingButEOL
 
-  anythingButEOL = skipTo<eolc>
+  anythingButEOL = skipTo<eolc,op>
   operator = ">"
   eolc = srcnl | nl
 
@@ -74,13 +74,13 @@ Op_Rewrite {
     wsc = space | spc | nl | uspc | unl | indentc | dedentc | commentspace | commentnl | stringspace | stringnl | charspace | charnl | verbatim
     ws = wsc*
 
-    skipTo<stopBefore> =
+    skipTo<stopBefore,macro> =
     | &stopBefore -- done
-    | inner skipTo<stopBefore> -- continue
+    | macro -- macro
+    | inner skipTo<stopBefore,macro> -- continue
   inner =
-    | wsc -- ws
     | "(" ws inner* ")" -- nestedparens
     | "{" ws inner* "}" -- nestedbraces
     | ~"(" ~")" ~"{" ~"}" anyToken -- bottom
-  
+
 }

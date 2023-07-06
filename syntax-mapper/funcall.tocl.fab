@@ -30,8 +30,7 @@ FuncallRewriteForCL {
   indentc [k] = ‛«k»’
   dedentc [k] = ‛«k»’
   
-
-  skipTo_done [lookahead] = ‛’
+    skipTo_done [lookahead] = ‛’
   skipTo_continue [i x] = ‛«i»«x»’
   skipTo_macro [x] = ‛«x»’
   inner_nestedparens [l ws1 Inner* r] = ‛«l»«ws1»«Inner»«r»’

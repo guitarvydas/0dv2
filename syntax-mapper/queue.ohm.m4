@@ -1,18 +1,18 @@
 QueueRewrite {
   program = item+
   item =
-    | push -- push
-    | pop -- pop
-    | any -- other
+    | pushOrPop
+    | any
 
+  pushOrPop = push | pop
   push = "❲queue❳" ws "." ws "❲push_back❳" ws "(" ws "&" ws notlastoperand lastoperand ")"
   pop = "❲queue❳" ws "." ws "❲pop_front_safe❳" ws "(" ws "&" ws lastoperand ")"
 
   notlastoperand = anythingButComma "," ws
   lastoperand = anythingButRPar ws
 
-  anythingButComma = skipTo<","> ws
-  anythingButRPar = skipTo<")"> ws
+  anythingButComma = skipTo<",",pushOrPop> ws
+  anythingButRPar = skipTo<")",pushOrPop> ws
 
   include(`tokens.ohm.inc')
   include(`skip.ohm.inc')  
