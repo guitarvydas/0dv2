@@ -14,9 +14,9 @@ Odin0Dstruct {
     | id ws ":" ws anythingButComma "," ws &"}" -- fieldwithcomma
     | id ws ":" ws anythingButRBrace &"}" -- fieldnocomma
 
-  anythingButComma = skipTo<","> ws
-  anythingButRBrace = skipTo<"}"> ws
-  anythingButRPar = skipTo<")"> ws
+  anythingButComma = skipTo<",",struct> ws
+  anythingButRBrace = skipTo<"}",struct> ws
+  anythingButRPar = skipTo<")",struct> ws
 
       dqb = "“"
     dqe = "”"
@@ -78,13 +78,13 @@ Odin0Dstruct {
     wsc = space | spc | nl | uspc | unl | indentc | dedentc | commentspace | commentnl | stringspace | stringnl | charspace | charnl | verbatim
     ws = wsc*
 
-    skipTo<stopBefore> =
+    skipTo<stopBefore,macro> =
     | &stopBefore -- done
-    | inner skipTo<stopBefore> -- continue
+    | macro -- macro
+    | inner skipTo<stopBefore,macro> -- continue
   inner =
-    | wsc -- ws
     | "(" ws inner* ")" -- nestedparens
     | "{" ws inner* "}" -- nestedbraces
     | ~"(" ~")" ~"{" ~"}" anyToken -- bottom
-    
+  
 }

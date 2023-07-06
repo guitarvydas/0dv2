@@ -8,7 +8,7 @@ Return_Rewrite {
 
   expr = anythingButEOL
 
-  anythingButEOL = skipTo<srcnl>
+  anythingButEOL = skipTo<srcnl,returnstatement>
 
   include(`tokens.ohm.inc')
   include(`skip.ohm.inc')

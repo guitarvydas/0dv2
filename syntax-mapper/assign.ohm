@@ -1,17 +1,17 @@
 AssignRewrite {
   program = item+
   item =
-    | massign
-    | assign
+    | massignOrAssign
     | any
 
+  massignOrAssign = massign | assign
   assign = lhs ws assignc ws rhs
   massign = mlhs ws assignc ws rhs
   lhs = id ws ~","
   mlhs = id ws "," ws id ws
   rhs = anythingButEOL
 
-  anythingButEOL = skipTo<eol>
+  anythingButEOL = skipTo<eol,massignOrAssign>
   eol = "⦚"
   assignc = "=" | ":="
 
@@ -75,13 +75,13 @@ AssignRewrite {
     wsc = space | spc | nl | uspc | unl | indentc | dedentc | commentspace | commentnl | stringspace | stringnl | charspace | charnl | verbatim
     ws = wsc*
 
-    skipTo<stopBefore> =
+    skipTo<stopBefore,macro> =
     | &stopBefore -- done
-    | inner skipTo<stopBefore> -- continue
+    | macro -- macro
+    | inner skipTo<stopBefore,macro> -- continue
   inner =
-    | wsc -- ws
     | "(" ws inner* ")" -- nestedparens
     | "{" ws inner* "}" -- nestedbraces
     | ~"(" ~")" ~"{" ~"}" anyToken -- bottom
-    
+  
 }

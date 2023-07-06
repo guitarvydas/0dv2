@@ -14,9 +14,9 @@ Odin0Dstruct {
     | id ws ":" ws anythingButComma "," ws &"}" -- fieldwithcomma
     | id ws ":" ws anythingButRBrace &"}" -- fieldnocomma
 
-  anythingButComma = skipTo<","> ws
-  anythingButRBrace = skipTo<"}"> ws
-  anythingButRPar = skipTo<")"> ws
+  anythingButComma = skipTo<",",struct> ws
+  anythingButRBrace = skipTo<"}",struct> ws
+  anythingButRPar = skipTo<")",struct> ws
 
   include(`tokens.ohm.inc')
   include(`skip.ohm.inc')  

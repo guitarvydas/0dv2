@@ -9,8 +9,8 @@ Ifstatemet_Rewrite {
   expr = anythingButLBrace
   then = anythingButRBrace
 
-  anythingButLBrace = skipTo<"{">
-  anythingButRBrace = skipTo<"}">
+  anythingButLBrace = skipTo<"{",ifstatement>
+  anythingButRBrace = skipTo<"}",ifstatement>
 
       dqb = "“"
     dqe = "”"
@@ -72,13 +72,13 @@ Ifstatemet_Rewrite {
     wsc = space | spc | nl | uspc | unl | indentc | dedentc | commentspace | commentnl | stringspace | stringnl | charspace | charnl | verbatim
     ws = wsc*
 
-    skipTo<stopBefore> =
+    skipTo<stopBefore,macro> =
     | &stopBefore -- done
-    | inner skipTo<stopBefore> -- continue
+    | macro -- macro
+    | inner skipTo<stopBefore,macro> -- continue
   inner =
-    | wsc -- ws
     | "(" ws inner* ")" -- nestedparens
     | "{" ws inner* "}" -- nestedbraces
     | ~"(" ~")" ~"{" ~"}" anyToken -- bottom
-  
+
 }

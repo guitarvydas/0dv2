@@ -10,8 +10,8 @@ Forin_Rewrite {
   expr = anythingButLBrace
   block = anythingButRBrace
 
-  anythingButLBrace = skipTo<"{">
-  anythingButRBrace = skipTo<"}">
+  anythingButLBrace = skipTo<"{",forin>
+  anythingButRBrace = skipTo<"}",forin>
 
   include(`tokens.ohm.inc')
   include(`skip.ohm.inc')

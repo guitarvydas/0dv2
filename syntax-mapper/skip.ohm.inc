@@ -1,9 +1,8 @@
-  skipTo<stopBefore> =
+  skipTo<stopBefore,macro> =
     | &stopBefore -- done
-    | inner skipTo<stopBefore> -- continue
+    | macro -- macro
+    | inner skipTo<stopBefore,macro> -- continue
   inner =
-    | wsc -- ws
     | "(" ws inner* ")" -- nestedparens
     | "{" ws inner* "}" -- nestedbraces
     | ~"(" ~")" ~"{" ~"}" anyToken -- bottom
-  

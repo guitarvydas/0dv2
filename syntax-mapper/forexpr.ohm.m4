@@ -9,8 +9,8 @@ Forexpr_Rewrite {
   expr = anythingButLBrace
   block = anythingButRBrace
 
-  anythingButLBrace = skipTo<"{">
-  anythingButRBrace = skipTo<"}">
+  anythingButLBrace = skipTo<"{",forexpr>
+  anythingButRBrace = skipTo<"}",forexpr>
 
   include(`tokens.ohm.inc')
   include(`skip.ohm.inc')
