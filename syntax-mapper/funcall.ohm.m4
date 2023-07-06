@@ -8,11 +8,6 @@ FuncallRewrite {
     | ~dotc id ws "(" notLastArg* lastArg ")" -- single
     | idchain ws "(" notLastArg* lastArg ")" -- indirect
 
-  idchain =
-    | idchain dotc id -- rec
-    | id -- bottom
-
-  dotc = "." ws
   notLastArg = anythingButComma ","
   lastArg = anythingButRPar
 
@@ -21,4 +16,5 @@ FuncallRewrite {
 
   include(`tokens.ohm.inc')
   include(`skip.ohm.inc')
+  include(`tocl.ohm.inc')
 }

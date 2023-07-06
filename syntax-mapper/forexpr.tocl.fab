@@ -25,7 +25,8 @@ Forexpr_Rewrite {
 
   indentc [k] = ‛«k»’
   dedentc [k] = ‛«k»’
-  
+
+
     skipTo_done [lookahead] = ‛’
   skipTo_continue [i x] = ‛«i»«x»’
   skipTo_macro [x] = ‛«x»’

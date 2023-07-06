@@ -8,11 +8,6 @@ FuncallRewrite {
     | ~dotc id ws "(" notLastArg* lastArg ")" -- single
     | idchain ws "(" notLastArg* lastArg ")" -- indirect
 
-  idchain =
-    | idchain dotc id -- rec
-    | id -- bottom
-
-  dotc = "." ws
   notLastArg = anythingButComma ","
   lastArg = anythingButRPar
 
@@ -79,6 +74,8 @@ FuncallRewrite {
     wsc = space | spc | nl | uspc | unl | indentc | dedentc | commentspace | commentnl | stringspace | stringnl | charspace | charnl | verbatim
     ws = wsc*
 
+
+
     skipTo<stopBefore,macro> =
     | &stopBefore -- done
     | macro -- macro
@@ -87,5 +84,11 @@ FuncallRewrite {
     | "(" ws inner* ")" -- nestedparens
     | "{" ws inner* "}" -- nestedbraces
     | ~"(" ~")" ~"{" ~"}" anyToken -- bottom
+
+    idchain =
+    | idchain dotc id -- rec
+    | id -- bottom
+
+  dotc = "." ws
 
 }

@@ -78,6 +78,8 @@ Odin0Dstruct {
     wsc = space | spc | nl | uspc | unl | indentc | dedentc | commentspace | commentnl | stringspace | stringnl | charspace | charnl | verbatim
     ws = wsc*
 
+
+
     skipTo<stopBefore,macro> =
     | &stopBefore -- done
     | macro -- macro

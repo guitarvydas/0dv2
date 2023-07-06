@@ -4,10 +4,6 @@ FuncallRewriteForCL {
   funcall_single [id ws lp notLastArg* lastArg rp] = ‛(«id» «notLastArg»«lastArg»)’
   funcall_indirect [idchain ws lp notLastArg* lastArg rp] = ‛(‹funcall› «idchain» «notLastArg»«lastArg»)’
 
-  idchain_rec [idchain dotc id] = ‛«idchain».«id»’
-  idchain_bottom [id] = ‛«id»’
-  dotc [kdot ws] = ‛«kdot»«ws»’
-
   notLastArg [stuff kcomma] = ‛«stuff» ’
   lastArg [stuff] = ‛«stuff»’
 
@@ -29,13 +25,18 @@ FuncallRewriteForCL {
 
   indentc [k] = ‛«k»’
   dedentc [k] = ‛«k»’
-  
+
+
     skipTo_done [lookahead] = ‛’
   skipTo_continue [i x] = ‛«i»«x»’
   skipTo_macro [x] = ‛«x»’
   inner_nestedparens [l ws1 Inner* r] = ‛«l»«ws1»«Inner»«r»’
   inner_nestedbraces [l ws1 Inner* r] = ‛«l»«ws1»«Inner»«r»’
   inner_bottom [AnyToken] = ‛«AnyToken»’
+
+    idchain_rec [idchain dotc id] = ‛«idchain».«id»’
+  idchain_bottom [id] = ‛«id»’
+  dotc [kdot ws] = ‛«kdot»«ws»’
 
 
 }
