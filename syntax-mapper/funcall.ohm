@@ -21,9 +21,9 @@ FuncallRewrite {
 
   skipTo<stopBefore> =
     | &stopBefore -- done
+    | funcall -- macro
     | inner skipTo<stopBefore> -- continue
   inner =
-    | funcall -- funcall
     | "(" ws inner* ")" -- nestedparens
     | "{" ws inner* "}" -- nestedbraces
     | ~"(" ~")" ~"{" ~"}" anyToken -- bottom
