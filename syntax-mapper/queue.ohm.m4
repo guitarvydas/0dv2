@@ -5,10 +5,10 @@ QueueRewrite {
     | any
 
   pushOrPop = push | pop
-  push = "❲queue❳" ws "." ws "❲push_back❳" ws "(" ws "&" ws notlastoperand lastoperand ")"
+  push = "❲queue❳" ws "." ws "❲push_back❳" ws "(" ws "&" ws notlastoperand "," ws lastoperand ")"
   pop = "❲queue❳" ws "." ws "❲pop_front_safe❳" ws "(" ws "&" ws lastoperand ")"
 
-  notlastoperand = anythingButComma "," ws
+  notlastoperand = anythingButComma &","
   lastoperand = anythingButRPar ws
 
   anythingButComma = skipTo<",",pushOrPop> ws
