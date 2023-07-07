@@ -4,14 +4,16 @@ Op_Rewrite {
     | op
     | any
 
-  op = lhs operator ws rhs eolc
+  op = lhs operator ws rhs terminator
   lhs = idchain ws
   rhs = anythingButEOL
 
-  anythingButEOL = skipTo<eolc,op>
+  anythingButEOL = skipTo<op,terminator>
+  terminator = operator
   operator =
     | ">" -- gt
-    
+    | eolc -- eol
+
   eolc = srcnl | nl
 
   include(`tokens.ohm.inc')
