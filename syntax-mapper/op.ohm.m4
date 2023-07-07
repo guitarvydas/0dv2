@@ -11,7 +11,11 @@ Op_Rewrite {
   expr = anythingButEOL
 
   anythingButEOL = skipTo<eolc,op>
-  operator = ">"
+  operator =
+    | ">" -- gt
+    | "==" -- eq
+    | "&&" -- and
+
   eolc = srcnl | nl
 
   include(`tokens.ohm.inc')

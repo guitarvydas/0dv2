@@ -6,6 +6,10 @@ Op_RewriteForCL {
   idchain_rec [idchain kdot ws id] = ‛«idchain».«id»’
   idchain_bottom [id] = ‛«id»’
 
+  operator_gt [c] = ‛>’
+  operator_eq [c] = ‛eq’
+  operator_and [c] = ‛and’
+  
 
   
   string [kb1 cs* ke] = ‛«kb1»«cs»«ke»’
