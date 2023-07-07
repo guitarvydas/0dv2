@@ -1,0 +1,151 @@
+Message :: struct {
+    port
+    datum
+}
+
+System :: struct {
+    components
+    connectors
+}
+
+Connector :: struct {
+    src
+    src_port
+    dst
+    dst_port
+}
+
+Component :: struct {
+    name
+    input
+    output
+    state
+    data
+}
+step :: proc (sys ) {
+    
+    (loop for component in (slot-value sys 'components)
+          do (progn
+               (loop while (> (slot-value (slot-value component 'output) 'len) 0 )
+                     do (progn
+			  (multiple-value-bind
+				(msg _)
+                              (funcall (slot-value (slot-value component 'output) 'dequeue) ) )
+			  (route sys  component  msg)
+			  ))
+               ))
+    
+    (loop for component in (slot-value sys 'components)
+          do (progn
+               (multiple-value-bind
+                     (msg ok)
+                   (funcall (slot-value (slot-value component 'input) 'dequeue) ) )
+               (if  ok
+                    (progn
+                      (funcall (slot-value component 'state) component  (slot-value msg 'port)  (slot-value msg 'datum))
+                    (setf retry  true)
+                    ))
+               ))
+
+retry
+
+}
+
+route :: proc (sys from  msg ) {
+    
+    (loop for c in (slot-value sys 'connectors)
+        do (progn
+            
+            
+            (if  (slot-value c 'src) == from && (slot-value c 'src_port) == (slot-value msg 'port)
+                (progn
+                    
+                    
+                    (setf new_msg  msg)
+                    
+                    
+                    (setf (slot-value new_msg 'port)  (slot-value c 'dst_port))
+                    
+                    (funcall (slot-value (slot-value (slot-value c 'dst) 'input) 'enqueue) new_msg)
+                    ))
+            ))
+    
+}
+
+run :: proc (sys port  data ) {
+    
+    (setf msg  (Message_Literal port  data))
+    
+    (route sys  nil  msg)
+    
+    (loop for component in (slot-value sys 'components)
+        do (progn
+            
+            (funcall (slot-value component 'state) component  (Port “__STATE_ENTER__”)  nil)
+            ))
+    
+    (loop while (step sys)
+        do (progn
+            
+            
+            ))
+    
+    (loop for component in (slot-value sys 'components)
+        do (progn
+            
+            (funcall (slot-value component 'state) component  (Port “__STATE_EXIT__”)  nil)
+            ))
+    
+}
+
+add_component :: proc (sys name  handler ) {
+    
+    (setf component  (new (Component User_Datum)))
+    
+    
+    (setf (slot-value component 'name)  name)
+    
+    
+    (setf (slot-value component 'state)  handler)
+    
+    
+    (funcall (slot-value (slot-value sys 'components) 'append) component)
+    
+    component
+    
+}
+
+add_connection :: proc (sys  connection ) {
+    
+    (funcall (slot-value (slot-value sys 'connectors) 'append) connection)
+    
+}
+
+send :: proc (component port  data ) {
+    (funcall (slot-value (slot-value component 'output) 'enqueue) (Message_Literal port  data))
+    
+}
+
+tran :: proc (component  state ) {
+    (funcall (slot-value component 'state) component  (Port “__STATE_EXIT__”)  nil)
+    
+    (setf (slot-value component 'state)  state)
+    
+    (funcall (slot-value component 'state) component  (Port “__STATE_ENTER__”)  nil)
+    (a b).(funcall (slot-value c 'd) e f)
+    
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+

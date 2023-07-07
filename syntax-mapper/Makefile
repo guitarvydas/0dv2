@@ -39,7 +39,8 @@ pseudo: deleteComments odinproc.ohm odinproc.fab odinstruct.ohm odinstruct.fab q
 	| ./fab queue.ohm queue.fab support.js | tee junk--queue \
 	| cat - > junk--pseudo
 
-cl: pseudo append.ohm append.tocl.fab message_literal.ohm message_literal.tocl.fab assign.ohm assign.tocl.fab funcall.ohm funcall.tocl.fab if.ohm if.tocl.fab forin.ohm forin.tocl.fab forexpr.ohm forexpr.tocl.fab  return.ohm return.tocl.fab op.ohm op.tocl.fab slotvalue.ohm slotvalue.tocl.fab
+cl: pseudo append.ohm append.tocl.fab message_literal.ohm message_literal.tocl.fab assign.ohm assign.tocl.fab funcall.ohm funcall.tocl.fab if.ohm if.tocl.fab forin.ohm forin.tocl.fab forexpr.ohm forexpr.tocl.fab  return.ohm return.tocl.fab op.ohm op.tocl.fab slotvalue.ohm slotvalue.tocl.fab \
+clstruct.ohm clstruct.tocl.fab clproc.ohm clproc.tocl.fab
 	./fab append.ohm append.tocl.fab support.js <junk--pseudo | tee junk--append \
 	| ./fab message_literal.ohm message_literal.tocl.fab support.js | tee junk--ml \
 	| ./fab if.ohm if.tocl.fab support.js | tee junk--if \
@@ -50,6 +51,8 @@ cl: pseudo append.ohm append.tocl.fab message_literal.ohm message_literal.tocl.f
 	| ./fab op.ohm op.tocl.fab support.js | tee junk--op \
 	| ./fab slotvalue.ohm slotvalue.tocl.fab support.js | tee junk--slotvalue \
 	| ./fab return.ohm return.tocl.fab support.js | tee junk--return \
+	| ./fab clstruct.ohm clstruct.tocl.fab support.js | tee junk--clstruct \
+	| ./fab clproc.ohm clproc.tocl.fab support.js | tee junk--clproc \
 	| cat - >junk--cl
 	cat - <junk--cl | ./cleanup.py | ./indenter.py | ./show.py >junk--show
 	cat - <junk--cl | ./cleanup.py | ./indenter.py | ./show.py
@@ -118,6 +121,16 @@ slotvalue.ohm: slotvalue.ohm.m4 tokens.ohm.inc skip.ohm.inc
 	m4 slotvalue.ohm.m4 >slotvalue.ohm
 slotvalue.tocl.fab: slotvalue.tocl.fab.m4 tokens.fab.inc skip.fab.inc
 	m4 slotvalue.tocl.fab.m4 >slotvalue.tocl.fab
+
+clstruct.ohm: clstruct.ohm.m4 tokens.ohm.inc skip.ohm.inc
+	m4 clstruct.ohm.m4 >clstruct.ohm
+clstruct.tocl.fab: clstruct.tocl.fab.m4 tokens.fab.inc skip.fab.inc
+	m4 clstruct.tocl.fab.m4 >clstruct.tocl.fab
+
+clproc.ohm: clproc.ohm.m4 tokens.ohm.inc skip.ohm.inc
+	m4 clproc.ohm.m4 >clproc.ohm
+clproc.tocl.fab: clproc.tocl.fab.m4 tokens.fab.inc skip.fab.inc
+	m4 clproc.tocl.fab.m4 >clproc.tocl.fab
 
 funcall.ohm: funcall.ohm.m4 tokens.ohm.inc skip.ohm.inc
 	m4 funcall.ohm.m4 >funcall.ohm
