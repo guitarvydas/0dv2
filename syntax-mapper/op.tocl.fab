@@ -1,14 +1,9 @@
 Op_RewriteForCL {
   program [items+] = ‛«items»’
   item [x] = ‛«x»’
-  op [idchain ws1 op ws2 expr eolc] = ‛(«op» «idchain» «expr»)«eolc»’
-
-  idchain_rec [idchain kdot ws id] = ‛«idchain».«id»’
-  idchain_bottom [id] = ‛«id»’
+  op [lhs op ws2 rhs eolc] = ‛(«op» «lhs» «rhs»)«eolc»’
 
   operator_gt [c] = ‛>’
-  operator_eq [c] = ‛eq’
-  operator_and [c] = ‛and’
   
 
   
@@ -38,4 +33,9 @@ Op_RewriteForCL {
   inner_nestedbraces [l ws1 Inner* r] = ‛«l»«ws1»«Inner»«r»’
   inner_bottom [AnyToken] = ‛«AnyToken»’
   
+    idchain_rec [idchain dotc id] = ‛«idchain».«id»’
+  idchain_bottom [id] = ‛«id»’
+  dotc [kdot ws] = ‛«kdot»«ws»’
+
+
 }

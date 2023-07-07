@@ -1,20 +1,21 @@
-Op_Rewrite {
+Op2_Rewrite {
   program = item+
   item =
     | op
     | any
 
-  op = lhs operator ws rhs eolc
-  lhs = idchain ws
-  rhs = anythingButEOL
+  op = idchain ws operator ws expr eolc
+  idchain =
+    | idchain "." ws id -- rec
+    | id -- bottom
+  expr = anythingButEOL
 
   anythingButEOL = skipTo<eolc,op>
   operator =
-    | ">" -- gt
-    
+    | "&&" -- and
+
   eolc = srcnl | nl
 
   include(`tokens.ohm.inc')
   include(`skip.ohm.inc')
-  include(`tocl.ohm.inc')
 }

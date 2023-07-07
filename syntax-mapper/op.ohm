@@ -4,18 +4,14 @@ Op_Rewrite {
     | op
     | any
 
-  op = idchain ws operator ws expr eolc
-  idchain =
-    | idchain "." ws id -- rec
-    | id -- bottom
-  expr = anythingButEOL
+  op = lhs operator ws rhs eolc
+  lhs = idchain ws
+  rhs = anythingButEOL
 
   anythingButEOL = skipTo<eolc,op>
   operator =
     | ">" -- gt
-    | "==" -- eq
-    | "&&" -- and
-
+    
   eolc = srcnl | nl
 
       dqb = "“"
@@ -88,5 +84,11 @@ Op_Rewrite {
     | "(" ws inner* ")" -- nestedparens
     | "{" ws inner* "}" -- nestedbraces
     | ~"(" ~")" ~"{" ~"}" anyToken -- bottom
+
+    idchain =
+    | idchain dotc id -- rec
+    | id -- bottom
+
+  dotc = "." ws
 
 }
