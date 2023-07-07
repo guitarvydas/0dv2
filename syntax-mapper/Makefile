@@ -26,6 +26,7 @@ tokenize:
 	| ./delnoise.sed \
 	| ./macros.py \
 	| ./convertws.py \
+	| ./multi-char-operators.py \
 	| ./fab odincomment.ohm odincomment.fab support.js | tee junk--comments \
 	| ./fab odinstrings.ohm odinstrings.fab support.js | tee junk--strings \
 	| ./fab odinsymbols.ohm odinsymbols.fab support.js >junk--tokenized

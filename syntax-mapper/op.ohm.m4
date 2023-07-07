@@ -8,11 +8,12 @@ Op_Rewrite {
   lhs = idchain ws
   rhs = anythingButEOL
 
-  anythingButEOL = skipTo<op,terminator>
-  terminator = operator
+  anythingButEOL = skipTo<terminator, op>
+  terminator = operator | &eolc | &end
   operator =
     | ">" -- gt
-    | eolc -- eol
+    | "==" -- eq
+    | "&&" -- and
 
   eolc = srcnl | nl
 

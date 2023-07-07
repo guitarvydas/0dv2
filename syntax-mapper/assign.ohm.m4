@@ -13,7 +13,7 @@ AssignRewrite {
 
   anythingButEOL = skipTo<eol,massignOrAssign>
   eol = "⦚"
-  assignc = "=" | ":="
+  assignc = (~"==" "=") | ":="
 
   include(`tokens.ohm.inc')
   include(`skip.ohm.inc')  
