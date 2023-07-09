@@ -152,5 +152,6 @@ clean:
 	rm -rf junk--*
 	rm -f odinproc.ohm odinproc.fab odinstruct.ohm odinstruct.fab queue.ohm queue.fab append.ohm message_literal.ohm assign.ohm funcall.ohm
 	rm -f append.*.fab message_literal.*.fab assign.*.fab funcall.*.fab
+	rm -f tempvar.*.fab tempvar.*.fab
 	rm -f *~
 
