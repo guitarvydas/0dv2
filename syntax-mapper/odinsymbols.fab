@@ -1,5 +1,6 @@
 dOdin0Dsymbolsandintegers {
   program [item+] = ‛«item»’
+  keyword [kwb first rest* kwe] = ‛«kwb»«first»«rest»«kwe»’
   symbol [first rest*] = ‛❲«first»«rest»❳’
   comment [B cs* E] = ‛«B»«cs»«E»’
   string [dq1 cs* dq2] = ‛“«cs»”’

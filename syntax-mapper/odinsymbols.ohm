@@ -5,10 +5,12 @@ Odin0Dsymbolsandintegers{
     | string -- string
     | charconst -- charconst
     | integer -- integer
+    | keyword -- keyword
     | symbol -- symbol
     | any -- other
 
 
+  keyword = kwb symfirst symrest* kwe
   symbol = symfirst symrest*
   symfirst = ~ws ~uspc ~unl ~commentbegin ~commentend ~digit char
   symrest  = ~ws ~uspc ~unl ~commentbegin ~commentend        char
@@ -17,6 +19,9 @@ Odin0Dsymbolsandintegers{
 
   integer = digit+
   
+  kwb = "‹"
+  kwe = "›"
+
   dqb = "“"
   dqe = "”"
   sqb = "❛"
