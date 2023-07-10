@@ -12,7 +12,7 @@ AssignRewrite {
   rhs = anythingButEOL
 
   anythingButEOL = skipTo<eol,massignOrAssign>
-  eol = "⦚"
+  eol = srcnl | nl | end
   assignc = "=" | "⟪:=⟫"
 
   include(`tokens.ohm.inc')

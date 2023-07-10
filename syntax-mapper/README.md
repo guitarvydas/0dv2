@@ -31,3 +31,9 @@
 - might just use a post-pass to clean up `\nl)` -> `)\nl`
 - undecided
 - actually, there should be no unls remaining in the source (just nls) after transpilation
+
+## July 9, 2023
+- simplification: add /*tempvar*/ to Odin code
+- simplification: assume that multiple assignments are to tempvars only, not globals (allows (multiple-value-bind ...) with local scoping of vars)
+- important: matching to end of line implies that generated ")" must be on fresh lines, or must be verbatim
+- simplification: remove && and || from Odin code, replace with unrolled 'if' statements

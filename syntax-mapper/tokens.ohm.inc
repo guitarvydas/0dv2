@@ -55,7 +55,10 @@
     charspace = "☐"
     charnl = "†"
 
-    wsc = space | spc | nl | uspc | unl | indentc | dedentc | commentspace | commentnl | stringspace | stringnl | charspace | charnl | verbatim
+    scopebegin = "⎧"
+    scopeend = "⎭"
+    
+    wsc = space | spc | nl | uspc | unl | indentc | dedentc | commentspace | commentnl | stringspace | stringnl | charspace | charnl | verbatim | scopebegin | scopeend
     ws = wsc*
 
 
