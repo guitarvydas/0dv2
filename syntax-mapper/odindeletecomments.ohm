@@ -50,7 +50,7 @@ Odin0Ddeletecomments{
   annotation = ab (~ab ~ae any)* ae
 
 
-  anyToken1 = string | charconst | id | integer | keyword | multi_char_operator | indentc | dedentc | verbatim | comment | symbol | integer | any
+  anyToken1 = string | charconst | id | integer | keyword | multi_char_operator | indentc | dedentc | verbatim | comment | symbol | integer | annotation | any
   anyToken = anyToken1
 
     uspc = "・"

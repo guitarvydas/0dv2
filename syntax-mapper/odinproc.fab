@@ -12,7 +12,7 @@ OdinProcSignature {
 }
 ’
 
-  procDefinitionBody [lb ws1 BodyStuff rb ws2] = ‛«BodyStuff»’
+  procDefinitionBody [lb ws1 BodyStuff rb ws2] = ‛«lb»«ws1»«BodyStuff»«rb»«ws2»’
 
   procSignature_nonvoid [ID ws0 kcc ws1 Pragma? kproc ws2 OdinParameterList OdinReturnTypeList] = ‛«ID» :: ‹proc› «OdinParameterList»’
   procSignature_void [ID ws0 kcc ws1 Pragma? kproc ws2 OdinParameterList lookahead] = ‛«ID» :: ‹proc› «OdinParameterList»’
