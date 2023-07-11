@@ -47,7 +47,8 @@ StructdefRewrite {
     ab = "⎨"
     ae = "⎬"
   annotation = ab (~ab ~ae any)* ae
-
+    scopebegin = "⎧"
+    scopeend   = "⎭"
 
   anyToken1 = string | charconst | id | integer | keyword | multi_char_operator | indentc | dedentc | verbatim | comment | symbol | integer | annotation | any
   anyToken = anyToken1
@@ -82,6 +83,10 @@ StructdefRewrite {
   inner =
     | "(" ws inner* ")" -- nestedparens
     | "{" ws inner* "}" -- nestedbraces
+    | scopeOpen ws inner* scopeClose -- nestedScope
     | ~"(" ~")" ~"{" ~"}" anyToken -- bottom
 
+  scopeOpen = ab scopebegin ae
+  scopeClose = ab scopeend ae
+  
 }

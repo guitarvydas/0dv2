@@ -1,24 +1,22 @@
 ScopedvarRewrite {
+
+  // ⎨scoped ??? x⎬
+  //   ...
+  // <scope end>
+  
   program = item+
   item =
-    | massignOrAssign
+    | scoped
     | any
 
-  massignOrAssign = massign | assign
-  assign = scopedvar ws lhs ws assignc ws rhs therest
-  massign = scopedvar ws mlhs ws assignc ws rhs therest
-  lhs = tID ~","
-  mlhs = tID "," ws tID
-  rhs = anythingButEOL
-  therest = anythingButScopeOpen
-  tID = ~"." id ~"." ws
+  scoped = ab "scoped" scopeid varid ae therest scopeClose
 
-  scopedvar = "‹scopedvar›"
-  anythingButEOL = skipTo<eol,massignOrAssign>
-  eol = "⦚"
-  assignc = "=" | "⟪:=⟫"
-
-  anythingButScopeOpen = skipTo<semanticscopebeginopen,massignOrAssign>
+  scopeid = symbol
+  varid = symbol
+  
+  scopeClose = ab scopeend scopeid ae
+  therest = anythingButScopeClose
+  anythingButScopeClose = skipTo<scopeClose,scoped>
 
   include(`tokens.ohm.inc')
   include(`skip.ohm.inc')  

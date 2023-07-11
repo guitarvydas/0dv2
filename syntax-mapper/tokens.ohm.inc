@@ -38,7 +38,8 @@
     ab = "⎨"
     ae = "⎬"
   annotation = ab (~ab ~ae any)* ae
-
+    scopebegin = "⎧"
+    scopeend   = "⎭"
 
   anyToken1 = string | charconst | id | integer | keyword | multi_char_operator | indentc | dedentc | verbatim | comment | symbol | integer | annotation | any
   anyToken = anyToken1
