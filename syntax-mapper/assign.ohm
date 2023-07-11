@@ -12,8 +12,8 @@ AssignRewrite {
   rhs = anythingButEOL
 
   anythingButEOL = skipTo<eol,massignOrAssign>
-  eol = "⦚"
-  assignc = "=" | ":="
+  eol = srcnl | nl | end
+  assignc = "=" | "⟪:=⟫"
 
       dqb = "“"
     dqe = "”"
@@ -72,7 +72,10 @@ AssignRewrite {
     charspace = "☐"
     charnl = "†"
 
-    wsc = space | spc | nl | uspc | unl | indentc | dedentc | commentspace | commentnl | stringspace | stringnl | charspace | charnl | verbatim
+    scopebegin = "⎧"
+    scopeend = "⎭"
+    
+    wsc = space | spc | nl | uspc | unl | indentc | dedentc | commentspace | commentnl | stringspace | stringnl | charspace | charnl | verbatim | scopebegin | scopeend
     ws = wsc*
 
 

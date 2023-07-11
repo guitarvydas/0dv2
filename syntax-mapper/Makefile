@@ -14,7 +14,7 @@ SRC=test.odin
 
 all: dev
 
-dev: clean
+dev: clean hold-test.odin
 	make cl
 
 devandclean: dev
@@ -26,6 +26,7 @@ tokenize:
 	| ./delnoise.sed \
 	| ./macros.py \
 	| ./convertws.py \
+	| ./multi-char-operators.py \
 	| ./fab odincomment.ohm odincomment.fab support.js | tee junk--comments \
 	| ./fab odinstrings.ohm odinstrings.fab support.js | tee junk--strings \
 	| ./fab odinsymbols.ohm odinsymbols.fab support.js >junk--tokenized
@@ -40,12 +41,14 @@ pseudo: deleteComments odinproc.ohm odinproc.fab odinstruct.ohm odinstruct.fab q
 	| cat - > junk--pseudo
 
 cl: pseudo append.ohm append.tocl.fab message_literal.ohm message_literal.tocl.fab assign.ohm assign.tocl.fab funcall.ohm funcall.tocl.fab if.ohm if.tocl.fab forin.ohm forin.tocl.fab forexpr.ohm forexpr.tocl.fab  return.ohm return.tocl.fab op.ohm op.tocl.fab slotvalue.ohm slotvalue.tocl.fab \
-clstruct.ohm clstruct.tocl.fab clproc.ohm clproc.tocl.fab
+clstruct.ohm clstruct.tocl.fab clproc.ohm clproc.tocl.fab \
+tempvar.ohm tempvar.tocl.fab
 	./fab append.ohm append.tocl.fab support.js <junk--pseudo | tee junk--append \
 	| ./fab message_literal.ohm message_literal.tocl.fab support.js | tee junk--ml \
 	| ./fab if.ohm if.tocl.fab support.js | tee junk--if \
 	| ./fab forin.ohm forin.tocl.fab support.js | tee junk--forin \
 	| ./fab forexpr.ohm forexpr.tocl.fab support.js | tee junk--forexpr \
+	| ./fab tempvar.ohm tempvar.tocl.fab support.js | tee junk--tempvar \
 	| ./fab assign.ohm assign.tocl.fab support.js | tee junk--assign \
 	| ./fab funcall.ohm funcall.tocl.fab support.js | tee junk--funcall \
 	| ./fab op.ohm op.tocl.fab support.js | tee junk--op \
@@ -117,6 +120,11 @@ assign.ohm: assign.ohm.m4 tokens.ohm.inc skip.ohm.inc
 assign.tocl.fab: assign.tocl.fab.m4 tokens.fab.inc skip.fab.inc
 	m4 assign.tocl.fab.m4 >assign.tocl.fab
 
+tempvar.ohm: tempvar.ohm.m4 tokens.ohm.inc skip.ohm.inc
+	m4 tempvar.ohm.m4 >tempvar.ohm
+tempvar.tocl.fab: tempvar.tocl.fab.m4 tokens.fab.inc skip.fab.inc
+	m4 tempvar.tocl.fab.m4 >tempvar.tocl.fab
+
 slotvalue.ohm: slotvalue.ohm.m4 tokens.ohm.inc skip.ohm.inc
 	m4 slotvalue.ohm.m4 >slotvalue.ohm
 slotvalue.tocl.fab: slotvalue.tocl.fab.m4 tokens.fab.inc skip.fab.inc
@@ -137,20 +145,13 @@ funcall.ohm: funcall.ohm.m4 tokens.ohm.inc skip.ohm.inc
 funcall.tocl.fab: funcall.tocl.fab.m4 tokens.fab.inc skip.fab.inc
 	m4 funcall.tocl.fab.m4 >funcall.tocl.fab
 
-old:
-	| ./fab odinproc.ohm odinproc.fab support.js \
-	| ./fab odinstruct.ohm odinstruct.fab support.js \
-	| ./fab queue.ohm queue.fab support.js \
-	| ./fab append.ohm append.fab support.js | tee junk--append \
-	| ./fab message_literal.ohm message_literal.fab support.js | tee junk--ml \
-	| ./fab assign.ohm assign.fab support.js | tee junk--assign \
-	| ./fab funcall.ohm funcall.fab support.js \
-	| ./intermediateindenter.py >0d.lisp.pseudo
+hold-test.odin: ../../odin0d/0d/0d.odin
+	cp ../../odin0d/0d/0d.odin ./hold-test.odin
 
 clean:
-	rm -f temp*
 	rm -rf junk--*
 	rm -f odinproc.ohm odinproc.fab odinstruct.ohm odinstruct.fab queue.ohm queue.fab append.ohm message_literal.ohm assign.ohm funcall.ohm
 	rm -f append.*.fab message_literal.*.fab assign.*.fab funcall.*.fab
+	rm -f tempvar.*.fab tempvar.*.fab
 	rm -f *~
 

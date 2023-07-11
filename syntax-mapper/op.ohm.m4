@@ -4,13 +4,12 @@ Op_Rewrite {
     | op
     | any
 
-  op = idchain ws operator ws expr eolc
-  idchain =
-    | idchain "." ws id -- rec
-    | id -- bottom
-  expr = anythingButEOL
+  op = lhs operator ws rhs terminator
+  lhs = idchain ws
+  rhs = anythingButEOL
 
-  anythingButEOL = skipTo<eolc,op>
+  anythingButEOL = skipTo<terminator, op>
+  terminator = operator | &eolc | &end
   operator =
     | ">" -- gt
     | "==" -- eq
@@ -20,4 +19,5 @@ Op_Rewrite {
 
   include(`tokens.ohm.inc')
   include(`skip.ohm.inc')
+  include(`tocl.ohm.inc')
 }

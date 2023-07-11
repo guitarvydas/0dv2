@@ -1,14 +1,12 @@
-Op_RewriteForCL {
+TempvarRewriteForCL {
   program [items+] = ‛«items»’
-  item [x] = ‛«x»’
-  op [lhs op ws2 rhs terminator] = ‛(«op» «lhs» «rhs») «terminator»’
 
-  operator_gt [c] = ‛>’
-  operator_and [c] = ‛and’
-  operator_eq [c] = ‛eq’
+  assign [ktempvar ws1 lhsid ws2 kassign ws3 rhs therest] = ‛\n(‹let› ((«lhsid» nil))⇢\n«ws1»«lhsid»«ws2»«kassign»«ws3»«rhs»⇠«therest»⎨)⎬\n’
+  massign [ktempvar ws1 mlhs ws2 kassign ws3 rhs therest] = ‛«ws2»«mlhs»«ws2»«kassign»«ws3»«rhs»«therest»’
 
-  lhs [idchain ws] = ‛«idchain»«ws»’
-  rhs [anythingButEOL] = ‛«anythingButEOL»’
+  mlhs [id1 kcomma ws2 id2] = ‛«id1»,«ws2»«id2»’
+  
+  tID [id ws] = ‛«id»«ws»’
 
   
   string [kb1 cs* ke] = ‛«kb1»«cs»«ke»’
@@ -36,7 +34,7 @@ Op_RewriteForCL {
   inner_nestedparens [l ws1 Inner* r] = ‛«l»«ws1»«Inner»«r»’
   inner_nestedbraces [l ws1 Inner* r] = ‛«l»«ws1»«Inner»«r»’
   inner_bottom [AnyToken] = ‛«AnyToken»’
-  
+
     idchain_rec [idchain dotc id] = ‛«idchain».«id»’
   idchain_bottom [id] = ‛«id»’
   dotc [kdot ws] = ‛«kdot»«ws»’

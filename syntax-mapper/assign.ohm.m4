@@ -12,8 +12,8 @@ AssignRewrite {
   rhs = anythingButEOL
 
   anythingButEOL = skipTo<eol,massignOrAssign>
-  eol = "⦚"
-  assignc = "=" | ":="
+  eol = srcnl | nl | end
+  assignc = "=" | "⟪:=⟫"
 
   include(`tokens.ohm.inc')
   include(`skip.ohm.inc')  
