@@ -3,7 +3,7 @@ Forin_Rewrite {
   item [x] = ‛«x»’
 
   forin [kfor ws1 variable kin ws2 expr lb block rb] =
-‛\n❪loop for ❫⇢«variable»❪ in ❫«expr»
+‛\n❪loop for ❫⇢«ws1»«variable»❪ in ❫«ws2»«expr»
     ❪do (progn❫⇢
           «block»❪))❫⇠⇠’
   variable [id ws] = ‛«id»’

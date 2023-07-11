@@ -2,7 +2,7 @@ Return_Rewrite {
   program [items+] = ‛«items»’
   item [x] = ‛«x»’
 
-  returnstatement [kreturn ws expr] = ‛\n«expr»’
+  returnstatement [kreturn ws expr] = ‛\n«ws»«expr»’
 
   
   string [kb1 cs* ke] = ‛«kb1»«cs»«ke»’
