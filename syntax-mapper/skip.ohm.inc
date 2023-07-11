@@ -5,4 +5,4 @@
   inner =
     | "(" ws inner* ")" -- nestedparens
     | "{" ws inner* "}" -- nestedbraces
-    | ~"(" ~")" ~"{" ~"}" ~scopebegin ~scopeend anyToken -- bottom
+    | ~"(" ~")" ~"{" ~"}" anyToken -- bottom

@@ -9,6 +9,7 @@
   verbatim [kb8 cs* ke] = ‛«kb8»«cs»«ke»’
   comment [kb9 cs* ke] = ‛«kb9»«cs»«ke»’
   anyToken [anyToken1] = ‛«anyToken1»’
+  annotation [ab cs* ae] = ‛«ab»«cs»«ae»’
   
   ws [wsc*] = ‛«wsc»’
 

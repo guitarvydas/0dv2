@@ -1,0 +1,14 @@
+Annotation {
+  program = item+
+  item =
+    | unl+ -- newlines
+    | annotation -- annotation
+    | space+ -- space
+    | any -- other
+
+  annotation = ab (~ab ~ae any)* ae
+
+  uspc = "・"
+  space := uspc | unl
+}
+

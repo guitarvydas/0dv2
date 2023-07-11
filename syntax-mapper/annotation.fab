@@ -1,0 +1,14 @@
+???
+Annotation {
+  program [item+] = ‛«item»’
+  item_newlines [nl+] = ‛⦚’
+  item_space [s+] = ‛・’
+  item_other [c] = ‛«c»’
+  comment [lslsl cs*] = ‛⎣«cs»⎦’
+
+  // convert input whitespace to annotation-specific whitespace
+  aspc [c] = ‛◦’
+  anl [c] = ‛¶’
+
+}
+
