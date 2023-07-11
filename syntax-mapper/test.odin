@@ -1,5 +1,5 @@
 // Clones the datum portion of the message.
 c :: proc(m: Message) -> any {
-    /*⎨scoped ❲c❳ ❲y❳ ⎬*/
+    /*⎨scoped _ y ⎬*/
     y := h(i)
 }

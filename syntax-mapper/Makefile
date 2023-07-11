@@ -86,7 +86,7 @@ append.ohm: append.ohm.m4 tokens.ohm.inc skip.ohm.inc
 append.tocl.fab: append.tocl.fab.m4 tokens.fab.inc skip.fab.inc
 	m4 append.tocl.fab.m4 >append.tocl.fab
 
-scopedvar.ohm: scopedvar.ohm.m4 tokens.ohm.inc skip.ohm.inc
+scopedvar.ohm: scopedvar.ohm.m4 tokensWithAnnotations.ohm.inc skip.ohm.inc
 	m4 scopedvar.ohm.m4 >scopedvar.ohm
 scopedvar.tocl.fab: scopedvar.tocl.fab.m4 tokens.fab.inc skip.fab.inc
 	m4 scopedvar.tocl.fab.m4 >scopedvar.tocl.fab

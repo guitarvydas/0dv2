@@ -9,7 +9,7 @@ ScopedvarRewrite {
     | scoped
     | any
 
-  scoped = ab "scoped" scopeid varid ae therest scopeClose
+  scoped = ab sym<"scoped"> ws scopeid ws varid ws ae therest scopeClose
 
   scopeid = symbol
   varid = symbol
@@ -17,7 +17,7 @@ ScopedvarRewrite {
   therest = anythingButScopeClose
   anythingButScopeClose = skipTo<scopeClose,scoped>
 
-  include(`tokens.ohm.inc')
+  include(`tokensWithAnnotations.ohm.inc')
   include(`skip.ohm.inc')  
   include(`tocl.ohm.inc')
 }

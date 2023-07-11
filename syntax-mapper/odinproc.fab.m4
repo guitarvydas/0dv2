@@ -4,11 +4,11 @@ OdinProcSignature {
 
 
   proc [ProcSignature ProcDefinitionBody] = ‛\n«ProcSignature»⇢ {
-⎨⎧ ... ⎬
+⎨⎧ ❲_❳ ⎬
  ⇢
 «ProcDefinitionBody»
 ⇠
-⎨⎭ ... ⎬
+⎨⎭ ❲_❳  ⎬
 }
 ’
 

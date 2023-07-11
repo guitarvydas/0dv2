@@ -1,7 +1,7 @@
 ScopedvarRewrite {
   program [item+] = ‛«item»’
 
-  scoped [ab kscoped scopeid varid ae therest scopeClose] = ‛(let ((«varid» nil))⇢\n«therest»)\n⇠’
+  scoped [ab kscoped ws1 scopeid ws2 varid ws3 ae therest scopeClose] = ‛(let ((«varid» nil))⇢\n«therest»)\n⇠«scopeClose»’
   
   scopeClose [ab scopeend scopeid ae] = ‛«ab»«scopeend»«scopeid»«ae»’
 

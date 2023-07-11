@@ -1,23 +1,4 @@
-ScopedvarRewrite {
-
-  // ⎨scoped ??? x⎬
-  //   ...
-  // <scope end>
-  
-  program = item+
-  item =
-    | scoped
-    | any
-
-  scoped = ab sym<"scoped"> ws scopeid ws varid ws ae therest scopeClose
-
-  scopeid = symbol
-  varid = symbol
-  
-  therest = anythingButScopeClose
-  anythingButScopeClose = skipTo<scopeClose,scoped>
-
-      dqb = "“"
+    dqb = "“"
     dqe = "”"
   string = dqb (~dqb ~dqe any)* dqe
 
@@ -84,26 +65,4 @@ ScopedvarRewrite {
     wsc = space | spc | nl | uspc | unl | indentc | dedentc | commentspace | commentnl | stringspace | stringnl | charspace | charnl | verbatim | annotationspace | annotation
     ws = wsc*
 
-
-
-    skipTo<stopBefore,macro> =
-    | &stopBefore -- done
-    | macro -- macro
-    | inner skipTo<stopBefore,macro> -- continue
-  inner =
-    | "(" ws inner* ")" -- nestedparens
-    | "{" ws inner* "}" -- nestedbraces
-    | scopeOpen ws inner* scopeClose -- nestedScope
-    | ~"(" ~")" ~"{" ~"}" anyToken -- bottom
-
-  scopeOpen = ab scopebegin ws id ws id ws ae
-  scopeClose = ab scopeend ws id ws ae
-    
-    idchain =
-    | idchain dotc id -- rec
-    | id -- bottom
-
-  dotc = "." ws
-
-}
 
