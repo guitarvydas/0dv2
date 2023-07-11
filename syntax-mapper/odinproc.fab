@@ -12,7 +12,7 @@ OdinProcSignature {
 }
 ’
 
-  procDefinitionBody [lb ws1 BodyStuff rb ws2] = ‛«lb»«ws1»«BodyStuff»«rb»«ws2»’
+  procDefinitionBody [lb ws1 BodyStuff rb ws2] = ‛«ws1»«BodyStuff»«ws2»’
 
   procSignature_nonvoid [ID ws0 kcc ws1 Pragma? kproc ws2 OdinParameterList OdinReturnTypeList] = ‛«ID» :: ‹proc› «OdinParameterList»’
   procSignature_void [ID ws0 kcc ws1 Pragma? kproc ws2 OdinParameterList lookahead] = ‛«ID» :: ‹proc› «OdinParameterList»’
@@ -74,6 +74,9 @@ OdinProcSignature {
   inner_nestedparens [l ws1 Inner* r] = ‛«l»«ws1»«Inner»«r»’
   inner_nestedbraces [l ws1 Inner* r] = ‛«l»«ws1»«Inner»«r»’
   inner_bottom [AnyToken] = ‛«AnyToken»’
+
+  scopeOpen  [ab scopebegin ws1 id1 ws2 id2 ws3 ae] = ‛«ab»«scopebegin»«ws1»«id1»«ws2»«id2»«ws3»«ae»’
+  scopeClose [ab scopeend   ws1 id1 ws2         ae] = ‛«ab»«scopebegin»«ws1»«id1»«ws3»«ae»’
 
 }
 

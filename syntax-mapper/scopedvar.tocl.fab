@@ -1,14 +1,9 @@
-ScopedvarRewriteForCL {
-  program [items+] = ‛«items»’
+ScopedvarRewrite {
+  program [item+] = ‛«item»’
 
-  assign [kscopedvar ws1 lhsid ws2 kassign ws3 rhs therest] = ‛\n(‹let› ((«lhsid» nil))⇢\n«ws1»«lhsid»«ws2»«kassign»«ws3»«rhs»«therest»⎨)⎬⇠\n’
-  massign [kscopedvar ws1 mlhs ws2 kassign ws3 rhs therest] = ‛«ws2»«mlhs»«ws2»«kassign»«ws3»«rhs»«therest»’
-
-  therest [stuff] = ‛«stuff»’
+  scoped [ab kscoped scopeid varid ae therest scopeClose] = ‛(let ((«varid» nil))⇢\n«therest»)\n⇠’
   
-  mlhs [id1 kcomma ws2 id2] = ‛«id1»,«ws2»«id2»’
-  
-  tID [id ws] = ‛«id»«ws»’
+  scopeClose [ab scopeend scopeid ae] = ‛«ab»«scopeend»«scopeid»«ae»’
 
   
   string [kb1 cs* ke] = ‛«kb1»«cs»«ke»’
@@ -21,6 +16,7 @@ ScopedvarRewriteForCL {
   verbatim [kb8 cs* ke] = ‛«kb8»«cs»«ke»’
   comment [kb9 cs* ke] = ‛«kb9»«cs»«ke»’
   anyToken [anyToken1] = ‛«anyToken1»’
+  annotation [ab cs* ae] = ‛«ab»«cs»«ae»’
   
   ws [wsc*] = ‛«wsc»’
 
@@ -36,6 +32,9 @@ ScopedvarRewriteForCL {
   inner_nestedparens [l ws1 Inner* r] = ‛«l»«ws1»«Inner»«r»’
   inner_nestedbraces [l ws1 Inner* r] = ‛«l»«ws1»«Inner»«r»’
   inner_bottom [AnyToken] = ‛«AnyToken»’
+
+  scopeOpen  [ab scopebegin ws1 id1 ws2 id2 ws3 ae] = ‛«ab»«scopebegin»«ws1»«id1»«ws2»«id2»«ws3»«ae»’
+  scopeClose [ab scopeend   ws1 id1 ws2         ae] = ‛«ab»«scopebegin»«ws1»«id1»«ws3»«ae»’
 
     idchain_rec [idchain dotc id] = ‛«idchain».«id»’
   idchain_bottom [id] = ‛«id»’

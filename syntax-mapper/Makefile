@@ -42,12 +42,14 @@ pseudo: deleteComments odinproc.ohm odinproc.fab odinstruct.ohm odinstruct.fab q
 	| cat - > junk--pseudo
 
 cl: pseudo append.ohm append.tocl.fab message_literal.ohm message_literal.tocl.fab assign.ohm assign.tocl.fab funcall.ohm funcall.tocl.fab if.ohm if.tocl.fab forin.ohm forin.tocl.fab forexpr.ohm forexpr.tocl.fab  return.ohm return.tocl.fab op.ohm op.tocl.fab slotvalue.ohm slotvalue.tocl.fab \
-clstruct.ohm clstruct.tocl.fab clproc.ohm clproc.tocl.fab
+clstruct.ohm clstruct.tocl.fab clproc.ohm clproc.tocl.fab \
+scopedvar.ohm scopedvar.tocl.fab
 	./fab append.ohm append.tocl.fab support.js <junk--pseudo | tee junk--append \
 	| ./fab message_literal.ohm message_literal.tocl.fab support.js | tee junk--ml \
 	| ./fab if.ohm if.tocl.fab support.js | tee junk--if \
 	| ./fab forin.ohm forin.tocl.fab support.js | tee junk--forin \
 	| ./fab forexpr.ohm forexpr.tocl.fab support.js | tee junk--forexpr \
+	| ./fab scopedvar.ohm scopedvar.tocl.fab support.js | tee junk--scopedvar \
 	| ./fab assign.ohm assign.tocl.fab support.js | tee junk--assign \
 	| ./fab funcall.ohm funcall.tocl.fab support.js | tee junk--funcall \
 	| ./fab op.ohm op.tocl.fab support.js | tee junk--op \
@@ -83,6 +85,11 @@ append.ohm: append.ohm.m4 tokens.ohm.inc skip.ohm.inc
 	m4 append.ohm.m4 >append.ohm
 append.tocl.fab: append.tocl.fab.m4 tokens.fab.inc skip.fab.inc
 	m4 append.tocl.fab.m4 >append.tocl.fab
+
+scopedvar.ohm: scopedvar.ohm.m4 tokens.ohm.inc skip.ohm.inc
+	m4 scopedvar.ohm.m4 >scopedvar.ohm
+scopedvar.tocl.fab: scopedvar.tocl.fab.m4 tokens.fab.inc skip.fab.inc
+	m4 scopedvar.tocl.fab.m4 >scopedvar.tocl.fab
 
 message_literal.ohm: message_literal.ohm.m4 tokens.ohm.inc skip.ohm.inc
 	m4 message_literal.ohm.m4 >message_literal.ohm

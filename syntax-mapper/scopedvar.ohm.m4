@@ -14,7 +14,6 @@ ScopedvarRewrite {
   scopeid = symbol
   varid = symbol
   
-  scopeClose = ab scopeend scopeid ae
   therest = anythingButScopeClose
   anythingButScopeClose = skipTo<scopeClose,scoped>
 

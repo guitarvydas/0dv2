@@ -1,24 +1,21 @@
 ScopedvarRewrite {
+
+  // ⎨scoped ??? x⎬
+  //   ...
+  // <scope end>
+  
   program = item+
   item =
-    | massignOrAssign
+    | scoped
     | any
 
-  massignOrAssign = massign | assign
-  assign = scopedvar ws lhs ws assignc ws rhs therest
-  massign = scopedvar ws mlhs ws assignc ws rhs therest
-  lhs = tID ~","
-  mlhs = tID "," ws tID
-  rhs = anythingButEOL
-  therest = anythingButScopeOpen
-  tID = ~"." id ~"." ws
+  scoped = ab "scoped" scopeid varid ae therest scopeClose
 
-  scopedvar = "‹scopedvar›"
-  anythingButEOL = skipTo<eol,massignOrAssign>
-  eol = "⦚"
-  assignc = "=" | "⟪:=⟫"
-
-  anythingButScopeOpen = skipTo<semanticscopebeginopen,massignOrAssign>
+  scopeid = symbol
+  varid = symbol
+  
+  therest = anythingButScopeClose
+  anythingButScopeClose = skipTo<scopeClose,scoped>
 
       dqb = "“"
     dqe = "”"
@@ -60,9 +57,10 @@ ScopedvarRewrite {
     ab = "⎨"
     ae = "⎬"
   annotation = ab (~ab ~ae any)* ae
+    scopebegin = "⎧"
+    scopeend   = "⎭"
 
-
-  anyToken1 = string | charconst | id | integer | keyword | multi_char_operator | indentc | dedentc | verbatim | comment | symbol | integer | any
+  anyToken1 = string | charconst | id | integer | keyword | multi_char_operator | indentc | dedentc | verbatim | comment | symbol | integer | annotation | any
   anyToken = anyToken1
 
     uspc = "・"
@@ -95,8 +93,12 @@ ScopedvarRewrite {
   inner =
     | "(" ws inner* ")" -- nestedparens
     | "{" ws inner* "}" -- nestedbraces
+    | scopeOpen ws inner* scopeClose -- nestedScope
     | ~"(" ~")" ~"{" ~"}" anyToken -- bottom
-  
+
+  scopeOpen = ab scopebegin ws id ws id ws ae
+  scopeClose = ab scopeend ws id ws ae
+    
     idchain =
     | idchain dotc id -- rec
     | id -- bottom

@@ -1,14 +1,9 @@
-ScopedvarRewriteForCL {
-  program [items+] = ‛«items»’
+ScopedvarRewrite {
+  program [item+] = ‛«item»’
 
-  assign [kscopedvar ws1 lhsid ws2 kassign ws3 rhs therest] = ‛\n(‹let› ((«lhsid» nil))⇢\n«ws1»«lhsid»«ws2»«kassign»«ws3»«rhs»«therest»⎨)⎬⇠\n’
-  massign [kscopedvar ws1 mlhs ws2 kassign ws3 rhs therest] = ‛«ws2»«mlhs»«ws2»«kassign»«ws3»«rhs»«therest»’
-
-  therest [stuff] = ‛«stuff»’
+  scoped [ab kscoped scopeid varid ae therest scopeClose] = ‛(let ((«varid» nil))⇢\n«therest»)\n⇠’
   
-  mlhs [id1 kcomma ws2 id2] = ‛«id1»,«ws2»«id2»’
-  
-  tID [id ws] = ‛«id»«ws»’
+  scopeClose [ab scopeend scopeid ae] = ‛«ab»«scopeend»«scopeid»«ae»’
 
   include(`tokens.fab.inc')
   include(`skip.fab.inc')
