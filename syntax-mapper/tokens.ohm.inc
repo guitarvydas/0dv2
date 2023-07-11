@@ -53,23 +53,15 @@
     commentspace = "◦"
     commentnl = "¶"
 
+    annotationspace = uspc
+
     stringspace = "□"
     stringnl = "‡"
     charspace = "☐"
     charnl = "†"
 
-    scopebegin = "⎧"
-    scopeend = "⎭"
 
-    semanticscopebeginopen = "❪⎧"
-    semanticscopebeginclose = "❫"
-    semanticscopeendopen = "❪⎭"
-    semanticscopeendclose = "❫"
-    scopedvaropen = "❪𝛕"
-    scopedvarclose = "❫"
-    
-
-    wsc = space | spc | nl | uspc | unl | indentc | dedentc | commentspace | commentnl | stringspace | stringnl | charspace | charnl | verbatim | scopebegin | scopeend
+    wsc = space | spc | nl | uspc | unl | indentc | dedentc | commentspace | commentnl | stringspace | stringnl | charspace | charnl | verbatim | annotationspace | annotation
     ws = wsc*
 
 

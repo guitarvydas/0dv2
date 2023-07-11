@@ -41,3 +41,8 @@
 ## July 10, 2023
 - see https://publish.obsidian.md/programmingsimplicity/2023-07-10-Gradual+Optimization
 - see https://publish.obsidian.md/programmingsimplicity/2023-07-10-Towards+Compilation+Using+Textual+Transpilation+(WP)
+
+## July 11, 2023
+
+TODO:
+- change spaces back to 2 kinds: src and generated
