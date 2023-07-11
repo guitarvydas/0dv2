@@ -1,24 +1,24 @@
-TempvarRewrite {
+ScopedvarRewrite {
   program = item+
   item =
     | massignOrAssign
     | any
 
   massignOrAssign = massign | assign
-  assign = tempvar ws lhs ws assignc ws rhs therest
-  massign = tempvar ws mlhs ws assignc ws rhs therest
+  assign = scopedvar ws lhs ws assignc ws rhs therest
+  massign = scopedvar ws mlhs ws assignc ws rhs therest
   lhs = tID ~","
   mlhs = tID "," ws tID
   rhs = anythingButEOL
-  therest = anythingButEND
+  therest = anythingButScopeEnd scopeend
   tID = ~"." id ~"." ws
 
-  tempvar = "‹tempvar›"
+  scopedvar = "‹scopedvar›"
   anythingButEOL = skipTo<eol,massignOrAssign>
   eol = "⦚"
   assignc = "=" | "⟪:=⟫"
 
-  anythingButEND = skipTo<scopeend,massignOrAssign>
+  anythingButScopeEnd = skipTo<scopeend,massignOrAssign>
 
   include(`tokens.ohm.inc')
   include(`skip.ohm.inc')  

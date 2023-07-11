@@ -1,0 +1,115 @@
+ScopedvarRewrite {
+  program = item+
+  item =
+    | massignOrAssign
+    | any
+
+  massignOrAssign = massign | assign
+  assign = scopedvar ws lhs ws assignc ws rhs therest
+  massign = scopedvar ws mlhs ws assignc ws rhs therest
+  lhs = tID ~","
+  mlhs = tID "," ws tID
+  rhs = anythingButEOL
+  therest = anythingButScopeOpen
+  tID = ~"." id ~"." ws
+
+  scopedvar = "‹scopedvar›"
+  anythingButEOL = skipTo<eol,massignOrAssign>
+  eol = "⦚"
+  assignc = "=" | "⟪:=⟫"
+
+  anythingButScopeOpen = skipTo<semanticscopebeginopen,massignOrAssign>
+
+      dqb = "“"
+    dqe = "”"
+  string = dqb (~dqb ~dqe any)* dqe
+
+    sqb = "❛"
+    sqe = "❜"
+  charconst = sqb (~sqb ~sqe any)* sqe
+
+  id = "❲" (~"❲" ~"❳" any)* "❳"
+
+
+    intb = "⟨"
+    inte = "⟩"
+  integer = intb (~intb ~inte any)* inte
+
+    symb = "❲"
+    syme = "❳"
+  symbol = symb (~symb ~syme any)* syme
+  sym<text> = symb text syme
+    
+    kwb = "‹"
+    kwe = "›"
+  keyword = kwb (~kwb ~kwe any)* kwe
+
+    mcb = "⟪"
+    mce = "⟫"
+  multi_char_operator = mcb (~mcb ~mce any)* mce
+
+  indentc = "⇢"
+  dedentc = "⇠"
+
+    vb = "❪"
+    ve = "❫"
+    verbatim = vb (~vb ~ve any)* ve
+
+  comment = "⎣" (~"⎣" ~"⎦" any)* "⎦"
+
+    ab = "⎨"
+    ae = "⎬"
+  annotation = ab (~ab ~ae any)* ae
+
+
+  anyToken1 = string | charconst | id | integer | keyword | multi_char_operator | indentc | dedentc | verbatim | comment | symbol | integer | any
+  anyToken = anyToken1
+
+    uspc = "・"
+    unl = "⦚"
+    srcnl = unl
+    
+    spc = " "
+    nl = "\n"
+
+    commentspace = "◦"
+    commentnl = "¶"
+
+    stringspace = "□"
+    stringnl = "‡"
+    charspace = "☐"
+    charnl = "†"
+
+    scopebegin = "⎧"
+    scopeend = "⎭"
+
+    semanticscopebeginopen = "❪⎧"
+    semanticscopebeginclose = "❫"
+    semanticscopeendopen = "❪⎭"
+    semanticscopeendclose = "❫"
+    scopedvaropen = "❪𝛕"
+    scopedvarclose = "❫"
+    
+
+    wsc = space | spc | nl | uspc | unl | indentc | dedentc | commentspace | commentnl | stringspace | stringnl | charspace | charnl | verbatim | scopebegin | scopeend
+    ws = wsc*
+
+
+
+    skipTo<stopBefore,macro> =
+    | &stopBefore -- done
+    | macro -- macro
+    | inner skipTo<stopBefore,macro> -- continue
+  inner =
+    | "(" ws inner* ")" -- nestedparens
+    | "{" ws inner* "}" -- nestedbraces
+    | ~"(" ~")" ~"{" ~"}" ~scopebegin ~scopeend anyToken -- bottom
+  
+    idchain =
+    | idchain dotc id -- rec
+    | id -- bottom
+
+  dotc = "." ws
+
+}
+

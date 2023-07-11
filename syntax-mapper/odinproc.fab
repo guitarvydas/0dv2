@@ -3,7 +3,14 @@ OdinProcSignature {
   item [i] = ‛«i»’
 
 
-  proc [ProcSignature ProcDefinitionBody] = ‛\n«ProcSignature»⇢ {\n«ProcDefinitionBody»⇠\n}\n’
+  proc [ProcSignature ProcDefinitionBody] = ‛\n«ProcSignature»⇢ {
+❪⎧ ... ❫
+ ⇢
+«ProcDefinitionBody»
+⇠
+❪⎭ ... ❫
+}
+’
 
   procDefinitionBody [lb ws1 BodyStuff rb ws2] = ‛«BodyStuff»’
 

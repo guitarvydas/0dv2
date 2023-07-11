@@ -1,3 +1,0 @@
-❲tran❳ :: ‹proc› (❲component❳  ❲state❳ )⇢ {
-❲component❳.❲state❳(❲component❳,・❲Port❳(“__STATE_EXIT__”),・❲nil❳)⦚・❲component❳.❲state❳・=・❲state❳⦚・❲component❳.❲state❳(❲component❳,・❲Port❳(“__STATE_ENTER__”),・❲nil❳)⦚・❲a❳(❲b❳).❲c❳.❲d❳(❲e❳,❲f❳)・⦚⇠
-}

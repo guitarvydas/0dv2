@@ -1,0 +1,3 @@
+  space := uspc | unl | comment
+  uspc = "・"
+  unl = "⦚"

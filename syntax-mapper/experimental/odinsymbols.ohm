@@ -1,0 +1,40 @@
+Odin0Dsymbolsandintegers{
+  program = item+
+  item =
+    | comment -- comment
+    | string -- string
+    | charconst -- charconst
+    | integer -- integer
+    | keyword -- keyword
+    | symbol -- symbol
+    | any -- other
+
+
+  keyword = kwb symfirst symrest* kwe
+  symbol = symfirst symrest*
+  symfirst = ~ws ~uspc ~unl ~commentbegin ~commentend ~digit char
+  symrest  = ~ws ~uspc ~unl ~commentbegin ~commentend        char
+
+  char = alnum | "_"
+
+  integer = digit+
+  
+  kwb = "‹"
+  kwe = "›"
+
+  dqb = "“"
+  dqe = "”"
+  sqb = "❛"
+  sqe = "❜"
+  string = dqb (~dqb ~dqe any)* dqe
+  charconst = sqb (~sqb ~sqe any)* sqe
+
+  comment = commentbegin (~commentend ~commentbegin any)* commentend
+  commentbegin = "⎣"
+  commentend = "⎦"
+  ws = " " | "\n" | "\t"
+  uspc = "・"
+  unl = "⦚"
+  space := uspc | unl
+}
+

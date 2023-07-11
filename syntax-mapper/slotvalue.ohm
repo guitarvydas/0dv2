@@ -41,13 +41,16 @@ SlotvalueRewrite {
   indentc = "⇢"
   dedentc = "⇠"
 
-    vb = "«"
-    ve = "»"
-    vb2 = "⎨"
-    ve2 = "⎬"
-    verbatim = (vb | vb2) (~vb ~ve any)* (ve | ve2)
+    vb = "❪"
+    ve = "❫"
+    verbatim = vb (~vb ~ve any)* ve
 
   comment = "⎣" (~"⎣" ~"⎦" any)* "⎦"
+
+    ab = "⎨"
+    ae = "⎬"
+  annotation = ab (~ab ~ae any)* ae
+
 
   anyToken1 = string | charconst | id | integer | keyword | multi_char_operator | indentc | dedentc | verbatim | comment | symbol | integer | any
   anyToken = anyToken1
@@ -69,7 +72,15 @@ SlotvalueRewrite {
 
     scopebegin = "⎧"
     scopeend = "⎭"
+
+    semanticscopebeginopen = "❪⎧"
+    semanticscopebeginclose = "❫"
+    semanticscopeendopen = "❪⎭"
+    semanticscopeendclose = "❫"
+    scopedvaropen = "❪𝛕"
+    scopedvarclose = "❫"
     
+
     wsc = space | spc | nl | uspc | unl | indentc | dedentc | commentspace | commentnl | stringspace | stringnl | charspace | charnl | verbatim | scopebegin | scopeend
     ws = wsc*
 

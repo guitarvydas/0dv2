@@ -1,12 +1,7 @@
 // Clones the datum portion of the message.
-clone_datum :: proc(message: Message) -> any {
-    /*tempvar*/ datum_ti := type_info_of(message.datum.id)
-
-    /*tempvar*/ new_datum_ptr, ok := mem.alloc(datum_ti.size, datum_ti.align)
-    if !ok {
-	panic("data_ptr alloc")
-    }
-    mem.copy_non_overlapping(new_datum_ptr, message.datum.data, datum_ti.size)
-
-    return any{new_datum_ptr, message.datum.id},
+c :: proc(m: Message) -> any {
+  /*❪⎧ c proc ❫*/
+    /*❪𝛕 c y ❫*/
+    y := h(i)
+  /*❪⎭ c ❫*/
 }

@@ -3,9 +3,9 @@ Forexpr_Rewrite {
   item [x] = ‛«x»’
 
   forexpr [kfor ws1 expr lb block rb] =
-‛\n⎨(loop while ⎬⇢«expr»
-    ⎨do (progn⎬⇢
-          «block»⎨))⎬⇠⇠’
+‛\n❪(loop while ❫⇢«expr»
+    ❪do (progn❫⇢
+          «block»❪))❫⇠⇠’
 
   
   string [kb1 cs* ke] = ‛«kb1»«cs»«ke»’

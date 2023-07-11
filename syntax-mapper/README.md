@@ -37,3 +37,7 @@
 - simplification: assume that multiple assignments are to tempvars only, not globals (allows (multiple-value-bind ...) with local scoping of vars)
 - important: matching to end of line implies that generated ")" must be on fresh lines, or must be verbatim
 - simplification: remove && and || from Odin code, replace with unrolled 'if' statements
+
+## July 10, 2023
+- see https://publish.obsidian.md/programmingsimplicity/2023-07-10-Gradual+Optimization
+- see https://publish.obsidian.md/programmingsimplicity/2023-07-10-Towards+Compilation+Using+Textual+Transpilation+(WP)
