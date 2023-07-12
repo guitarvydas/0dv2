@@ -3,14 +3,9 @@ OdinProcSignature {
   item [i] = ‛«i»’
 
 
-  proc [ProcSignature ProcDefinitionBody] = ‛\n«ProcSignature»⇢ {
-⎨⎧ ❲_❳ ⎬
- ⇢
-«ProcDefinitionBody»
-⇠
-⎨⎭ ❲_❳  ⎬
-}
-’
+  proc [ProcSignature ProcDefinitionBody] =
+‛
+«ProcSignature»⇢ {⎨⎧ ❲_❳ ⎬⇢«ProcDefinitionBody»⇠⎨⎭ ❲_❳  ⎬}’
 
   procDefinitionBody [lb ws1 BodyStuff rb ws2] = ‛«ws1»«BodyStuff»«ws2»’
 
@@ -73,10 +68,11 @@ OdinProcSignature {
   skipTo_macro [x] = ‛«x»’
   inner_nestedparens [l ws1 Inner* r] = ‛«l»«ws1»«Inner»«r»’
   inner_nestedbraces [l ws1 Inner* r] = ‛«l»«ws1»«Inner»«r»’
+  inner_nestedscope [scopeopen ws1 Inner* scopeclose] = ‛«scopeopen»«ws1»«Inner»«socpeclose»’
   inner_bottom [AnyToken] = ‛«AnyToken»’
 
-  scopeOpen  [ab scopebegin ws1 id1 ws2 id2 ws3 ae] = ‛«ab»«scopebegin»«ws1»«id1»«ws2»«id2»«ws3»«ae»’
-  scopeClose [ab scopeend   ws1 id1 ws2         ae] = ‛«ab»«scopeend»«ws1»«id1»«ws2»«ae»’
+  scopeOpen  [ab scopebegin ws1 id1 ws2 ae] = ‛«ab»«scopebegin»«ws1»«id1»«ws2»«ae»’
+  scopeClose [ab scopeend   ws1 id1 ws2 ae] = ‛«ab»«scopeend»«ws1»«id1»«ws2»«ae»’
 
 }
 

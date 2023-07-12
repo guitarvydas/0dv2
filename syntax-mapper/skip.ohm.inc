@@ -5,9 +5,9 @@
   inner =
     | "(" ws inner* ")" -- nestedparens
     | "{" ws inner* "}" -- nestedbraces
-    | scopeOpen ws inner* scopeClose -- nestedScope
+    | scopeOpen ws inner* scopeClose -- nestedscope
     | ~"(" ~")" ~"{" ~"}" anyToken -- bottom
 
-  scopeOpen = ab scopebegin ws id ws id ws ae
+  scopeOpen = ab scopebegin ws id ws ae
   scopeClose = ab scopeend ws id ws ae
   

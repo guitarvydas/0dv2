@@ -1,0 +1,11 @@
+(defun message_clone    (message )
+  (setf x   7)
+  (let ((y nil))
+    (setf y   8)
+    (setf z   9)))
+    
+    
+    
+    
+    
+    
