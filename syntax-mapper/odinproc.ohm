@@ -42,10 +42,10 @@ OdinProcSignature {
   allocator =  "❲allocator❳" ws ":=" ws
   allocatorOrParameterName = allocator | parameterName
 
-  bodyStuff = skipTo<"}",proc>
-  anythingButComma = skipTo<",",proc>
-  anythingButRPar = skipTo<")",proc>
-  anythingButProcDefinitionBody = skipTo<procDefinitionBody,proc>
+  bodyStuff = skim<"}",proc>
+  anythingButComma = skim<",",proc>
+  anythingButRPar = skim<")",proc>
+  anythingButProcDefinitionBody = skim<procDefinitionBody,proc>
 
       dqb = "“"
     dqe = "”"
@@ -116,10 +116,10 @@ OdinProcSignature {
 
 
 
-    skipTo<stopBefore,macro> =
+    skim<stopBefore,macro> =
     | &stopBefore -- done
     | macro -- macro
-    | inner skipTo<stopBefore,macro> -- continue
+    | inner skim<stopBefore,macro> -- continue
   inner =
     | "(" ws inner* ")" -- nestedparens
     | "{" ws inner* "}" -- nestedbraces

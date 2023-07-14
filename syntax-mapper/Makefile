@@ -91,89 +91,89 @@ scopedvar.ohm scopedvar.tocl.fab
 	cat - <junk--cl | ./cleanup.py | ./indenter.py | ./show.py >junk--show
 	cat - <junk--cl | ./cleanup.py | ./indenter.py | ./show.py
 
-odinproc.ohm: odinproc.ohm.m4 tokens.ohm.inc skip.ohm.inc
+odinproc.ohm: odinproc.ohm.m4 tokens.ohm.inc skim.ohm.inc
 	m4 odinproc.ohm.m4 >odinproc.ohm
-odinproc.fab: odinproc.fab.m4 tokens.fab.inc skip.fab.inc
+odinproc.fab: odinproc.fab.m4 tokens.fab.inc skim.fab.inc
 	m4 odinproc.fab.m4 >odinproc.fab
 
-odinstruct.ohm: odinstruct.ohm.m4 tokens.ohm.inc skip.ohm.inc
+odinstruct.ohm: odinstruct.ohm.m4 tokens.ohm.inc skim.ohm.inc
 	m4 odinstruct.ohm.m4 >odinstruct.ohm
-odinstruct.fab: odinstruct.fab.m4 tokens.fab.inc skip.fab.inc
+odinstruct.fab: odinstruct.fab.m4 tokens.fab.inc skim.fab.inc
 	m4 odinstruct.fab.m4 >odinstruct.fab
 
-odindeletecomments.ohm: odindeletecomments.ohm.m4 tokens.ohm.inc skip.ohm.inc
+odindeletecomments.ohm: odindeletecomments.ohm.m4 tokens.ohm.inc skim.ohm.inc
 	m4 odindeletecomments.ohm.m4 >odindeletecomments.ohm
-odindeletecomments.fab: odindeletecomments.fab.m4 tokens.fab.inc skip.fab.inc
+odindeletecomments.fab: odindeletecomments.fab.m4 tokens.fab.inc skim.fab.inc
 	m4 odindeletecomments.fab.m4 >odindeletecomments.fab
 
-queue.ohm: queue.ohm.m4 tokens.ohm.inc skip.ohm.inc
+queue.ohm: queue.ohm.m4 tokens.ohm.inc skim.ohm.inc
 	m4 queue.ohm.m4 >queue.ohm
-queue.fab: queue.fab.m4 tokens.fab.inc skip.fab.inc
+queue.fab: queue.fab.m4 tokens.fab.inc skim.fab.inc
 	m4 queue.fab.m4 >queue.fab
 
-append.ohm: append.ohm.m4 tokens.ohm.inc skip.ohm.inc
+append.ohm: append.ohm.m4 tokens.ohm.inc skim.ohm.inc
 	m4 append.ohm.m4 >append.ohm
-append.tocl.fab: append.tocl.fab.m4 tokens.fab.inc skip.fab.inc
+append.tocl.fab: append.tocl.fab.m4 tokens.fab.inc skim.fab.inc
 	m4 append.tocl.fab.m4 >append.tocl.fab
 
-scopedvar.ohm: scopedvar.ohm.m4 tokensWithAnnotations.ohm.inc skip.ohm.inc
+scopedvar.ohm: scopedvar.ohm.m4 tokensWithAnnotations.ohm.inc skim.ohm.inc
 	m4 scopedvar.ohm.m4 >scopedvar.ohm
-scopedvar.tocl.fab: scopedvar.tocl.fab.m4 tokens.fab.inc skip.fab.inc
+scopedvar.tocl.fab: scopedvar.tocl.fab.m4 tokens.fab.inc skim.fab.inc
 	m4 scopedvar.tocl.fab.m4 >scopedvar.tocl.fab
 
-message_literal.ohm: message_literal.ohm.m4 tokens.ohm.inc skip.ohm.inc
+message_literal.ohm: message_literal.ohm.m4 tokens.ohm.inc skim.ohm.inc
 	m4 message_literal.ohm.m4 >message_literal.ohm
-message_literal.tocl.fab: message_literal.tocl.fab.m4 tokens.fab.inc skip.fab.inc
+message_literal.tocl.fab: message_literal.tocl.fab.m4 tokens.fab.inc skim.fab.inc
 	m4 message_literal.tocl.fab.m4 >message_literal.tocl.fab
 
-if.ohm: if.ohm.m4 tokens.ohm.inc skip.ohm.inc
+if.ohm: if.ohm.m4 tokens.ohm.inc skim.ohm.inc
 	m4 if.ohm.m4 >if.ohm
-if.tocl.fab: if.tocl.fab.m4 tokens.fab.inc skip.fab.inc
+if.tocl.fab: if.tocl.fab.m4 tokens.fab.inc skim.fab.inc
 	m4 if.tocl.fab.m4 >if.tocl.fab
 
-forin.ohm: forin.ohm.m4 tokens.ohm.inc skip.ohm.inc
+forin.ohm: forin.ohm.m4 tokens.ohm.inc skim.ohm.inc
 	m4 forin.ohm.m4 >forin.ohm
-forin.tocl.fab: forin.tocl.fab.m4 tokens.fab.inc skip.fab.inc
+forin.tocl.fab: forin.tocl.fab.m4 tokens.fab.inc skim.fab.inc
 	m4 forin.tocl.fab.m4 >forin.tocl.fab
 
-forexpr.ohm: forexpr.ohm.m4 tokens.ohm.inc skip.ohm.inc
+forexpr.ohm: forexpr.ohm.m4 tokens.ohm.inc skim.ohm.inc
 	m4 forexpr.ohm.m4 >forexpr.ohm
-forexpr.tocl.fab: forexpr.tocl.fab.m4 tokens.fab.inc skip.fab.inc
+forexpr.tocl.fab: forexpr.tocl.fab.m4 tokens.fab.inc skim.fab.inc
 	m4 forexpr.tocl.fab.m4 >forexpr.tocl.fab
 
-return.ohm: return.ohm.m4 tokens.ohm.inc skip.ohm.inc
+return.ohm: return.ohm.m4 tokens.ohm.inc skim.ohm.inc
 	m4 return.ohm.m4 >return.ohm
-return.tocl.fab: return.tocl.fab.m4 tokens.fab.inc skip.fab.inc
+return.tocl.fab: return.tocl.fab.m4 tokens.fab.inc skim.fab.inc
 	m4 return.tocl.fab.m4 >return.tocl.fab
 
-op.ohm: op.ohm.m4 tokens.ohm.inc skip.ohm.inc
+op.ohm: op.ohm.m4 tokens.ohm.inc skim.ohm.inc
 	m4 op.ohm.m4 >op.ohm
-op.tocl.fab: op.tocl.fab.m4 tokens.fab.inc skip.fab.inc
+op.tocl.fab: op.tocl.fab.m4 tokens.fab.inc skim.fab.inc
 	m4 op.tocl.fab.m4 >op.tocl.fab
 
-assign.ohm: assign.ohm.m4 tokens.ohm.inc skip.ohm.inc
+assign.ohm: assign.ohm.m4 tokens.ohm.inc skim.ohm.inc
 	m4 assign.ohm.m4 >assign.ohm
-assign.tocl.fab: assign.tocl.fab.m4 tokens.fab.inc skip.fab.inc
+assign.tocl.fab: assign.tocl.fab.m4 tokens.fab.inc skim.fab.inc
 	m4 assign.tocl.fab.m4 >assign.tocl.fab
 
-slotvalue.ohm: slotvalue.ohm.m4 tokens.ohm.inc skip.ohm.inc
+slotvalue.ohm: slotvalue.ohm.m4 tokens.ohm.inc skim.ohm.inc
 	m4 slotvalue.ohm.m4 >slotvalue.ohm
-slotvalue.tocl.fab: slotvalue.tocl.fab.m4 tokens.fab.inc skip.fab.inc
+slotvalue.tocl.fab: slotvalue.tocl.fab.m4 tokens.fab.inc skim.fab.inc
 	m4 slotvalue.tocl.fab.m4 >slotvalue.tocl.fab
 
-clstruct.ohm: clstruct.ohm.m4 tokens.ohm.inc skip.ohm.inc
+clstruct.ohm: clstruct.ohm.m4 tokens.ohm.inc skim.ohm.inc
 	m4 clstruct.ohm.m4 >clstruct.ohm
-clstruct.tocl.fab: clstruct.tocl.fab.m4 tokens.fab.inc skip.fab.inc
+clstruct.tocl.fab: clstruct.tocl.fab.m4 tokens.fab.inc skim.fab.inc
 	m4 clstruct.tocl.fab.m4 >clstruct.tocl.fab
 
-clproc.ohm: clproc.ohm.m4 tokens.ohm.inc skip.ohm.inc
+clproc.ohm: clproc.ohm.m4 tokens.ohm.inc skim.ohm.inc
 	m4 clproc.ohm.m4 >clproc.ohm
-clproc.tocl.fab: clproc.tocl.fab.m4 tokens.fab.inc skip.fab.inc
+clproc.tocl.fab: clproc.tocl.fab.m4 tokens.fab.inc skim.fab.inc
 	m4 clproc.tocl.fab.m4 >clproc.tocl.fab
 
-funcall.ohm: funcall.ohm.m4 tokens.ohm.inc skip.ohm.inc
+funcall.ohm: funcall.ohm.m4 tokens.ohm.inc skim.ohm.inc
 	m4 funcall.ohm.m4 >funcall.ohm
-funcall.tocl.fab: funcall.tocl.fab.m4 tokens.fab.inc skip.fab.inc
+funcall.tocl.fab: funcall.tocl.fab.m4 tokens.fab.inc skim.fab.inc
 	m4 funcall.tocl.fab.m4 >funcall.tocl.fab
 
 hold-test.odin: ../../odin0d/0d/0d.odin

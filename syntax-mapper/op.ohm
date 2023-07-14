@@ -8,7 +8,7 @@ Op_Rewrite {
   lhs = idchain ws
   rhs = anythingButEOL
 
-  anythingButEOL = skipTo<terminator, op>
+  anythingButEOL = skim<terminator, op>
   terminator = operator | &eolc | &end
   operator =
     | ">" -- gt
@@ -86,10 +86,10 @@ Op_Rewrite {
 
 
 
-    skipTo<stopBefore,macro> =
+    skim<stopBefore,macro> =
     | &stopBefore -- done
     | macro -- macro
-    | inner skipTo<stopBefore,macro> -- continue
+    | inner skim<stopBefore,macro> -- continue
   inner =
     | "(" ws inner* ")" -- nestedparens
     | "{" ws inner* "}" -- nestedbraces

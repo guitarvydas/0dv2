@@ -11,6 +11,6 @@ Op_RewriteForCL {
   rhs [anythingButEOL] = ‛«anythingButEOL»’
 
   include(`tokens.fab.inc')
-  include(`skip.fab.inc')  
+  include(`skim.fab.inc')  
   include(`tocl.fab.inc')
 }

@@ -11,7 +11,7 @@ AssignRewrite {
   mlhs = idchain ws "," ws id ws
   rhs = anythingButEOL
 
-  anythingButEOL = skipTo<eol,massignOrAssign>
+  anythingButEOL = skim<eol,massignOrAssign>
   eol = srcnl | nl | end
   assignc = "=" | "⟪:=⟫"
 
@@ -84,10 +84,10 @@ AssignRewrite {
 
 
 
-    skipTo<stopBefore,macro> =
+    skim<stopBefore,macro> =
     | &stopBefore -- done
     | macro -- macro
-    | inner skipTo<stopBefore,macro> -- continue
+    | inner skim<stopBefore,macro> -- continue
   inner =
     | "(" ws inner* ")" -- nestedparens
     | "{" ws inner* "}" -- nestedbraces

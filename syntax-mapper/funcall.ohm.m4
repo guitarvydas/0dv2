@@ -11,10 +11,10 @@ FuncallRewrite {
   notLastArg = anythingButComma ","
   lastArg = anythingButRPar
 
-  anythingButComma = skipTo<",",funcall>
-  anythingButRPar  = skipTo<")",funcall>
+  anythingButComma = skim<",",funcall>
+  anythingButRPar  = skim<")",funcall>
 
   include(`tokens.ohm.inc')
-  include(`skip.ohm.inc')
+  include(`skim.ohm.inc')
   include(`tocl.ohm.inc')
 }

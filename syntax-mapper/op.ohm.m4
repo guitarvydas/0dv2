@@ -8,7 +8,7 @@ Op_Rewrite {
   lhs = idchain ws
   rhs = anythingButEOL
 
-  anythingButEOL = skipTo<terminator, op>
+  anythingButEOL = skim<terminator, op>
   terminator = operator | &eolc | &end
   operator =
     | ">" -- gt
@@ -18,6 +18,6 @@ Op_Rewrite {
   eolc = srcnl | nl
 
   include(`tokens.ohm.inc')
-  include(`skip.ohm.inc')
+  include(`skim.ohm.inc')
   include(`tocl.ohm.inc')
 }

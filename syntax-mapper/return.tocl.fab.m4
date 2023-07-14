@@ -5,5 +5,5 @@ Return_Rewrite {
   returnstatement [kreturn ws expr] = ‛\n«ws»«expr»’
 
   include(`tokens.fab.inc')
-  include(`skip.fab.inc')
+  include(`skim.fab.inc')
 }

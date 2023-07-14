@@ -11,10 +11,10 @@ QueueRewrite {
   notlastoperand = anythingButComma &","
   lastoperand = anythingButRPar ws
 
-  anythingButComma = skipTo<",",pushOrPop> ws
-  anythingButRPar = skipTo<")",pushOrPop> ws
+  anythingButComma = skim<",",pushOrPop> ws
+  anythingButRPar = skim<")",pushOrPop> ws
 
   include(`tokens.ohm.inc')
-  include(`skip.ohm.inc')  
+  include(`skim.ohm.inc')  
   
 }

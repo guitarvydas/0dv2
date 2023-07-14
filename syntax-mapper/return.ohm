@@ -8,7 +8,7 @@ Return_Rewrite {
 
   expr = anythingButEOL
 
-  anythingButEOL = skipTo<srcnl,returnstatement>
+  anythingButEOL = skim<srcnl,returnstatement>
 
       dqb = "“"
     dqe = "”"
@@ -79,10 +79,10 @@ Return_Rewrite {
 
 
 
-    skipTo<stopBefore,macro> =
+    skim<stopBefore,macro> =
     | &stopBefore -- done
     | macro -- macro
-    | inner skipTo<stopBefore,macro> -- continue
+    | inner skim<stopBefore,macro> -- continue
   inner =
     | "(" ws inner* ")" -- nestedparens
     | "{" ws inner* "}" -- nestedbraces

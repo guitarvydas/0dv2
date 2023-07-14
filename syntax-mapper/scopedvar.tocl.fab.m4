@@ -12,6 +12,6 @@ ScopedvarRewrite {
   scopeClose [ab scopeend scopeid ae] = ‛«ab»«scopeend»«scopeid»«ae»’
 
   include(`tokens.fab.inc')
-  include(`skip.fab.inc')
+  include(`skim.fab.inc')
   include(`tocl.fab.inc')
 }

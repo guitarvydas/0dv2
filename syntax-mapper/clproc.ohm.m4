@@ -5,9 +5,9 @@ ProcdefRewrite {
     | any
 
   procdef = id ws "::" ws "‹proc›" ws "(" formals ")" ws "{" body "}"
-  formals = skipTo<")",procdef>
-  body = skipTo<"}",procdef>
+  formals = skim<")",procdef>
+  body = skim<"}",procdef>
     
   include(`tokens.ohm.inc')
-  include(`skip.ohm.inc')
+  include(`skim.ohm.inc')
 }

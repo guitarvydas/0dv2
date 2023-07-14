@@ -14,9 +14,9 @@ Odin0Dstruct {
     | id ws ":" ws anythingButComma "," ws &"}" -- fieldwithcomma
     | id ws ":" ws anythingButRBrace &"}" -- fieldnocomma
 
-  anythingButComma = skipTo<",",struct> ws
-  anythingButRBrace = skipTo<"}",struct> ws
-  anythingButRPar = skipTo<")",struct> ws
+  anythingButComma = skim<",",struct> ws
+  anythingButRBrace = skim<"}",struct> ws
+  anythingButRPar = skim<")",struct> ws
 
       dqb = "“"
     dqe = "”"
@@ -87,10 +87,10 @@ Odin0Dstruct {
 
 
 
-    skipTo<stopBefore,macro> =
+    skim<stopBefore,macro> =
     | &stopBefore -- done
     | macro -- macro
-    | inner skipTo<stopBefore,macro> -- continue
+    | inner skim<stopBefore,macro> -- continue
   inner =
     | "(" ws inner* ")" -- nestedparens
     | "{" ws inner* "}" -- nestedbraces

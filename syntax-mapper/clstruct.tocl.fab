@@ -25,9 +25,9 @@ StructdefRewriteForCL {
   dedentc [k] = ‛«k»’
 
 
-    skipTo_done [lookahead] = ‛’
-  skipTo_continue [i x] = ‛«i»«x»’
-  skipTo_macro [x] = ‛«x»’
+    skim_done [lookahead] = ‛’
+  skim_continue [i x] = ‛«i»«x»’
+  skim_macro [x] = ‛«x»’
   inner_nestedparens [l ws1 Inner* r] = ‛«l»«ws1»«Inner»«r»’
   inner_nestedbraces [l ws1 Inner* r] = ‛«l»«ws1»«Inner»«r»’
   inner_nestedscope [scopeopen ws1 Inner* scopeclose] = ‛«scopeopen»«ws1»«Inner»«socpeclose»’
