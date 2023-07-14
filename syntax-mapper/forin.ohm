@@ -10,8 +10,8 @@ Forin_Rewrite {
   expr = anythingButLBrace
   block = anythingButRBrace
 
-  anythingButLBrace = skipTo<"{",forin>
-  anythingButRBrace = skipTo<"}",forin>
+  anythingButLBrace = skim<"{",forin>
+  anythingButRBrace = skim<"}",forin>
 
       dqb = "“"
     dqe = "”"
@@ -82,10 +82,10 @@ Forin_Rewrite {
 
 
 
-    skipTo<stopBefore,macro> =
+    skim<stopBefore,macro> =
     | &stopBefore -- done
     | macro -- macro
-    | inner skipTo<stopBefore,macro> -- continue
+    | inner skim<stopBefore,macro> -- continue
   inner =
     | "(" ws inner* ")" -- nestedparens
     | "{" ws inner* "}" -- nestedbraces

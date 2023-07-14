@@ -9,8 +9,8 @@ Ifstatemet_Rewrite {
   expr = anythingButLBrace
   then = anythingButRBrace
 
-  anythingButLBrace = skipTo<"{",ifstatement>
-  anythingButRBrace = skipTo<"}",ifstatement>
+  anythingButLBrace = skim<"{",ifstatement>
+  anythingButRBrace = skim<"}",ifstatement>
 
       dqb = "“"
     dqe = "”"
@@ -81,10 +81,10 @@ Ifstatemet_Rewrite {
 
 
 
-    skipTo<stopBefore,macro> =
+    skim<stopBefore,macro> =
     | &stopBefore -- done
     | macro -- macro
-    | inner skipTo<stopBefore,macro> -- continue
+    | inner skim<stopBefore,macro> -- continue
   inner =
     | "(" ws inner* ")" -- nestedparens
     | "{" ws inner* "}" -- nestedbraces

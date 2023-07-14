@@ -11,9 +11,9 @@ Odin0Dstruct {
   lastField_fieldwithcomma [ID ws0 kcolon ws1 AnythingButComma kcomma ws2 lookahead] = ‛⇠«ID»’
   lastField_fieldnocomma [ID ws0 kcolon ws1 AnythingButRBrace lookahead] = ‛⇠«ID»’
 
-  anythingButComma [skip ws] = ‛«skip»’
-  anythingButRBrace [skip ws] = ‛«skip»’
-  anythingButRPar [skip ws] = ‛«skip»’
+  anythingButComma [skim ws] = ‛«skim»’
+  anythingButRBrace [skim ws] = ‛«skim»’
+  anythingButRPar [skim ws] = ‛«skim»’
 
   
   string [kb1 cs* ke] = ‛«kb1»«cs»«ke»’
@@ -36,9 +36,9 @@ Odin0Dstruct {
   dedentc [k] = ‛«k»’
 
 
-    skipTo_done [lookahead] = ‛’
-  skipTo_continue [i x] = ‛«i»«x»’
-  skipTo_macro [x] = ‛«x»’
+    skim_done [lookahead] = ‛’
+  skim_continue [i x] = ‛«i»«x»’
+  skim_macro [x] = ‛«x»’
   inner_nestedparens [l ws1 Inner* r] = ‛«l»«ws1»«Inner»«r»’
   inner_nestedbraces [l ws1 Inner* r] = ‛«l»«ws1»«Inner»«r»’
   inner_nestedscope [scopeopen ws1 Inner* scopeclose] = ‛«scopeopen»«ws1»«Inner»«socpeclose»’

@@ -15,10 +15,10 @@ ScopedvarRewrite {
   varid = symbol
   
   therest = anythingButScopeClose
-  anythingButScopeClose = skipTo<scopeClose,scoped>
+  anythingButScopeClose = skim<scopeClose,scoped>
 
   include(`tokensWithAnnotations.ohm.inc')
-  include(`skip.ohm.inc')  
+  include(`skim.ohm.inc')  
   include(`tocl.ohm.inc')
 }
 

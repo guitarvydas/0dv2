@@ -5,5 +5,5 @@ Ifstatement_Rewrite {
   ifstatement [kif expr lb then rb] = ‛\n❪(«kif» ❫⇢«expr»\n❪(progn❫⇢\n«then»❪))❫⇠⇠’
 
   include(`tokens.fab.inc')
-  include(`skip.fab.inc')
+  include(`skim.fab.inc')
 }

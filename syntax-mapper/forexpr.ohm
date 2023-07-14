@@ -9,8 +9,8 @@ Forexpr_Rewrite {
   expr = anythingButLBrace
   block = anythingButRBrace
 
-  anythingButLBrace = skipTo<"{",forexpr>
-  anythingButRBrace = skipTo<"}",forexpr>
+  anythingButLBrace = skim<"{",forexpr>
+  anythingButRBrace = skim<"}",forexpr>
 
       dqb = "“"
     dqe = "”"
@@ -81,10 +81,10 @@ Forexpr_Rewrite {
 
 
 
-    skipTo<stopBefore,macro> =
+    skim<stopBefore,macro> =
     | &stopBefore -- done
     | macro -- macro
-    | inner skipTo<stopBefore,macro> -- continue
+    | inner skim<stopBefore,macro> -- continue
   inner =
     | "(" ws inner* ")" -- nestedparens
     | "{" ws inner* "}" -- nestedbraces

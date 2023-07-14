@@ -11,8 +11,8 @@ QueueRewrite {
   notlastoperand = anythingButComma &","
   lastoperand = anythingButRPar ws
 
-  anythingButComma = skipTo<",",pushOrPop> ws
-  anythingButRPar = skipTo<")",pushOrPop> ws
+  anythingButComma = skim<",",pushOrPop> ws
+  anythingButRPar = skim<")",pushOrPop> ws
 
       dqb = "“"
     dqe = "”"
@@ -83,10 +83,10 @@ QueueRewrite {
 
 
 
-    skipTo<stopBefore,macro> =
+    skim<stopBefore,macro> =
     | &stopBefore -- done
     | macro -- macro
-    | inner skipTo<stopBefore,macro> -- continue
+    | inner skim<stopBefore,macro> -- continue
   inner =
     | "(" ws inner* ")" -- nestedparens
     | "{" ws inner* "}" -- nestedbraces

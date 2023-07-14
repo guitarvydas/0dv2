@@ -8,6 +8,6 @@ FuncallRewriteForCL {
   lastArg [stuff] = ‛«stuff»’
 
   include(`tokens.fab.inc')
-  include(`skip.fab.inc')
+  include(`skim.fab.inc')
   include(`tocl.fab.inc')
 }

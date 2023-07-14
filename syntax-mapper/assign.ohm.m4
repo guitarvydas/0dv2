@@ -11,11 +11,11 @@ AssignRewrite {
   mlhs = idchain ws "," ws id ws
   rhs = anythingButEOL
 
-  anythingButEOL = skipTo<eol,massignOrAssign>
+  anythingButEOL = skim<eol,massignOrAssign>
   eol = srcnl | nl | end
   assignc = "=" | "⟪:=⟫"
 
   include(`tokens.ohm.inc')
-  include(`skip.ohm.inc')  
+  include(`skim.ohm.inc')  
   include(`tocl.ohm.inc')
 }

@@ -8,6 +8,6 @@ AppendRewriteForCL {
   mlhs [id1 ws1 kcomma ws2 id2 ws3] = ‛«id1»«ws1» «ws2»«id2»«ws3»’
 
   include(`tokens.fab.inc')
-  include(`skip.fab.inc')
+  include(`skim.fab.inc')
   include(`tocl.fab.inc')
 }

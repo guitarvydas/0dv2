@@ -12,6 +12,6 @@ QueueRewrite {
   anythingButRPar [stuff ws] = ‛«stuff»’
 
   include(`tokens.fab.inc')
-  include(`skip.fab.inc')
+  include(`skim.fab.inc')
 }
 

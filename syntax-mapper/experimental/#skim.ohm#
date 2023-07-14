@@ -1,0 +1,24 @@
+Skim {
+  test = skim<"]",ur,squareBracketNesting,bracketRule>? "]"
+  ur = "P"
+  squareBracketNesting = "[" skim<terminator,userRule,squarBracketNesting,bracketRule>* "]"
+  bracketRule = "[" | "]"
+  
+  skim<terminator,userRule,nestingRule,bracketRule> =
+    | userRule  skim<terminator,userRule,nestingRule,bracketRule>? -- userRule
+    | nestingRule  skim<terminator,userRule,nestingRule,bracketRule>? -- nested
+    | ~bracketRule any  skim<terminator,userRule,nestingRule,bracketRule>? -- bottom
+
+
+
+  ws = space*
+}
+
+// ]
+// a]
+// a[]]
+// a[b]]
+// a[b]c]
+// P]
+// a[P]c]
+// a[b]c d]

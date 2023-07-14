@@ -5,7 +5,7 @@ StructdefRewrite {
     | any
 
   structdef = id ws "::" ws "‹struct›" ws "{" fields "}"
-  fields = skipTo<"}",structdef>
+  fields = skim<"}",structdef>
   
       dqb = "“"
     dqe = "”"
@@ -76,10 +76,10 @@ StructdefRewrite {
 
 
 
-    skipTo<stopBefore,macro> =
+    skim<stopBefore,macro> =
     | &stopBefore -- done
     | macro -- macro
-    | inner skipTo<stopBefore,macro> -- continue
+    | inner skim<stopBefore,macro> -- continue
   inner =
     | "(" ws inner* ")" -- nestedparens
     | "{" ws inner* "}" -- nestedbraces

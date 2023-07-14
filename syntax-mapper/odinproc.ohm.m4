@@ -42,12 +42,12 @@ OdinProcSignature {
   allocator =  "❲allocator❳" ws ":=" ws
   allocatorOrParameterName = allocator | parameterName
 
-  bodyStuff = skipTo<"}",proc>
-  anythingButComma = skipTo<",",proc>
-  anythingButRPar = skipTo<")",proc>
-  anythingButProcDefinitionBody = skipTo<procDefinitionBody,proc>
+  bodyStuff = skim<"}",proc>
+  anythingButComma = skim<",",proc>
+  anythingButRPar = skim<")",proc>
+  anythingButProcDefinitionBody = skim<procDefinitionBody,proc>
 
   include(`tokens.ohm.inc')
-  include(`skip.ohm.inc')  
+  include(`skim.ohm.inc')  
 }
 

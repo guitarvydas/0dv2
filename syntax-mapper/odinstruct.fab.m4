@@ -11,10 +11,10 @@ Odin0Dstruct {
   lastField_fieldwithcomma [ID ws0 kcolon ws1 AnythingButComma kcomma ws2 lookahead] = ‛⇠«ID»’
   lastField_fieldnocomma [ID ws0 kcolon ws1 AnythingButRBrace lookahead] = ‛⇠«ID»’
 
-  anythingButComma [skip ws] = ‛«skip»’
-  anythingButRBrace [skip ws] = ‛«skip»’
-  anythingButRPar [skip ws] = ‛«skip»’
+  anythingButComma [skim ws] = ‛«skim»’
+  anythingButRBrace [skim ws] = ‛«skim»’
+  anythingButRPar [skim ws] = ‛«skim»’
 
   include(`tokens.fab.inc')
-  include(`skip.fab.inc')
+  include(`skim.fab.inc')
 }
