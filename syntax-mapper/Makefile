@@ -15,7 +15,7 @@ SRC=test.odin
 all: dev
 
 dev: clean hold-test.odin
-	make cl
+	make clsv
 
 devandclean: dev
 	./cleanup.py <0d.lisp.pseudo | ./indenter.py >0d.lisp
@@ -69,6 +69,24 @@ scopedvar.ohm scopedvar.tocl.fab
 	./fab clstruct.ohm clstruct.tocl.fab support.js <junk--temp2 | tee junk--clstruct >junk--temp
 	@cat junk--temp >junk--temp2
 	./fab clproc.ohm clproc.tocl.fab support.js <junk--temp2 | \tee junk--clproc >junk--temp
+	@cat junk--temp >junk--cl
+	cat - <junk--cl | ./cleanup.py | ./indenter.py | ./show.py >junk--show
+	cat - <junk--cl | ./cleanup.py | ./indenter.py | ./show.py
+
+clsv: pseudo append.ohm append.tocl.fab message_literal.ohm message_literal.tocl.fab assign.ohm assign.tocl.fab funcall.ohm funcall.tocl.fab if.ohm if.tocl.fab forin.ohm forin.tocl.fab forexpr.ohm forexpr.tocl.fab  return.ohm return.tocl.fab op.ohm op.tocl.fab slotvalue.ohm slotvalue.tocl.fab \
+clstruct.ohm clstruct.tocl.fab clproc.ohm clproc.tocl.fab \
+scopedvar.ohm scopedvar.tocl.fab
+	./fab append.ohm append.tocl.fab support.js <junk--pseudo | tee junk--append > junk--temp 
+	@cat junk--temp >junk--temp2
+	./fab message_literal.ohm message_literal.tocl.fab support.js <junk--temp2 | tee junk--ml >junk--temp
+	@cat junk--temp >junk--temp2
+	./fab if.ohm if.tocl.fab support.js <junk--temp2 | tee junk--if >junk--temp
+	@cat junk--temp >junk--temp2
+	./fab forin.ohm forin.tocl.fab support.js <junk--temp2 | tee junk--forin >junk--temp
+	@cat junk--temp >junk--temp2
+	./fab forexpr.ohm forexpr.tocl.fab support.js <junk--temp2 | tee junk--forexpr >junk--temp
+	@cat junk--temp >junk--temp2
+	./fab scopedvar.ohm scopedvar.tocl.fab support.js <junk--temp2 | tee junk--scopedvar >junk--temp
 	@cat junk--temp >junk--cl
 	cat - <junk--cl | ./cleanup.py | ./indenter.py | ./show.py >junk--show
 	cat - <junk--cl | ./cleanup.py | ./indenter.py | ./show.py
