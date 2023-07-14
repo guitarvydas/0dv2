@@ -1,0 +1,22 @@
+Skim {
+  test = skim<"]",ur>? "]"
+  ur = "P"
+  
+  skim<terminator,userRule> =
+    | userRule skim<terminator,userRule>? -- userRule
+    | "[" skim<terminator,userRule>* "]"  skim<terminator,userRule>? -- nestedSquare
+    | ~bracket any   skim<terminator,userRule>? -- bottom
+
+  bracket = "[" | "]" | "(" | ")"
+
+  ws = space*
+}
+
+// ]
+// a]
+// a[]]
+// a[b]]
+// a[b]c]
+// P]
+// a[P]c]
+// a[b]c d]

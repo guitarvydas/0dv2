@@ -3,8 +3,8 @@ ScopedvarRewrite {
 
   scoped [ab kscoped ws1 scopeid ws2 varid ws3 ae therest scopeClose] =
 ‛⎨⎧ ❲_❳ ⎬
-(let ((«varid» nil))⇢
->>>«therest»<<<)
+❪(let ((«varid» nil))❫⇢
+«therest»❪)❫
 ⇠⎨⎭ ❲_❳  ⎬
 «scopeClose»
 ’
