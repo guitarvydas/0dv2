@@ -19,8 +19,8 @@ OdinProcSignature {
     | id ws ":" ws toComma "," -- id
     | allocToComma "," -- alloc
   lastParameter = 
-    | id ws ":" ws toRPar ")" -- id
-    | allocToRPar ")" -- alloc
+    | id ws ":" ws toRPar &")" -- id
+    | allocToRPar &")" -- alloc
 
   toComma = skim<",",procSignature>
   toRPar = skim<")",procSignature>
