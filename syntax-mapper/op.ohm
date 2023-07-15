@@ -12,8 +12,8 @@ Op_Rewrite {
   terminator = operator | &eolc | &end
   operator =
     | ">" -- gt
-    | "==" -- eq
-    | "&&" -- and
+    | "⟪==⟫" -- eq
+    | "⟪&&⟫" -- and
 
   eolc = srcnl | nl
 
@@ -48,8 +48,6 @@ Op_Rewrite {
   indentc = "⇢"
   dedentc = "⇠"
 
-    vb = "❪"
-    ve = "❫"
     verbatim = vb (~vb ~ve any)* ve
 
   comment = "⎣" (~"⎣" ~"⎦" any)* "⎦"
@@ -85,6 +83,8 @@ Op_Rewrite {
     ws = wsc*
 
 
+    vb = "⎡"
+    ve = "⎦"
 
     skim<terminator,userRule> =
     | userRule skim<terminator,userRule>? -- userRule

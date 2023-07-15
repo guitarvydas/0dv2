@@ -64,8 +64,6 @@ OdinProcSignature {
   indentc = "⇢"
   dedentc = "⇠"
 
-    vb = "❪"
-    ve = "❫"
     verbatim = vb (~vb ~ve any)* ve
 
   comment = "⎣" (~"⎣" ~"⎦" any)* "⎦"
@@ -101,6 +99,8 @@ OdinProcSignature {
     ws = wsc*
 
 
+    vb = "⎡"
+    ve = "⎦"
 
     skim<terminator,userRule> =
     | userRule skim<terminator,userRule>? -- userRule

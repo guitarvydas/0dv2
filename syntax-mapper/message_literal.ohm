@@ -41,8 +41,6 @@ Message_Literal_Rewrite {
   indentc = "⇢"
   dedentc = "⇠"
 
-    vb = "❪"
-    ve = "❫"
     verbatim = vb (~vb ~ve any)* ve
 
   comment = "⎣" (~"⎣" ~"⎦" any)* "⎦"
@@ -78,5 +76,7 @@ Message_Literal_Rewrite {
     ws = wsc*
 
 
+    vb = "⎡"
+    ve = "⎦"
 
 }

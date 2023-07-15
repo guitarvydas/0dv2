@@ -39,8 +39,6 @@ Odin0Ddeletecomments{
   indentc = "⇢"
   dedentc = "⇠"
 
-    vb = "❪"
-    ve = "❫"
     verbatim = vb (~vb ~ve any)* ve
 
   comment = "⎣" (~"⎣" ~"⎦" any)* "⎦"
@@ -76,6 +74,8 @@ Odin0Ddeletecomments{
     ws = wsc*
 
 
+    vb = "⎡"
+    ve = "⎦"
 
 }
 

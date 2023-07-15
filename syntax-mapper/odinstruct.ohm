@@ -45,8 +45,6 @@ Odin0Dstruct {
   indentc = "⇢"
   dedentc = "⇠"
 
-    vb = "❪"
-    ve = "❫"
     verbatim = vb (~vb ~ve any)* ve
 
   comment = "⎣" (~"⎣" ~"⎦" any)* "⎦"
@@ -82,6 +80,8 @@ Odin0Dstruct {
     ws = wsc*
 
 
+    vb = "⎡"
+    ve = "⎦"
 
     skim<terminator,userRule> =
     | userRule skim<terminator,userRule>? -- userRule

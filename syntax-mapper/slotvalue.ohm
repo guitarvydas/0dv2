@@ -41,8 +41,6 @@ SlotvalueRewrite {
   indentc = "⇢"
   dedentc = "⇠"
 
-    vb = "❪"
-    ve = "❫"
     verbatim = vb (~vb ~ve any)* ve
 
   comment = "⎣" (~"⎣" ~"⎦" any)* "⎦"
@@ -78,5 +76,7 @@ SlotvalueRewrite {
     ws = wsc*
 
 
+    vb = "⎡"
+    ve = "⎦"
 
 }

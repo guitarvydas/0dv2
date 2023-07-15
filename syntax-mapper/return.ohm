@@ -41,8 +41,6 @@ Return_Rewrite {
   indentc = "⇢"
   dedentc = "⇠"
 
-    vb = "❪"
-    ve = "❫"
     verbatim = vb (~vb ~ve any)* ve
 
   comment = "⎣" (~"⎣" ~"⎦" any)* "⎦"
@@ -78,6 +76,8 @@ Return_Rewrite {
     ws = wsc*
 
 
+    vb = "⎡"
+    ve = "⎦"
 
     skim<terminator,userRule> =
     | userRule skim<terminator,userRule>? -- userRule

@@ -40,8 +40,6 @@ AppendRewrite {
   indentc = "⇢"
   dedentc = "⇠"
 
-    vb = "❪"
-    ve = "❫"
     verbatim = vb (~vb ~ve any)* ve
 
   comment = "⎣" (~"⎣" ~"⎦" any)* "⎦"
@@ -77,5 +75,7 @@ AppendRewrite {
     ws = wsc*
 
 
+    vb = "⎡"
+    ve = "⎦"
 
 }
