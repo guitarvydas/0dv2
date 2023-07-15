@@ -1,21 +1,18 @@
-Op_Rewrite {
+FuncallRewrite {
   program = item+
   item =
-    | op
-    | any
+    | funcall -- funcall
+    | any -- other
 
-  op = lhs operator ws rhs terminator
-  lhs = idchain ws
-  rhs = anythingButEOL
+  funcall = 
+    | ~dotc id ws "(" notLastArg* lastArg ")" -- single
+    | idchain ws "(" notLastArg* lastArg ")" -- indirect
 
-  anythingButEOL = skim<terminator, op>
-  terminator = operator | &eolc | &end
-  operator =
-    | ">" -- gt
-    | "==" -- eq
-    | "&&" -- and
+  notLastArg = anythingButComma ","
+  lastArg = anythingButRPar
 
-  eolc = srcnl | nl
+  anythingButComma = skim<",",funcall>
+  anythingButRPar  = skim<")",funcall>
 
       dqb = "“"
     dqe = "”"

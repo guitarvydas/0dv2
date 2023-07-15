@@ -9,7 +9,7 @@ ScopedvarRewrite {
     | scoped
     | any
 
-  scoped = ab sym<"scoped"> ws scopeid ws varid ws ae therest scopeClose
+  scoped = ab sym<"scoped"> ws scopeid ws varid ws ae therest
 
   scopeid = symbol
   varid = symbol

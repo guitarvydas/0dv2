@@ -1,11 +1,11 @@
-ScopedvarRewrite {
-  program [item+] = ‛«item»’
+FuncallRewriteForCL {
+  program [items+] = ‛«items»’
+  item [x] = ‛«x»’
+  funcall_single [id ws lp notLastArg* lastArg rp] = ‛(«id» «notLastArg»«lastArg»)’
+  funcall_indirect [idchain ws lp notLastArg* lastArg rp] = ‛(‹funcall› «idchain» «notLastArg»«lastArg»)’
 
-  scoped [ab kscoped ws1 scopeid ws2 varid ws3 ae therest] =
-‛❪let ❪❪«varid» nil❫❫⇢
-«therest»❫⇠’
-  
-  scopeClose [ab scopeend scopeid ae] = ‛«ab»«scopeend»«scopeid»«ae»’
+  notLastArg [stuff kcomma] = ‛«stuff» ’
+  lastArg [stuff] = ‛«stuff»’
 
   
   string [kb1 cs* ke] = ‛«kb1»«cs»«ke»’
