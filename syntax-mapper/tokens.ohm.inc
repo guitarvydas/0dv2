@@ -29,8 +29,6 @@
   indentc = "⇢"
   dedentc = "⇠"
 
-    vb = "❪"
-    ve = "❫"
     verbatim = vb (~vb ~ve any)* ve
 
   comment = "⎣" (~"⎣" ~"⎦" any)* "⎦"
@@ -66,3 +64,5 @@
     ws = wsc*
 
 
+    vb = "⎡"
+    ve = "⎦"

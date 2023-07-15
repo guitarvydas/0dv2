@@ -12,8 +12,8 @@ Op_Rewrite {
   terminator = operator | &eolc | &end
   operator =
     | ">" -- gt
-    | "==" -- eq
-    | "&&" -- and
+    | "⟪==⟫" -- eq
+    | "⟪&&⟫" -- and
 
   eolc = srcnl | nl
 

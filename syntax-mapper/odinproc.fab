@@ -4,7 +4,7 @@ OdinProcSignature {
   proc [signature lb body rb] = ‛«signature»{⎨⎧ ❲_❳ ⎬⇢«body»⇠⎨⎭ ❲_❳  ⎬}’
   procSignature [id ws1 kcc ws2 pragma? ws3 kproc ws4 params returns] =
 ‛
-«id»«ws1»::«ws2»«ws3»‹proc›«ws4»«params» ’
+«id»«ws1»⟪::⟫«ws2»«ws3»‹proc›«ws4»«params» ’
 
   parameterList [lp notLastParameters* lastParameter? rp] = ‛❪«notLastParameters»«lastParameter»❫’
 
