@@ -1,21 +1,19 @@
-ScopedvarRewrite {
-
-  // ⎨scoped ??? x⎬
-  //   ...
-  // <scope end>
-  
+AssignRewrite {
   program = item+
   item =
-    | scoped
+    | massignOrAssign
     | any
 
-  scoped = ab sym<"scoped"> ws scopeid ws varid ws ae therest scopeClose
+  massignOrAssign = massign | assign
+  assign = lhs ws assignc ws rhs
+  massign = mlhs ws assignc ws rhs
+  lhs = idchain ws ~","
+  mlhs = idchain ws "," ws id ws
+  rhs = anythingButEOL
 
-  scopeid = symbol
-  varid = symbol
-  
-  therest = anythingButScopeClose
-  anythingButScopeClose = skim<scopeClose,scoped>
+  anythingButEOL = skim<eol,massignOrAssign>
+  eol = srcnl | nl | end
+  assignc = "=" | "⟪:=⟫"
 
       dqb = "“"
     dqe = "”"
@@ -60,7 +58,7 @@ ScopedvarRewrite {
     scopebegin = "⎧"
     scopeend   = "⎭"
 
-  anyToken1 = string | charconst | id | integer | keyword | multi_char_operator | indentc | dedentc | verbatim | comment | symbol | integer | any
+  anyToken1 = string | charconst | id | integer | keyword | multi_char_operator | indentc | dedentc | verbatim | comment | symbol | integer | annotation | any
   anyToken = anyToken1
 
     uspc = "・"
@@ -105,4 +103,3 @@ ScopedvarRewrite {
   dotc = "." ws
 
 }
-

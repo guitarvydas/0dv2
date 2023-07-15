@@ -16,10 +16,7 @@ all: dev
 
 dev: clean hold-test.odin
 	make clean
-	make pseudo
-	@echo '---'
-	@echo
-	@cat junk--struct | ./indenter.py | ./show.py
+	make clsv
 
 tokenize:
 	./delmacrodefs.sed <$(SRC) \
@@ -89,7 +86,9 @@ scopedvar.ohm scopedvar.tocl.fab
 	./fab scopedvar.ohm scopedvar.tocl.fab support.js <junk--temp2 | tee junk--scopedvar >junk--temp
 	@cat junk--temp >junk--cl
 	cat - <junk--cl | ./cleanup.py | ./indenter.py | ./show.py >junk--show
-	cat - <junk--cl | ./cleanup.py | ./indenter.py | ./show.py
+	@echo '---'
+	@echo
+	@cat - <junk--cl | ./cleanup.py | ./indenter.py | ./show.py
 
 odinproc.ohm: odinproc.ohm.m4 tokens.ohm.inc skim.ohm.inc
 	m4 odinproc.ohm.m4 >odinproc.ohm

@@ -1,21 +1,18 @@
-ScopedvarRewrite {
-
-  // ⎨scoped ??? x⎬
-  //   ...
-  // <scope end>
-  
+FuncallRewrite {
   program = item+
   item =
-    | scoped
-    | any
+    | funcall -- funcall
+    | any -- other
 
-  scoped = ab sym<"scoped"> ws scopeid ws varid ws ae therest scopeClose
+  funcall = 
+    | ~dotc id ws "(" notLastArg* lastArg ")" -- single
+    | idchain ws "(" notLastArg* lastArg ")" -- indirect
 
-  scopeid = symbol
-  varid = symbol
-  
-  therest = anythingButScopeClose
-  anythingButScopeClose = skim<scopeClose,scoped>
+  notLastArg = anythingButComma ","
+  lastArg = anythingButRPar
+
+  anythingButComma = skim<",",funcall>
+  anythingButRPar  = skim<")",funcall>
 
       dqb = "“"
     dqe = "”"
@@ -60,7 +57,7 @@ ScopedvarRewrite {
     scopebegin = "⎧"
     scopeend   = "⎭"
 
-  anyToken1 = string | charconst | id | integer | keyword | multi_char_operator | indentc | dedentc | verbatim | comment | symbol | integer | any
+  anyToken1 = string | charconst | id | integer | keyword | multi_char_operator | indentc | dedentc | verbatim | comment | symbol | integer | annotation | any
   anyToken = anyToken1
 
     uspc = "・"
@@ -97,7 +94,7 @@ ScopedvarRewrite {
 
   scopeOpen = ab scopebegin ws id ws ae
   scopeClose = ab scopeend ws id ws ae
-    
+  
     idchain =
     | idchain dotc id -- rec
     | id -- bottom
@@ -105,4 +102,3 @@ ScopedvarRewrite {
   dotc = "." ws
 
 }
-
