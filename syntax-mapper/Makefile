@@ -15,12 +15,11 @@ SRC=test.odin
 all: dev
 
 dev: clean hold-test.odin
+	make clean
 	make pseudo
-	cat junk--struct
-
-devandclean: dev
-	./cleanup.py <0d.lisp.pseudo | ./indenter.py >0d.lisp
-	cat 0d.lisp
+	@echo '---'
+	@echo
+	@cat junk--struct | ./indenter.py | ./show.py
 
 tokenize:
 	./delmacrodefs.sed <$(SRC) \
