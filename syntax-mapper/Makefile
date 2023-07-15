@@ -85,10 +85,9 @@ scopedvar.ohm scopedvar.tocl.fab
 	@cat junk--temp >junk--temp2
 	./fab scopedvar.ohm scopedvar.tocl.fab support.js <junk--temp2 | tee junk--scopedvar >junk--temp
 	@cat junk--temp >junk--cl
-	cat - <junk--cl | ./cleanup.py | ./indenter.py | ./show.py >junk--show
 	@echo '---'
 	@echo
-	@cat - <junk--cl | ./cleanup.py | ./indenter.py | ./show.py
+	@cat - <junk--cl  | ./debug-cleanup.py | ./indenter.py | ./show.py | tee junk--show
 
 odinproc.ohm: odinproc.ohm.m4 tokens.ohm.inc skim.ohm.inc
 	m4 odinproc.ohm.m4 >odinproc.ohm
