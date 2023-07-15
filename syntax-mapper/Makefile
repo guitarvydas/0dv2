@@ -16,7 +16,7 @@ all: dev
 
 dev: clean hold-test.odin
 	make pseudo
-	cat junk--proc
+	cat junk--struct
 
 devandclean: dev
 	./cleanup.py <0d.lisp.pseudo | ./indenter.py >0d.lisp
