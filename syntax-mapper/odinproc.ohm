@@ -2,50 +2,32 @@
 OdinProcSignature {
   program = item+
   item =
-    | proc -- proc
+    | procSignature -- proc
     | anyToken -- other
     
-  proc = procSignature procDefinitionBody
-
-  procDefinitionBody = "{" ws bodyStuff "}" ws
-
   procSignature =
-    | id ws "::" ws pragma? "❲proc❳" ws odinParameterList odinReturnTypeList -- nonvoid
-    | id ws "::" ws pragma? "❲proc❳" ws odinParameterList &procDefinitionBody -- void
+    | id ws "⟪::⟫" ws pragma? ws "❲proc❳" ws parameterList returnTypeList
 
-  odinParameterList =
-    | "(" ws ")" ws -- empty
-    | "(" ws lastParameter ")" ws -- single
-    | "(" ws notLastParameter+ lastParameter ")" ws -- multiple
+  parameterList =
+    | "(" notLastParameter* lastParameter? ")"
 
-  odinReturnType =
-    | &procDefinitionBody -- void
-    | "->" ws odinReturnTypeList -- typed
-  odinReturnTypeList =
-    |  "(" ws ")" ws -- empty
-    |  "(" ws lastParameter ")" ws -- singlebracketed
-    |  "(" ws notLastReturnParameter+ lastReturnParameter ")" ws -- multiple
-    | ~"(" singleReturnParameter -- single
+  returnTypeList = skim<"{",procSignature>
 
-  notLastParameter = allocatorOrParameterName anythingButComma "," ws ~")"
-  lastParameter = allocatorOrParameterName ~anythingButComma anythingButRPar
+  pragma = "#" ws "❲force_inline❳"
 
-  notLastReturnParameter = parameterName? anythingButComma "," ws ~")"
-  lastReturnParameter = parameterName? ~anythingButComma anythingButRPar
-  singleReturnParameter = ~procDefinitionBody anythingButProcDefinitionBody
+  notLastParameter =
+    | id ws ":" ws toComma "," -- id
+    | allocToComma "," -- alloc
+  lastParameter = 
+    | id ws ":" ws toRPar ")" -- id
+    | allocToRPar ")" -- alloc
 
-  pragma = "#❲force_inline❳" ws
+  toComma = skim<",",procSignature>
+  toRPar = skim<")",procSignature>
 
-  parameterName =
-    | id ws &"," -- sharedtype
-    | id ws ":" ws -- named
-  allocator =  "❲allocator❳" ws ":=" ws
-  allocatorOrParameterName = allocator | parameterName
+  allocToComma = "❲allocator❳" ws "⟪:=⟫" toComma
+  allocToRPar = "❲allocator❳" ws "⟪:=⟫" toRPar
 
-  bodyStuff = skim<"}",proc>
-  anythingButComma = skim<",",proc>
-  anythingButRPar = skim<")",proc>
-  anythingButProcDefinitionBody = skim<procDefinitionBody,proc>
 
       dqb = "“"
     dqe = "”"

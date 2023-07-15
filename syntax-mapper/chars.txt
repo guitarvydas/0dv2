@@ -47,17 +47,20 @@ _
 `⟪...⟫` multi-char operators
 `⇢` indent
 `⇠` dedent
-`❪...❫` verbatim
+...
+`⎡...⎦` verbatim
 `⎨⎧ ??? proc ⎬` annotation: semantic scope begin
 `⎨⎭ ??? ⎬` annotation semantic scope end
 `⎨𝛕 ??? ?v?⎬` annotation: add variable ?v? to current scope
 
+`❪` generated left parenthesis
+`❫` generated right parenthesis
+
 misc
-`⎧...⎫`
 `❬...❭`
 ⎝...⎠
 ⎛...⎞
 ⎟...⎢
-⎡...⎤
-⎣...⎦
+...⎤
+⎣
 ‹...›
