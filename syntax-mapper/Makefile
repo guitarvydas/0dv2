@@ -69,7 +69,7 @@ scopedvar.ohm scopedvar.tocl.fab
 	@cat junk--temp >junk--cl
 	@echo '---'
 	@echo
-	@cat - <junk--cl  | ./debug-cleanup.py | ./indenter.py | ./show.py | tee junk--show
+	cat - <junk--cl  | ./debug-cleanup.py | ./indenter.py | ./show.py | tee junk--show
 
 odinproc.ohm: odinproc.ohm.m4 tokens.ohm.inc skim.ohm.inc
 	m4 odinproc.ohm.m4 >odinproc.ohm

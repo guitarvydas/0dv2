@@ -4,15 +4,16 @@ Odin0Dstruct {
     | struct -- struct
     | anyToken -- other
 
-  struct = id ws "⟪::⟫" ws "❲struct❳" ws structtype? "{" ws field+ "}"
+  struct = id ws "⟪::⟫" ws "❲struct❳" ws structtype? "{" ws field* "}"
 
   structtype = skim<"{",struct>
   field =
-    | id ws ":" ws toComma "," ws
-    | id ws ":" ws toRBrace &"}" ws
+    | id ws ":" ws slurp "," ws -- comma
+    | id ws ":" ws slurp &"}" -- rbrace
 
-  toComma = skim<",",struct>
-  toRBrace = skim<"}",struct>
+  slurp = skim<commaOrRBrace,struct>
+
+  commaOrRBrace = "," | "}"
 
   include(`tokens.ohm.inc')
   include(`skim.ohm.inc')  

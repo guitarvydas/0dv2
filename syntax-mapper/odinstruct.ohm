@@ -4,15 +4,16 @@ Odin0Dstruct {
     | struct -- struct
     | anyToken -- other
 
-  struct = id ws "⟪::⟫" ws "❲struct❳" ws structtype? "{" ws field+ "}"
+  struct = id ws "⟪::⟫" ws "❲struct❳" ws structtype? "{" ws field* "}"
 
   structtype = skim<"{",struct>
   field =
-    | id ws ":" ws toComma "," ws
-    | id ws ":" ws toRBrace &"}" ws
+    | id ws ":" ws slurp "," ws -- comma
+    | id ws ":" ws slurp &"}" -- rbrace
 
-  toComma = skim<",",struct>
-  toRBrace = skim<"}",struct>
+  slurp = skim<commaOrRBrace,struct>
+
+  commaOrRBrace = "," | "}"
 
       dqb = "“"
     dqe = "”"
@@ -88,7 +89,7 @@ Odin0Dstruct {
     | ~terminator "{" skim<terminator,userRule>* "}"  skim<terminator,userRule>? -- nestedbraces
     | ~terminator "(" skim<terminator,userRule>* ")"  skim<terminator,userRule>? -- nestedparens
     | ~terminator scopeOpen skim<terminator,userRule>* scopeClose  skim<terminator,userRule>? -- nestedscope
-    | ~terminator (~bracket any)+   skim<terminator,userRule>? -- bottom
+    | (~terminator ~bracket any)+   skim<terminator,userRule>? -- bottom
 
   bracket = "{" | "}" | "(" | ")" | scopeOpen | scopeClose
 
