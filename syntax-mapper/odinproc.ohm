@@ -2,9 +2,11 @@
 OdinProcSignature {
   program = item+
   item =
-    | procSignature -- proc
+    | proc -- proc
     | anyToken -- other
-    
+
+  proc = procSignature "{" procBody "}"
+  
   procSignature =
     | id ws "⟪::⟫" ws pragma? ws "❲proc❳" ws parameterList returnTypeList
 
@@ -21,6 +23,8 @@ OdinProcSignature {
   lastParameter = 
     | id ws ":" ws toRPar &")" -- id
     | allocToRPar &")" -- alloc
+
+  procBody = skim<"}",proc>
 
   toComma = skim<",",procSignature>
   toRPar = skim<")",procSignature>
