@@ -77,15 +77,14 @@ ProcdefRewrite {
 
 
 
-    skim<stopBefore,macro> =
-    | &stopBefore -- done
-    | macro -- macro
-    | inner skim<stopBefore,macro> -- continue
-  inner =
-    | "(" ws inner* ")" -- nestedparens
-    | "{" ws inner* "}" -- nestedbraces
-    | scopeOpen ws inner* scopeClose -- nestedscope
-    | ~"(" ~")" ~"{" ~"}" anyToken -- bottom
+    skim<terminator,userRule> =
+    | userRule skim<terminator,userRule>? -- userRule
+    | "{" skim<terminator,userRule>* "}"  skim<terminator,userRule>? -- nestedbraces
+    | "(" skim<terminator,userRule>* ")"  skim<terminator,userRule>? -- nestedparens
+    | scopeOpen skim<terminator,userRule>* scopeClose  skim<terminator,userRule>? -- nestedscope
+    | ~bracket any   skim<terminator,userRule>? -- bottom
+
+  bracket = "{" | "}" | "(" | ")" | scopeOpen | scopeClose
 
   scopeOpen = ab scopebegin ws id ws ae
   scopeClose = ab scopeend ws id ws ae
