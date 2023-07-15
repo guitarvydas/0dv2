@@ -1,6 +1,5 @@
 OdinProcSignature {
   program [item+] = ‛«item»’
-  item [i] = ‛«i»’
 
   procSignature [id ws1 kcc ws2 pragma? ws3 kproc ws4 params returns] =
 ‛
