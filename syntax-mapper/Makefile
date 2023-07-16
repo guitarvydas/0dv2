@@ -38,6 +38,13 @@ pseudo: deleteComments odinproc.ohm odinproc.fab odinstruct.ohm odinstruct.fab q
 	| ./fab queue.ohm queue.fab support.js | tee junk--queue \
 	| cat - > junk--pseudo
 
+zero: deleteComments odinproc.ohm odinproc.z odinstruct.ohm odinstruct.z queue.ohm queue.z
+	./fab odinproc.ohm odinproc.z support.js <junk--nocomments | tee junk--z-proc >junk--temp
+	cat junk--temp >junk--temp2
+	@echo '---'
+	@echo
+	@cat - <junk--temp2  | ./debug-cleanup.py | ./indenter.py | ./show.py | tee junk--show
+
 cl: pseudo append.ohm append.tocl.fab message_literal.ohm message_literal.tocl.fab assign.ohm assign.tocl.fab funcall.ohm funcall.tocl.fab if.ohm if.tocl.fab forin.ohm forin.tocl.fab forexpr.ohm forexpr.tocl.fab  return.ohm return.tocl.fab op.ohm op.tocl.fab slotvalue.ohm slotvalue.tocl.fab \
 clstruct.ohm clstruct.tocl.fab clproc.ohm clproc.tocl.fab \
 scopedvar.ohm scopedvar.tocl.fab
@@ -75,11 +82,15 @@ odinproc.ohm: odinproc.ohm.m4 tokens.ohm.inc skim.ohm.inc
 	m4 odinproc.ohm.m4 >odinproc.ohm
 odinproc.fab: odinproc.fab.m4 tokens.fab.inc skim.fab.inc
 	m4 odinproc.fab.m4 >odinproc.fab
+odinproc.z: odinproc.z.m4 tokens.fab.inc skim.fab.inc
+	m4 odinproc.z.m4 >odinproc.z
 
 odinstruct.ohm: odinstruct.ohm.m4 tokens.ohm.inc skim.ohm.inc
 	m4 odinstruct.ohm.m4 >odinstruct.ohm
 odinstruct.fab: odinstruct.fab.m4 tokens.fab.inc skim.fab.inc
 	m4 odinstruct.fab.m4 >odinstruct.fab
+odinstruct.z: odinstruct.z.m4 tokens.fab.inc skim.fab.inc
+	m4 odinstruct.z.m4 >odinstruct.z
 
 odindeletecomments.ohm: odindeletecomments.ohm.m4 tokens.ohm.inc skim.ohm.inc
 	m4 odindeletecomments.ohm.m4 >odindeletecomments.ohm
@@ -90,6 +101,8 @@ queue.ohm: queue.ohm.m4 tokens.ohm.inc skim.ohm.inc
 	m4 queue.ohm.m4 >queue.ohm
 queue.fab: queue.fab.m4 tokens.fab.inc skim.fab.inc
 	m4 queue.fab.m4 >queue.fab
+queue.z: queue.z.m4 tokens.fab.inc skim.fab.inc
+	m4 queue.z.m4 >queue.z
 
 append.ohm: append.ohm.m4 tokens.ohm.inc skim.ohm.inc
 	m4 append.ohm.m4 >append.ohm
@@ -162,6 +175,7 @@ hold-test.odin: ../../odin0d/0d/0d.odin
 clean:
 	rm -rf junk--*
 	rm -f odinproc.ohm odinproc.fab odinstruct.ohm odinstruct.fab queue.ohm queue.fab append.ohm message_literal.ohm assign.ohm funcall.ohm
+	rm -f odinproc.z odinstruct.z queue.z
 	rm -f append.*.fab message_literal.*.fab assign.*.fab funcall.*.fab
 	rm -f *~
 
