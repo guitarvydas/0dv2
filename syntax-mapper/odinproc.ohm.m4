@@ -26,7 +26,7 @@ OdinProcSignature {
 
   procBody = skim<"}",proc>
 
-  toComma = skim<",",proc>
+  toComma = skim<("," | ")"),proc>
   toRPar = skim<")",proc>
 
   allocToComma = "❲allocator❳" ws "⟪:=⟫" toComma

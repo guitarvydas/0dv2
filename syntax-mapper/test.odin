@@ -6,5 +6,5 @@ send :: proc(eh: ^Eh, port: string, data: $Data) {
 }
 
 L :: proc(e: ^Eh) {
-    f(&s, "{{%s, %v}", p, d)
+    f, g
 }
