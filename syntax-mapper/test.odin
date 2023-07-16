@@ -3,4 +3,3 @@ Eh :: struct {
     input:        FIFO,
     output:       FIFO,
 }
-
