@@ -53,7 +53,8 @@ SlotvalueRewrite {
 
   anyToken1 = string | charconst | id | integer | keyword | multi_char_operator | indentc | dedentc | verbatim | comment | symbol | integer | annotation | any
   anyToken = anyToken1
-
+  compoundToken = string | charconst | id | integer | keyword | multi_char_operator | verbatim | comment | symbol | integer | annotation
+  
     uspc = "・"
     unl = "⦚"
     srcnl = unl

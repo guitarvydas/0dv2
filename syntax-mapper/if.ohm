@@ -55,7 +55,8 @@ Ifstatemet_Rewrite {
 
   anyToken1 = string | charconst | id | integer | keyword | multi_char_operator | indentc | dedentc | verbatim | comment | symbol | integer | annotation | any
   anyToken = anyToken1
-
+  compoundToken = string | charconst | id | integer | keyword | multi_char_operator | verbatim | comment | symbol | integer | annotation
+  
     uspc = "・"
     unl = "⦚"
     srcnl = unl
@@ -84,9 +85,11 @@ Ifstatemet_Rewrite {
     skim<terminator,userRule> =
     | userRule skim<terminator,userRule>? -- userRule
     | ~terminator scopeOpen skim<terminator,userRule>* scopeClose  skim<terminator,userRule>? -- nestedscope
+    | ~terminator compoundToken skim<terminator,userRule>? -- compoundToken
     | ~terminator "{" skim<terminator,userRule>* "}"  skim<terminator,userRule>? -- nestedbraces
     | ~terminator "(" skim<terminator,userRule>* ")"  skim<terminator,userRule>? -- nestedparens
-    | (~terminator ~bracket any)+   skim<terminator,userRule>? -- bottom
+//    | (~terminator ~bracket ???compoundToken??? ???userRule??? any)+   skim<terminator,userRule>? -- bottom
+    | ~terminator any   skim<terminator,userRule>? -- bottom
 
   bracket = "{" | "}" | "(" | ")" | scopeOpen | scopeClose
 

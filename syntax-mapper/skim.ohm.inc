@@ -1,9 +1,11 @@
   skim<terminator,userRule> =
     | userRule skim<terminator,userRule>? -- userRule
     | ~terminator scopeOpen skim<terminator,userRule>* scopeClose  skim<terminator,userRule>? -- nestedscope
+    | ~terminator compoundToken skim<terminator,userRule>? -- compoundToken
     | ~terminator "{" skim<terminator,userRule>* "}"  skim<terminator,userRule>? -- nestedbraces
     | ~terminator "(" skim<terminator,userRule>* ")"  skim<terminator,userRule>? -- nestedparens
-    | (~terminator ~bracket any)+   skim<terminator,userRule>? -- bottom
+//    | (~terminator ~bracket ???compoundToken??? ???userRule??? any)+   skim<terminator,userRule>? -- bottom
+    | ~terminator any   skim<terminator,userRule>? -- bottom
 
   bracket = "{" | "}" | "(" | ")" | scopeOpen | scopeClose
 

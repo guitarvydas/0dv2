@@ -62,6 +62,7 @@ ScopedvarRewrite {
 
   anyToken1 = string | charconst | id | integer | keyword | multi_char_operator | indentc | dedentc | verbatim | comment | symbol | integer | any
   anyToken = anyToken1
+  compoundToken = string | charconst | id | integer | keyword | multi_char_operator | indentc | dedentc | verbatim | comment | symbol | integer
 
     uspc = "・"
     unl = "⦚"
@@ -89,9 +90,11 @@ ScopedvarRewrite {
     skim<terminator,userRule> =
     | userRule skim<terminator,userRule>? -- userRule
     | ~terminator scopeOpen skim<terminator,userRule>* scopeClose  skim<terminator,userRule>? -- nestedscope
+    | ~terminator compoundToken skim<terminator,userRule>? -- compoundToken
     | ~terminator "{" skim<terminator,userRule>* "}"  skim<terminator,userRule>? -- nestedbraces
     | ~terminator "(" skim<terminator,userRule>* ")"  skim<terminator,userRule>? -- nestedparens
-    | (~terminator ~bracket any)+   skim<terminator,userRule>? -- bottom
+//    | (~terminator ~bracket ???compoundToken??? ???userRule??? any)+   skim<terminator,userRule>? -- bottom
+    | ~terminator any   skim<terminator,userRule>? -- bottom
 
   bracket = "{" | "}" | "(" | ")" | scopeOpen | scopeClose
 
