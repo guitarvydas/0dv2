@@ -19,6 +19,7 @@ OdinProcSignature {
 
   notLastParameter =
     | id ws ":" ws toComma "," ws -- id
+    | id ws "," ws -- idsharedtype
     | allocToComma "," ws -- alloc
   lastParameter = 
     | id ws ":" ws toRPar ws &")" -- id
