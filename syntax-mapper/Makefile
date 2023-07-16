@@ -1,5 +1,6 @@
-#SRC=../../odin0d/0d/0d.odin
-SRC=test.odin
+BIGSRC=../../odin0d/0d/0d.odin
+TESTSRC=test.odin
+SRC=$(BIGSRC)
 
 # notes: 
 # steps: src (Odin syntax) -> tokenize -> pseudo -> cl (to Common Lisp)
@@ -14,8 +15,7 @@ SRC=test.odin
 
 all: dev
 
-dev: clean hold-test.odin
-	make clean
+dev: clean
 	make cl
 
 tokenize:
@@ -47,7 +47,8 @@ zero: deleteComments odinproc.ohm odinproc.z odinstruct.ohm odinstruct.z queue.o
 
 cl: pseudo append.ohm append.tocl.fab message_literal.ohm message_literal.tocl.fab assign.ohm assign.tocl.fab funcall.ohm funcall.tocl.fab if.ohm if.tocl.fab forin.ohm forin.tocl.fab forexpr.ohm forexpr.tocl.fab  return.ohm return.tocl.fab op.ohm op.tocl.fab slotvalue.ohm slotvalue.tocl.fab \
 clstruct.ohm clstruct.tocl.fab clproc.ohm clproc.tocl.fab \
-scopedvar.ohm scopedvar.tocl.fab
+scopedvar.ohm scopedvar.tocl.fab \
+delannotations.ohm delannotations.tocl.fab
 	./fab append.ohm append.tocl.fab support.js <junk--pseudo | tee junk--append > junk--temp 
 	@cat junk--temp >junk--temp2
 	./fab message_literal.ohm message_literal.tocl.fab support.js <junk--temp2 | tee junk--ml >junk--temp
@@ -72,7 +73,9 @@ scopedvar.ohm scopedvar.tocl.fab
 	@cat junk--temp >junk--temp2
 	./fab clstruct.ohm clstruct.tocl.fab support.js <junk--temp2 | tee junk--clstruct >junk--temp
 	@cat junk--temp >junk--temp2
-	./fab clproc.ohm clproc.tocl.fab support.js <junk--temp2 | \tee junk--clproc >junk--temp
+	./fab clproc.ohm clproc.tocl.fab support.js <junk--temp2 | tee junk--clproc >junk--temp
+	@cat junk--temp >junk--temp2
+	./fab delannotations.ohm delannotations.tocl.fab support.js <junk--temp2 | tee junk--delannotations >junk--temp
 	@cat junk--temp >junk--cl
 	@echo '---'
 	@echo
@@ -139,6 +142,11 @@ return.ohm: return.ohm.m4 tokens.ohm.inc skim.ohm.inc
 return.tocl.fab: return.tocl.fab.m4 tokens.fab.inc skim.fab.inc
 	m4 return.tocl.fab.m4 >return.tocl.fab
 
+delannotations.ohm: delannotations.ohm.m4 tokens.ohm.inc skim.ohm.inc
+	m4 delannotations.ohm.m4 >delannotations.ohm
+delannotations.tocl.fab: delannotations.tocl.fab.m4 tokens.fab.inc skim.fab.inc
+	m4 delannotations.tocl.fab.m4 >delannotations.tocl.fab
+
 op.ohm: op.ohm.m4 tokens.ohm.inc skim.ohm.inc
 	m4 op.ohm.m4 >op.ohm
 op.tocl.fab: op.tocl.fab.m4 tokens.fab.inc skim.fab.inc
@@ -168,9 +176,6 @@ funcall.ohm: funcall.ohm.m4 tokens.ohm.inc skim.ohm.inc
 	m4 funcall.ohm.m4 >funcall.ohm
 funcall.tocl.fab: funcall.tocl.fab.m4 tokens.fab.inc skim.fab.inc
 	m4 funcall.tocl.fab.m4 >funcall.tocl.fab
-
-hold-test.odin: ../../odin0d/0d/0d.odin
-	cp ../../odin0d/0d/0d.odin ./hold-test.odin
 
 clean:
 	rm -rf junk--*

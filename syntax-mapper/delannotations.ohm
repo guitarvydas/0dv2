@@ -1,0 +1,100 @@
+DelAnnotations_Rewrite {
+  program = item+
+  item =
+    | annotation -- annotation
+    | any -- other
+
+      dqb = "“"
+    dqe = "”"
+  string = dqb (~dqb ~dqe any)* dqe
+
+    sqb = "❛"
+    sqe = "❜"
+  charconst = sqb (~sqb ~sqe any)* sqe
+
+  id = "❲" (~"❲" ~"❳" any)* "❳"
+
+
+    intb = "⟨"
+    inte = "⟩"
+  integer = intb (~intb ~inte any)* inte
+
+    symb = "❲"
+    syme = "❳"
+  symbol = symb (~symb ~syme any)* syme
+  sym<text> = symb text syme
+    
+    kwb = "‹"
+    kwe = "›"
+  keyword = kwb (~kwb ~kwe any)* kwe
+
+    mcb = "⟪"
+    mce = "⟫"
+  multi_char_operator = mcb (~mcb ~mce any)* mce
+
+  indentc = "⇢"
+  dedentc = "⇠"
+
+    verbatim = vb (~vb ~ve any)* ve
+
+  comment = "⎣" (~"⎣" ~"⎦" any)* "⎦"
+
+    ab = "⎨"
+    ae = "⎬"
+  annotation = ab (~ab ~ae any)* ae
+    scopebegin = "⎧"
+    scopeend   = "⎭"
+
+  anyToken1 = string | charconst | id | integer | keyword | multi_char_operator | indentc | dedentc | verbatim | comment | symbol | integer | annotation | any
+  anyToken = anyToken1
+  compoundToken = string | charconst | id | integer | keyword | multi_char_operator | verbatim | comment | symbol | integer | annotation
+  
+    uspc = "・"
+    unl = "⦚"
+    srcnl = unl
+    
+    spc = " "
+    nl = "\n"
+
+    commentspace = "◦"
+    commentnl = "¶"
+
+    annotationspace = uspc
+
+    stringspace = "□"
+    stringnl = "‡"
+    charspace = "☐"
+    charnl = "†"
+
+
+    wsc = space | spc | nl | uspc | unl | indentc | dedentc | commentspace | commentnl | stringspace | stringnl | charspace | charnl | verbatim | annotationspace | annotation
+    ws = wsc*
+
+
+    vb = "⎡"
+    ve = "⎦"
+
+    skim<terminator,userRule> = skim1<terminator,userRule>+
+  skim1<terminator,userRule> =
+    | userRule -- userRule
+    | ~terminator scopeOpen skim<terminator,userRule>* scopeClose -- nestedscope
+    | ~terminator compoundToken  -- compoundToken
+    | ~terminator "{" skim<terminator,userRule>* "}"  -- nestedbraces
+    | ~terminator "(" skim<terminator,userRule>* ")"  -- nestedparens
+    | ~terminator any    -- bottom
+
+//   skim<terminator,userRule> =
+//     | userRule skim<terminator,userRule>? -- userRule
+//     | ~terminator scopeOpen skim<terminator,userRule>* scopeClose  skim<terminator,userRule>? -- nestedscope
+//     | ~terminator compoundToken skim<terminator,userRule>? -- compoundToken
+//     | ~terminator "{" skim<terminator,userRule>* "}"  skim<terminator,userRule>? -- nestedbraces
+//     | ~terminator "(" skim<terminator,userRule>* ")"  skim<terminator,userRule>? -- nestedparens
+// //    | (~terminator ~bracket ???compoundToken??? ???userRule??? any)+   skim<terminator,userRule>? -- bottom
+//     | ~terminator any   skim<terminator,userRule>? -- bottom
+
+  bracket = "{" | "}" | "(" | ")" | scopeOpen | scopeClose
+
+  scopeOpen = ab scopebegin ws id ws ae
+  scopeClose = ab scopeend ws id ws ae
+  
+}

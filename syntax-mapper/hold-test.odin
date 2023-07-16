@@ -350,16 +350,12 @@ child_is_ready :: proc(eh: ^Eh) -> bool {
 
 // Utility for printing an array of messages.
 print_output_list :: proc(eh: ^Eh) {
-    /*⎨scoped _ write_rune⎬*/
-    write_rune   :: strings.write_rune
-    /*⎨scoped _ write_string⎬*/
-    write_string :: strings.write_string
 
-    /*⎨scoped _ write_sb⎬*/
+    /*⎨scoped _ sb⎬*/
     sb: strings.Builder
     defer strings.builder_destroy(&sb)
 
-    write_rune(&sb, '[')
+    strings.write_rune(&sb, '[')
 
     /*⎨scoped _ iter⎬*/
     iter := make_fifo_iterator(&eh.output)
@@ -367,7 +363,7 @@ print_output_list :: proc(eh: ^Eh) {
     /*⎨scoped _ idx⎬*/
     for msg, idx in fifo_iterate(&iter) {
         if idx > 0 {
-            write_string(&sb, ", ")
+            strings.write_string(&sb, ", ")
         }
         fmt.sbprintf(&sb, "{{%s, %v}", msg.port, msg.datum)
     }

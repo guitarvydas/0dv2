@@ -183,6 +183,7 @@
   "lastOpenFiles": [
     "syntax-mapper/junk--show",
     "syntax-mapper/junk--cl",
+    "syntax-mapper/junk--delannotations",
     "syntax-mapper/junk--clproc",
     "syntax-mapper/junk--clstruct",
     "syntax-mapper/junk--return",
@@ -191,7 +192,6 @@
     "syntax-mapper/junk--funcall",
     "syntax-mapper/junk--assign",
     "syntax-mapper/junk--scopedvar",
-    "syntax-mapper/junk--forexpr",
     "syntax-mapper/experimental/lisp-notes.md",
     "syntax-mapper/experimental/README.md",
     "doc/2023-07-01.md",
