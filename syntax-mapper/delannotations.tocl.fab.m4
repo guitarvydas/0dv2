@@ -1,8 +1,8 @@
 DelAnnotations_Rewrite {
   program [items+] = ‛«items»’
-  item [x] = ‛«x»’
 
-  annotation [a] = ‛’
+  item_annotation [a] = ‛’
+  item_other [x] = ‛«x»’
 
   include(`tokens.fab.inc')
   include(`skim.fab.inc')
