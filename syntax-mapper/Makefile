@@ -1,6 +1,6 @@
 BIGSRC=../../odin0d/0d/0d.odin
 TESTSRC=test.odin
-SRC=$(BIGSRC)
+SRC=$(TESTSRC)
 
 # notes: 
 # steps: src (Odin syntax) -> tokenize -> pseudo -> cl (to Common Lisp)
