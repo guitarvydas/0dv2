@@ -1,11 +1,16 @@
-ScopedvarRewrite {
-  program [item+] = ‛«item»’
+QueueRewrite {
+  program [items+] = ‛«items»’
+  item_pattern [x] = ‛’
+  item_other [x] = ‛«x»’
 
-  scoped [ab kscoped ws1 scopeid ws2 varid ws3 ae therest] =
-‛❪let ❪❪«varid» nil❫❫⇢
-«therest»❫⇠’
-  
-  scopeClose [ab scopeend scopeid ae] = ‛«ab»«scopeend»«scopeid»«ae»’
+  push [kqueue ws1 kdot ws2 kpushback ws3 lp ws4 kamp ws5 operand1 kcomma ws6 operand2 rp] = ‛ «operand1».❲enqueue❳(«operand2») ’
+  pop [kqueue ws1 kdot ws2 kpopfrontsafe ws3 lp ws4 kamp ws5 operand1 rp] = ‛ «operand1».❲dequeue❳() ’
+
+  notlastoperand [anythingButComma lookahead] = ‛«anythingButComma»’
+  lastoperand [anythingButRPar ws1] = ‛«anythingButRPar»«ws1»’
+
+  anythingButComma [stuff ws] = ‛«stuff»’
+  anythingButRPar [stuff ws] = ‛«stuff»’
 
   
   string [kb1 cs* ke] = ‛«kb1»«cs»«ke»’
@@ -33,14 +38,10 @@ ScopedvarRewrite {
   skim_nestedbraces [lb stuff* rb more?] = ‛«lb»«stuff»«rb»«more»’
   skim_nestedparens [lp stuff* rp more?] = ‛«lp»«stuff»«rp»«more»’
   skim_nestedscope [so stuff* sc more?] = ‛«so»«stuff»«sc»«more»’
-  skim_bottom [any+ more?] = ‛«any»«more»’
+  skim_bottom [any more?] = ‛«any»«more»’
   
   scopeOpen  [ab scopebegin ws1 id1 ws2 ae] = ‛«ab»«scopebegin»«ws1»«id1»«ws2»«ae»’
   scopeClose [ab scopeend   ws1 id1 ws2 ae] = ‛«ab»«scopeend»«ws1»«id1»«ws2»«ae»’
 
-    idchain_rec [idchain dotc id] = ‛«idchain».«id»’
-  idchain_bottom [id] = ‛«id»’
-  dotc [kdot ws] = ‛«kdot»«ws»’
-
-
 }
+

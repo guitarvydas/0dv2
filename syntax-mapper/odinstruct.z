@@ -1,11 +1,13 @@
-ScopedvarRewrite {
+Odin0Dstruct {
   program [item+] = ‛«item»’
+  item_struct [i] = ‛’
+  item_other [i] = ‛«i»’
 
-  scoped [ab kscoped ws1 scopeid ws2 varid ws3 ae therest] =
-‛❪let ❪❪«varid» nil❫❫⇢
-«therest»❫⇠’
-  
-  scopeClose [ab scopeend scopeid ae] = ‛«ab»«scopeend»«scopeid»«ae»’
+  struct [id ws1 kcc ws2 kstruct ws3 structtype? lb ws4 fields+ rb] = ‛
+«id»«ws1»::«ws2»struct«ws3»«ws4»{«fields»}’
+
+  field_comma [id ws1 kcolon ws2 toComma kcomma ws3] = ‛«id»«ws1»«ws2»«ws3»’
+  field_rbrace [id ws1 kcolon ws2 slurp lookahead] = ‛«id»«ws1»«ws2»«ws3»’
 
   
   string [kb1 cs* ke] = ‛«kb1»«cs»«ke»’
@@ -33,14 +35,9 @@ ScopedvarRewrite {
   skim_nestedbraces [lb stuff* rb more?] = ‛«lb»«stuff»«rb»«more»’
   skim_nestedparens [lp stuff* rp more?] = ‛«lp»«stuff»«rp»«more»’
   skim_nestedscope [so stuff* sc more?] = ‛«so»«stuff»«sc»«more»’
-  skim_bottom [any+ more?] = ‛«any»«more»’
+  skim_bottom [any more?] = ‛«any»«more»’
   
   scopeOpen  [ab scopebegin ws1 id1 ws2 ae] = ‛«ab»«scopebegin»«ws1»«id1»«ws2»«ae»’
   scopeClose [ab scopeend   ws1 id1 ws2 ae] = ‛«ab»«scopeend»«ws1»«id1»«ws2»«ae»’
-
-    idchain_rec [idchain dotc id] = ‛«idchain».«id»’
-  idchain_bottom [id] = ‛«id»’
-  dotc [kdot ws] = ‛«kdot»«ws»’
-
 
 }

@@ -43,6 +43,7 @@
 
   anyToken1 = string | charconst | id | integer | keyword | multi_char_operator | indentc | dedentc | verbatim | comment | symbol | integer | any
   anyToken = anyToken1
+  compoundToken = string | charconst | id | integer | keyword | multi_char_operator | indentc | dedentc | verbatim | comment | symbol | integer
 
     uspc = "・"
     unl = "⦚"

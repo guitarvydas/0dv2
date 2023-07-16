@@ -1,11 +1,24 @@
-ScopedvarRewrite {
-  program [item+] = ‛«item»’
+OdinProcSignature {
+  program [x+] = ‛«x»’
+  item_proc [x] = ‛«x»’
+  item_other [x] = ‛«x»’
+		  
 
-  scoped [ab kscoped ws1 scopeid ws2 varid ws3 ae therest] =
-‛❪let ❪❪«varid» nil❫❫⇢
-«therest»❫⇠’
-  
-  scopeClose [ab scopeend scopeid ae] = ‛«ab»«scopeend»«scopeid»«ae»’
+  proc [signature lb body rb] = ‛«lb»«body»«rb»’
+  procSignature [id ws1 kcc ws2 pragma? ws3 kproc ws4 params returns] =
+‛
+«id»«ws1»⟪::⟫«ws2»«ws3»‹proc›«ws4»«params» ’
+
+  parameterList [lp notLastParameters* lastParameter? rp] = ‛❪«notLastParameters»«lastParameter»❫’
+
+  pragma [koctothorpe ws kinline] = ‛’
+  notLastParameter_id [id ws1 kcolon ws2 typestuff kcomma ws3] = ‛ «id»’
+  notLastParameter_alloc [stuff kcomma ws1] = ‛’
+  lastParameter_id [id ws1 kcolon ws2 typestuff ws3 lookahead] = ‛ «id»’
+  lastParameter_alloc [stuff ws1 lookahead] = ‛’
+
+  allocToComma [kallocator ws1 kceq stuff] = ‛’
+  allocToRPar [kallocator ws1 kceq stuff] = ‛’
 
   
   string [kb1 cs* ke] = ‛«kb1»«cs»«ke»’
@@ -33,14 +46,10 @@ ScopedvarRewrite {
   skim_nestedbraces [lb stuff* rb more?] = ‛«lb»«stuff»«rb»«more»’
   skim_nestedparens [lp stuff* rp more?] = ‛«lp»«stuff»«rp»«more»’
   skim_nestedscope [so stuff* sc more?] = ‛«so»«stuff»«sc»«more»’
-  skim_bottom [any+ more?] = ‛«any»«more»’
+  skim_bottom [any more?] = ‛«any»«more»’
   
   scopeOpen  [ab scopebegin ws1 id1 ws2 ae] = ‛«ab»«scopebegin»«ws1»«id1»«ws2»«ae»’
   scopeClose [ab scopeend   ws1 id1 ws2 ae] = ‛«ab»«scopeend»«ws1»«id1»«ws2»«ae»’
 
-    idchain_rec [idchain dotc id] = ‛«idchain».«id»’
-  idchain_bottom [id] = ‛«id»’
-  dotc [kdot ws] = ‛«kdot»«ws»’
-
-
 }
+

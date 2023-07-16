@@ -29,6 +29,7 @@ AppendRewriteForCL {
 
 
     skim_userRule [userRule more?] = ‛«userRule»«more»’
+  skim_compoundToken [tok more?] = ‛«tok»«more»’
   skim_nestedbraces [lb stuff* rb more?] = ‛«lb»«stuff»«rb»«more»’
   skim_nestedparens [lp stuff* rp more?] = ‛«lp»«stuff»«rp»«more»’
   skim_nestedscope [so stuff* sc more?] = ‛«so»«stuff»«sc»«more»’
