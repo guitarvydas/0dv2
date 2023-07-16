@@ -13,7 +13,7 @@ OdinProcSignature {
   parameterList =
     | "(" notLastParameter* lastParameter? ")"
 
-  returnTypeList = skim<"{",proc>
+  returnTypeList = skimraw<"{">
 
   pragma = "#" ws "❲force_inline❳"
 
@@ -26,12 +26,11 @@ OdinProcSignature {
 
   procBody = skim<"}",proc>
 
-  toComma = skim<("," | ")"),proc>
-  toRPar = skim<")",proc>
+  toComma = skimraw<("," | ")")>
+  toRPar = skimraw<")">
 
   allocToComma = "❲allocator❳" ws "⟪:=⟫" toComma
   allocToRPar = "❲allocator❳" ws "⟪:=⟫" toRPar
-
 
       dqb = "“"
     dqe = "”"
@@ -112,14 +111,13 @@ OdinProcSignature {
     | ~terminator "(" skim<terminator,userRule>* ")"  -- nestedparens
     | ~terminator any    -- bottom
 
-//   skim<terminator,userRule> =
-//     | userRule skim<terminator,userRule>? -- userRule
-//     | ~terminator scopeOpen skim<terminator,userRule>* scopeClose  skim<terminator,userRule>? -- nestedscope
-//     | ~terminator compoundToken skim<terminator,userRule>? -- compoundToken
-//     | ~terminator "{" skim<terminator,userRule>* "}"  skim<terminator,userRule>? -- nestedbraces
-//     | ~terminator "(" skim<terminator,userRule>* ")"  skim<terminator,userRule>? -- nestedparens
-// //    | (~terminator ~bracket ???compoundToken??? ???userRule??? any)+   skim<terminator,userRule>? -- bottom
-//     | ~terminator any   skim<terminator,userRule>? -- bottom
+  skimraw<terminator> = skimraw1<terminator>+
+  skimraw1<terminator> =
+    | ~terminator scopeOpen skimraw<terminator>* scopeClose -- nestedscope
+    | ~terminator compoundToken  -- compoundToken
+    | ~terminator "{" skimraw<terminator>* "}"  -- nestedbraces
+    | ~terminator "(" skimraw<terminator>* ")"  -- nestedparens
+    | ~terminator any    -- bottom
 
   bracket = "{" | "}" | "(" | ")" | scopeOpen | scopeClose
 
