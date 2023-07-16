@@ -1,6 +1,3 @@
-
-
-
 package zd
 
 import "core:container/queue"
@@ -55,21 +52,16 @@ Message :: struct {
 // Creates a component that acts as a container. It is the same as a `Eh` instance
 // whose handler function is `container_handler`.
 make_container :: proc(name: string) -> ^Eh {
+    /*⎨scoped _ eh⎬*/
     eh := new(Eh)
     eh.name = name
     eh.handler = container_handler
     return eh
 }
 
-// Creates a new leaf component out of a handler function, and optionally a user
-// data parameter that will be passed back to your handler when it is run.
-make_leaf :: proc{
-    make_leaf_simple,
-    make_leaf_with_data,
-}
-
 // Creates a new leaf component out of a handler function.
 make_leaf_simple :: proc(name: string, handler: proc(^Eh, Message)) -> ^Eh {
+    /*⎨scoped _ eh⎬*/
     eh := new(Eh)
     eh.name = name
     eh.handler = handler
@@ -80,11 +72,14 @@ make_leaf_simple :: proc(name: string, handler: proc(^Eh, Message)) -> ^Eh {
 // that will be passed back to your handler when called.
 make_leaf_with_data :: proc(name: string, data: ^$Data, handler: proc(^Eh, Message, ^Data)) -> ^Eh {
     leaf_handler_with_data :: proc(eh: ^Eh, message: Message) {
+        /*⎨scoped _ handler⎬*/
+        /*⎨scoped _ data⎬*/
         handler := (proc(^Eh, Message, ^Data))(eh.leaf_handler)
         data := (^Data)(eh.leaf_data)
         handler(eh, message, data)
     }
 
+    /*⎨scoped _ eh⎬*/
     eh := new(Eh)
     eh.name = name
     eh.handler = leaf_handler_with_data
@@ -96,7 +91,9 @@ make_leaf_with_data :: proc(name: string, data: ^$Data, handler: proc(^Eh, Messa
 // Utility for making a `Message`. Used to safely "seed" messages
 // entering the very top of a network.
 make_message :: proc(port: string, data: $Data) -> Message {
+    /*⎨scoped _ data_ptr⎬*/
     data_ptr := new_clone(data)
+    /*⎨scoped _ data_id⎬*/
     data_id := typeid_of(Data)
 
     return {
@@ -107,6 +104,7 @@ make_message :: proc(port: string, data: $Data) -> Message {
 
 // Clones a message. Primarily used internally for "fanning out" a message to multiple destinations.
 message_clone :: proc(message: Message) -> Message {
+    /*⎨scoped _ new_message⎬*/
     new_message := Message {
         port = message.port,
         datum = clone_datum(message),
@@ -116,9 +114,11 @@ message_clone :: proc(message: Message) -> Message {
 
 // Clones the datum portion of the message.
 clone_datum :: proc(message: Message) -> any {
-    /*tempvar*/ datum_ti := type_info_of(message.datum.id)
+    /*⎨scoped _ datum_ti⎬*/
+    datum_ti := type_info_of(message.datum.id)
 
-    /*tempvar*/ new_datum_ptr := mem.alloc(datum_ti.size, datum_ti.align) or_else panic("data_ptr alloc")
+    /*⎨scoped _ new_datum_ptr⎬*/
+    new_datum_ptr := mem.alloc(datum_ti.size, datum_ti.align) or_else panic("data_ptr alloc")
     mem.copy_non_overlapping(new_datum_ptr, message.datum.data, datum_ti.size)
 
     return any{new_datum_ptr, message.datum.id},
@@ -151,6 +151,7 @@ send :: proc(eh: ^Eh, port: string, data: $Data) {
 // exploring how to best expose an API that allows for concurrent IO etc.
 // while staying in-line with the principles of the system.
 yield :: proc(eh: ^Eh, port: string, data: $Data) {
+    /*⎨scoped _ msg⎬*/
     msg := make_message(port, data)
     fifo_push(&eh.yield, msg)
 }
@@ -158,8 +159,10 @@ yield :: proc(eh: ^Eh, port: string, data: $Data) {
 // Returns a list of all output messages on a container.
 // For testing / debugging purposes.
 output_list :: proc(eh: ^Eh, allocator := context.allocator) -> []Message {
+    /*⎨scoped _ list⎬*/
     list := make([]Message, eh.output.len)
 
+    /*⎨scoped _ iter⎬*/
     iter := make_fifo_iterator(&eh.output)
     for msg, i in fifo_iterate(&iter) {
         list[i] = msg
@@ -222,6 +225,7 @@ fifo_iterate :: proc(iter: ^FIFO_Iterator) -> (item: Message, idx: int, ok: bool
         return
     }
 
+    /*⎨scoped _ i⎬*/
     i := (uint(iter.idx)+iter.q.offset) % len(iter.q.data)
     if i < iter.q.len {
         ok = true
@@ -274,6 +278,7 @@ sender_eq :: proc(s1, s2: Sender) -> bool {
 
 // Delivers the given message to the receiver of this connector.
 deposit :: proc(c: Connector, message: Message) {
+    /*⎨scoped _ new_message⎬*/
     new_message := message_clone(message)
     new_message.port = c.receiver.port
     fifo_push(c.receiver.queue, new_message)
@@ -281,7 +286,9 @@ deposit :: proc(c: Connector, message: Message) {
 
 step_children :: proc(container: ^Eh) {
     for child in container.children {
+        /*⎨scoped _ msg⎬*/
         msg: Message
+        /*⎨scoped _ ok⎬*/
         ok: bool
 
         switch {
@@ -309,6 +316,7 @@ step_children :: proc(container: ^Eh) {
 // Routes a single message to all matching destinations, according to
 // the container's connection network.
 route :: proc(container: ^Eh, from: ^Eh, message: Message) {
+    /*⎨scoped _ from_sender⎬*/
     from_sender := Sender{from, message.port}
 
     for connector in container.connections {
@@ -342,15 +350,21 @@ child_is_ready :: proc(eh: ^Eh) -> bool {
 
 // Utility for printing an array of messages.
 print_output_list :: proc(eh: ^Eh) {
+    /*⎨scoped _ write_rune⎬*/
     write_rune   :: strings.write_rune
+    /*⎨scoped _ write_string⎬*/
     write_string :: strings.write_string
 
+    /*⎨scoped _ write_sb⎬*/
     sb: strings.Builder
     defer strings.builder_destroy(&sb)
 
     write_rune(&sb, '[')
 
+    /*⎨scoped _ iter⎬*/
     iter := make_fifo_iterator(&eh.output)
+    /*⎨scoped _ msg⎬*/
+    /*⎨scoped _ idx⎬*/
     for msg, idx in fifo_iterate(&iter) {
         if idx > 0 {
             write_string(&sb, ", ")

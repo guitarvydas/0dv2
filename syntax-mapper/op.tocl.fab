@@ -31,12 +31,13 @@ Op_RewriteForCL {
   dedentc [k] = ‛«k»’
 
 
-    skim_userRule [userRule more?] = ‛«userRule»«more»’
-  skim_compoundToken [tok more?] = ‛«tok»«more»’
-  skim_nestedbraces [lb stuff* rb more?] = ‛«lb»«stuff»«rb»«more»’
-  skim_nestedparens [lp stuff* rp more?] = ‛«lp»«stuff»«rp»«more»’
-  skim_nestedscope [so stuff* sc more?] = ‛«so»«stuff»«sc»«more»’
-  skim_bottom [any more?] = ‛«any»«more»’
+    skim [x+] = ‛«x»’
+  skim1_userRule [userRule] = ‛«userRule»’
+  skim1_compoundToken [tok] = ‛«tok»’
+  skim1_nestedbraces [lb stuff* rb] = ‛«lb»«stuff»«rb»’
+  skim1_nestedparens [lp stuff* rp] = ‛«lp»«stuff»«rp»’
+  skim1_nestedscope [so stuff* sc] = ‛«so»«stuff»«sc»’
+  skim1_bottom [any] = ‛«any»’
   
   scopeOpen  [ab scopebegin ws1 id1 ws2 ae] = ‛«ab»«scopebegin»«ws1»«id1»«ws2»«ae»’
   scopeClose [ab scopeend   ws1 id1 ws2 ae] = ‛«ab»«scopeend»«ws1»«id1»«ws2»«ae»’
