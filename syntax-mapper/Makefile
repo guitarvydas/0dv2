@@ -1,5 +1,5 @@
-#SRC=../../odin0d/0d/0d.odin
-SRC=test.odin
+SRC=../../odin0d/0d/0d.odin
+#SRC=test.odin
 
 # notes: 
 # steps: src (Odin syntax) -> tokenize -> pseudo -> cl (to Common Lisp)
@@ -73,6 +73,8 @@ scopedvar.ohm scopedvar.tocl.fab
 	./fab clstruct.ohm clstruct.tocl.fab support.js <junk--temp2 | tee junk--clstruct >junk--temp
 	@cat junk--temp >junk--temp2
 	./fab clproc.ohm clproc.tocl.fab support.js <junk--temp2 | \tee junk--clproc >junk--temp
+	@cat junk--temp >junk--temp2
+	./fab delannotations.ohm delannotations.tocl.fab support.js <junk--temp2 | \tee junk--delannotations >junk--temp
 	@cat junk--temp >junk--cl
 	@echo '---'
 	@echo
