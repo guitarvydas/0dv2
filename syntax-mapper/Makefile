@@ -1,6 +1,6 @@
 BIGSRC=../../odin0d/0d/0d.odin
 TESTSRC=test.odin
-SRC=$(BIGSRC)
+SRC=$(TESTSRC)
 
 # notes: 
 # steps: src (Odin syntax) -> tokenize -> pseudo -> cl (to Common Lisp)
@@ -76,7 +76,7 @@ delannotations.ohm delannotations.tocl.fab
 	./fab clproc.ohm clproc.tocl.fab support.js <junk--temp2 | tee junk--clproc >junk--temp
 	@cat junk--temp >junk--temp2
 	./fab delannotations.ohm delannotations.tocl.fab support.js <junk--temp2 | tee junk--delannotations >junk--temp
-	@cat junk--temp >junk--cl
+	./clean.py  <junk--temp >junk--cl
 	@echo '---'
 	@echo
 	cat - <junk--cl  | ./debug-cleanup.py | ./indenter.py | ./show.py | tee junk--show

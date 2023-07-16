@@ -1,20 +1,19 @@
   skim<terminator,userRule> = skim1<terminator,userRule>+
   skim1<terminator,userRule> =
     | userRule -- userRule
-    | ~terminator scopeOpen skim<terminator,userRule>* scopeClose -- nestedscope
+    | ~terminator scopeOpen skim<scopeClose,userRule>* scopeClose -- nestedscope
     | ~terminator compoundToken  -- compoundToken
-    | ~terminator "{" skim<terminator,userRule>* "}"  -- nestedbraces
-    | ~terminator "(" skim<terminator,userRule>* ")"  -- nestedparens
+    | ~terminator "{" skim<"}",userRule>* "}"  -- nestedbraces
+    | ~terminator "(" skim<")",userRule>* ")"  -- nestedparens
     | ~terminator any    -- bottom
 
-//   skim<terminator,userRule> =
-//     | userRule skim<terminator,userRule>? -- userRule
-//     | ~terminator scopeOpen skim<terminator,userRule>* scopeClose  skim<terminator,userRule>? -- nestedscope
-//     | ~terminator compoundToken skim<terminator,userRule>? -- compoundToken
-//     | ~terminator "{" skim<terminator,userRule>* "}"  skim<terminator,userRule>? -- nestedbraces
-//     | ~terminator "(" skim<terminator,userRule>* ")"  skim<terminator,userRule>? -- nestedparens
-// //    | (~terminator ~bracket ???compoundToken??? ???userRule??? any)+   skim<terminator,userRule>? -- bottom
-//     | ~terminator any   skim<terminator,userRule>? -- bottom
+  skimraw<terminator> = skimraw1<terminator>+
+  skimraw1<terminator> =
+    | ~terminator scopeOpen skimraw<scopeClose>* scopeClose -- nestedscope
+    | ~terminator compoundToken  -- compoundToken
+    | ~terminator "{" skimraw<"}">* "}"  -- nestedbraces
+    | ~terminator "(" skimraw<")">* ")"  -- nestedparens
+    | ~terminator any    -- bottom
 
   bracket = "{" | "}" | "(" | ")" | scopeOpen | scopeClose
 

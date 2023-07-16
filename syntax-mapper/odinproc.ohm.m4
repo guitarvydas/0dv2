@@ -13,12 +13,13 @@ OdinProcSignature {
   parameterList =
     | "(" notLastParameter* lastParameter? ")"
 
-  returnTypeList = skim<"{",proc>
+  returnTypeList = skimraw<"{">
 
   pragma = "#" ws "❲force_inline❳"
 
   notLastParameter =
     | id ws ":" ws toComma "," ws -- id
+    | id ws "," ws -- idsharedtype
     | allocToComma "," ws -- alloc
   lastParameter = 
     | id ws ":" ws toRPar ws &")" -- id
@@ -26,12 +27,11 @@ OdinProcSignature {
 
   procBody = skim<"}",proc>
 
-  toComma = skim<("," | ")"),proc>
-  toRPar = skim<")",proc>
+  toComma = skimraw<("," | ")")>
+  toRPar = skimraw<")">
 
   allocToComma = "❲allocator❳" ws "⟪:=⟫" toComma
   allocToRPar = "❲allocator❳" ws "⟪:=⟫" toRPar
-
 
   include(`tokens.ohm.inc')
   include(`skim.ohm.inc')  
