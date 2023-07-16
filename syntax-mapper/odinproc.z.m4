@@ -12,10 +12,10 @@ OdinProcSignature {
   parameterList [lp notLastParameters* lastParameter? rp] = ‛❪«notLastParameters»«lastParameter»❫’
 
   pragma [koctothorpe ws kinline] = ‛’
-  notLastParameter_id [id ws1 kcolon ws2 typestuff kcomma] = ‛ «id»’
-  notLastParameter_alloc [stuff kcomma] = ‛’
-  lastParameter_id [id ws1 kcolon ws2 typestuff krpar] = ‛ «id»’
-  lastParameter_alloc [stuff klpar] = ‛’
+  notLastParameter_id [id ws1 kcolon ws2 typestuff kcomma ws3] = ‛ «id»’
+  notLastParameter_alloc [stuff kcomma ws1] = ‛’
+  lastParameter_id [id ws1 kcolon ws2 typestuff ws3 lookahead] = ‛ «id»’
+  lastParameter_alloc [stuff ws1 lookahead] = ‛’
 
   allocToComma [kallocator ws1 kceq stuff] = ‛’
   allocToRPar [kallocator ws1 kceq stuff] = ‛’

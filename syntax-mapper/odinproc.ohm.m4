@@ -18,11 +18,11 @@ OdinProcSignature {
   pragma = "#" ws "❲force_inline❳"
 
   notLastParameter =
-    | id ws ":" ws toComma "," -- id
-    | allocToComma "," -- alloc
+    | id ws ":" ws toComma "," ws -- id
+    | allocToComma "," ws -- alloc
   lastParameter = 
-    | id ws ":" ws toRPar &")" -- id
-    | allocToRPar &")" -- alloc
+    | id ws ":" ws toRPar ws &")" -- id
+    | allocToRPar ws &")" -- alloc
 
   procBody = skim<"}",proc>
 
