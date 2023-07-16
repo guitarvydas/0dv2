@@ -37,6 +37,7 @@ Forin_Rewrite {
   skim1_nestedscope [so stuff* sc] = ‛«so»«stuff»«sc»’
   skim1_bottom [any] = ‛«any»’
 
+  skimraw [x+] = ‛«x»’
   skimraw1_compoundToken [tok] = ‛«tok»’
   skimraw1_nestedbraces [lb stuff* rb] = ‛«lb»«stuff»«rb»’
   skimraw1_nestedparens [lp stuff* rp] = ‛«lp»«stuff»«rp»’
