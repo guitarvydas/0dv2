@@ -181,6 +181,7 @@
   },
   "active": "90007e6683140748",
   "lastOpenFiles": [
+    "syntax-mapper/junk.md",
     "syntax-mapper/indenter-test.fakepy",
     "syntax-mapper/indenter-test.fakepy~",
     "syntax-mapper/junk.py",
@@ -191,7 +192,6 @@
     "syntax-mapper/junk--cl",
     "syntax-mapper/junk--delannotations",
     "syntax-mapper/junk--clproc",
-    "syntax-mapper/junk--clstruct",
     "cl/README.md",
     "odin/doc/visualizing-software.md",
     "odin/doc/parallel.png",
