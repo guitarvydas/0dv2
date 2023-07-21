@@ -184,3 +184,5 @@ clean:
 	rm -f append.*.fab message_literal.*.fab assign.*.fab funcall.*.fab
 	rm -f *~
 
+indenter-test:
+	./indenter.py <indenter-test.fakepy
