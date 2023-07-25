@@ -26,7 +26,7 @@
   datum)
 
 (defstruct connector
-  direction ;; 'down, 'across, 'up, 'through, 'ignore (in which case, receiver is nil)
+  direction ;; 'down, 'across, 'up, 'through, 'NC (in which case, receiver is nil)
   sender
   receiver)
 
@@ -66,7 +66,7 @@
 (defun Leaf/new (name handler &optional (instance-data nil))
   (let ((eh (EH/new name)))
     (setf (eh-handler eh) handler
-	  (eh-data eh) instance-data
+	  (eh-data eh) instance-data)
     eh))
 
 (defun send (eh port data)

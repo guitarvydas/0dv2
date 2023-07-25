@@ -86,21 +86,6 @@
 		       (setf (slot-value conn 'receiver) 
 			     (Receiver/new (slot-value self 'output)
 					   (slot-value (slot-value proto-conn 'port) 'port))))
-;;                  NCs don't need to be inserted at this low-level (non-existence of a connection is enough)		    
-;;		    (NC-down
-;;		     (setf (slot-value conn 'direction) 'NC-down)
-;;		     ;; (setf conn.sender (Sender/new 'self proto-conn.sender.port))
-;;		     (setf (slot-value conn 'sender) 
-;;			   (Sender/new 'self
-;;				       (slot-value (slot-value proto-conn 'port) 'port)))
-;;		     (setf (slot-value conn 'receiver) nil))
-;;		    (NC-across
-;;		     (setf (slot-value conn 'direction) 'NC-across)
-;;		     ;; (setf conn.sender (Sender/new proto-conn.sender.component proto-conn.sender.port))
-;;		     (setf (slot-value conn 'sender) 
-;;			   (Sender/new (slot-value (slot-value (slot-value proto-conn 'sender) 'component))
-;;				       (slot-value (slot-value proto-conn 'port) 'port)))
-;;		     (setf (slot-value conn 'receiver) nil))
 		      )
 		    (insert-and-mutate conn connections)))
       (setf (slot-value self connections) connections)

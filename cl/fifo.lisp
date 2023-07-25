@@ -1,13 +1,13 @@
 (defun FIFO/new ()
   (let ((q nil))
-    (list
-     ('append . (lambda (v) (setf q (append q (cons v nil))))) ;; append v to end of queue
-     ('push . (lambda (v) (push v q))) ;; push v to front of queue
-     ('pop . (lambda () (pop q))) ;; pop first item from front of queue (mutate q to be the rest)
-     ('is-empty . (lambda () (null q))) ;; return true if q is empty
-     ('as-list . (lambda () q))
-     ('%proto . nil)
-    )))
+    `(
+      ('append . ,(lambda (v) (setf q (append q (cons v nil))))) ;; append v to end of queue
+      ('push . ,(lambda (v) (push v q))) ;; push v to front of queue
+      ('pop . ,(lambda () (pop q))) ;; pop first item from front of queue (mutate q to be the rest)
+      ('is-empty . ,(lambda () (null q))) ;; return true if q is empty
+      ('as-list . ,(lambda () q))
+      ('%proto . nil)
+      )))
 
 (defun lookup (operation-name obj)
   (let ((pair (assoc operation-name obj)))
@@ -30,10 +30,10 @@
 (defun fifopush (fifo v)
   (@ push fifo v))
 
-(defun fifopop (fifo v)
+(defun fifopop (fifo)
   (@ pop fifo))
 
-(defun empty? (fifo v)
+(defun empty? (fifo)
   (@ is-empty fifo))
 
   
