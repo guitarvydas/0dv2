@@ -10,7 +10,7 @@
   connections
   handler
   leaf-handler
-  leaf-data
+  instance-data
   state)
 
 (defun EH/new (name)
@@ -18,7 +18,7 @@
     (setf (eh-name eh) name
           (eh-input eh) (FIFO/new)
 	  (eh-output eh) (FIFO/new)
-	  (eh-priority eh) (FIFO/new))
+	  (eh-yield eh) (FIFO/new))
     eh))
 
 (defstruct message
@@ -39,7 +39,7 @@
   port)
 
 (defun Message/new (port data)
-  (make-messge :port port :datum data))
+  (make-message :port port :datum data))
 
 ;; Clones a message
 (defun clone-message (message)
@@ -56,17 +56,19 @@
 (defun destroy-message (message)
   ;; No need to explicitly free memory in Common Lisp, as it has automatic garbage collection
   ;; Do nothing here
+  (declare (ignore message))
   )
 
 (defun Container/new (name)
   (let ((eh (EH/new name)))
-    (setf (eh-handler eh) #'container-handler)
+    (setf (eh-handler eh) #'container-handler
+          (eh-instance-data eh) nil)
     eh))
 
 (defun Leaf/new (name handler &optional (instance-data nil))
   (let ((eh (EH/new name)))
     (setf (eh-handler eh) handler
-	  (eh-data eh) instance-data)
+	  (eh-instance-data eh) instance-data)
     eh))
 
 (defun send (eh port data)
@@ -101,8 +103,8 @@
   (let ((input-msg (fifopop fifo)))
     (funcall (eh-handler child) child input-msg)
     (loop while (not (empty? (eh-output child)))
-	  do (let (output-message (fifopop (eh-output child)))
-	       (route container output-message)
+	  do (let ((output-message (fifopop (eh-output child))))
+	       (route container child output-message)
 	       (destroy-message output-message)))))
   
 (defun step-children (container)

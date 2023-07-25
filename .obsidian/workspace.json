@@ -181,6 +181,7 @@
   },
   "active": "90007e6683140748",
   "lastOpenFiles": [
+    "cl/#fifo.lisp#",
     "cl/sample.json~",
     "cl/#registry.lisp#",
     "cl/sample.json",
@@ -190,7 +191,6 @@
     "cl/DI-Registry.md",
     "cl/#registry-prompt.md#",
     "cl/registry.lisp",
-    "cl/#fifo.lisp#",
     "cl/0d-prompt.md~",
     "cl/fifo.lisp~",
     "cl/0d-prompt.md",

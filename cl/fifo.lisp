@@ -19,21 +19,21 @@
 	     nil)))))
 
 (defmacro @ (operation-name obj &rest args)
-  `(let ((%func (lookup ',operation-name ,obj)))
+  `(let ((%func (lookup ,operation-name ,obj)))
      (unless %func 
        (error (format nil "operator ~a not found in object ~a" ,operation-name ,obj)))
-     (apply %func ,args)))
+     (apply %func (list ,@args))))
 
 (defun enqueue (fifo v)
-  (@ append fifo v))
+  (@ 'append fifo v))
 
 (defun fifopush (fifo v)
-  (@ push fifo v))
+  (@ 'push fifo v))
 
 (defun fifopop (fifo)
-  (@ pop fifo))
+  (@ 'pop fifo))
 
 (defun empty? (fifo)
-  (@ is-empty fifo))
+  (@ 'is-empty fifo))
 
   
