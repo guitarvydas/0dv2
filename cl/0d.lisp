@@ -98,7 +98,7 @@
   (setf (eh-state eh) state))
 
 (defun sender-eq (s1 s2)
-  (and (eq (sender-component s1) (sender-component s2))
+  (and (equal (sender-component s1) (sender-component s2))
        (equal (sender-port s1) (sender-port s2))))
 
 (defun deposit (connector message)
@@ -110,6 +110,7 @@
 
 (defun step1 (container child fifo)
   (let ((input-msg (fifopop fifo)))
+    (format *standard-output* "~%stepping: ~a" (slot-value child 'name))
     (funcall (eh-handler child) child input-msg)
     (loop while (not (empty? (eh-output child)))
 	  do (let ((output-message (fifopop (eh-output child))))
