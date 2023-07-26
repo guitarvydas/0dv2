@@ -26,9 +26,9 @@
       (unless (not err)
         (error (format nil "Failed parsing container XML")))
       (loop for decl in decls
-            do (let ((name (slot-value decl 'name)))
-		 (setf (gethash name reg) (ContainerInitializer/new name decl))
-                 reg)))))
+            do (let ((name (cdr (assoc 'name decl))))
+		 (setf (gethash name reg) (ContainerInitializer/new name decl)))))
+    reg))
 
 (defun get-component-instance (reg name)
   (multiple-value-bind (initializer ok)

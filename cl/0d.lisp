@@ -110,7 +110,6 @@
 
 (defun step1 (container child fifo)
   (let ((input-msg (fifopop fifo)))
-    (format *standard-output* "~%stepping: ~a" (slot-value child 'name))
     (funcall (eh-handler child) child input-msg)
     (loop while (not (empty? (eh-output child)))
 	  do (let ((output-message (fifopop (eh-output child))))
