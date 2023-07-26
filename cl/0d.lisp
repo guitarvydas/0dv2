@@ -38,6 +38,15 @@
   queue
   port)
 
+(defun Connector/new (d s r)
+  (make-connector d s r))
+
+(defun Sender/new (component port)
+  (make-sender component port))
+
+(defun Receiver/new (queue port)
+  (make-sender queue port))
+
 (defun Message/new (port data)
   (make-message :port port :datum data))
 
@@ -129,3 +138,6 @@
 (defun child-is-ready (eh)
   (or (not (empty? (eh-input eh)))
       (not (empty? (eh-yield eh)))))
+
+(defun insert-and-mutate (v lis)
+  (push v lis))

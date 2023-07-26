@@ -1,43 +1,3 @@
-
-(defun ComponentRegistry/new ()
-  (make-hash-table :test 'equal))
-
-
-(defstruct initializer
-  name
-  init)
-
-(defun ContainerInitializer/new (name init)
-  (make-initializer :name name :init init))
-(defun LeafInitializer/new (name init)
-  (make-initializer :name name :init init))
-
-
-(defun make-component-registry (leaves container-xml)
-  ;; creates a registry  given a diagram and a set of Leaf prototypes
-  ;; see DI-registry.md
-  
-  (let ((reg (ComponentRegistry/new)))
-    (loop for leaf-init in leaves
-          do (let ((name (slot-value leaf-init 'name)))
-               (setf (gethash name reg) leaf-init)))
-    (multiple-value-bind (decls err) 
-        (read-json-graph container-xml)
-      (unless (not err)
-        (error (format nil "Failed parsing container XML")))
-      (loop for decl in decls
-            do (let ((name (slot-value decl 'name)))
-		 (setf (gethash name reg) (ContainerInitializer/new name decl))
-                 reg)))))
-
-(defun get-component-instance (reg name)
-  (multiple-value-bind (initializer ok)
-      (gethash name reg)
-    (if ok
-	(let ((instance (funcall (slot-value initializer 'init))))
-	  (values instance t))
-      (values nil nil))))
-
 (defun container-initializer (reg decl)
   ;; instantiating ("initializing") a Container is relatively simple in principle
   ;; 2 things need to happen:
@@ -94,19 +54,3 @@
                  (insert-and-mutate conn connections)))
       (setf (slot-value self connections) connections))
     self))
-
-(defun dump-registry (reg)
-  (format *standard-output* "~%")
-  (maphash #'(lambda (key v)
-	       (format *standard-output* "~a ~a~%" key v))
-	   reg)
-  (format *standard-output* "~%"))
-
-(defun dump-diagram (diagram-as-json-file)
-    (multiple-value-bind (decls err)
-        (read-json-graph diagram-as-json-file)
-      (unless (not err)
-        (error (format nil "Failed parsing diagram ~a" diagram-as-json-file)))
-      (loop for decl in decls
-	    do (let ((j (json:encode-json decl)))
-		 (format *standard-output* "~a~%" j)))))
