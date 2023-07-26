@@ -2,8 +2,8 @@
   (send eh "stdout" (slot-value msg 'datum)))
 
 (defun main ()
-  (format *standard-output* "*** Handmade Visibility Jam ***")
-  (format *standard-output* "--- Super Basic: Single ---")
+  (format *standard-output* "~%*** Handmade Visibility Jam ***")
+  (format *standard-output* "~%--- Super Basic: Single ---")
   (let ((echo0 (Leaf/New "10" #'echo-handler))
 	(top (Container/new "Top")))
     (setf (slot-value top 'children)
@@ -23,6 +23,6 @@
     (funcall (slot-value top 'handler)
              top
              (Message/new "stdin" "hello"))
-    (slot-value top 'output)))
+    (as-list (slot-value top 'output))))
 	  
 	  

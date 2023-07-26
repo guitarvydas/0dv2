@@ -39,13 +39,13 @@
   port)
 
 (defun Connector/new (d s r)
-  (make-connector d s r))
+  (make-connector :direction d :sender s :receiver r))
 
 (defun Sender/new (component port)
-  (make-sender component port))
+  (make-sender :component component :port port))
 
 (defun Receiver/new (queue port)
-  (make-sender queue port))
+  (make-receiver :queue queue :port port))
 
 (defun Message/new (port data)
   (make-message :port port :datum data))
