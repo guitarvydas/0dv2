@@ -12,11 +12,11 @@
       (setf (slot-value top 'connections)
 	    (list
 	     (Connector/new 'Down 
-			     (Sender/new 'self "stdin")
+			     (Sender/new top "stdin")
 			     (Receiver/new (slot-value child0 'input) "stdin"))
 	     (Connector/new 'Up
 			     (Sender/new child0 "stdout")
-			     (Receiver/new 'self "stdout"))
+			     (Receiver/new (slot-value top 'output) "stdout"))
 	     )
 	    )
       )

@@ -90,7 +90,7 @@
 
 
 (defun container-handler (eh message)
-  (route eh nil message)
+  (route eh eh message)
   (loop until (not (any-child-ready eh))
         do (step-children eh)))
 

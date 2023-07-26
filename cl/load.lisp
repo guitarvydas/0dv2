@@ -5,3 +5,4 @@
 (load (format nil "~a~a" *root* "0d.lisp"))
 (load (format nil "~a~a" *root* "registry.lisp"))
 (load (format nil "~a~a" *root* "read-json-graph.lisp"))
+(load (format nil "~a~a" *root* "main.lisp"))
