@@ -1,3 +1,4 @@
 (defun read-json-graph (filename)
-  (with-input-from-string (j (uiop:read-file-string (format nil "~a~a" *root* filename)))
-    (cl-json:decode-json j)))
+  (let ((jstr (uiop:read-file-string (format nil "~a~a" *root* filename))))
+    (with-input-from-string (j jstr)
+      (cl-json:decode-json j))))

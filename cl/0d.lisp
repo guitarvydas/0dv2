@@ -13,12 +13,12 @@
   instance-data
   state)
 
-(defun EH/new (name)
+(defun EH/fresh (name)
   (let ((eh (make-eh)))
     (setf (eh-name eh) name
-          (eh-input eh) (FIFO/new)
-	  (eh-output eh) (FIFO/new)
-	  (eh-yield eh) (FIFO/new))
+          (eh-input eh) (FIFO/fresh)
+	  (eh-output eh) (FIFO/fresh)
+	  (eh-yield eh) (FIFO/fresh))
     eh))
 
 (defstruct message
@@ -38,16 +38,16 @@
   queue
   port)
 
-(defun Connector/new (d s r)
+(defun Connector/fresh (d s r)
   (make-connector :direction d :sender s :receiver r))
 
-(defun Sender/new (component port)
+(defun Sender/fresh (component port)
   (make-sender :component component :port port))
 
-(defun Receiver/new (queue port)
+(defun Receiver/fresh (queue port)
   (make-receiver :queue queue :port port))
 
-(defun Message/new (port data)
+(defun Message/fresh (port data)
   (make-message :port port :datum data))
 
 ;; Clones a message
@@ -68,24 +68,24 @@
   (declare (ignore message))
   )
 
-(defun Container/new (name)
-  (let ((eh (EH/new name)))
+(defun Container/fresh (name)
+  (let ((eh (EH/fresh name)))
     (setf (eh-handler eh) #'container-handler
           (eh-instance-data eh) nil)
     eh))
 
-(defun Leaf/new (name handler &optional (instance-data nil))
-  (let ((eh (EH/new name)))
+(defun Leaf/fresh (name handler &optional (instance-data nil))
+  (let ((eh (EH/fresh name)))
     (setf (eh-handler eh) handler
 	  (eh-instance-data eh) instance-data)
     eh))
 
 (defun send (eh port data)
-  (let ((msg (Message/new (clone-port port) (clone-datum data))))
+  (let ((msg (Message/fresh (clone-port port) (clone-datum data))))
     (enqueue (eh-output eh) msg)))
 
 (defun yield (eh port data)
-  (let ((msg (Message/new (clone-port port) (clone-datum data))))
+  (let ((msg (Message/fresh (clone-port port) (clone-datum data))))
     (enqueue (eh-yield eh) msg)))
 
 

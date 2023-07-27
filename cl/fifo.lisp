@@ -1,4 +1,4 @@
-(defun FIFO/new ()
+(defun FIFO/fresh ()
   (let ((q nil))
     `(
       (append . ,(lambda (v) (setf q (append q (cons v nil))))) ;; append v to end of queue
