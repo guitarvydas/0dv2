@@ -181,6 +181,8 @@
   },
   "active": "90007e6683140748",
   "lastOpenFiles": [
+    "cl/datum.lisp~",
+    "cl/#0d.lisp#",
     "cl/#main.lisp#",
     "cl/#0doperands.lisp#",
     "cl/datum.lisp",
@@ -190,8 +192,6 @@
     "cl/0doperands.lisp~",
     "cl/#load.lisp#",
     "cl/0doperands.lisp",
-    "cl/#0d.lisp#",
-    "cl/#0db.lisp#",
     "cl/DI-Registry.md",
     "cl/0d-prompt.md",
     "cl/registry-prompt.md",

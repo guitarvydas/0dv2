@@ -1,5 +1,5 @@
 (defun echo-handler (eh msg)
-  (send eh "stdout" (slot-value msg 'datum)))
+  (send eh "stdout" (message-datum msg)))
 
 (defun main ()
   (format *standard-output* "~%*** Handmade Visibility Jam ***")
@@ -22,7 +22,7 @@
       )
     (funcall (slot-value top 'handler)
              top
-             (Message/fresh "stdin" "hello"))
+             (Message/fresh :port "stdin" :datum "hello"))
     (format *standard-output* "~%output: ~a" (as-list (slot-value top 'output)))
     )
   (format *standard-output* "~%--- Basic: Synchronous ---")
@@ -49,7 +49,7 @@
       )
     (funcall (slot-value top 'handler)
              top
-             (Message/fresh "stdin" "hello"))
+             (Message/fresh :port "stdin" :datum "hello"))
     (format *standard-output* "~%output: ~a" (as-list (slot-value top 'output)))
     )
   (format *standard-output* "~%--- Basic: Parallel ---")
@@ -79,7 +79,7 @@
       )
     (funcall (slot-value top 'handler)
              top
-             (Message/fresh "stdin" "hello"))
+             (Message/fresh :port "stdin" :datum "hello"))
     (format *standard-output* "~%output: ~a" (as-list (slot-value top 'output)))
     )
 

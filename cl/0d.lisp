@@ -21,10 +21,6 @@
 	  (eh-yield eh) (FIFO/fresh nil))
     eh))
 
-(defstruct message
-  port
-  datum)
-
 (defstruct connector
   direction ;; 'down, 'across, 'up, 'through, 'NC (in which case, receiver is nil)
   sender
@@ -32,27 +28,6 @@
 
 (defun Connector/fresh (d s r)
   (make-connector :direction d :sender s :receiver r))
-
-(defun Message/fresh (port data)
-  (make-message :port port :datum data))
-
-;; Clones a message
-(defun clone-message (message)
-  (make-message :port (clone-port (message-port message)) :datum (clone-datum (message-datum message))))
-
-;; Clones the datum portion of the message
-(defun clone-datum (datum)
-  (copy-seq datum))
-
-(defun clone-port (port)
-  (copy-seq port))
-
-;; Frees a message
-(defun destroy-message (message)
-  ;; No need to explicitly free memory in Common Lisp, as it has automatic garbage collection
-  ;; Do nothing here
-  (declare (ignore message))
-  )
 
 (defun Container/fresh (name)
   (let ((eh (EH/fresh name)))
@@ -67,13 +42,14 @@
     eh))
 
 (defun send (eh port data)
-  (let ((msg (Message/fresh (clone-port port) (clone-datum data))))
-    (enqueue (eh-output eh) msg)))
+  (let ((uncloned-msg (Message/fresh :port port :datum data)))
+    (let ((msg (clone uncloned-msg)))
+      (enqueue (eh-output eh) msg))))
 
 (defun yield (eh port data)
-  (let ((msg (Message/fresh (clone-port port) (clone-datum data))))
-    (enqueue (eh-yield eh) msg)))
-
+  (let ((uncloned-msg (Message/fresh :port port :datum data)))
+    (let ((msg (clone uncloned-msg)))
+      (enqueue (eh-yield eh) msg))))
 
 (defun container-handler (eh message)
   (route eh eh message)
@@ -86,9 +62,10 @@
 (defun deposit (connector message)
   (let ((recvr (connector-receiver connector)))
       (if (not (null recvr))
-	  (let ((new-message (clone-message message)))
-	    (setf (message-port new-message) (receiver-port (connector-receiver connector)))
-	    (enqueue (receiver-queue recvr) new-message)))))
+	  (let ((uncloned-new-message (Message/fresh :port (receiver-port (connector-receiver connector))
+					    :datum (message-datum message))))
+	    (let ((new-message (clone uncloned-new-message)))
+	      (enqueue (receiver-queue recvr) new-message))))))
 
 (defun step1 (container child fifo)
   (let ((input-msg (dequeue fifo)))
@@ -96,7 +73,7 @@
     (loop while (not (empty? (eh-output child)))
 	  do (let ((output-message (dequeue (eh-output child))))
 	       (route container child output-message)
-	       (destroy-message output-message)))))
+	       (destroy output-message)))))
   
 (defun step-children (container)
   (dolist (child (eh-children container))

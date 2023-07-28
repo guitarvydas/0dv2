@@ -41,3 +41,18 @@
   (lookup-call $me 'queue))
 (defun receiver-port ($me)
   (lookup-call $me 'port))
+
+
+
+(defun Message/fresh (&key port datum)
+    (let ((instance-variables (make-instance-variables-table `((_port ,port) (_datum ,datum)))))
+      (let ((operations (make-operations-table 
+			 `((datum ,(attr _datum))
+			   (port ,(attr _port))))))
+	(make-operand instance-variables operations nil (Datum/template)))))
+	
+
+(defun message-datum ($me)
+  (lookup-call $me 'datum))
+(defun message-port ($me)
+  (lookup-call $me 'port))
