@@ -181,6 +181,7 @@
   },
   "active": "90007e6683140748",
   "lastOpenFiles": [
+    "cl/test-fifo.lisp~",
     "cl/#load.lisp#",
     "cl/test-fifo.lisp",
     "cl/#fifo.lisp#",
@@ -191,7 +192,6 @@
     "cl/#junk.lisp#",
     "cl/junk.lisp~",
     "cl/junk.json",
-    "cl/read-json-graph.lisp~",
     "cl/DI-Registry.md",
     "cl/0d-prompt.md",
     "cl/registry-prompt.md",
