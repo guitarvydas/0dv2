@@ -48,8 +48,8 @@ _ instance variable
 |#
 
 (defun FIFO/fresh ()
-  (let ((data (make-data-table `((_q nil)))))
-    (let ((operations (make-function-table 
+  (let ((instance-variables (make-instance-variables-table `((_q nil)))))
+    (let ((operations (make-operations-table 
                        `((clone ,#'(lambda ($me) (clone-operand $me)))
                          (free ,#'(lambda ($me) (declare (ignore $me))))
                          (enqueue ,#'(lambda ($me v)
@@ -72,16 +72,16 @@ _ instance variable
                                         (cond ((null previous-value) t)
                                               (t nil)))))
                          (as-list ,#'(lambda ($me) (get-named-instance-variable-value $me '_q)))))))
-      (make-operand-table `((data ,data) (operations ,operations)) nil))))
+      (make-operand instance-variables operations nil))))
 
 (defun enqueue ($me v)
-  (lookup-call 'enqueue $me v))
+  (lookup-call $me 'enqueue v))
 (defun push ($me v)
-  (lookup-call 'push $me v))
+  (lookup-call $me 'push v))
 (defun dequeue ($me)
-  (lookup-call 'dequeue $me))
+  (lookup-call $me 'dequeue))
 (defun empty? ($me)
-  (lookup-call 'empty $me))
+  (lookup-call $me 'empty?))
 (defun as-list ($me)
-  (lookup-call 'as-list $me))
+  (lookup-call $me 'as-list))
 

@@ -9,9 +9,9 @@
 (defun make-instance-variables-table (pairs)
   (make-hashmap pairs (make-hash-table :test 'equal)))
 
-(defun make-operand-table (pairs parent)
-  (let ((lis (make-listmap pairs)))
-    (coerce-list-to-vector (append lis (cons parent nil)))))
+(defun make-operand (instance-variables operations parent)
+  (let ((lis (list instance-variables operations parent)))
+    (coerce-list-to-vector lis)))
 
 (defun make-hashmap (pairs htable)
   (cond ((null pairs) htable)
@@ -27,7 +27,7 @@
 	     (cons (second pair) (make-listmap tail))))))
 
 (defun coerce-list-to-vector (lis)
-  (coerce 'vector lis))
+  (coerce lis 'vector))
 
 (defun get-instance-variables-table (operand)
   ;; when operand is known to be a vector[3]
@@ -89,9 +89,9 @@
 ;;;;;;;;
 
 
-(defun lookup-call (name operand &rest args)
+(defun lookup-call (operand name &rest args)
   (let ((func (get-named-operation operand name)))
     (if (null func)
 	(error (format nil "operation ~a not found in ~a" name operand))
-      (funcall func args))))
+      (apply func (cons operand args)))))
 
