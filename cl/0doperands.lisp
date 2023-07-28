@@ -56,3 +56,26 @@
   (lookup-call $me 'datum))
 (defun message-port ($me)
   (lookup-call $me 'port))
+
+
+
+(defun Connector/fresh (&key direction sender receiver)
+  (let ((instance-variables (make-instance-variables-table `(
+							     (_direction ,direction) 
+							     (_sender ,sender)
+							     (_receiver ,receiver)
+							     ))))
+      (let ((operations (make-operations-table 
+			 `((direction ,(attr _direction))
+			   (sender ,(attr _sender))
+			   (receiver ,(attr _receiver))))))
+	(make-operand instance-variables operations nil (Datum/template)))))
+	
+
+(defun connector-direction ($me)
+  (lookup-call $me 'direction))
+(defun connector-sender ($me)
+  (lookup-call $me 'sender))
+(defun connector-receiver ($me)
+  (lookup-call $me 'receiver))
+

@@ -21,14 +21,6 @@
 	  (eh-yield eh) (FIFO/fresh nil))
     eh))
 
-(defstruct connector
-  direction ;; 'down, 'across, 'up, 'through, 'NC (in which case, receiver is nil)
-  sender
-  receiver)
-
-(defun Connector/fresh (d s r)
-  (make-connector :direction d :sender s :receiver r))
-
 (defun Container/fresh (name)
   (let ((eh (EH/fresh name)))
     (setf (eh-handler eh) #'container-handler

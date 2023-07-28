@@ -11,12 +11,12 @@
     (let ((child0 (nth 0 (slot-value top 'children))))
       (setf (slot-value top 'connections)
 	    (list
-	     (Connector/fresh 'Down 
-                            (Sender/fresh :component top :port "stdin")
-                            (Receiver/fresh :queue (eh-input child0) :port "stdin"))
-	     (Connector/fresh 'Up
-                            (Sender/fresh :component child0 :port "stdout")
-                            (Receiver/fresh :queue (eh-output top) :port "stdout"))
+	     (Connector/fresh :direction 'Down 
+                              :sender (Sender/fresh :component top :port "stdin")
+                              :receiver (Receiver/fresh :queue (eh-input child0) :port "stdin"))
+	     (Connector/fresh :direction 'Up
+                              :sender (Sender/fresh :component child0 :port "stdout")
+                              :receiver (Receiver/fresh :queue (eh-output top) :port "stdout"))
 	     )
 	    )
       )
@@ -35,15 +35,15 @@
           (child1 (nth 1 (slot-value top 'children))))
       (setf (slot-value top 'connections)
 	    (list
-	     (Connector/fresh 'Down 
-                            (Sender/fresh :component top :port "stdin")
-                            (Receiver/fresh :queue (eh-input child0) :port "stdin"))
-	     (Connector/fresh 'Across
-                            (Sender/fresh :component child0 :port "stdout")
-                            (Receiver/fresh :queue (eh-input child1) :port "stdin"))
-	     (Connector/fresh 'Up
-                            (Sender/fresh :component child1 :port "stdout")
-                            (Receiver/fresh :queue (eh-output top) :port "stdout"))
+	     (Connector/fresh :direction 'Down 
+                            :sender (Sender/fresh :component top :port "stdin")
+                            :receiver (Receiver/fresh :queue (eh-input child0) :port "stdin"))
+	     (Connector/fresh :direction 'Across
+                            :sender (Sender/fresh :component child0 :port "stdout")
+                            :receiver (Receiver/fresh :queue (eh-input child1) :port "stdin"))
+	     (Connector/fresh :direction 'Up
+                            :sender (Sender/fresh :component child1 :port "stdout")
+                            :receiver (Receiver/fresh :queue (eh-output top) :port "stdout"))
 	     )
 	    )
       )
@@ -62,18 +62,18 @@
           (child1 (nth 1 (slot-value top 'children))))
       (setf (slot-value top 'connections)
 	    (list
-	     (Connector/fresh 'Down 
-                            (Sender/fresh :component top :port "stdin")
-                            (Receiver/fresh :queue (eh-input child0) :port "stdin"))
-	     (Connector/fresh 'Down 
-                            (Sender/fresh :component top :port "stdin")
-                            (Receiver/fresh :queue (eh-input child1) :port "stdin"))
-	     (Connector/fresh 'Up
-                            (Sender/fresh :component child0 :port "stdout")
-                            (Receiver/fresh :queue (eh-output top) :port "stdout"))
-	     (Connector/fresh 'Up
-                            (Sender/fresh :component child1 :port "stdout")
-                            (Receiver/fresh :queue (eh-output top) :port "stdout"))
+	     (Connector/fresh :direction 'Down 
+                            :sender (Sender/fresh :component top :port "stdin")
+                            :receiver (Receiver/fresh :queue (eh-input child0) :port "stdin"))
+	     (Connector/fresh :direction 'Down 
+                            :sender (Sender/fresh :component top :port "stdin")
+                            :receiver (Receiver/fresh :queue (eh-input child1) :port "stdin"))
+	     (Connector/fresh :direction 'Up
+                            :sender (Sender/fresh :component child0 :port "stdout")
+                            :receiver (Receiver/fresh :queue (eh-output top) :port "stdout"))
+	     (Connector/fresh :direction 'Up
+                            :sender (Sender/fresh :component child1 :port "stdout")
+                            :receiver (Receiver/fresh :queue (eh-output top) :port "stdout"))
 	     )
 	    )
       )
@@ -108,18 +108,18 @@
 ;;   ;;         (child1 (nth 1 (slot-value top 'children))))
 ;;   ;;     (setf (slot-value top 'connections)
 ;;   ;; 	    (list
-;;   ;; 	     (Connector/fresh 'Down 
-;;   ;;                           (Sender/fresh :component top :port "stdin")
-;;   ;;                           (Receiver/fresh :queue (eh-input child0) :port "stdin"))
-;;   ;; 	     (Connector/fresh 'Down 
-;;   ;;                           (Sender/fresh :component top :port "stdin")
-;;   ;;                           (Receiver/fresh :queue (eh-input child1) :port "stdin"))
-;;   ;; 	     (Connector/fresh 'Up
-;;   ;;                           (Sender/fresh :component child0 :port "stdout")
-;;   ;;                           (Receiver/fresh :queue (eh-output top) :port "stdout"))
-;;   ;; 	     (Connector/fresh 'Up
-;;   ;;                           (Sender/fresh :component child1 :port "stdout")
-;;   ;;                           (Receiver/fresh :queue (eh-output top) :port "stdout"))
+;;   ;; 	     (Connector/fresh :direction 'Down 
+;;   ;;                           :sender (Sender/fresh :component top :port "stdin")
+;;   ;;                           :receiver (Receiver/fresh :queue (eh-input child0) :port "stdin"))
+;;   ;; 	     (Connector/fresh :direction 'Down 
+;;   ;;                           :sender (Sender/fresh :component top :port "stdin")
+;;   ;;                           :receiver (Receiver/fresh :queue (eh-input child1) :port "stdin"))
+;;   ;; 	     (Connector/fresh :direction 'Up
+;;   ;;                           :sender (Sender/fresh :component child0 :port "stdout")
+;;   ;;                           :receiver (Receiver/fresh :queue (eh-output top) :port "stdout"))
+;;   ;; 	     (Connector/fresh :direction 'Up
+;;   ;;                           :sender (Sender/fresh :component child1 :port "stdout")
+;;   ;;                           :receiver (Receiver/fresh :queue (eh-output top) :port "stdout"))
 ;;   ;; 	     )
 ;;   ;; 	    )
 ;;   ;;     )
