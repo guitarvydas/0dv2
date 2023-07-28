@@ -14,8 +14,8 @@
 (defun Sender/fresh (&key component port)
     (let ((instance-variables (make-instance-variables-table `((_component ,component) (_port ,port)))))
       (let ((operations (make-operations-table 
-			 `((component ,#'(lambda ($me) (get-named-instance-variable-value $me '_component)))
-			   (port ,#'(lambda ($me) (get-named-instance-variable-value $me '_port)))
+			 `((component ,(attr _component))
+			   (port ,(attr _port))
 			   (=? ,#'(lambda ($me other)
 				   (and (equal (component $me) (component other))
 					(equal (port $me) (port other)))))))))
@@ -33,7 +33,7 @@
     (let ((instance-variables (make-instance-variables-table `((_queue ,queue) (_port ,port)))))
       (let ((operations (make-operations-table 
 			 `((queue ,(attr _queue))
-			   (port ,#'(lambda ($me) (get-named-instance-variable-value $me '_port)))))))
+			   (port ,(attr _port))))))
 	(make-operand instance-variables operations nil (Datum/template)))))
 	
 

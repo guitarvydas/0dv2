@@ -50,7 +50,7 @@ _ instance variable
     (let ((operations (make-operations-table 
                        `((clone ,#'(lambda ($me) (clone-operand $me)))
                          (free ,#'(lambda ($me) (declare (ignore $me))))
-                         (Enqueue ,#'(lambda ($me v)
+                         (enqueue ,#'(lambda ($me v)
                                        (let ((previous-value (get-named-instance-variable-value $me '_q)))
                                          (cond ((null previous-value)
                                                 (set-named-instance-variable $me '_q (cons v nil)))
