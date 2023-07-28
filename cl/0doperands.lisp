@@ -28,3 +28,16 @@
   (lookup-call $me 'port))
 (defun =? ($me other)
   (lookup-call $me '=? other))
+
+(defun Receiver/fresh (&key queue port)
+    (let ((instance-variables (make-instance-variables-table `((_queue ,queue) (_port ,port)))))
+      (let ((operations (make-operations-table 
+			 `((queue ,#'(lambda ($me) (get-named-instance-variable-value $me '_queue)))
+			   (port ,#'(lambda ($me) (get-named-instance-variable-value $me '_port)))))))
+	(make-operand instance-variables operations nil (Datum/template)))))
+	
+
+(defun receiver-queue ($me)
+  (lookup-call $me 'queue))
+(defun receiver-port ($me)
+  (lookup-call $me 'port))

@@ -78,8 +78,9 @@
 (defun clone-operand (operand)
   (let ((instance-variables-table (copy-table (get-instance-variables-table operand)))
         (operations-table (copy-table (get-operations-table operand)))
-        (parent (get-parent operand)))
-    (vector instance-variables-table operations-table parent)))
+        (parent-instance (get-parent-instance operand))
+        (parent-template (get-parent-template operand)))
+    (vector instance-variables-table operations-table parent-instance parent-template)))
       
 
 ;;; https://stackoverflow.com/questions/26045442/copy-hash-table-in-lisp

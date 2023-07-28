@@ -13,10 +13,10 @@
 	    (list
 	     (Connector/fresh 'Down 
                             (Sender/fresh :component top :port "stdin")
-                            (Receiver/fresh (slot-value child0 'input) "stdin"))
+                            (Receiver/fresh :queue (eh-input child0) :port "stdin"))
 	     (Connector/fresh 'Up
                             (Sender/fresh :component child0 :port "stdout")
-                            (Receiver/fresh (slot-value top 'output) "stdout"))
+                            (Receiver/fresh :queue (eh-output top) :port "stdout"))
 	     )
 	    )
       )
@@ -37,13 +37,13 @@
 	    (list
 	     (Connector/fresh 'Down 
                             (Sender/fresh :component top :port "stdin")
-                            (Receiver/fresh (slot-value child0 'input) "stdin"))
+                            (Receiver/fresh :queue (eh-input child0) :port "stdin"))
 	     (Connector/fresh 'Across
                             (Sender/fresh :component child0 :port "stdout")
-                            (Receiver/fresh (slot-value child1 'input) "stdin"))
+                            (Receiver/fresh :queue (eh-input child1) :port "stdin"))
 	     (Connector/fresh 'Up
                             (Sender/fresh :component child1 :port "stdout")
-                            (Receiver/fresh (slot-value top 'output) "stdout"))
+                            (Receiver/fresh :queue (eh-output top) :port "stdout"))
 	     )
 	    )
       )
@@ -64,16 +64,16 @@
 	    (list
 	     (Connector/fresh 'Down 
                             (Sender/fresh :component top :port "stdin")
-                            (Receiver/fresh (slot-value child0 'input) "stdin"))
+                            (Receiver/fresh :queue (eh-input child0) :port "stdin"))
 	     (Connector/fresh 'Down 
                             (Sender/fresh :component top :port "stdin")
-                            (Receiver/fresh (slot-value child1 'input) "stdin"))
+                            (Receiver/fresh :queue (eh-input child1) :port "stdin"))
 	     (Connector/fresh 'Up
                             (Sender/fresh :component child0 :port "stdout")
-                            (Receiver/fresh (slot-value top 'output) "stdout"))
+                            (Receiver/fresh :queue (eh-output top) :port "stdout"))
 	     (Connector/fresh 'Up
                             (Sender/fresh :component child1 :port "stdout")
-                            (Receiver/fresh (slot-value top 'output) "stdout"))
+                            (Receiver/fresh :queue (eh-output top) :port "stdout"))
 	     )
 	    )
       )
@@ -110,16 +110,16 @@
 ;;   ;; 	    (list
 ;;   ;; 	     (Connector/fresh 'Down 
 ;;   ;;                           (Sender/fresh :component top :port "stdin")
-;;   ;;                           (Receiver/fresh (slot-value child0 'input) "stdin"))
+;;   ;;                           (Receiver/fresh :queue (eh-input child0) :port "stdin"))
 ;;   ;; 	     (Connector/fresh 'Down 
 ;;   ;;                           (Sender/fresh :component top :port "stdin")
-;;   ;;                           (Receiver/fresh (slot-value child1 'input) "stdin"))
+;;   ;;                           (Receiver/fresh :queue (eh-input child1) :port "stdin"))
 ;;   ;; 	     (Connector/fresh 'Up
 ;;   ;;                           (Sender/fresh :component child0 :port "stdout")
-;;   ;;                           (Receiver/fresh (slot-value top 'output) "stdout"))
+;;   ;;                           (Receiver/fresh :queue (eh-output top) :port "stdout"))
 ;;   ;; 	     (Connector/fresh 'Up
 ;;   ;;                           (Sender/fresh :component child1 :port "stdout")
-;;   ;;                           (Receiver/fresh (slot-value top 'output) "stdout"))
+;;   ;;                           (Receiver/fresh :queue (eh-output top) :port "stdout"))
 ;;   ;; 	     )
 ;;   ;; 	    )
 ;;   ;;     )

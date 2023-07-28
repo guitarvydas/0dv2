@@ -30,15 +30,8 @@
   sender
   receiver)
 
-(defstruct receiver
-  queue
-  port)
-
 (defun Connector/fresh (d s r)
   (make-connector :direction d :sender s :receiver r))
-
-(defun Receiver/fresh (queue port)
-  (make-receiver :queue queue :port port))
 
 (defun Message/fresh (port data)
   (make-message :port port :datum data))
