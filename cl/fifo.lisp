@@ -47,6 +47,8 @@ _ instance variable
 		     ))))
 |#
 
+
+
 (defun FIFO/fresh ()
   (let ((instance-variables (make-instance-variables-table `((_q nil)))))
     (let ((operations (make-operations-table 
@@ -62,11 +64,14 @@ _ instance variable
                                       (cond ((null previous-value)
                                              (set-named-instance-variable $me '_q (cons v nil)))
                                             (t (set-named-instance-variable $me '_q (cons v previous-value)))))))
-                         (dequeue ,#'(lambda ($me) 
+                         (dequeue ,#'(lambda ($me)
                                        (let ((previous-value (get-named-instance-variable-value $me '_q)))
                                          (cond ((null previous-value)
                                                 (error (format nil "error: attempt to dequeue empty FIFO ~a" $me)))
-                                               (t (pop previous-value))))))
+                                               (t (let ((v (first previous-value))
+                                                        (tail (rest previous-value)))
+                                                    (set-named-instance-variable $me '_q tail)
+                                                    v))))))
                          (empty? ,#'(lambda ($me)
                                       (let ((previous-value (get-named-instance-variable-value $me '_q)))
                                         (cond ((null previous-value) t)
