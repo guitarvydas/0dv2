@@ -109,10 +109,10 @@
 	    (enqueue (receiver-queue recvr) new-message)))))
 
 (defun step1 (container child fifo)
-  (let ((input-msg (fifopop fifo)))
+  (let ((input-msg (dequeue fifo)))
     (funcall (eh-handler child) child input-msg)
     (loop while (not (empty? (eh-output child)))
-	  do (let ((output-message (fifopop (eh-output child))))
+	  do (let ((output-message (dequeue (eh-output child))))
 	       (route container child output-message)
 	       (destroy-message output-message)))))
   

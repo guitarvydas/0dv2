@@ -1,6 +1,7 @@
 (ql:quickload "uiop")
 (ql:quickload "cl-json")
 (defparameter *root* "/Users/tarvydas/quicklisp/local-projects/0dv2/cl/")
+(load (format nil "~a~a" *root* "operand.lisp"))
 (load (format nil "~a~a" *root* "fifo.lisp"))
 (load (format nil "~a~a" *root* "0d.lisp"))
 (load (format nil "~a~a" *root* "registry.lisp"))
