@@ -12,10 +12,10 @@
       (setf (slot-value top 'connections)
 	    (list
 	     (Connector/fresh 'Down 
-                            (Sender/fresh top "stdin")
+                            (Sender/fresh :component top :port "stdin")
                             (Receiver/fresh (slot-value child0 'input) "stdin"))
 	     (Connector/fresh 'Up
-                            (Sender/fresh child0 "stdout")
+                            (Sender/fresh :component child0 :port "stdout")
                             (Receiver/fresh (slot-value top 'output) "stdout"))
 	     )
 	    )
@@ -36,13 +36,13 @@
       (setf (slot-value top 'connections)
 	    (list
 	     (Connector/fresh 'Down 
-                            (Sender/fresh top "stdin")
+                            (Sender/fresh :component top :port "stdin")
                             (Receiver/fresh (slot-value child0 'input) "stdin"))
 	     (Connector/fresh 'Across
-                            (Sender/fresh child0 "stdout")
+                            (Sender/fresh :component child0 :port "stdout")
                             (Receiver/fresh (slot-value child1 'input) "stdin"))
 	     (Connector/fresh 'Up
-                            (Sender/fresh child1 "stdout")
+                            (Sender/fresh :component child1 :port "stdout")
                             (Receiver/fresh (slot-value top 'output) "stdout"))
 	     )
 	    )
@@ -63,16 +63,16 @@
       (setf (slot-value top 'connections)
 	    (list
 	     (Connector/fresh 'Down 
-                            (Sender/fresh top "stdin")
+                            (Sender/fresh :component top :port "stdin")
                             (Receiver/fresh (slot-value child0 'input) "stdin"))
 	     (Connector/fresh 'Down 
-                            (Sender/fresh top "stdin")
+                            (Sender/fresh :component top :port "stdin")
                             (Receiver/fresh (slot-value child1 'input) "stdin"))
 	     (Connector/fresh 'Up
-                            (Sender/fresh child0 "stdout")
+                            (Sender/fresh :component child0 :port "stdout")
                             (Receiver/fresh (slot-value top 'output) "stdout"))
 	     (Connector/fresh 'Up
-                            (Sender/fresh child1 "stdout")
+                            (Sender/fresh :component child1 :port "stdout")
                             (Receiver/fresh (slot-value top 'output) "stdout"))
 	     )
 	    )
@@ -109,16 +109,16 @@
 ;;   ;;     (setf (slot-value top 'connections)
 ;;   ;; 	    (list
 ;;   ;; 	     (Connector/fresh 'Down 
-;;   ;;                           (Sender/fresh top "stdin")
+;;   ;;                           (Sender/fresh :component top :port "stdin")
 ;;   ;;                           (Receiver/fresh (slot-value child0 'input) "stdin"))
 ;;   ;; 	     (Connector/fresh 'Down 
-;;   ;;                           (Sender/fresh top "stdin")
+;;   ;;                           (Sender/fresh :component top :port "stdin")
 ;;   ;;                           (Receiver/fresh (slot-value child1 'input) "stdin"))
 ;;   ;; 	     (Connector/fresh 'Up
-;;   ;;                           (Sender/fresh child0 "stdout")
+;;   ;;                           (Sender/fresh :component child0 :port "stdout")
 ;;   ;;                           (Receiver/fresh (slot-value top 'output) "stdout"))
 ;;   ;; 	     (Connector/fresh 'Up
-;;   ;;                           (Sender/fresh child1 "stdout")
+;;   ;;                           (Sender/fresh :component child1 :port "stdout")
 ;;   ;;                           (Receiver/fresh (slot-value top 'output) "stdout"))
 ;;   ;; 	     )
 ;;   ;; 	    )

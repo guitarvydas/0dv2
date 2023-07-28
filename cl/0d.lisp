@@ -16,9 +16,9 @@
 (defun EH/fresh (name)
   (let ((eh (make-eh)))
     (setf (eh-name eh) name
-          (eh-input eh) (FIFO/fresh)
-	  (eh-output eh) (FIFO/fresh)
-	  (eh-yield eh) (FIFO/fresh))
+          (eh-input eh) (FIFO/fresh nil)
+	  (eh-output eh) (FIFO/fresh nil)
+	  (eh-yield eh) (FIFO/fresh nil))
     eh))
 
 (defstruct message
