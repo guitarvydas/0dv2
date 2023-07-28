@@ -30,19 +30,12 @@
   sender
   receiver)
 
-(defstruct sender
-  component
-  port)
-
 (defstruct receiver
   queue
   port)
 
 (defun Connector/fresh (d s r)
   (make-connector :direction d :sender s :receiver r))
-
-(defun Sender/fresh (component port)
-  (make-sender :component component :port port))
 
 (defun Receiver/fresh (queue port)
   (make-receiver :queue queue :port port))
@@ -97,10 +90,6 @@
 (defun set-state (eh state)
   (setf (eh-state eh) state))
 
-(defun sender-eq (s1 s2)
-  (and (equal (sender-component s1) (sender-component s2))
-       (equal (sender-port s1) (sender-port s2))))
-
 (defun deposit (connector message)
   (let ((recvr (connector-receiver connector)))
       (if (not (null recvr))
@@ -124,9 +113,9 @@
 	   (step1 container child (eh-input child))))))
 
 (defun route (container from message)
-  (let ((from-sender (make-sender :component from :port (message-port message))))
+  (let ((from-sender (Sender/fresh :component from :port (message-port message))))
     (dolist (connector (eh-connections container))
-      (when (sender-eq from-sender (connector-sender connector))
+      (when (=? from-sender (connector-sender connector))
         (deposit connector message)))))
 
 (defun any-child-ready (container)

@@ -9,8 +9,8 @@
 (defun make-instance-variables-table (pairs)
   (make-hashmap pairs (make-hash-table :test 'equal)))
 
-(defun make-operand (instance-variables operations parent)
-  (let ((lis (list instance-variables operations parent)))
+(defun make-operand (instance-variables operations parent-instance parent-template)
+  (let ((lis (list instance-variables operations parent-instance parent-template)))
     (coerce-list-to-vector lis)))
 
 (defun make-hashmap (pairs htable)
@@ -30,26 +30,30 @@
   (coerce lis 'vector))
 
 (defun get-instance-variables-table (operand)
-  ;; when operand is known to be a vector[3]
+  ;; when operand is known to be a vector[4]
   (aref operand 0))
 
 (defun get-operations-table (operand)
-  ;; when operand is known to be a vector[3]
+  ;; when operand is known to be a vector[4]
   (aref operand 1))
 
-(defun get-parent (operand)
-  ;; when operand is known to be a vector[3]
+(defun get-parent-instance (operand)
+  ;; when operand is known to be a vector[4]
   (aref operand 2))
+
+(defun get-parent-template (operand)
+  ;; when operand is known to be a vector[4]
+  (aref operand 3))
 
 (defun get-named-instance-variable-value (operand name)
   (let ((instance-variables-table (get-instance-variables-table operand)))
     (multiple-value-bind (v found)
         (gethash name instance-variables-table)
       (cond ((not found)
-             (let ((parent (get-parent operand)))
-               (cond ((null parent)
+             (let ((parent-instance (get-parent-instance operand)))
+               (cond ((null parent-instance)
                       (error (format nil "variable ~a not found in ~a" name operand)))
-                     (t (get-named-instance-variable-value parent name)))))
+                     (t (get-named-instance-variable-value parent-instance name)))))
             (t v)))))
 
 (defun set-named-instance-variable (operand name v)
@@ -61,10 +65,13 @@
     (multiple-value-bind (v found)
         (gethash name operations-table)
       (cond ((not found)
-             (let ((parent (get-parent operand)))
-               (cond ((null parent)
-                      (error (format nil "operation ~a not found in ~a" name operand)))
-                     (t (get-named-operation parent name)))))
+             (let ((parent-instance (get-parent-instance operand))
+                   (parent-template (get-parent-template operand)))
+               (cond ((null parent-instance)
+                      (cond ((null parent-template)
+                             (error (format nil "operation ~a not found in ~a" name operand)))
+                            (t (get-named-operation parent-template name))))
+                     (t (get-named-operation parent-instance name)))))
             (t v)))))
 
 

@@ -21,8 +21,9 @@ _ instance variable
    (push (v) (push v _q)) ;; push v to front of queue
    (dequeue () (pop _q)) ;; pop first item from front of queue (mutate q to be the rest)
    (empty? () (null _q)) ;; return true if q is empty
-   (as-list () _q)
-   (@upwards () nil)))
+   (as-list () _q))
+  nil
+)
 |#
 
 
@@ -54,7 +55,7 @@ _ instance variable
     (let ((operations (make-operations-table 
                        `((clone ,#'(lambda ($me) (clone-operand $me)))
                          (free ,#'(lambda ($me) (declare (ignore $me))))
-                         (enqueue ,#'(lambda ($me v)
+                         (Enqueue ,#'(lambda ($me v)
                                        (let ((previous-value (get-named-instance-variable-value $me '_q)))
                                          (cond ((null previous-value)
                                                 (set-named-instance-variable $me '_q (cons v nil)))
@@ -77,7 +78,7 @@ _ instance variable
                                         (cond ((null previous-value) t)
                                               (t nil)))))
                          (as-list ,#'(lambda ($me) (get-named-instance-variable-value $me '_q)))))))
-      (make-operand instance-variables operations nil))))
+      (make-operand instance-variables operations nil nil))))
 
 (defun enqueue ($me v)
   (lookup-call $me 'enqueue v))
