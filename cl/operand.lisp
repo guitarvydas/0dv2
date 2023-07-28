@@ -103,3 +103,6 @@
 	(error (format nil "operation ~a not found in ~a" name operand))
       (apply func (cons operand args)))))
 
+
+(defmacro attr (name)
+  `#'(lambda ($me) (get-named-instance-variable-value $me ',name)))

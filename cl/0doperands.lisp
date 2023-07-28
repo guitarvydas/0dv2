@@ -32,7 +32,7 @@
 (defun Receiver/fresh (&key queue port)
     (let ((instance-variables (make-instance-variables-table `((_queue ,queue) (_port ,port)))))
       (let ((operations (make-operations-table 
-			 `((queue ,#'(lambda ($me) (get-named-instance-variable-value $me '_queue)))
+			 `((queue ,(attr _queue))
 			   (port ,#'(lambda ($me) (get-named-instance-variable-value $me '_port)))))))
 	(make-operand instance-variables operations nil (Datum/template)))))
 	
