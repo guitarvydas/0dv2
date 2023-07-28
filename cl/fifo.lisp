@@ -31,7 +31,7 @@ _ instance variable
 (defstruct FIFO/state
   (_q nil))
 
-(defstruct FIFO
+(defstruct FIFO (datum)
   (data (make-FIFO/state))
   (operations (make-function-table 
 	       `((clone ,#'(lambda ($me) ...))
@@ -40,17 +40,12 @@ _ instance variable
 		 (push ,#'(lambda ($me v) (push v (FIFO/state-_q (FIFO-data $me)))))
 		 (dequeue ,#'(lambda ($me) (pop (FIFO/state-_q (FIFO-data $me)))))
 		 (empty? ,#'(lambda ($me) (null (FIFO/state-_q (FIFO-data $me)))))
-		 (as-list ,#'(lambda ($me) (null (FIFO/state-_q (FIFO-data $me)))))
-		 (@upwards ,#'(lambda ($me) nil)))))
-  (initialization (make-function-table
-		   `(
-		     (fresh ,#'(lambda () 
-		     ))))
+		 (as-list ,#'(lambda ($me) (null (FIFO/state-_q (FIFO-data $me))))))))
 |#
 
 
 
-(defun FIFO/fresh ()
+(defun FIFO/fresh (proto)
   (let ((instance-variables (make-instance-variables-table `((_q nil)))))
     (let ((operations (make-operations-table 
                        `((clone ,#'(lambda ($me) (clone-operand $me)))
@@ -78,7 +73,7 @@ _ instance variable
                                         (cond ((null previous-value) t)
                                               (t nil)))))
                          (as-list ,#'(lambda ($me) (get-named-instance-variable-value $me '_q)))))))
-      (make-operand instance-variables operations nil nil))))
+      (make-operand instance-variables operations proto (Datum/template)))))
 
 (defun enqueue ($me v)
   (lookup-call $me 'enqueue v))

@@ -3,6 +3,7 @@
 (ql:quickload "cl-json")
 (defparameter *root* "/Users/tarvydas/quicklisp/local-projects/0dv2/cl/")
 (load (format nil "~a~a" *root* "operand.lisp"))
+(load (format nil "~a~a" *root* "datum.lisp"))
 (load (format nil "~a~a" *root* "fifo.lisp"))
 (load (format nil "~a~a" *root* "test-fifo.lisp"))
 (load (format nil "~a~a" *root* "0doperands.lisp"))

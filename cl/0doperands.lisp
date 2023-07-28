@@ -1,10 +1,3 @@
-(defun Datum/fresh (&key datum)
-  (let ((instance-variables (make-instance-variables-table `((_datum ,datum)))))
-    (let ((operations (make-operations-table 
-                       `((clone ,#'(lambda ($me) (clone-operand $me)))
-                         (free ,#'(lambda ($me) (declare (ignore $me))))))))
-	(make-operand instance-variables operations nil nil))))
-
 #|
 (defoperand Sender (datum nil)
   ((_component nil)
@@ -26,7 +19,7 @@
 			   (=? #'(lambda ($me other)
 				   (and (equal (component $me) (component other))
 					(equal (port $me) (port other)))))))))
-	(make-operand instance-variables operations nil datum))))
+	(make-operand instance-variables operations nil (Datum/template)))))
 	
 
 (defun component ($me)

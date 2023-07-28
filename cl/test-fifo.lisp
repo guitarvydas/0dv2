@@ -1,5 +1,5 @@
 (defun test ()
-  (let ((fifo (FIFO/fresh)))
+  (let ((fifo (FIFO/fresh nil)))
     (format *standard-output* "empty: ~a~%" (empty? fifo))
     (format *standard-output* "as-list: ~a~%" (as-list fifo))
     (push fifo 1)
