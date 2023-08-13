@@ -13,7 +13,14 @@ SRC=$(TESTSRC)
 # intention: to convert to .py syntax, we will create non-indented code containing special brackets,
 #  then, will indent the code (removing the special brackets) to create Python3-compatible code
 
-all: dev
+ODIN_FLAGS ?= -debug -o:none
+
+all: dw0d
+
+dw0d:
+	make clean
+	odin run . $(ODIN_FLAGS)
+
 
 dev: clean
 	make cl
