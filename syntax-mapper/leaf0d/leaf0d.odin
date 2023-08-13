@@ -111,13 +111,10 @@ collect_process_leaves :: proc(path: string, leaves: ^[dynamic]reg.Leaf_Instanti
 
     for decl in decls {
         for child in decl.children {
-	    fmt.println (child.name)
             if ref_is_container(decls[:], child.name) {
                 continue
             }
 
-	    fmt.printf ("CPL: ~%s~\n", child.name)
-	    
             if strings.has_prefix(child.name, "$") {
                 leaf_instantiate := reg.Leaf_Instantiator {
                     name = child.name,

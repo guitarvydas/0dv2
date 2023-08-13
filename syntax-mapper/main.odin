@@ -48,8 +48,6 @@ main :: proc() {
 
     regstry := reg.make_component_registry(leaves[:], diagram_source_file)
 
-    reg.dump_registry (regstry)
-
     // get entrypoint container
     main_container, ok := reg.get_component_instance(regstry, main_container_name)
     fmt.assertf(
@@ -66,5 +64,6 @@ main :: proc() {
 }
 
 run :: proc (main_container : ^zd.Eh) {
-    main_container.handler(main_container, zd.make_message("filename", "test.odin.txt"))
+    // main_container.handler(main_container, zd.make_message("filename", "test.odin.txt"))
+    main_container.handler(main_container, zd.make_message("filename", "../../odin0d/0d/0d.odin"))
 }

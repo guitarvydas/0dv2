@@ -204,6 +204,7 @@
   "active": "bfd3fdef936a26bb",
   "lastOpenFiles": [
     "syntax-mapper/syntax-mapper.o",
+    "syntax-mapper/0D.xml",
     "syntax-mapper/leaf0d/#leaf0d.odin#",
     "syntax-mapper/syntax-mapper.ld_Itg8xE",
     "syntax-mapper/syntax/#drawio_mxgraph.odin#",
@@ -213,7 +214,6 @@
     "syntax-mapper/syntax-mapper.ld_oqAlrm",
     "syntax-mapper/syntax-mapper.ld_rZ9RDv",
     "syntax-mapper/0d/0d.odin~",
-    "syntax-mapper/hold-syntaxmapper.drawio",
     "syntax-mapper/0d/README.md",
     "syntax-mapper/README.md",
     "2023-08-04-Cost Benefits of Static Type Checking.md",

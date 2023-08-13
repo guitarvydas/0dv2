@@ -51,7 +51,6 @@ make_component_registry :: proc(leaves: []Leaf_Initializer, container_xml: strin
 }
 
 get_component_instance :: proc(reg: Component_Registry, name: string) -> (instance: ^zd.Eh, ok: bool) {
-    fmt.printf ("GCI: ~%s~\n", name)
     initializer: Initializer
     initializer, ok = reg.initializers[name]
     if ok {
