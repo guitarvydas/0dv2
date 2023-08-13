@@ -62,9 +62,19 @@
                 "source": false
               }
             }
+          },
+          {
+            "id": "bfd3fdef936a26bb",
+            "type": "leaf",
+            "state": {
+              "type": "release-notes",
+              "state": {
+                "currentVersion": "1.3.7"
+              }
+            }
           }
         ],
-        "currentTab": 4
+        "currentTab": 5
       }
     ],
     "direction": "vertical"
@@ -191,9 +201,10 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "fdf01b22a863f633",
+  "active": "bfd3fdef936a26bb",
   "lastOpenFiles": [
     "syntax-mapper/syntax-mapper.o",
+    "syntax-mapper/leaf0d/#leaf0d.odin#",
     "syntax-mapper/syntax-mapper.ld_Itg8xE",
     "syntax-mapper/syntax/#drawio_mxgraph.odin#",
     "syntax-mapper/main.odin~",
@@ -203,7 +214,6 @@
     "syntax-mapper/syntax-mapper.ld_rZ9RDv",
     "syntax-mapper/0d/0d.odin~",
     "syntax-mapper/hold-syntaxmapper.drawio",
-    "syntax-mapper/test.odin.txt",
     "syntax-mapper/0d/README.md",
     "syntax-mapper/README.md",
     "2023-08-04-Cost Benefits of Static Type Checking.md",

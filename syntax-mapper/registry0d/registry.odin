@@ -51,6 +51,7 @@ make_component_registry :: proc(leaves: []Leaf_Initializer, container_xml: strin
 }
 
 get_component_instance :: proc(reg: Component_Registry, name: string) -> (instance: ^zd.Eh, ok: bool) {
+    fmt.printf ("GCI: ~%s~\n", name)
     initializer: Initializer
     initializer, ok = reg.initializers[name]
     if ok {
@@ -177,7 +178,7 @@ dump_registry:: proc (reg : Component_Registry) {
   fmt.println ()
   fmt.println ("*** PALETTE ***")
   for c in reg.initializers {
-    fmt.println(c);
+      fmt.printf ("\t~%s~\n", c);
   }
   fmt.println ("***************")
   fmt.println ()

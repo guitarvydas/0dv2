@@ -116,7 +116,9 @@ collect_process_leaves :: proc(path: string, leaves: ^[dynamic]reg.Leaf_Instanti
                 continue
             }
 
-            if strings.has_prefix(child.name, "$") || strings.has_prefix (child.name, "<div>$") {
+	    fmt.printf ("CPL: ~%s~\n", child.name)
+	    
+            if strings.has_prefix(child.name, "$") {
                 leaf_instantiate := reg.Leaf_Instantiator {
                     name = child.name,
                     init = process_instantiate,
