@@ -7,4 +7,4 @@ junk.*
 junk*
 fmt-js/
 syntax-mapper/syntax-mapper
-syntax-mapper/syntax-mapper.dSYM/
+syntax-mapper/syntax-mapper.dSYM/*
