@@ -65,6 +65,7 @@ get_component_instance :: proc(reg: Component_Registry, name: string) -> (instan
 }
 
 container_initializer :: proc(reg: Component_Registry, decl: syntax.Container_Decl) -> ^zd.Eh {
+
     container := zd.make_container(decl.name)
 
     children := make([dynamic]^zd.Eh)
@@ -101,10 +102,12 @@ container_initializer :: proc(reg: Component_Registry, decl: syntax.Container_De
             source_component: ^zd.Eh
             source_ok := false
 
+
             switch c.dir {
             case .Down:
                 connector.direction = .Down
                 connector.sender = {
+		    "",
                     nil,
                     c.source_port,
                 }
@@ -112,6 +115,7 @@ container_initializer :: proc(reg: Component_Registry, decl: syntax.Container_De
 
                 target_component, target_ok = child_id_map[c.target.id]
                 connector.receiver = {
+		    target_component.name,
                     &target_component.input,
                     c.target_port,
                 }
@@ -121,11 +125,13 @@ container_initializer :: proc(reg: Component_Registry, decl: syntax.Container_De
                 target_component, target_ok = child_id_map[c.target.id]
 
                 connector.sender = {
+		    source_component.name,
                     source_component,
                     c.source_port,
                 }
 
                 connector.receiver = {
+		    target_component.name,
                     &target_component.input,
                     c.target_port,
                 }
@@ -133,11 +139,13 @@ container_initializer :: proc(reg: Component_Registry, decl: syntax.Container_De
                 connector.direction = .Up
                 source_component, source_ok = child_id_map[c.source.id]
                 connector.sender = {
+		    source_component.name,
                     source_component,
                     c.source_port,
                 }
 
                 connector.receiver = {
+		    "",
                     &container.output,
                     c.target_port,
                 }
@@ -145,12 +153,14 @@ container_initializer :: proc(reg: Component_Registry, decl: syntax.Container_De
             case .Through:
                 connector.direction = .Through
                 connector.sender = {
+		    "",
                     nil,
                     c.source_port,
                 }
                 source_ok = true
 
                 connector.receiver = {
+		    "",
                     &container.output,
                     c.target_port,
                 }
@@ -177,7 +187,7 @@ dump_registry:: proc (reg : Component_Registry) {
   fmt.println ()
   fmt.println ("*** PALETTE ***")
   for c in reg.initializers {
-      fmt.printf ("\t~%s~\n", c);
+    fmt.println(c);
   }
   fmt.println ("***************")
   fmt.println ()

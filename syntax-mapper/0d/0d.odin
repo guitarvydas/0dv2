@@ -54,12 +54,12 @@ make_container :: proc(name: string) -> ^Eh {
 // Creates a new leaf component out of a handler function, and optionally a user
 // data parameter that will be passed back to your handler when it is run.
 make_leaf :: proc{
-    make_leaf_simple,
+    make_leaf_with_no_instance_data,
     make_leaf_with_data,
 }
 
 // Creates a new leaf component out of a handler function.
-make_leaf_simple :: proc(name: string, handler: proc(^Eh, Message)) -> ^Eh {
+make_leaf_with_no_instance_data :: proc(name: string, handler: proc(^Eh, Message)) -> ^Eh {
     eh := new(Eh)
     eh.name = name
     eh.handler = handler
@@ -186,6 +186,7 @@ Direction :: enum {
 // `Sender` is used to "pattern match" which `Receiver` a message should go to,
 // based on component ID (pointer) and port name.
 Sender :: struct {
+    name: string,
     component: ^Eh,
     port:      string,
 }
@@ -193,6 +194,7 @@ Sender :: struct {
 // `Receiver` is a handle to a destination queue, and a `port` name to assign
 // to incoming messages to this queue.
 Receiver :: struct {
+    name: string,
     queue: ^FIFO,
     port:  string,
 }
@@ -259,7 +261,11 @@ route :: proc(container: ^Eh, from: ^Eh, message: Message) {
 	}
 	was_sent = true
     } else {
-	from_sender := Sender{from, message.port}
+	fname := ""
+	if from != nil  {
+	    fname = from.name
+	}
+	from_sender := Sender{fname, from, message.port}
 	
 	for connector in container.connections {
             if sender_eq(from_sender, connector.sender) {
