@@ -155,7 +155,7 @@ process_destroy_handle :: proc(hnd: Process_Handle) {
     os.close(hnd.error)
 }
 
-run_command :: proc(cmd: string, input: Maybe(string)) -> string {
+run_command :: proc(cmd: string, input: Maybe(string)) -> (string, string) {
     p := process_start(cmd)
 
     if input, ok := input.?; ok {
@@ -165,24 +165,15 @@ run_command :: proc(cmd: string, input: Maybe(string)) -> string {
 
     process_wait(p)
 
-    output, ok := process_read_handle(p.output)
-    assert(ok)
-
-    return string(output)
-}
-
-run_command4 :: proc(cmd: string, input: Maybe(string)) -> string {
-    p := process_start(cmd)
-
-    if input, ok := input.?; ok {
-        os.write(p.input, transmute([]byte)input)
+    output, ok_o := process_read_handle(p.output)
+    stderr, ok_e := process_read_handle(p.error)
+    if !ok_o {
+	return "", "read error on stdout"
+    } else if !ok_e {
+	return "", "read error on stderr"
+    } else if string (stderr) != "" {
+	return "", string (stderr)
+    } else {
+	return string(output), ""
     }
-    os.close(p.input)
-
-    process_wait(p)
-
-    output, ok := process_read_handle(p.output)
-    assert(ok)
-
-    return string(output)
 }

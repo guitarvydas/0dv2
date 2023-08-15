@@ -141,6 +141,7 @@
   "active": "d6f026d6fdfcaeb5",
   "lastOpenFiles": [
     "syntax-mapper/syntax-mapper.o",
+    "syntax-mapper/leaf0d/#leaf0d.odin#",
     "syntax-mapper/junk--strings",
     "syntax-mapper/junk--comments",
     "syntax-mapper/junk--tokenized",
@@ -150,7 +151,6 @@
     "syntax-mapper/syntax/drawio_mxgraph.odin",
     "syntax-mapper/registry0d/registry.odin~",
     "syntax-mapper/0d/Makefile~",
-    "syntax-mapper/0d/stateexplosion.odin~",
     "syntax-mapper/0d/README.md",
     "syntax-mapper/lisp-notes.md",
     "syntax-mapper/README.md",

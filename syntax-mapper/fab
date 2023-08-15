@@ -541,37 +541,38 @@ function getFabGrammar () {
 
 var argv;
 
-// Component Based Programming version
-function main () {
-}
-
 function main (argv) {
-    argv = require('yargs/yargs')(process.argv.slice(2)).argv;
-    viewGeneratedCode = false;
-    tracing = false;
-    traceDepth = 0;
-    srcfilename = '/dev/fd/0';
-    var grammarfilename = argv._[0];
-    var fabfilename = argv._[1];
-    var src = fs.readFileSync (srcfilename, 'utf-8');
-    var grammar = fs.readFileSync (grammarfilename, 'utf-8');
-    var fab = fs.readFileSync (fabfilename, 'utf-8');
-    var support = argv._[2];
-    var r;
-    if (argv.grammarname) {
-	console.error (`multi ${argv.grammarname}`);
-	r = multi_transpile (src, argv.grammarname, grammar, fab, ohm, compilefab, support);
-    } else {
-	r = transpile (src, grammar, fab, ohm, compilefab, support);
-    }
-    var success = r [0]
-    var transpiled = r [1]
-    var errormessage = r [2]
-    if (success) {
-	emit (transpiled);
-	process.exit (0);
-    } else {
-	erremit (errormessage);
+    try {
+	argv = require('yargs/yargs')(process.argv.slice(2)).argv;
+	viewGeneratedCode = false;
+	tracing = false;
+	traceDepth = 0;
+	srcfilename = '/dev/fd/0';
+	var grammarfilename = argv._[0];
+	var fabfilename = argv._[1];
+	var src = fs.readFileSync (srcfilename, 'utf-8');
+	var grammar = fs.readFileSync (grammarfilename, 'utf-8');
+	var fab = fs.readFileSync (fabfilename, 'utf-8');
+	var support = argv._[2];
+	var r;
+	if (argv.grammarname) {
+	    console.error (`multi ${argv.grammarname}`);
+	    r = multi_transpile (src, argv.grammarname, grammar, fab, ohm, compilefab, support);
+	} else {
+	    r = transpile (src, grammar, fab, ohm, compilefab, support);
+	}
+	var success = r [0]
+	var transpiled = r [1]
+	var errormessage = r [2]
+	if (success) {
+	    emit (transpiled);
+	    process.exit (0);
+	} else {
+	    erremit (errormessage);
+	    process.exit (1);
+	}
+    } catch (e) {
+	console.error (e.message);
 	process.exit (1);
     }
 }
@@ -580,9 +581,7 @@ function emit (s) {
 }
 
 function erremit (s) {
-    console.error ();
     console.error (s);
-    console.error ();
 }
 
 main ();

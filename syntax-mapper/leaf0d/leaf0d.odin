@@ -136,7 +136,7 @@ hard_coded_ps_instantiate :: proc(name: string) -> ^zd.Eh {
 }
 
 hard_coded_ps_proc :: proc(eh: ^zd.Eh, msg: zd.Message) {
-    captured_output := process.run_command ("ps", nil)
+    captured_output, _ := process.run_command ("ps", nil)
     zd.send(eh, "stdout", captured_output)
 }
 
@@ -150,7 +150,7 @@ hard_coded_grepvsh_instantiate :: proc(name: string) -> ^zd.Eh {
 
 hard_coded_grepvsh_proc :: proc(eh: ^zd.Eh, msg: zd.Message) {
     received_input := msg.datum.(string)
-    captured_output := process.run_command ("grep vsh", received_input)
+    captured_output, _ := process.run_command ("grep vsh", received_input)
     zd.send(eh, "stdout", captured_output)
 }
 
@@ -164,7 +164,7 @@ hard_coded_wcl_instantiate :: proc(name: string) -> ^zd.Eh {
 
 hard_coded_wcl_proc :: proc(eh: ^zd.Eh, msg: zd.Message) {
     received_input := msg.datum.(string)
-    captured_output := process.run_command ("wc -l", received_input)
+    captured_output, _ := process.run_command ("wc -l", received_input)
     zd.send(eh, "stdout", captured_output)
 }
 
@@ -188,7 +188,7 @@ command_proc :: proc(eh: ^zd.Eh, msg: zd.Message, inst: ^Command_Instance_Data) 
     case "command":
         inst.buffer = msg.datum.(string)
         received_input := msg.datum.(string)
-        captured_output := process.run_command (inst.buffer, received_input)
+        captured_output, _ := process.run_command (inst.buffer, received_input)
         zd.send(eh, "stdout", captured_output)
     case:
         fmt.assertf (false, "!!! ERROR: command got an illegal message port %v", msg.port)
@@ -210,7 +210,7 @@ icommand_proc :: proc(eh: ^zd.Eh, msg: zd.Message, inst: ^Command_Instance_Data)
         inst.buffer = msg.datum.(string)
     case "stdin":
         received_input := msg.datum.(string)
-        captured_output := process.run_command (inst.buffer, received_input)
+        captured_output, _ := process.run_command (inst.buffer, received_input)
         zd.send(eh, "stdout", captured_output)
     case:
         fmt.assertf (false, "!!! ERROR: command got an illegal message port %v", msg.port)
@@ -434,7 +434,7 @@ panic_instantiate :: proc(name: string) -> ^zd.Eh {
 
 panic_proc :: proc(eh: ^zd.Eh, msg: zd.Message) {
     fmt.println ("PANIC: ", msg.datum.(string))
-    assert (false, msg.datum.(string))
+    // assert (false, msg.datum.(string))
 }
 
 ////
@@ -506,8 +506,12 @@ transpiler_leaf_proc :: proc(eh: ^zd.Eh, msg: zd.Message, inst: ^Transpile_Insta
     case "stdin":
         received_input := msg.datum.(string)
         cmd := fmt.aprintf ("./transpile %s %s %s", inst.grammar_name, inst.fab_name, inst.support_name)
-	captured_output := process.run_command (cmd, received_input)
-        zd.send(eh, "output", captured_output)
+	captured_output, captured_stderr := process.run_command (cmd, received_input)
+	if string (captured_stderr) != "" {
+            zd.send(eh, "error", captured_stderr)
+	} else {
+            zd.send(eh, "output", captured_output)
+	}
      case:
         emsg := fmt.aprintf("!!! ERROR: transpile got an illegal message port %v", msg.port)
 	zd.send(eh, "error", emsg)
