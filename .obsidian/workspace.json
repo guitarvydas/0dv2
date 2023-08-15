@@ -14,57 +14,8 @@
               "type": "empty",
               "state": {}
             }
-          },
-          {
-            "id": "a98586a35812063e",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "doc/0Dv2 Working Paper.md",
-                "mode": "source",
-                "source": false
-              }
-            }
-          },
-          {
-            "id": "8e9f07a47fca0712",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "doc/0Dv2 Working Paper.md",
-                "mode": "source",
-                "source": false
-              }
-            }
-          },
-          {
-            "id": "90007e6683140748",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "syntax-mapper/README.md",
-                "mode": "source",
-                "source": false
-              }
-            }
-          },
-          {
-            "id": "fdf01b22a863f633",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "2023-08-04-Cost Benefits of Static Type Checking.md",
-                "mode": "source",
-                "source": false
-              }
-            }
           }
-        ],
-        "currentTab": 4
+        ]
       }
     ],
     "direction": "vertical"
@@ -130,7 +81,6 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "2023-08-04-Cost Benefits of Static Type Checking.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -147,7 +97,6 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "2023-08-04-Cost Benefits of Static Type Checking.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -169,9 +118,7 @@
             "type": "leaf",
             "state": {
               "type": "outline",
-              "state": {
-                "file": "2023-08-04-Cost Benefits of Static Type Checking.md"
-              }
+              "state": {}
             }
           }
         ]
@@ -191,21 +138,29 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "fdf01b22a863f633",
+  "active": "d6f026d6fdfcaeb5",
   "lastOpenFiles": [
     "syntax-mapper/syntax-mapper.o",
-    "syntax-mapper/0D.xml",
-    "syntax-mapper/leaf0d/#leaf0d.odin#",
-    "syntax-mapper/syntax-mapper.ld_Itg8xE",
-    "syntax-mapper/syntax/#drawio_mxgraph.odin#",
-    "syntax-mapper/main.odin~",
-    "syntax-mapper/syntax-mapper",
-    "syntax-mapper/syntax/drawio_mxgraph.odin~",
-    "syntax-mapper/syntax-mapper.ld_oqAlrm",
-    "syntax-mapper/syntax-mapper.ld_rZ9RDv",
-    "syntax-mapper/0d/0d.odin~",
+    "syntax-mapper/syntax-mapper.dSYM/Contents/Resources/DWARF/syntax-mapper",
+    "syntax-mapper/syntax-mapper.dSYM/Contents/Resources/DWARF",
+    "syntax-mapper/syntax-mapper.dSYM/Contents/Resources",
+    "syntax-mapper/syntax-mapper.dSYM/Contents/Info.plist",
+    "syntax-mapper/syntax-mapper.dSYM/Contents",
+    "syntax-mapper/user0d/user0d.odin",
+    "syntax-mapper/syntax/syntax.odin",
+    "syntax-mapper/syntax/drawio_mxgraph.odin",
+    "syntax-mapper/syntax/decls.odin",
+    "syntax-mapper/registry0d/registry.odin",
     "syntax-mapper/0d/README.md",
+    "syntax-mapper/lisp-notes.md",
     "syntax-mapper/README.md",
+    "doc/WP 2023-06-28.md",
+    "doc/Skip.drawio.svg",
+    "doc/2023-07-01.md",
+    "doc/2023-06-29.md",
+    "doc/0Dv2 Working Paper.md",
+    "attic/syntax-mapper.md",
+    "README.md",
     "2023-08-04-Cost Benefits of Static Type Checking.md",
     "cl/DI-Registry.md",
     "cl/0d-prompt.md",
@@ -228,16 +183,8 @@
     "odin/doc/fig2.png",
     "odin/doc/parallel-collapsed.png",
     "odin/doc/fig3.png",
-    "odin/doc/fig1.png",
     "odin/README.md",
     "summary.md",
-    "syntax-mapper/experimental/lisp-notes.md",
-    "syntax-mapper/experimental/README.md",
-    "doc/2023-07-01.md",
-    "doc/WP 2023-06-28.md",
-    "doc/2023-06-29.md",
-    "2023-06-29.md",
-    "doc/0Dv2 Working Paper.md",
-    "syntax-mapper/lisp-notes.md"
+    "syntax-mapper/experimental/lisp-notes.md"
   ]
 }
