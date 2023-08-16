@@ -1,0 +1,54 @@
+FuncallRewriteForCL {
+  program [items+] = ‛«items»’
+  item [x] = ‛«x»’
+  funcall_single [id ws lp notLastArg* lastArg rp] = ‛❪«id» «notLastArg»«lastArg»❫’
+  funcall_indirect [idchain ws lp notLastArg* lastArg rp] = ‛❪‹funcall› «idchain» «notLastArg»«lastArg»❫’
+
+  notLastArg [stuff kcomma] = ‛«stuff» ’
+  lastArg [stuff] = ‛«stuff»’
+
+  
+  string [kb1 cs* ke] = ‛«kb1»«cs»«ke»’
+  charconst [kb2 cs* ke] = ‛«kb2»«cs»«ke»’
+  id [kb3 cs* ke] = ‛«kb3»«cs»«ke»’
+  integer [kb4 cs* ke] = ‛«kb4»«cs»«ke»’
+  symbol [kb5 cs* ke] = ‛«kb5»«cs»«ke»’
+  keyword [kb6 cs* ke] = ‛«kb6»«cs»«ke»’
+  multi_char_operator [kb7 cs* ke] = ‛«kb7»«cs»«ke»’
+  verbatim [kb8 cs* ke] = ‛«kb8»«cs»«ke»’
+  comment [kb9 cs* ke] = ‛«kb9»«cs»«ke»’
+  anyToken [anyToken1] = ‛«anyToken1»’
+  annotation [ab cs* ae] = ‛«ab»«cs»«ae»’
+  
+  ws [wsc*] = ‛«wsc»’
+
+  sym [kbegin text kend] = ‛«kbegin»«text»«kend»’
+
+  indentc [k] = ‛«k»’
+  dedentc [k] = ‛«k»’
+
+
+    skim [x+] = ‛«x»’
+  skim1_userRule [userRule] = ‛«userRule»’
+  skim1_compoundToken [tok] = ‛«tok»’
+  skim1_nestedbraces [lb stuff* rb] = ‛«lb»«stuff»«rb»’
+  skim1_nestedparens [lp stuff* rp] = ‛«lp»«stuff»«rp»’
+  skim1_nestedscope [so stuff* sc] = ‛«so»«stuff»«sc»’
+  skim1_bottom [any] = ‛«any»’
+
+  skimraw [x+] = ‛«x»’
+  skimraw1_compoundToken [tok] = ‛«tok»’
+  skimraw1_nestedbraces [lb stuff* rb] = ‛«lb»«stuff»«rb»’
+  skimraw1_nestedparens [lp stuff* rp] = ‛«lp»«stuff»«rp»’
+  skimraw1_nestedscope [so stuff* sc] = ‛«so»«stuff»«sc»’
+  skimraw1_bottom [any] = ‛«any»’
+  
+  scopeOpen  [ab scopebegin ws1 id1 ws2 ae] = ‛«ab»«scopebegin»«ws1»«id1»«ws2»«ae»’
+  scopeClose [ab scopeend   ws1 id1 ws2 ae] = ‛«ab»«scopeend»«ws1»«id1»«ws2»«ae»’
+
+    idchain_rec [idchain dotc id] = ‛«idchain».«id»’
+  idchain_bottom [id] = ‛«id»’
+  dotc [kdot ws] = ‛«kdot»«ws»’
+
+
+}

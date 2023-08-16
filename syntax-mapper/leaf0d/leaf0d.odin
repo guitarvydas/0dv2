@@ -517,3 +517,59 @@ transpiler_leaf_proc :: proc(eh: ^zd.Eh, msg: zd.Message, inst: ^Transpile_Insta
 	zd.send(eh, "error", emsg)
     }
 }
+
+////////
+
+Syncfilewrite_Data :: struct {
+    filename : string
+}
+
+syncfilewrite_instantiate :: proc(name: string) -> ^zd.Eh {
+    @(static) counter := 0
+    counter += 1
+
+    name_with_id := fmt.aprintf("syncfilewrite (ID:%d)", counter)
+    inst := new (Syncfilewrite_Data)
+    return zd.make_leaf(name_with_id, inst, syncfilewrite_proc)
+}
+
+syncfilewrite_proc :: proc(eh: ^zd.Eh, msg: zd.Message, inst: ^Syncfilewrite_Data) {
+    switch msg.port {
+    case "filename":
+	inst.filename = msg.datum.(string)
+    case "stdin":
+	contents := msg.datum.(string)
+	ok := os.write_entire_file (inst.filename, transmute([]u8)contents, true)
+	if !ok {
+	    zd.send (eh, "stderr", "write error")
+	}
+    }
+}
+
+////////
+
+Suffix_Data :: struct {
+    suffix : string
+}
+
+suffix_instantiate :: proc(name: string) -> ^zd.Eh {
+    @(static) counter := 0
+    counter += 1
+    name_with_id := fmt.aprintf("suffix (ID:%d)", counter)
+    inst := new (Suffix_Data)
+    inst.suffix = ""
+    return zd.make_leaf(name_with_id, inst, suffix_proc)
+}
+
+suffix_proc :: proc(eh: ^zd.Eh, msg: zd.Message, inst: ^Suffix_Data) {
+    switch msg.port {
+    case "suffix":
+	inst.suffix = msg.datum.(string)
+    case "str":
+	s := fmt.aprintf ("%v%v", msg.datum.(string), inst.suffix)
+	zd.send (eh, "str", s)
+    case:
+	zd.send (eh, "error", fmt.aprintf ("illegal port for suffix: ~v", msg.port))
+    }
+}
+
